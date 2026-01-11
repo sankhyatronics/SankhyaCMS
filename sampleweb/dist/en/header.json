@@ -58,7 +58,7 @@
                         "type": "MenuItem",
                         "data": {
                             "id": "menu-item-home",
-                            "title": "Lorem ipsum dolor sit amet.",
+                            "title": "Home",
                             "href": "/",
                             "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
                         }
@@ -67,7 +67,7 @@
                         "type": "Dropdown",
                         "data": {
                             "id": "menu-dropdown-services",
-                            "title": "Lorem ipsum dolor sit amet.",
+                            "title": "Services",
                             "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
                             "itemGroupClassName": "bg-primary text-primary-950 p-4",
                             "icon": "mdi:apps",
@@ -123,7 +123,7 @@
                         "type": "Dropdown",
                         "data": {
                             "id": "menu-dropdown-help",
-                            "title": "Lorem ipsum dolor sit amet.",
+                            "title": "Help",
                             "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
                             "itemGroupClassName": "bg-primary text-primary-950 p-4",
                             "icon": "mdi:apps",
@@ -209,7 +209,7 @@
                         "type": "Dropdown",
                         "data": {
                             "id": "dropdown-products",
-                            "title": "Lorem ipsum dolor sit amet.",
+                            "title": "Products",
                             "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
                             "itemGroupClassName": "bg-primary text-primary-950 p-4",
                             "icon": "mdi:apps",
@@ -246,7 +246,7 @@
                         "type": "Dropdown",
                         "data": {
                             "id": "dropdown-aboutus",
-                            "title": "Lorem ipsum dolor sit amet.",
+                            "title": "Information",
                             "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
                             "itemGroupClassName": "bg-primary text-primary-950 p-4",
                             "icon": "mdi:information-outline",
