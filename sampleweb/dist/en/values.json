@@ -1,0 +1,97 @@
+[
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "Hero",
+            "data": {
+                "Title": "Lorem ipsum dolor sit amet.",
+                "SubTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "ImageUrl": "#",
+                "textPosition": "left",
+                "textAlignment": "left",
+                "padding": "none",
+                "className": "min-h-[40vh] bg-primary text-primary-950"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "FeatureSplit",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                "image": {
+                    "src": "https://images.unsplash.com/photo-1521791136064-7986c2923216?auto=format&fit=crop&q=80&w=800",
+                    "alt": "Integrity"
+                },
+                "imagePosition": "left",
+                "className": "py-12"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "FeatureSplit",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                "image": {
+                    "src": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
+                    "alt": "Sustainability"
+                },
+                "imagePosition": "right",
+                "className": "py-12 theme-inverted"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "FeatureSplit",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                "image": {
+                    "src": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800",
+                    "alt": "Quality"
+                },
+                "imagePosition": "left",
+                "className": "py-12"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "FeatureSplit",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                "image": {
+                    "src": "https://images.unsplash.com/photo-1522071823991-b550ba247b60?auto=format&fit=crop&q=80&w=800",
+                    "alt": "Diversity & Inclusion"
+                },
+                "imagePosition": "right",
+                "className": "py-12 theme-inverted"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "FeatureSplit",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                "image": {
+                    "src": "https://images.unsplash.com/photo-1521791136064-7986c2923216?auto=format&fit=crop&q=80&w=800",
+                    "alt": "Innovation"
+                },
+                "imagePosition": "left",
+                "className": "py-12"
+            }
+        }
+    }
+]

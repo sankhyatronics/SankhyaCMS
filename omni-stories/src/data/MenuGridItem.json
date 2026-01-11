@@ -1,0 +1,234 @@
+[
+  {
+    "Title": "Default",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-default",
+        "title": "Developers Laptop",
+        "description": "Powerful machines for coding and development",
+        "href": "#",
+        "icon": "mdi:laptop",
+        "badge": "New",
+        "compact": false,
+        "showDescription": true,
+        "className": "bg-primary text-primary-950 shadow-md"
+      }
+    }
+  },
+  {
+    "Title": "Compact",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-compact",
+        "title": "Mobile App",
+        "description": "iOS and Android applications",
+        "href": "#mobile",
+        "icon": "mdi:cellphone",
+        "badge": "Popular",
+        "compact": true,
+        "showDescription": true,
+        "className": "bg-primary text-primary-950 shadow-md w-48"
+      }
+    }
+  },
+  {
+    "Title": "WithoutIcon",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-no-icon",
+        "title": "Web Services",
+        "description": "Cloud hosting and deployment",
+        "href": "#web",
+        "badge": "Featured",
+        "compact": false,
+        "showDescription": true,
+        "className": "bg-primary text-primary-950 shadow-md"
+      }
+    }
+  },
+  {
+    "Title": "WithoutBadge",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-no-badge",
+        "title": "Data Analytics",
+        "description": "Business intelligence and insights",
+        "href": "#analytics",
+        "icon": "mdi:chart-bar",
+        "compact": false,
+        "showDescription": true,
+        "className": "bg-primary text-primary-950 shadow-md"
+      }
+    }
+  },
+  {
+    "Title": "WithoutDescription",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-no-desc",
+        "title": "Settings",
+        "href": "#settings",
+        "icon": "mdi:cog",
+        "badge": "Updated",
+        "compact": false,
+        "showDescription": false,
+        "className": "bg-primary text-primary-950 shadow-md w-48"
+      }
+    }
+  },
+  {
+    "Title": "Minimal",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-minimal",
+        "title": "Help Center",
+        "href": "#help",
+        "icon": "mdi:help-circle",
+        "compact": true,
+        "showDescription": false,
+        "className": "bg-primary text-primary-950 shadow-md"
+      }
+    }
+  },
+  {
+    "Title": "LongTitle",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-long-title",
+        "title": "Enterprise Cloud Solutions with Advanced Security Features",
+        "description": "Comprehensive cloud infrastructure for large organizations",
+        "href": "#enterprise",
+        "icon": "mdi:cloud",
+        "badge": "Enterprise",
+        "compact": false,
+        "showDescription": true,
+        "className": "bg-primary text-primary-950 shadow-md"
+      }
+    }
+  },
+  {
+    "Title": "LongDescription",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-long-desc",
+        "title": "API Gateway",
+        "description": "Managed API gateway service with rate limiting, authentication, monitoring, and analytics for all your microservices architecture needs across multiple regions.",
+        "href": "#api",
+        "icon": "mdi:api",
+        "badge": "API",
+        "compact": false,
+        "showDescription": true,
+        "className": "bg-primary text-primary-950 shadow-md w-96"
+      }
+    }
+  },
+  {
+    "Title": "SpecialBadge",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-special-badge",
+        "title": "AI Assistant",
+        "description": "Intelligent chatbot with natural language processing",
+        "href": "#ai",
+        "icon": "mdi:robot",
+        "badge": "Beta",
+        "compact": false,
+        "showDescription": true,
+        "className": "bg-primary text-primary-950 shadow-md"
+      }
+    }
+  },
+  {
+    "Title": "CustomColors",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-custom-colors",
+        "title": "Custom color",
+        "description": "Complete UI component library and guidelines",
+        "href": "#design",
+        "icon": "mdi:palette",
+        "badge": "Design",
+        "compact": false,
+        "showDescription": true,
+        "className": "bg-green-50 p-6 rounded-xl border border-green-200 shadow-md"
+      }
+    }
+  },
+  {
+    "Title": "DisabledStyle",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-disabled",
+        "title": "Legacy System",
+        "description": "Deprecated service (read-only)",
+        "icon": "mdi:alert-circle",
+        "badge": "Deprecated",
+        "compact": false,
+        "showDescription": true,
+        "className": "bg-gray-100 p-5 rounded-lg opacity-60 cursor-not-allowed"
+      }
+    }
+  },
+  {
+    "Title": "MultipleBadges",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-multi-badge",
+        "title": "Multi-Region Database",
+        "description": "Globally distributed database with automatic failover",
+        "href": "#database",
+        "icon": "mdi:database",
+        "badge": "HA",
+        "compact": false,
+        "showDescription": true,
+        "className": "bg-primary text-primary-950 shadow-md"
+      }
+    }
+  },
+  {
+    "Title": "ExternalLink",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-external",
+        "title": "Documentation",
+        "description": "Complete API reference and guides",
+        "href": "https://docs.example.com",
+        "icon": "mdi:book-open",
+        "badge": "External",
+        "compact": false,
+        "showDescription": true,
+        "className": "bg-primary text-primary-950 shadow-md"
+      }
+    }
+  },
+  {
+    "Title": "PremiumFeature",
+    "Data": {
+      "type": "MenuGridItem",
+      "data": {
+        "id": "menu-grid-item-premium",
+        "title": "Advanced Analytics",
+        "description": "Real-time dashboards and predictive insights",
+        "href": "#premium",
+        "icon": "mdi:chart-timeline",
+        "badge": "Premium",
+        "compact": false,
+        "showDescription": true,
+        "className": "bg-primary text-primary-950 shadow-md"
+      }
+    }
+  }
+]

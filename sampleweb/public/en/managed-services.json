@@ -1,0 +1,27 @@
+[
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "Hero",
+            "data": {
+                "Title": "Lorem ipsum dolor sit amet.",
+                "SubTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "ImageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+                "textPosition": "left",
+                "textAlignment": "left",
+                "padding": "none",
+                "className": "min-h-[40vh] bg-primary text-primary-950"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "ContentBlock",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "content": "Are IT challenges holding back your company's growth? Say goodbye to constant tech worries and hello to seamless operations with our Managed Services offerings. Our dedicated team of experts is here to take the weight off your shoulders, ensuring your technology works for you, not against you.\n\nOur top-tier Managed Services are designed to take the burden off your shoulders and supercharge your business's performance.\n\n**Seamless Operations**: Leave the technicalities to us. Our expert team ensures your IT infrastructure runs like clockwork, minimizing downtime and maximizing productivity.\n\n**Ironclad Security**: Your data's safety is our priority. Benefit from robust security measures that shield your business from cyber threats and keep your sensitive information under lock and key.\n\n**Proactive Maintenance**: Say goodbye to unexpected IT hiccups. We take a proactive approach, identifying and resolving issues before they impact your operations.\n\n**Performance Optimization**: Watch your business reach new heights with our performance tuning. Experience faster systems, smoother applications, and delighted customers.\n\n**24/7 Support**: We're always here for you. Based on your business need, we have the answers and solutions you need.\n\n**Strategic Growth**: Partner with us to align your technology with your business goals. Leverage our insights and expertise to drive innovation and achieve sustainable growth.\n\nFocus on what you do best and let us handle the rest."
+            }
+        }
+    }
+]

@@ -1,0 +1,27 @@
+[
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "Hero",
+            "data": {
+                "Title": "Lorem ipsum dolor sit amet.",
+                "SubTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "ImageUrl": "#",
+                "textPosition": "left",
+                "textAlignment": "left",
+                "padding": "none",
+                "className": "min-h-[40vh] bg-primary text-primary-950"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "ContentBlock",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "content": "Thinking about get on the AI train and revolutionize your digital landscape by integrating Generative AI, Chatbots, and Machine Learning into your organizations Digital Employee Experience and your Automation?\n\n**Sankhyatronics** is a pioneer in bringing AI and automation to your organization and revolutionize your digital landscape. Leveraging Generative AI, we crafts unique solutions that enhance your Digital Employee Experience. This technology enables the creation of dynamic content, fostering a more engaging and productive work environment.\n\nChatbots, powered by sophisticated AI algorithms, are deployed to provide 24/7 support, answering queries instantly and efficiently. This leads to improved employee satisfaction and productivity, while also offering superior customer service in B2B and B2C scenarios.\n\n**Sankhyatronics** build your Automated Solutions, streamline your processes within your organizations, driving productivity and reducing manual effort. But our vision extends beyond internal operations. Our AI-powered solutions are designed to enhance B2B and B2C experiences, creating value at every touch-point. In essence, in **Sankhyatronics** we are not just implementing AI and automation; we\u2019re shaping your future of digital interactions, both within your organization and in your external engagements.\n\nOur commitment to innovation is bringing new standards in the digital realm into your business and bringing you in front in your business, - making us your trusted partner in the journey towards digital transformation.\n\nAt **Sankhyatronics**, we don't just build AI solutions; we create the future in a secure and responsible way."
+            }
+        }
+    }
+]

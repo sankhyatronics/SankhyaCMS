@@ -1,0 +1,41 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Theming Guide" />
+
+# Theming OmniPortal
+
+OmniPortal uses a combination of CSS variables and Tailwind utilities to provide a robust theming system.
+
+## Theme Colors
+
+The library relies on a set of core CSS variables defined on the `:root` element. By updating these, you can transform the entire look and feel.
+
+### Primary Tokens
+
+| Variable | Description | Default (Example) |
+| :--- | :--- | :--- |
+| `--color-primary` | Main brand color | `#2E6305` |
+| `--color-primary-50` | Lightest variation | `#f0f7ea` |
+| `--color-primary-950` | Darkest variation | `#0a1702` |
+
+## Implementation
+
+To apply your own theme, simply override these variables in your global CSS:
+
+```css
+:root {
+  --color-primary: #00678c; /* Your brand blue */
+  --color-primary-50: #f0f8ff;
+  --color-primary-950: #001a24;
+}
+```
+
+## Dark Mode
+
+OmniPortal components are design to be dark-mode aware. Use the `.dark` class on a wrapper element to activate dark themes.
+
+```tsx
+<div className="dark">
+  <DynamicRenderer data={pageData} />
+</div>
+```

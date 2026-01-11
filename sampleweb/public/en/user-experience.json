@@ -1,0 +1,27 @@
+[
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "Hero",
+            "data": {
+                "Title": "Lorem ipsum dolor sit amet.",
+                "SubTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "ImageUrl": "#",
+                "textPosition": "left",
+                "textAlignment": "left",
+                "padding": "none",
+                "className": "min-h-[40vh] bg-primary text-primary-950"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "ContentBlock",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "content": "A well-crafted User Experience is key to reaching and engaging your customers. It ensures that your digital platforms are intuitive, satisfying, and tailored to the needs of your users, thereby fostering loyalty and driving customer engagement.\n\nA robust Digital Employee Experience is crucial in attracting and retaining the workforce of tomorrow. It fosters a culture of innovation and collaboration, making employees feel valued and engaged.\n\nAt **Sankhyatronics**, we are committed to pushing the boundaries of user experience (UX) design by leveraging cutting-edge technologies and methodologies.\n\nWe place a strong emphasis on User Research, Analytics and Continuous Discovery to understand the needs, behaviors, and motivations of your users. This helps us to create solutions that are not only functional but also meaningful, fast, easy, and enjoyable to use.\n\nOur understanding of the User Journey allows us to map out every touch-point between the user and the product. This helps you to identify opportunities for improvement and innovation.\n\nOur expertise in user interface technologies like Modern Apps, Next gen Web, AR and VR allows us to create immersive experiences that blur the line between the physical and digital worlds. These technologies enable design of your next interactive solutions that engage your users on a whole new level.\n\nFinally, our skills in User Experience Design ensure that every solution we build for you is intuitive, efficient, and satisfying to use. We believe that good design is not just about how a product looks, but also about how it works.\n\nAt **Sankhyatronics**, we don\u2019t just build solutions; we create experiences that delight users."
+            }
+        }
+    }
+]

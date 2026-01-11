@@ -1,0 +1,59 @@
+.hamburger-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.hamburger-toggle {
+  position: relative;
+  z-index: 1002;
+  /* Higher than overlay and menu */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--color-primary-950);
+}
+
+.hamburger-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.hamburger-content-container {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 300px;
+  max-width: 90vw;
+  z-index: 1001;
+  /* Between overlay and button */
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  background-color: var(--color-primary);
+  color: var(--color-primary-950);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.hamburger-content-container.left {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.hamburger-content-container.right {
+  right: 0;
+  transform: translateX(100%);
+}
+
+.hamburger-content-container.open {
+  transform: translateX(0);
+}
+
+.hamburger-content {
+  padding: 20px;
+  height: 100%;
+}

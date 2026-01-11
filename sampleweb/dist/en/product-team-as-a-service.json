@@ -1,0 +1,27 @@
+[
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "Hero",
+            "data": {
+                "Title": "Lorem ipsum dolor sit amet.",
+                "SubTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "ImageUrl": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
+                "textPosition": "left",
+                "textAlignment": "left",
+                "padding": "none",
+                "className": "min-h-[40vh] bg-primary text-primary-950"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "ContentBlock",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "content": "Envisioning and producing a great digital product is at best an unpredictable affair. Older development models running project-based waterfall plans based on internal IT colleagues working with help from available expert consultants, have given way to new agile approaches that have proven much more reliable, controllable, and more able to handle the unforeseen nature of software-based product development.\n\nThis trend is not achievable for many companies as the initial investment and the ongoing resource allocation is often too high. We see that the requirements for a fully agile Digital Product Team most often require a team of 6 to 10 highly skilled and specialized people.\n\nLeaving inflexible and uncontrollable options like buying an out of the box digital product, running large scale RFP processes to find a partner to build an upfront defined digital solution or fully outsourcing with very few options of control and adjustment to business needs.\n\nWhat if you could \u201cProduct Team as a Service\u201d- a digital product development model based on the new approaches to agile product development but available to your organization in a setup you can afford. A partner that takes care of the hiring, retainment, developing and management of these highly specialized teams both off- and on-shore and makes them available to you in the amount you need them.\n\nImagine you having access to the agile product delivery model, but only pay for the time you need, with you firmly in the center of control and where you are truly solving the business needs. Together we always ensure you receive the highest value from every opportunity we solve with you and that we Succeed Together."
+            }
+        }
+    }
+]

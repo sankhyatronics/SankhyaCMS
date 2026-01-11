@@ -1,0 +1,48 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Introduction" />
+
+# Welcome to @sankhyatronics/OmniPortal
+
+**OmniPortal** is a high-performance, pure-view React component library designed for building dynamic portals driven by headless CMS or static JSON data.
+
+## Why OmniPortal?
+
+Unlike traditional UI libraries, OmniPortal is built with **Dynamic Rendering** as a first-class citizen. Every component is designed to be easily mapped to a JSON structure, allowing you to change your entire website's layout and content without touching a single line of React code.
+
+### Core Philosophy
+
+1.  **JSON-Driven**: Layouts are defined in JSON, making them perfect for Headless CMS integrations.
+2.  **Pure View**: Components focus on presentation, allowing the application layer to handle logic and data fetching.
+3.  **Themable**: Built with CSS variables and Tailwind support for deep customization.
+4.  **Markdown-Ready**: Content blocks natively support Markdown for rich, formatted text.
+
+---
+
+## Getting Started
+
+### Installation
+
+```bash
+npm install @sankhyatronics/omniportal
+```
+
+### Basic Usage
+
+To render a page dynamically from a JSON file:
+
+```tsx
+import { DynamicRenderer } from '@sankhyatronics/omniportal';
+
+const MyPage = ({ pageData }) => {
+  return <DynamicRenderer data={pageData} />;
+};
+```
+
+---
+
+## Documentation Structure
+
+- **Components**: Detailed view of every individual UI component.
+- **Theming**: How to customize colors and typography.
+- **Dynamic Routing**: Guide on setting up slug-based page loading.

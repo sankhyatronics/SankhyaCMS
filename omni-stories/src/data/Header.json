@@ -1,0 +1,414 @@
+[
+  {
+    "Title": "Default",
+    "Data": {
+      "type": "Header",
+      "data": {
+        "id": "header-default",
+        "sticky": false,
+        "className": "bg-primary shadow-md",
+        "mobileBreakpoint": 768,
+        "logoHref": "/",
+        "logoSrc": "/Logo.jpg",
+        "logoClassName": "w-[84px]",
+        "altText": "Company Logo",
+        "children": [
+          {
+            "type": "IconButton",
+            "data": {
+              "id": "sticky-cart",
+              "icon": "mdi:cart",
+              "onClick": "@action:onCartClick",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+            }
+          },
+          {
+            "type": "Dropdown",
+            "data": {
+              "id": "dropdown-default",
+              "title": "Products",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+              "itemGroupClassName": "bg-primary text-primary-950 p-4",
+              "icon": "mdi:apps",
+              "iconPosition": "left",
+              "iconSize": "1.2rem",
+              "iconColor": "currentColor"
+            },
+            "children": [
+              {
+                "type": "MenuGrid",
+                "data": {
+                  "id": "menugrid-default",
+                  "columns": 3,
+                  "className": "rounded-sm shadow-md",
+                  "gridClassName": "gap-6 bg-primary text-primary-950 rounded-sm px-4 py-2 shadow-md w-148"
+                },
+                "children": [
+                  {
+                    "type": "MenuGridItem",
+                    "data": {
+                      "id": "menugrid-item-1",
+                      "title": "Web Development",
+                      "description": "Build modern web applications",
+                      "href": "#web",
+                      "icon": "mdi:web",
+                      "badge": "Popular"
+                    }
+                  },
+                  {
+                    "type": "MenuGridItem",
+                    "data": {
+                      "id": "menugrid-item-2",
+                      "title": "Mobile Apps",
+                      "description": "iOS and Android applications",
+                      "href": "#mobile",
+                      "icon": "mdi:cellphone"
+                    }
+                  },
+                  {
+                    "type": "MenuGridItem",
+                    "data": {
+                      "id": "menugrid-item-3",
+                      "title": "Cloud Services",
+                      "description": "Scalable cloud infrastructure",
+                      "href": "#cloud",
+                      "icon": "mdi:cloud",
+                      "badge": "New"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "Sticky",
+    "Data": {
+      "type": "Header",
+      "data": {
+        "id": "header-sticky",
+        "sticky": true,
+        "className": "bg-primary shadow-lg",
+        "mobileBreakpoint": 768,
+        "logoHref": "/",
+        "logoSrc": "/Logo.jpg",
+        "logoClassName": "w-[84px]",
+        "altText": "Company Logo",
+        "children": [
+          {
+            "type": "MenuItem",
+            "data": {
+              "id": "sticky-home",
+              "title": "Home",
+              "href": "/",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+            }
+          },
+          {
+            "type": "MenuItem",
+            "data": {
+              "id": "sticky-features",
+              "title": "Features",
+              "href": "/features",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+            }
+          },
+          {
+            "type": "MenuItem",
+            "data": {
+              "id": "sticky-pricing",
+              "title": "Pricing",
+              "href": "/pricing",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+            }
+          },
+          {
+            "type": "IconButton",
+            "data": {
+              "id": "sticky-cart",
+              "icon": "mdi:cart",
+              "onClick": "@action:onCartClick",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "Minimal",
+    "Data": {
+      "type": "Header",
+      "data": {
+        "id": "header-minimal",
+        "sticky": false,
+        "className": "bg-primary shadow-lg",
+        "mobileBreakpoint": 768,
+        "logoHref": "/",
+        "logoSrc": "/Logo.jpg",
+        "logoClassName": "w-[84px]",
+        "altText": "Minimal Logo",
+        "children": [
+          {
+            "type": "MenuItem",
+            "data": {
+              "id": "minimal-home",
+              "title": "Home",
+              "href": "/",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "WithMultipleDropdowns",
+    "Data": {
+      "type": "Header",
+      "data": {
+        "id": "header-multi-dropdown",
+        "sticky": false,
+        "className": "bg-primary shadow-lg",
+        "mobileBreakpoint": 768,
+        "logoHref": "/",
+        "logoSrc": "/Logo.jpg",
+        "logoClassName": "w-[84px]",
+        "altText": "Logo",
+        "children": [
+          {
+            "type": "Dropdown",
+            "data": {
+              "id": "header-products-dropdown",
+              "title": "Products",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+              "itemGroupClassName": "bg-primary text-primary-950 p-4",
+              "icon": "mdi:package",
+              "embeddedView": {
+                "type": "MenuGrid",
+                "data": {
+                  "id": "products-category-grid",
+                  "columns": 2,
+                  "className": "p-1 rounded-b-lg shadow-md bg-primary text-primary-950",
+                  "gridClassName": "gap-4",
+                  "items": [
+                    {
+                      "type": "MenuGridItem",
+                      "data": {
+                        "id": "category-web",
+                        "title": "Web",
+                        "href": "#web",
+                        "icon": "mdi:web"
+                      }
+                    },
+                    {
+                      "type": "MenuGridItem",
+                      "data": {
+                        "id": "category-mobile",
+                        "title": "Mobile",
+                        "href": "#mobile",
+                        "icon": "mdi:cellphone"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "type": "Dropdown",
+            "data": {
+              "id": "header-solutions-dropdown",
+              "title": "Solutions",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+              "itemGroupClassName": "bg-primary text-primary-950 p-4",
+              "icon": "mdi:puzzle",
+              "embeddedView": {
+                "type": "MenuGrid",
+                "data": {
+                  "id": "solutions-grid",
+                  "columns": 2,
+                  "className": "p-1 rounded-b-lg shadow-md bg-primary text-primary-950",
+                  "gridClassName": "gap-4",
+                  "items": [
+                    {
+                      "type": "MenuGridItem",
+                      "data": {
+                        "id": "solution-enterprise",
+                        "title": "Enterprise",
+                        "href": "#enterprise",
+                        "icon": "mdi:office-building"
+                      }
+                    },
+                    {
+                      "type": "MenuGridItem",
+                      "data": {
+                        "id": "solution-startup",
+                        "title": "Startup",
+                        "href": "#startup",
+                        "icon": "mdi:rocket"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "type": "IconButton",
+            "data": {
+              "id": "header-search-2",
+              "icon": "mdi:magnify",
+              "onClick": "@action:onSearchClick",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-full"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "WithNoMenu",
+    "Data": {
+      "type": "Header",
+      "data": {
+        "id": "header-no-menu",
+        "sticky": false,
+        "className": "bg-primary",
+        "mobileBreakpoint": 768,
+        "logoHref": "/",
+        "logoSrc": "/Logo.jpg",
+        "logoClassName": "w-[84px]",
+        "altText": "Logo",
+        "children": [
+          {
+            "type": "IconButton",
+            "data": {
+              "id": "header-login",
+              "icon": "mdi:login",
+              "title": "Login",
+              "onClick": "@action:onLoginClick",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 px-4 py-2 rounded",
+              "href": "/login"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "WithManyUtilityButtons",
+    "Data": {
+      "type": "Header",
+      "data": {
+        "id": "header-many-utility",
+        "sticky": false,
+        "className": "bg-primary",
+        "mobileBreakpoint": 768,
+        "logoHref": "/",
+        "logoSrc": "/Logo.jpg",
+        "logoClassName": "w-[84px]",
+        "altText": "Logo",
+        "children": [
+          {
+            "type": "MenuItem",
+            "data": {
+              "id": "simple-home",
+              "title": "Home",
+              "href": "/",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+            }
+          },
+          {
+            "type": "IconButton",
+            "data": {
+              "id": "util-notifications",
+              "icon": "mdi:bell",
+              "onClick": "@action:onNotificationClick",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-full"
+            }
+          },
+          {
+            "type": "IconButton",
+            "data": {
+              "id": "util-messages",
+              "icon": "mdi:message",
+              "onClick": "@action:onMessageClick",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-full"
+            }
+          },
+          {
+            "type": "IconButton",
+            "data": {
+              "id": "util-settings",
+              "icon": "mdi:cog",
+              "onClick": "@action:onSettingsClick",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-full"
+            }
+          },
+          {
+            "type": "IconButton",
+            "data": {
+              "id": "util-help",
+              "icon": "mdi:help-circle",
+              "onClick": "@action:onHelpClick",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-full"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "WithCTAs",
+    "Data": {
+      "type": "Header",
+      "data": {
+        "id": "header-with-cta",
+        "sticky": false,
+        "className": "bg-primary",
+        "mobileBreakpoint": 768,
+        "logoHref": "/",
+        "logoSrc": "/Logo.jpg",
+        "logoClassName": "w-[84px]",
+        "altText": "Logo",
+        "children": [
+          {
+            "type": "MenuItem",
+            "data": {
+              "id": "cta-home",
+              "title": "Home",
+              "href": "/",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 px-4 py-2 rounded"
+            }
+          },
+          {
+            "type": "IconButton",
+            "data": {
+              "id": "header-signup",
+              "title": "Sign Up Free",
+              "icon": "ic:round-assignment-ind",
+              "onClick": "@action:onSignUpClick",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 px-4 py-2 rounded",
+              "href": "/signup"
+            }
+          },
+          {
+            "type": "IconButton",
+            "data": {
+              "id": "header-login-cta",
+              "title": "Login",
+              "icon": "mdi:login",
+              "onClick": "@action:onLoginClick",
+              "className": "bg-primary hover:bg-primary-200 text-primary-950 px-4 py-2 rounded",
+              "href": "/login"
+            }
+          }
+        ]
+      }
+    }
+  }
+]

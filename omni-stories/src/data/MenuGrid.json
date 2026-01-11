@@ -1,0 +1,398 @@
+[
+  {
+    "Title": "Default",
+    "Data": {
+      "type": "MenuGrid",
+      "data": {
+        "id": "menugrid-default",
+        "columns": 3,
+        "className": "p-6",
+        "gridClassName": "gap-6 bg-primary text-primary-950 rounded-sm px-4 py-2 shadow-md",
+        "children": [
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "menugrid-item-1",
+              "title": "Web Development",
+              "description": "Build modern web applications",
+              "href": "#web",
+              "icon": "mdi:web",
+              "badge": "Popular"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "menugrid-item-2",
+              "title": "Mobile Apps",
+              "description": "iOS and Android applications",
+              "href": "#mobile",
+              "icon": "mdi:cellphone"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "menugrid-item-3",
+              "title": "Cloud Services",
+              "description": "Scalable cloud infrastructure",
+              "href": "#cloud",
+              "icon": "mdi:cloud",
+              "badge": "New"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "TwoColumns",
+    "Data": {
+      "type": "MenuGrid",
+      "data": {
+        "id": "menugrid-two-columns",
+        "columns": 2,
+        "className": "p-4",
+        "gridClassName": "gap-6 bg-primary text-primary-950 rounded-sm px-4 py-2 shadow-md",
+        "children": [
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "two-col-item-1",
+              "title": "Design",
+              "description": "UI/UX design services",
+              "href": "#design",
+              "icon": "mdi:palette"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "two-col-item-2",
+              "title": "Development",
+              "description": "Full-stack development",
+              "href": "#dev",
+              "icon": "mdi:code-braces"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "FourColumns",
+    "Data": {
+      "type": "MenuGrid",
+      "data": {
+        "id": "menugrid-four-columns",
+        "columns": 4,
+        "className": "p-4",
+        "gridClassName": "gap-6 bg-primary text-primary-950 rounded-sm px-4 py-2 shadow-md",
+        "children": [
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "four-col-item-1",
+              "title": "Frontend",
+              "href": "#frontend",
+              "icon": "mdi:monitor"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "four-col-item-2",
+              "title": "Backend",
+              "href": "#backend",
+              "icon": "mdi:server"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "four-col-item-3",
+              "title": "DevOps",
+              "href": "#devops",
+              "icon": "mdi:docker"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "four-col-item-4",
+              "title": "Security",
+              "href": "#security",
+              "icon": "mdi:shield"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "SingleColumn",
+    "Data": {
+      "type": "MenuGrid",
+      "data": {
+        "id": "menugrid-single-column",
+        "columns": 1,
+        "className": "p-4 max-w-md",
+        "gridClassName": "gap-6 bg-primary text-primary-950 rounded-sm px-4 py-2 shadow-md",
+        "children": [
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "single-col-item-1",
+              "title": "Dashboard",
+              "description": "Access your dashboard",
+              "href": "#dashboard",
+              "icon": "mdi:view-dashboard"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "single-col-item-2",
+              "title": "Settings",
+              "description": "Manage your settings",
+              "href": "#settings",
+              "icon": "mdi:cog"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "single-col-item-3",
+              "title": "Help & Support",
+              "description": "Get help and support",
+              "href": "#help",
+              "icon": "mdi:help-circle"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "ManyItems",
+    "Data": {
+      "type": "MenuGrid",
+      "data": {
+        "id": "menugrid-many-items",
+        "columns": 3,
+        "className": "p-6",
+        "gridClassName": "gap-6 bg-primary text-primary-950 rounded-sm px-4 py-2 shadow-md",
+        "children": [
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "item-1",
+              "title": "Analytics",
+              "description": "Data analytics and insights",
+              "href": "#analytics",
+              "icon": "mdi:chart-bar"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "item-2",
+              "title": "AI & ML",
+              "description": "Artificial intelligence services",
+              "href": "#ai",
+              "icon": "mdi:robot",
+              "badge": "Beta"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "item-3",
+              "title": "APIs",
+              "description": "REST and GraphQL APIs",
+              "href": "#apis",
+              "icon": "mdi:api"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "item-4",
+              "title": "Database",
+              "description": "Database management",
+              "href": "#database",
+              "icon": "mdi:database"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "item-5",
+              "title": "Storage",
+              "description": "Cloud storage solutions",
+              "href": "#storage",
+              "icon": "mdi:harddisk"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "item-6",
+              "title": "Networking",
+              "description": "Network infrastructure",
+              "href": "#networking",
+              "icon": "mdi:network"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "Compact",
+    "Data": {
+      "type": "MenuGrid",
+      "data": {
+        "id": "menugrid-compact",
+        "columns": 4,
+        "className": "p-2",
+        "gridClassName": "gap-6 bg-primary text-primary-950 rounded-sm px-4 py-2 shadow-md",
+        "children": [
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "compact-item-1",
+              "title": "Home",
+              "href": "#home",
+              "icon": "mdi:home",
+              "compact": true
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "compact-item-2",
+              "title": "Profile",
+              "href": "#profile",
+              "icon": "mdi:account",
+              "compact": true
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "compact-item-3",
+              "title": "Messages",
+              "href": "#messages",
+              "icon": "mdi:message",
+              "compact": true
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "compact-item-4",
+              "title": "Settings",
+              "href": "#settings",
+              "icon": "mdi:cog",
+              "compact": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "WithMixedContent",
+    "Data": {
+      "type": "MenuGrid",
+      "data": {
+        "id": "menugrid-mixed",
+        "columns": 2,
+        "className": "p-4 bg-gradient-to-r from-primary-50 to-primary-100 rounded-xl",
+        "gridClassName": "gap-4",
+        "children": [
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "mixed-item-1",
+              "title": "Premium Support",
+              "description": "24/7 premium customer support",
+              "href": "#support",
+              "icon": "mdi:headset",
+              "badge": "24/7",
+              "className": "bg-white shadow-lg"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "mixed-item-2",
+              "title": "Training",
+              "description": "Comprehensive training programs",
+              "href": "#training",
+              "icon": "mdi:school",
+              "className": "bg-white shadow-lg"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "Title": "Empty",
+    "Data": {
+      "type": "MenuGrid",
+      "data": {
+        "id": "menugrid-empty",
+        "columns": 3,
+        "className": "p-4 border-2 border-dashed border-gray-300 rounded-lg",
+        "gridClassName": "gap-4"
+      }
+    }
+  },
+  {
+    "Title": "ResponsiveTest",
+    "Data": {
+      "type": "MenuGrid",
+      "data": {
+        "id": "menugrid-responsive",
+        "columns": 3,
+        "className": "p-4",
+        "gridClassName": "gap-6 bg-primary text-primary-950 rounded-sm px-4 py-2 shadow-md",
+        "children": [
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "responsive-item-1",
+              "title": "Responsive Design",
+              "description": "Works on all screen sizes",
+              "href": "#responsive",
+              "icon": "mdi:responsive"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "responsive-item-2",
+              "title": "Mobile First",
+              "description": "Optimized for mobile devices",
+              "href": "#mobile-first",
+              "icon": "mdi:cellphone"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "responsive-item-3",
+              "title": "Performance",
+              "description": "Fast and optimized performance",
+              "href": "#performance",
+              "icon": "mdi:speedometer"
+            }
+          }
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,52 @@
+[
+    {
+        "Title": "Default",
+        "Data": {
+            "type": "BentoGrid",
+            "data": {
+                "title": "Built for scale",
+                "subtitle": "Everything you need to build your next great idea.",
+                "items": [
+                    {
+                        "title": "Global Infrastructure",
+                        "description": "Deploy closer to your users with our global edge network.",
+                        "colSpan": 2,
+                        "rowSpan": 2,
+                        "image": {
+                            "src": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80",
+                            "alt": "Earth from space"
+                        }
+                    },
+                    {
+                        "title": "Real-time Analytics",
+                        "description": "Monitor performance in real-time.",
+                        "colSpan": 1,
+                        "icon": "mdi:chart-bar"
+                    },
+                    {
+                        "title": "Secure by Default",
+                        "description": "Enterprise-grade security.",
+                        "colSpan": 1,
+                        "icon": "mdi:shield-check"
+                    },
+                    {
+                        "title": "Team Collaboration",
+                        "description": "Work together seamlessly.",
+                        "colSpan": 2,
+                        "icon": "mdi:account-group",
+                        "className": "bg-primary-50"
+                    },
+                    {
+                        "title": "Instant Deployments",
+                        "description": "Push to git and we handle the rest.",
+                        "colSpan": 4,
+                        "image": {
+                            "src": "https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                            "alt": "Code on screen"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+]

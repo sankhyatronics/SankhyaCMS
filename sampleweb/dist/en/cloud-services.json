@@ -1,0 +1,27 @@
+[
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "Hero",
+            "data": {
+                "Title": "Lorem ipsum dolor sit amet.",
+                "SubTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "ImageUrl": "#",
+                "textPosition": "left",
+                "textAlignment": "left",
+                "padding": "none",
+                "className": "min-h-[30vh] bg-primary text-primary-950"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "ContentBlock",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "content": "Looking to get ahead with your cloud investment? We help you harness the power of Microsoft 365, Azure and more to enhance your productivity, collaboration, and security.\n\nAt **Sankhyatronics**, we leverages cutting-edge technologies to maximize your investment in cloud services. Our expertise spans across **Microsoft 365, Azure, Cloud Infrastructure**, and **Modern Application Development**, but also include a deep knowledge within fields like Kubernetes and Microservice Architecture.\n\nWe help you harness the power of Microsoft 365 to **enhance your productivity, collaboration,** and **security**. Our team of experts **optimizes Azure services** to build, manage, and deploy applications swiftly on a global network using preferred tools and frameworks.\n\nOur proficiency in Cloud Infrastructure ensures **seamless migration, efficient cloud management**, and **cost-effective solutions**. We design robust and scalable infrastructures that align with your business needs.\n\nIn the realm of **Modern Application Development**, we employ agile discovery and development methodologies to deliver high-quality applications. Our developers are adept at creating cloud-native applications that are scalable, resilient, and quick to market.\n\nAt **Sankhyatronics**, we believe in staying at the forefront of technology trends. Our commitment to continuous learning and adaptation enables us to provide our clients with innovative solutions that drive their business growth. Trust **Sankhyatronics** to transform your cloud journey into a strategic advantage."
+            }
+        }
+    }
+]

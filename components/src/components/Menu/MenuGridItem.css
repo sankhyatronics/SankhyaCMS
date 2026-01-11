@@ -1,0 +1,156 @@
+.menu-grid-item {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.menu-grid-item.regular {
+  padding: 16px;
+}
+
+.menu-grid-item.compact {
+  padding: 12px;
+}
+
+.menu-grid-item:hover {
+  transform: translateY(-2px);
+}
+
+/* Link */
+.menu-grid-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  gap: 8px;
+}
+
+/* Badge */
+.menu-grid-badge {
+  position: absolute;
+  top: 2px;
+  right: 8px;
+  font-size: var(--text-xs);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-weight: 500;
+  z-index: 1;
+  background-color: var(--color-primary-950);
+  color: var(--color-primary);
+}
+
+/* Icon and Title container - on same line */
+.menu-grid-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Icon container */
+.menu-grid-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+  /* Override padding */
+  margin-bottom: 0;
+  /* Remove bottom margin */
+}
+
+.menu-grid-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Title */
+.menu-grid-title {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: color 0.2s ease;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+
+/* Description */
+.menu-grid-description {
+  font-size: var(--text-xs);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+  transition: color 0.2s ease;
+}
+
+/* Children container */
+.menu-grid-children {
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+.menu-grid-children>* {
+  margin: 4px 0;
+}
+
+/* Compact adjustments */
+.menu-grid-item.compact .menu-grid-header {
+  gap: 8px;
+}
+
+.menu-grid-item.compact .menu-grid-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.menu-grid-item.compact .menu-grid-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.menu-grid-item.compact .menu-grid-title {
+  font-size: var(--text-xs);
+}
+
+.menu-grid-item.compact .menu-grid-description {
+  font-size: var(--text-xs);
+  /* -webkit-line-clamp: 1; */
+}
+
+/* Handle cases with only icon or only title */
+.menu-grid-item:has(.menu-grid-icon):not(:has(.menu-grid-title)) .menu-grid-header {
+  justify-content: center;
+}
+
+.menu-grid-item:has(.menu-grid-title):not(:has(.menu-grid-icon)) .menu-grid-header {
+  justify-content: flex-start;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .menu-grid-header {
+    gap: 8px;
+  }
+
+  .menu-grid-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .menu-grid-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+}

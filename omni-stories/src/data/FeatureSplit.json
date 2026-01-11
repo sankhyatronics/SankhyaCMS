@@ -1,0 +1,61 @@
+[
+    {
+        "Title": "Default",
+        "Data": {
+            "type": "FeatureSplit",
+            "data": {
+                "title": "Experience the difference",
+                "description": "Our platform provides everything you need to scale your business efficiently.",
+                "imagePosition": "right",
+                "image": {
+                    "src": "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80",
+                    "alt": "Team working together"
+                },
+                "items": [
+                    {
+                        "icon": "mdi:speedometer",
+                        "title": "Lightning Fast",
+                        "description": "Deploy in seconds, not minutes. Global edge network ensures low latency."
+                    },
+                    {
+                        "icon": "mdi:shield-check",
+                        "title": "Secure by Default",
+                        "description": "Enterprise-grade security with automatic SSL and DDoS protection."
+                    },
+                    {
+                        "icon": "mdi:chart-box",
+                        "title": "Real-time Analytics",
+                        "description": "Gain insights into your traffic and user behavior instantly."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "Title": "ImageLeft",
+        "Data": {
+            "type": "FeatureSplit",
+            "data": {
+                "title": "Design without limits",
+                "description": "Create stunning visuals with our advanced design tools.",
+                "imagePosition": "left",
+                "image": {
+                    "src": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "alt": "Designing on tablet"
+                },
+                "items": [
+                    {
+                        "icon": "mdi:palette",
+                        "title": "Advanced Color Palettes",
+                        "description": "Access millions of colors and create custom themes."
+                    },
+                    {
+                        "icon": "mdi:vector-curve",
+                        "title": "Vector Editing",
+                        "description": "Powerful vector tools right in your browser."
+                    }
+                ]
+            }
+        }
+    }
+]

@@ -1,0 +1,18 @@
+{
+  "name": "portals",
+  "author": "Sankhyatronics",
+  "version": "0.1.0-alpha.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "pnpm update-version && pnpm -r --workspace-concurrency=1 build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "dev": "pnpm -r dev",
+    "update-version": "node version-manager.js"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "packageManager": "pnpm@10.26.0"
+}

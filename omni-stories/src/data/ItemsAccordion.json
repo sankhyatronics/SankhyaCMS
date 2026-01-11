@@ -1,0 +1,31 @@
+[
+    {
+        "Title": "Default",
+        "Data": {
+            "type": "ItemsAccordion",
+            "data": {
+                "title": "Frequently Asked Questions",
+                "subtitle": "Everything you need to know about the product.",
+                "className": "custom-accordion-class",
+                "allowMultiple": false,
+                "items": [
+                    {
+                        "id": "item-1",
+                        "title": "What is the return policy?",
+                        "content": "You can return any item within 30 days of purchase."
+                    },
+                    {
+                        "id": "item-2",
+                        "title": "Do you ship internationally?",
+                        "content": "Yes, we ship to over 50 countries worldwide."
+                    },
+                    {
+                        "id": "item-3",
+                        "title": "How can I contact support?",
+                        "content": "You can reach us via email at support@example.com or call us at 1-800-555-0199."
+                    }
+                ]
+            }
+        }
+    }
+]

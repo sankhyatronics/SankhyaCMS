@@ -1,0 +1,19 @@
+[
+  {
+    "Title": "Default",
+    "Data": {
+      "type": "Hero",
+      "data": {
+        "Title": "Give Your Business the Attention that it Deserves",
+        "SubTitle": "Unlock Your Potential: Let Us Handle IT Solutions While You Excel",
+        "ButtonText": "Schedule Call",
+        "Link": "#",
+        "ImageUrl": "/BusinessAttention0210.webp",
+        "textPosition": "left",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[50vh] md:min-h-[70vh] bg-primary text-primary-950"
+      }
+    }
+  }
+]

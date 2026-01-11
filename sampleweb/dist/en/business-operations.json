@@ -1,0 +1,27 @@
+[
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "Hero",
+            "data": {
+                "Title": "Lorem ipsum dolor sit amet.",
+                "SubTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "ImageUrl": "#",
+                "textPosition": "left",
+                "textAlignment": "left",
+                "padding": "none",
+                "className": "min-h-[40vh] bg-primary text-primary-950"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "ContentBlock",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "content": "At **Sankhyatronics**, our team of experts harnesses the power of cutting-edge technologies within Business Analysis, Business Intelligence, and Business Process Optimization to help you maximize your Business Operations and Strategy.\n\nIn the realm of Business Analysis, we employ advanced analytical tools and methodologies to help you understand your business needs and challenges. We then help you develop tailored digital strategies that drive growth and efficiency in your business.\n\nOur Business Intelligence solutions are powered by state-of-the-art data analytics platforms. We transform raw data into actionable insights, enabling you to make informed decisions that propel your businesses forward.\n\nIn Business Process Optimization, we help you utilize innovative process modeling and simulation tools to identify bottlenecks and inefficiencies in your operations. We then work with you to design optimized processes and apply digital solutions that enhance productivity and reduce costs.\n\nAt **Sankhyatronics**, we are committed to helping you harness the power of technology to achieve your business objectives. Our expertise in these fields allows us to deliver solutions that are not only technologically advanced but also aligned with your strategic goals."
+            }
+        }
+    }
+]

@@ -1,0 +1,60 @@
+import { useApiConfig, ApiService } from './useApiConfig';
+import { IComponent } from '../../src/components/Common/DynamicRenderer.interfaces';
+
+interface UseTypedApiConfigOptions {
+  component: ComponentType;
+  story: string;
+  apiService: ApiService;
+  variant?: string;
+}
+
+// Define component types for better TypeScript support
+type ComponentType =
+  | 'MenuGridItem'
+  | 'MenuGrid'
+  | 'Dropdown'
+  | 'Header'
+  | 'Hero'
+  | 'HamburgerMenu'
+  | 'Card'
+  | 'ItemsAccordion'
+  | 'Footer'
+  | 'Stats'
+  | 'FeatureSplit'
+  | 'ContentBlock'
+  | 'FeaturesSection'
+  | 'BentoGrid';
+
+const componentEndpoints: Record<ComponentType, string> = {
+  MenuGridItem: '/menu-grid-item',
+  MenuGrid: '/menu-grid',
+  Dropdown: '/dropdown',
+  Header: '/header',
+  HamburgerMenu: '/hamburger-menu',
+  Hero: '/hero',
+  Card: '/card',
+  ItemsAccordion: '/items-accordion',
+  Footer: '/footer',
+  Stats: '/stats',
+  FeatureSplit: '/feature-split',
+  ContentBlock: '/content-block',
+  FeaturesSection: '/features-section',
+  BentoGrid: '/bento-grid',
+};
+
+export function useTypedApiConfig(options: UseTypedApiConfigOptions) {
+  const { component, story = 'Default', variant, apiService } = options;
+  const endpoint = componentEndpoints[component];
+
+  const params: Record<string, string> = {};
+  if (variant) {
+    params.variant = variant;
+  }
+
+  return useApiConfig<IComponent>({
+    endpoint,
+    storyName: story,
+    params,
+    apiService
+  });
+}

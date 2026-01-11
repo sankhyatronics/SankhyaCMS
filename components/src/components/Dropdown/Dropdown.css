@@ -1,0 +1,87 @@
+.menu {
+  display: block;
+  position: relative;
+}
+
+.menu-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 12px;
+  text-align: center;
+  width: fit-content;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+/* Arrow indicators */
+.menu-title .arrow {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: var(--text-xs);
+  transition: transform 0.3s ease;
+}
+
+.menu-title[aria-expanded="true"] .arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown animations */
+.menu-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.menu-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* REMOVE ALL CSS-BASED HOVER RULES - Let React handle it */
+/* .menu:hover .menu-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+} */
+
+/* Touch device styles */
+.touch-device .menu-dropdown {
+  display: none;
+  position: relative;
+  width: 100%;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.touch-device .menu-dropdown.show {
+  display: block;
+  pointer-events: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-dropdown {
+    width: 100vw;
+    left: 0;
+    right: 0;
+  }
+}
+
+/* Dropdown items */
+.menu-dropdown>* {
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(.73, .32, .34, 1.5);
+}

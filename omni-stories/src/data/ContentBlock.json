@@ -1,0 +1,19 @@
+[
+    {
+        "Title": "Default",
+        "Data": {
+            "type": "ContentBlock",
+            "data": {
+                "title": "Markdown Support Example",
+                "subtitle": "Authoring content with Markdown",
+                "format": "markdown",
+                "image": {
+                    "src": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "alt": "Code editor",
+                    "caption": "Writing in Markdown"
+                },
+                "content": "## Why Markdown?\n\nMarkdown is a lightweight markup language that you can use to add formatting elements to plain text text documents. Created by John Gruber in 2004, Markdown is now one of the world's most popular markup languages.\n\n### Features\n\n*   **Easy to ready:** No complex tags.\n*   **Portable:** Can be converted to HTML, PDF, etc.\n*   **Fast:** Write without lifting your fingers from the keyboard.\n\nHere is a list of things:\n\n1.  First item\n2.  Second item\n3.  Third item\n\nAnd some code:\n\n```javascript\nconsole.log('Hello, Markdown!');\n```\n\n> Markdown is intended to be as easy-to-read and easy-to-write as is feasible.\n"
+            }
+        }
+    }
+]

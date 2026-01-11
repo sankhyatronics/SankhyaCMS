@@ -1,0 +1,200 @@
+.feature-split-section {
+    padding: 24px;
+    background-color: var(--color-primary);
+}
+
+.feature-split-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+}
+
+.feature-split-section.image-left .feature-split-container {
+    direction: rtl;
+}
+
+.feature-split-section.image-left .feature-split-content {
+    direction: ltr;
+    /* Reset text direction for content */
+}
+
+.feature-split-section.image-top .feature-split-container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    text-align: center;
+}
+
+.feature-split-section.image-top .feature-split-content {
+    align-items: center;
+}
+
+.feature-split-section.image-top .feature-split-image-wrapper {
+    order: -1;
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 400px;
+}
+
+/* content styles */
+.feature-split-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.feature-split-title {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-950);
+    line-height: 1.2;
+    margin: 0;
+}
+
+/* .feature-split-title strong {
+    color: var(--color-primary-600);
+} */
+
+.feature-split-description {
+    font-size: var(--text-base);
+    color: var(--color-primary-600);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.feature-split-description p {
+    margin-bottom: 1em;
+}
+
+.feature-split-description p:last-child {
+    margin-bottom: 0;
+}
+
+/* Inverted Theme */
+.feature-split-section.theme-inverted {
+    background-color: var(--color-primary-950);
+}
+
+.feature-split-section.theme-inverted .feature-split-title {
+    color: var(--color-primary);
+}
+
+/* .feature-split-section.theme-inverted .feature-split-title strong {
+    color: var(--color-primary);
+} */
+
+.feature-split-section.theme-inverted .feature-split-description {
+    color: var(--color-primary-100);
+}
+
+.feature-split-section.theme-inverted .feature-split-item-title {
+    color: var(--color-primary);
+}
+
+.feature-split-section.theme-inverted .feature-split-item-description {
+    color: var(--color-primary-100);
+}
+
+.feature-split-actions {
+    margin-top: 16px;
+}
+
+.feature-split-actions button {
+    color: var(--color-primary-950);
+    background-color: var(--color-primary-100);
+    padding: 16px;
+    border-radius: 12px;
+
+}
+
+.feature-split-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 16px;
+}
+
+.feature-split-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.feature-split-icon-wrapper {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-split-item-title {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-900);
+    margin: 0 0 8px 0;
+}
+
+.feature-split-item-description {
+    font-size: var(--text-sm);
+    color: var(--color-primary-600);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* image styles */
+.feature-split-image-wrapper {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+}
+
+.feature-split-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.feature-split-image:hover {
+    transform: scale(1.02);
+}
+
+@media (max-width: 1024px) {
+    .feature-split-container {
+        gap: 48px;
+    }
+}
+
+@media (max-width: 768px) {
+    .feature-split-section {
+        padding: 64px 24px;
+    }
+
+    .feature-split-container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        direction: ltr !important;
+        /* Stack vertically always ltr */
+    }
+
+    /* If image is left (top on mobile), move it to top visually if desired, 
+       but standard stacking order usually puts content first. 
+       Let's keep default grid flow (content then image) or reverse flex if needed.
+    */
+
+    .feature-split-image-wrapper {
+        min-height: 300px;
+        order: -1;
+        /* Often nicer to see image first on mobile */
+    }
+}

@@ -1,0 +1,44 @@
+[
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "Hero",
+            "data": {
+                "Title": "Lorem ipsum dolor sit amet.",
+                "SubTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "ImageUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                "textAlignment": "center"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "FeaturesSection",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "columns": 2
+            },
+            "children": [
+                {
+                    "type": "ContentBlock",
+                    "data": {
+                        "title": "Lorem ipsum dolor sit amet.",
+                        "className": "shadow-lg rounded-lg",
+                        "format": "markdown",
+                        "content": "Sankhyatronics Solutions Private Limited\nGSTN: 08ABMCS6245F1Z1\n[contact@sankkyatronics.com](mailto:contact@sankkyatronics.com)\n\n**Address:**\nF-9/478, Laxman Marg, Chitrakoot Scheme\nVaishali Nagar, Jaipur - 302021\nRajasthan, India"
+                    }
+                },
+                {
+                    "type": "ContentBlock",
+                    "data": {
+                        "title": "Lorem ipsum dolor sit amet.",
+                        "className": "shadow-lg rounded-lg",
+                        "format": "markdown",
+                        "content": "coming soon..."
+                    }
+                }
+            ]
+        }
+    }
+]

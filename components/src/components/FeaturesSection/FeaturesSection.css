@@ -1,0 +1,111 @@
+.features-section {
+    padding: 80px 24px;
+    background-color: var(--color-primary);
+}
+
+.features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.features-header {
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+.features-title {
+    color: var(--color-primary-950);
+    font-size: 3rem;
+    line-height: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    width: 100%;
+}
+
+.features-subtitle {
+    color: var(--color-primary-600);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--features-columns, 2), 1fr);
+    gap: 32px;
+}
+
+.feature-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.feature-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-900);
+    margin-bottom: 8px;
+}
+
+.feature-title {
+    font-size: 1.5rem;
+    /* Increased from text-lg (1.125rem) */
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-950);
+    margin: 0;
+}
+
+.feature-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: auto;
+    color: var(--color-primary-600);
+    font-weight: 500;
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.feature-link:hover {
+    color: var(--color-primary-900);
+    text-decoration: underline;
+}
+
+.feature-description {
+    font-size: var(--text-sm);
+    color: var(--color-primary-600);
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .features-section {
+        padding: 48px 20px;
+    }
+
+    .features-title {
+        font-size: var(--text-xl);
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (min-width: 640px) {
+
+    /* sm */
+    .features-title {
+        font-size: 1.875rem;
+        /* text-3xl */
+        line-height: 2.25rem;
+    }
+}

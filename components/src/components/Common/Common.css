@@ -1,0 +1,124 @@
+/* ===== BUTTON CLASSES ===== */
+.btn {
+  padding: 12px 24px;
+  border-radius: 4px;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid currentColor;
+}
+
+/* ===== ANIMATION & TRANSITIONS ===== */
+/* Delay utilities */
+.delay-100 {
+  transition-delay: 0.1s;
+}
+
+.delay-200 {
+  transition-delay: 0.2s;
+}
+
+.delay-300 {
+  transition-delay: 0.3s;
+}
+
+.delay-400 {
+  transition-delay: 0.4s;
+}
+
+.delay-500 {
+  transition-delay: 0.5s;
+}
+
+/* Duration utilities */
+.duration-fast {
+  transition-duration: 0.2s;
+}
+
+.duration-normal {
+  transition-duration: 0.3s;
+}
+
+.duration-slow {
+  transition-duration: 0.5s;
+}
+
+/* Easing utilities */
+.ease-in {
+  transition-timing-function: ease-in;
+}
+
+.ease-out {
+  transition-timing-function: ease-out;
+}
+
+.ease-in-out {
+  transition-timing-function: ease-in-out;
+}
+
+/* Will-change for performance */
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Fade animations */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+}
+
+/* Slide animations */
+.slide-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.slide-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== VISIBILITY & DISPLAY ===== */
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+/* ===== INTERACTIVE STATES ===== */
+.hover-lift:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+.active-scale:active {
+  transform: scale(0.98);
+}

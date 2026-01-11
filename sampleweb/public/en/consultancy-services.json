@@ -1,0 +1,27 @@
+[
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "Hero",
+            "data": {
+                "Title": "Lorem ipsum dolor sit amet.",
+                "SubTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "ImageUrl": "https://images.unsplash.com/photo-1454165833767-0275d2ff72e5?auto=format&fit=crop&q=80&w=800",
+                "textPosition": "left",
+                "textAlignment": "left",
+                "padding": "none",
+                "className": "min-h-[40vh] bg-primary text-primary-950"
+            }
+        }
+    },
+    {
+        "Title": "Lorem ipsum dolor sit amet.",
+        "Data": {
+            "type": "ContentBlock",
+            "data": {
+                "title": "Lorem ipsum dolor sit amet.",
+                "content": "Welcome to our Consultancy Services, where your technology aspirations meet expert guidance and seamless solutions. At Sankhyatronics, we understand the pivotal role that technology plays in the success of modern businesses. With a profound commitment to excellence, we offer a suite of services designed to elevate your operations and empower your digital transformation journey.\n\nOur track record in Cloud Services, Application Modernization, Enterprise Architecture, and Managed Services speaks volumes about our proficiency. As your trusted partner, we don't just provide services; we build relationships founded on reliability and innovation. When you choose us, you're choosing a team that is dedicated to navigating the intricate IT landscape with you, ensuring that every step forward is a step towards your goals. Embrace a future of technological prowess with Sankhyatronics by your side.\n\nAt Sankhyatronics, trust is not just a word; it's the cornerstone of our IT Consultancy Services. Our commitment to delivering unmatched expertise in Cloud Services, Application Modernization, Enterprise Architecture, and Managed Services is rooted in a deep understanding of the dynamic digital realm.\n\nWe recognize that in today's competitive market, reliability is paramount, and that's precisely what we offer. With a team of seasoned professionals, we meticulously craft strategies that align with your unique business objectives, ensuring a seamless integration of technology to drive growth.\n\nOur proven track record showcases our ability to transform challenges into opportunities, and our client-centric approach means that your success is our success. As you embark on a journey to harness the power of technology, rest assured that Sankhyatronics is here to provide guidance, support, and a partnership you can trust every step of the way."
+            }
+        }
+    }
+]
