@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DynamicRenderer } from "@sankhyatronics/SankhyaCMS";
-import { registerComponent } from "@sankhyatronics/SankhyaCMS";
-import { useItemsAccordionConfig } from "@sankhyatronics/SankhyaCMS";
-import { ItemsAccordion } from "@sankhyatronics/SankhyaCMS";
+import { DynamicRenderer } from "@sankhyatronics/sankhya-ui";
+import { registerComponent } from "@sankhyatronics/sankhya-ui";
+import { useItemsAccordionConfig } from "@sankhyatronics/sankhya-ui";
+import { ItemsAccordion } from "@sankhyatronics/sankhya-ui";
 import { mockApi } from "./data/mockApiService";
 // Register specific component
 registerComponent('ItemsAccordion', ItemsAccordion);

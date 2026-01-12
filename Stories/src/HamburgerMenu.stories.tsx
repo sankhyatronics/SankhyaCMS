@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DynamicRenderer } from "@sankhyatronics/SankhyaCMS";
-import { registerComponent } from "@sankhyatronics/SankhyaCMS";
-import { HamburgerMenu } from "@sankhyatronics/SankhyaCMS";
-import { useHamburgerMenuConfig } from "@sankhyatronics/SankhyaCMS";
+import { DynamicRenderer } from "@sankhyatronics/sankhya-ui";
+import { registerComponent } from "@sankhyatronics/sankhya-ui";
+import { HamburgerMenu } from "@sankhyatronics/sankhya-ui";
+import { useHamburgerMenuConfig } from "@sankhyatronics/sankhya-ui";
 import { mockApi } from "./data/mockApiService";
 // Register components
 registerComponent('HamburgerMenu', HamburgerMenu);

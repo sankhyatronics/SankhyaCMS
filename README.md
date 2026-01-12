@@ -1,4 +1,4 @@
-# @sankhyatronics/SankhyaCMS
+# @sankhyatronics/sankhya-ui
 
 > **The JSON-Powered Engine for Modern Portals.**
 

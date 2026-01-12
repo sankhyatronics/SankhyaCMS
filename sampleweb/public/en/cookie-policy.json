@@ -6,7 +6,7 @@
             "data": {
                 "Title": "Lorem ipsum dolor sit amet.",
                 "SubTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                "ImageUrl": "#",
+                "ImageUrl": "https://picsum.photos/900/1600",
                 "textPosition": "left",
                 "textAlignment": "left",
                 "padding": "none",

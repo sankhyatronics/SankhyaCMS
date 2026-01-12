@@ -5,9 +5,9 @@
             "type": "Footer",
             "data": {
                 "companyName": "",
-                "logoUrl": "https://placehold.co/400x120/2E6305/FFFFFF?text=SankhyaCMS",
+                "logoUrl": "https://placehold.co/400x120/2E6305/FFFFFF?text=SankhyaUI",
                 "inverted": true,
-                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit fugiat nulla pariatur.",
                 "copyright": "\u00a9 2026 Sankhyatronics. All rights reserved.",
                 "socialLinks": [
                     {
@@ -16,7 +16,7 @@
                     },
                     {
                         "icon": "mdi:github",
-                        "href": "https://github.com/sankhyatronics/SankhyaCMS"
+                        "href": "https://github.com/sankhyatronics/SankhyaUI"
                     }
                 ],
                 "columns": [

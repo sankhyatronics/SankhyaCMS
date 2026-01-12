@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DropdownProvider } from "@sankhyatronics/SankhyaCMS";
-import { DynamicRenderer } from "@sankhyatronics/SankhyaCMS";
-import { registerComponent } from "@sankhyatronics/SankhyaCMS";
-import { Header } from "@sankhyatronics/SankhyaCMS";
-import { useHeaderConfig } from "@sankhyatronics/SankhyaCMS";
+import { DropdownProvider } from "@sankhyatronics/sankhya-ui";
+import { DynamicRenderer } from "@sankhyatronics/sankhya-ui";
+import { registerComponent } from "@sankhyatronics/sankhya-ui";
+import { Header } from "@sankhyatronics/sankhya-ui";
+import { useHeaderConfig } from "@sankhyatronics/sankhya-ui";
 import { mockApi } from "./data/mockApiService";
 // Register all components
 registerComponent('Header', Header);

@@ -1,5 +1,4 @@
 export { BentoGrid } from './components/BentoGrid/BentoGrid';
-export { Button } from './components/Button/Button';
 export { Card } from './components/Card/Card';
 export { DynamicRenderer } from './components/Common/DynamicRenderer';
 export { registerComponent, getComponent, baseComponents } from './components/Common/DynamicRenderer.constants';

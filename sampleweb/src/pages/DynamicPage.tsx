@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, useLocation } from 'react-router';
-import { DynamicRenderer } from '@sankhyatronics/sankhya-cms';
+import { DynamicRenderer } from '@sankhyatronics/sankhya-ui';
 import { usePageData } from '../hooks/usePageData';
 
 /**

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DynamicRenderer } from "@sankhyatronics/SankhyaCMS";
-import { registerComponent } from "@sankhyatronics/SankhyaCMS";
-import { useBentoGridConfig } from "@sankhyatronics/SankhyaCMS";
-import { BentoGrid } from "@sankhyatronics/SankhyaCMS";
+import { DynamicRenderer } from "@sankhyatronics/sankhya-ui";
+import { registerComponent } from "@sankhyatronics/sankhya-ui";
+import { useBentoGridConfig } from "@sankhyatronics/sankhya-ui";
+import { BentoGrid } from "@sankhyatronics/sankhya-ui";
 import { mockApi } from "./data/mockApiService";
 // Register specific component
 registerComponent('BentoGrid', BentoGrid);

@@ -1,7 +1,6 @@
 import React from 'react';
 import './FeatureSplit.css';
 import { Icon } from '@iconify/react';
-import { Button } from '../Button/Button';
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
 
@@ -21,8 +20,8 @@ export interface FeatureSplitProps {
     };
     imagePosition?: 'left' | 'right' | 'top';
     className?: string;
-    primaryActionLabel?: string;
-    primaryActionHref?: string;
+    actionLabel?: string;
+    actionHref?: string;
 }
 
 export const FeatureSplit: React.FC<FeatureSplitProps> = ({
@@ -32,8 +31,8 @@ export const FeatureSplit: React.FC<FeatureSplitProps> = ({
     image,
     imagePosition = 'right',
     className = '',
-    primaryActionLabel,
-    primaryActionHref,
+    actionLabel,
+    actionHref,
 }) => {
     return (
         <section className={`feature-split-section ${className} image-${imagePosition}`}>
@@ -71,14 +70,13 @@ export const FeatureSplit: React.FC<FeatureSplitProps> = ({
                         </div>
                     )}
 
-                    {primaryActionLabel && primaryActionHref && (
+                    {actionLabel && actionHref && (
                         <div className="feature-split-actions">
-                            <Button
-                                variant="primary"
-                                onClick={() => window.location.href = primaryActionHref}
+                            <button
+                                onClick={() => window.location.href = actionHref}
                             >
-                                {primaryActionLabel}
-                            </Button>
+                                {actionLabel}
+                            </button>
                         </div>
                     )}
                 </div>

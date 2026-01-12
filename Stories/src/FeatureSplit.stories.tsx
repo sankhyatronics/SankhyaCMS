@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DynamicRenderer } from "@sankhyatronics/SankhyaCMS";
-import { registerComponent } from "@sankhyatronics/SankhyaCMS";
-import { useFeatureSplitConfig } from "@sankhyatronics/SankhyaCMS";
-import { FeatureSplit } from "@sankhyatronics/SankhyaCMS";
+import { DynamicRenderer } from "@sankhyatronics/sankhya-ui";
+import { registerComponent } from "@sankhyatronics/sankhya-ui";
+import { useFeatureSplitConfig } from "@sankhyatronics/sankhya-ui";
+import { FeatureSplit } from "@sankhyatronics/sankhya-ui";
 import { mockApi } from "./data/mockApiService";
 // Register specific component
 registerComponent('FeatureSplit', FeatureSplit);

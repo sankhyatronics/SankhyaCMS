@@ -13,7 +13,7 @@
                         "colSpan": 2,
                         "rowSpan": 2,
                         "image": {
-                            "src": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80",
+                            "src": "https://picsum.photos/300/400",
                             "alt": "Earth from space"
                         }
                     },
@@ -41,7 +41,7 @@
                         "description": "Push to git and we handle the rest.",
                         "colSpan": 4,
                         "image": {
-                            "src": "https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                            "src": "https://picsum.photos/800/200",
                             "alt": "Code on screen"
                         }
                     }

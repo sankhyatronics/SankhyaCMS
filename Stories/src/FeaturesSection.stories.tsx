@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DynamicRenderer } from "@sankhyatronics/SankhyaCMS";
-import { registerComponent } from "@sankhyatronics/SankhyaCMS";
-import { useFeaturesSectionConfig } from "@sankhyatronics/SankhyaCMS";
-import { FeaturesSection } from "@sankhyatronics/SankhyaCMS";
+import { DynamicRenderer } from "@sankhyatronics/sankhya-ui";
+import { registerComponent } from "@sankhyatronics/sankhya-ui";
+import { useFeaturesSectionConfig } from "@sankhyatronics/sankhya-ui";
+import { FeaturesSection } from "@sankhyatronics/sankhya-ui";
 import { mockApi } from "./data/mockApiService";
 // Register specific component
 registerComponent('FeaturesSection', FeaturesSection);

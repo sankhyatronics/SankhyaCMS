@@ -10,7 +10,7 @@
                 "mobileBreakpoint": 768,
                 "logoHref": "/",
                 "logoClassName": "w-[10vw]",
-                "logoSrc": "https://placehold.co/400x120/2E6305/FFFFFF?text=SankhyaCMS",
+                "logoSrc": "https://picsum.photos/100/100",
                 "altText": "Placeholder image",
                 "children": [
                     {
@@ -90,7 +90,7 @@
                                         "data": {
                                             "id": "menugrid-item-consultancy-service",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                             "href": "consultancy-services",
                                             "icon": "mdi:briefcase-outline"
                                         }
@@ -100,7 +100,7 @@
                                         "data": {
                                             "id": "menugrid-item-product-team-as-a-service",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                             "href": "product-team-as-a-service",
                                             "icon": "mdi:account-group-outline"
                                         }
@@ -110,7 +110,7 @@
                                         "data": {
                                             "id": "menugrid-item-managed-services",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                             "href": "managed-services",
                                             "icon": "mdi:cogs"
                                         }
@@ -146,7 +146,7 @@
                                         "data": {
                                             "id": "menugrid-item-cloud-services",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                             "href": "cloud-services",
                                             "icon": "mdi:cloud-outline"
                                         }
@@ -156,7 +156,7 @@
                                         "data": {
                                             "id": "menugrid-item-business-operations",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                             "href": "business-operations",
                                             "icon": "mdi:chart-line"
                                         }
@@ -166,7 +166,7 @@
                                         "data": {
                                             "id": "menugrid-item-user-experience",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                             "href": "user-experience",
                                             "icon": "mdi:palette-swatch-outline"
                                         }
@@ -176,7 +176,7 @@
                                         "data": {
                                             "id": "menugrid-item-modern-workspace",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                             "href": "modern-workspace",
                                             "icon": "mdi:monitor-dashboard"
                                         }
@@ -186,7 +186,7 @@
                                         "data": {
                                             "id": "menugrid-item-application-development",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                             "href": "application-development",
                                             "icon": "mdi:code-tags"
                                         }
@@ -196,7 +196,7 @@
                                         "data": {
                                             "id": "menugrid-item-agentics-ai",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                             "href": "agentics-ai-development",
                                             "icon": "mdi:robot-excited-outline"
                                         }
@@ -232,8 +232,8 @@
                                         "data": {
                                             "id": "menugrid-item-handbook-365",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-                                            "href": "https://handbook365.sankhyatronics.com/",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                                            "href": "#",
                                             "icon": "mdi:web",
                                             "target": "_blank"
                                         }
@@ -269,7 +269,7 @@
                                         "data": {
                                             "id": "menugrid-item-contactus",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                             "href": "contact-us",
                                             "icon": "mdi:web"
                                         }
@@ -279,7 +279,7 @@
                                         "data": {
                                             "id": "menugrid-item-values",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                             "href": "values",
                                             "icon": "mdi:web"
                                         }
@@ -289,7 +289,7 @@
                                         "data": {
                                             "id": "menugrid-item-promises",
                                             "title": "Lorem ipsum dolor sit amet.",
-                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                             "href": "promises",
                                             "icon": "mdi:web"
                                         }

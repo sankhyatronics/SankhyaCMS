@@ -1,5 +1,5 @@
 import React from 'react';
-import { Footer, DropdownProvider, DynamicRenderer } from '@sankhyatronics/sankhya-cms';
+import { Footer, DropdownProvider, DynamicRenderer } from '@sankhyatronics/sankhya-ui';
 import { Outlet } from 'react-router';
 import { cmsApiFetchers } from '../../api/cmsApiService';
 import { useUser } from '../../contexts/UserContext';

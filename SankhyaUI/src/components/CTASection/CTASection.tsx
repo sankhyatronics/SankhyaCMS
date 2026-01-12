@@ -1,14 +1,11 @@
 import React from 'react';
 import './CTASection.css';
-import { Button } from '../Button/Button';
 
 export interface CTASectionProps {
     title: string;
     description?: string;
-    primaryActionLabel?: string;
-    secondaryActionLabel?: string;
-    onPrimaryClick?: () => void;
-    onSecondaryClick?: () => void;
+    ActionLabel?: string;
+    onActionClick?: () => void;
     className?: string;
     backgroundImage?: string;
 }
@@ -16,10 +13,8 @@ export interface CTASectionProps {
 export const CTASection: React.FC<CTASectionProps> = ({
     title,
     description,
-    primaryActionLabel,
-    secondaryActionLabel,
-    onPrimaryClick,
-    onSecondaryClick,
+    ActionLabel,
+    onActionClick,
     className = '',
     backgroundImage,
 }) => {
@@ -33,26 +28,14 @@ export const CTASection: React.FC<CTASectionProps> = ({
                 <h2 className="cta-title">{title}</h2>
                 {description && <p className="cta-description">{description}</p>}
 
-                {(primaryActionLabel || secondaryActionLabel) && (
+                {ActionLabel && (
                     <div className="cta-actions">
-                        {primaryActionLabel && (
-                            <Button
-                                variant="secondary"
-                                size="lg"
-                                onClick={onPrimaryClick}
+                        {ActionLabel && (
+                            <button
+                                onClick={onActionClick}
                             >
-                                {primaryActionLabel}
-                            </Button>
-                        )}
-                        {secondaryActionLabel && (
-                            <Button
-                                variant="outline"
-                                size="lg"
-                                onClick={onSecondaryClick}
-                                style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}
-                            >
-                                {secondaryActionLabel}
-                            </Button>
+                                {ActionLabel}
+                            </button>
                         )}
                     </div>
                 )}

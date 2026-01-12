@@ -6,6 +6,9 @@ settings:
 
 catalogs:
   default:
+    '@emotion/is-prop-valid':
+      specifier: ^1.4.0
+      version: 1.4.0
     '@eslint/js':
       specifier: 9.39.1
       version: 9.39.1
@@ -69,6 +72,9 @@ catalogs:
     react-router:
       specifier: 7.11.0
       version: 7.11.0
+    remark-breaks:
+      specifier: ^4.0.0
+      version: 4.0.0
     storybook:
       specifier: 10.1.11
       version: 10.1.11
@@ -95,10 +101,10 @@ importers:
 
   .: {}
 
-  SankhyaCMS:
+  SankhyaUI:
     dependencies:
       '@emotion/is-prop-valid':
-        specifier: ^1.4.0
+        specifier: 'catalog:'
         version: 1.4.0
       '@iconify/react':
         specifier: 'catalog:'
@@ -119,7 +125,7 @@ importers:
         specifier: 'catalog:'
         version: 7.11.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       remark-breaks:
-        specifier: ^4.0.0
+        specifier: 'catalog:'
         version: 4.0.0
       tailwindcss:
         specifier: 'catalog:'
@@ -170,9 +176,9 @@ importers:
 
   Stories:
     dependencies:
-      '@sankhyatronics/sankhya-cms':
+      '@sankhyatronics/sankhya-ui':
         specifier: workspace:*
-        version: link:../SankhyaCMS
+        version: link:../SankhyaUI
       react:
         specifier: 'catalog:'
         version: 19.2.0
@@ -231,9 +237,9 @@ importers:
 
   sampleweb:
     dependencies:
-      '@sankhyatronics/sankhya-cms':
+      '@sankhyatronics/sankhya-ui':
         specifier: 'workspace:'
-        version: link:../SankhyaCMS
+        version: link:../SankhyaUI
       '@tailwindcss/vite':
         specifier: 'catalog:'
         version: 4.1.18(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2))

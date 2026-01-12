@@ -9,7 +9,7 @@
         "className": "bg-primary shadow-md",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "logoSrc": "/Logo.jpg",
+        "logoSrc": "https://picsum.photos/100/100",
         "logoClassName": "w-[84px]",
         "altText": "Company Logo",
         "children": [

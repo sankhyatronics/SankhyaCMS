@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DynamicRenderer } from "@sankhyatronics/SankhyaCMS";
-import { registerComponent } from "@sankhyatronics/SankhyaCMS";
-import { MenuGrid } from "@sankhyatronics/SankhyaCMS";
-import { MenuGridItem } from "@sankhyatronics/SankhyaCMS";
-import { useMenuGridConfig } from "@sankhyatronics/SankhyaCMS";
+import { DynamicRenderer } from "@sankhyatronics/sankhya-ui";
+import { registerComponent } from "@sankhyatronics/sankhya-ui";
+import { MenuGrid } from "@sankhyatronics/sankhya-ui";
+import { MenuGridItem } from "@sankhyatronics/sankhya-ui";
+import { useMenuGridConfig } from "@sankhyatronics/sankhya-ui";
 import { mockApi } from "./data/mockApiService";
 
 // Register components
