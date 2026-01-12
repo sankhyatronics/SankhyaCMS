@@ -1,6 +1,6 @@
 [
     {
-        "Title": "Default",
+        "title": "Default",
         "Data": {
             "type": "Dropdown",
             "data": {
@@ -63,7 +63,7 @@
         }
     },
     {
-        "Title": "WithIconRight",
+        "title": "WithIconRight",
         "Data": {
             "type": "Dropdown",
             "data": {
@@ -126,7 +126,7 @@
         }
     },
     {
-        "Title": "WithLink",
+        "title": "WithLink",
         "Data": {
             "type": "Dropdown",
             "data": {
@@ -173,7 +173,7 @@
         }
     },
     {
-        "Title": "Compact",
+        "title": "Compact",
         "Data": {
             "type": "Dropdown",
             "data": {
@@ -228,7 +228,7 @@
         }
     },
     {
-        "Title": "WithoutIcon",
+        "title": "WithoutIcon",
         "Data": {
             "type": "Dropdown",
             "data": {
@@ -281,7 +281,7 @@
         }
     },
     {
-        "Title": "WithSingleColumnGrid",
+        "title": "WithSingleColumnGrid",
         "Data": {
             "type": "Dropdown",
             "data": {
@@ -341,7 +341,7 @@
         }
     },
     {
-        "Title": "WithFourColumns",
+        "title": "WithFourColumns",
         "Data": {
             "type": "Dropdown",
             "data": {
@@ -438,7 +438,7 @@
         }
     },
     {
-        "Title": "WithMenuItemChildren",
+        "title": "WithMenuItemChildren",
         "Data": {
             "type": "Dropdown",
             "data": {
@@ -480,7 +480,7 @@
         }
     },
     {
-        "Title": "Empty",
+        "title": "Empty",
         "Data": {
             "type": "Dropdown",
             "data": {
@@ -494,7 +494,7 @@
         }
     },
     {
-        "Title": "WithCustomIconSize",
+        "title": "WithCustomIconSize",
         "Data": {
             "type": "Dropdown",
             "data": {

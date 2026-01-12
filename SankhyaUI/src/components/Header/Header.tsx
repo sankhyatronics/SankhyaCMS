@@ -1,16 +1,17 @@
+import React from 'react';
 import './Header.css';
 import '../Common/Common.css';
 import { HamburgerMenu } from '../HamburgerMenu/HamburgerMenu';
 import { useTouchDevice } from '../../hooks/useBreakpointTouch';
+import { BaseProps } from '../Common/BaseComponent.interfaces';
 
-export interface HeaderProps {
+export interface HeaderProps extends BaseProps {
   sticky?: boolean;
-  className?: string;
   mobileBreakpoint?: number;
   logoHref?: string;
   logoTarget?: string;
   logoClassName?: string;
-  logoSrc?: string;
+  imageSrc?: string;
   altText?: string;
   menuBar?: React.ReactNode[];
   utilityButtons?: React.ReactNode[];
@@ -24,19 +25,20 @@ export const Header: React.FC<HeaderProps> = (props) => {
     className = '',
     mobileBreakpoint = 768,
     logoHref,
-    logoSrc,
+    imageSrc,
     logoTarget = '_self',
     logoClassName = '',
-    altText = 'Logo'
+    altText = 'Logo',
+    inverted = false,
   } = props;
 
   const isMobile = useTouchDevice({ breakpoint: mobileBreakpoint });
 
   return (
-    <header className={`header ${sticky ? 'header-sticky' : ''} ${className}`}>
+    <header className={`header ${sticky ? 'header-sticky' : ''} ${inverted ? 'theme-inverted' : ''} ${className}`}>
       {/* Logo */}
       <div className="header-logo-wrapper">
-        {logoSrc && (
+        {imageSrc && (
           <a
             href={logoHref || '#'}
             target={logoTarget}
@@ -44,7 +46,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
             aria-label="Home"
           >
             <img
-              src={logoSrc}
+              src={imageSrc}
               alt={altText}
               className="header-logo-img"
             />

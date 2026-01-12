@@ -1,0 +1,41 @@
+[
+    {
+        "title": "Default",
+        "Data": {
+            "type": "Testimonials",
+            "data": {
+                "title": "Trusted by Industry Leaders",
+                "subtitle": "See what our clients have to say about their experience with us.",
+                "items": [
+                    {
+                        "id": "1",
+                        "name": "Sarah Johnson",
+                        "role": "CTO",
+                        "company": "TechFlow",
+                        "quote": "This platform has completely transformed how our engineering team operates. The efficiency gains were immediate.",
+                        "rating": 5,
+                        "imageSrc": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"
+                    },
+                    {
+                        "id": "2",
+                        "name": "Michael Chen",
+                        "role": "Product Manager",
+                        "company": "InnovateIQ",
+                        "quote": "The most intuitive CMS I've ever used. Our marketing team can now push updates without waiting for dev cycles.",
+                        "rating": 5,
+                        "imageSrc": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+                    },
+                    {
+                        "id": "3",
+                        "name": "Elena Rodriguez",
+                        "role": "Design Lead",
+                        "company": "CreativePulse",
+                        "quote": "Finally, a UI library that prioritizes both aesthetics and developer experience. Truly a game changer for us.",
+                        "rating": 4,
+                        "imageSrc": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80"
+                    }
+                ]
+            }
+        }
+    }
+]

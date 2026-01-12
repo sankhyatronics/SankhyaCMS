@@ -1,4 +1,4 @@
-import { ApiService, ApiResponse } from '../../src/hooks/useApiConfig';
+import { ApiService, ApiResponse } from '@sankhyatronics/sankhya-ui';
 import menuGridItemStories from "./MenuGridItem.json";
 import menuGridStories from "./MenuGrid.json";
 import dropdownStories from './Dropdown.json';
@@ -12,6 +12,8 @@ import featureSplitStories from './FeatureSplit.json';
 import contentBlockStories from './ContentBlock.json';
 import featuresSectionStories from './FeaturesSection.json';
 import bentoGridStories from './BentoGrid.json';
+import ctaSectionStories from './CTASection.json';
+import testimonialsStories from './Testimonials.json';
 
 
 // Simple mock API service
@@ -80,7 +82,7 @@ export class MockApiService implements ApiService {
     switch (path) {
       case '/menu-grid-item':
         const menuGridItemKey = queryParams.story || 'Default';
-        const menuGridItems = menuGridItemStories.find(item => item.Title === menuGridItemKey);
+        const menuGridItems = menuGridItemStories.find(item => item.title === menuGridItemKey);
         return {
           data: this.normalizeData(menuGridItems) as T,
           status: 200,
@@ -88,7 +90,7 @@ export class MockApiService implements ApiService {
         }
       case '/menu-grid':
         const menuGridKey = queryParams.story || 'Default';
-        const menuGrid = menuGridStories.find(item => item.Title === menuGridKey);
+        const menuGrid = menuGridStories.find(item => item.title === menuGridKey);
         return {
           data: this.normalizeData(menuGrid) as T,
           status: 200,
@@ -96,7 +98,7 @@ export class MockApiService implements ApiService {
         }
       case '/dropdown':
         const dropdownKey = queryParams.story || 'Default';
-        const dropdown = dropdownStories.find(item => item.Title === dropdownKey);
+        const dropdown = dropdownStories.find(item => item.title === dropdownKey);
         return {
           data: this.normalizeData(dropdown) as T,
           status: 200,
@@ -104,7 +106,7 @@ export class MockApiService implements ApiService {
         }
       case '/hamburger-menu':
         const hamburgerKey = queryParams.story || 'Default';
-        const hamburger = hamburgStories.find(item => item.Title === hamburgerKey);
+        const hamburger = hamburgStories.find(item => item.title === hamburgerKey);
         return {
           data: this.normalizeData(hamburger) as T,
           status: 200,
@@ -112,7 +114,7 @@ export class MockApiService implements ApiService {
         }
       case '/header':
         const headerKey = queryParams.story || 'Default';
-        const header = headerStories.find(item => item.Title === headerKey);
+        const header = headerStories.find(item => item.title === headerKey);
         return {
           data: this.normalizeData(header) as T,
           status: 200,
@@ -120,7 +122,7 @@ export class MockApiService implements ApiService {
         }
       case '/hero':
         const heroKey = queryParams.story || 'Default';
-        const hero = heroStories.find(item => item.Title === heroKey);
+        const hero = heroStories.find(item => item.title === heroKey);
         return {
           data: this.normalizeData(hero) as T,
           status: 200,
@@ -128,7 +130,7 @@ export class MockApiService implements ApiService {
         }
       case '/items-accordion':
         const itemsAccordionKey = queryParams.story || 'Default';
-        const itemsAccordion = itemsAccordionStories.find(item => item.Title === itemsAccordionKey);
+        const itemsAccordion = itemsAccordionStories.find(item => item.title === itemsAccordionKey);
         return {
           data: this.normalizeData(itemsAccordion) as T,
           status: 200,
@@ -136,7 +138,7 @@ export class MockApiService implements ApiService {
         }
       case '/footer':
         const footerKey = queryParams.story || 'Default';
-        const footer = footerStories.find(item => item.Title === footerKey);
+        const footer = footerStories.find(item => item.title === footerKey);
         return {
           data: this.normalizeData(footer) as T,
           status: 200,
@@ -144,7 +146,7 @@ export class MockApiService implements ApiService {
         }
       case '/stats':
         const statsKey = queryParams.story || 'Default';
-        const stats = statsStories.find(item => item.Title === statsKey);
+        const stats = statsStories.find(item => item.title === statsKey);
         return {
           data: this.normalizeData(stats) as T,
           status: 200,
@@ -152,7 +154,7 @@ export class MockApiService implements ApiService {
         }
       case '/feature-split':
         const featureSplitKey = queryParams.story || 'Default';
-        const featureSplit = featureSplitStories.find(item => item.Title === featureSplitKey);
+        const featureSplit = featureSplitStories.find(item => item.title === featureSplitKey);
         return {
           data: this.normalizeData(featureSplit) as T,
           status: 200,
@@ -160,7 +162,7 @@ export class MockApiService implements ApiService {
         }
       case '/content-block':
         const contentBlockKey = queryParams.story || 'Default';
-        const contentBlock = contentBlockStories.find(item => item.Title === contentBlockKey);
+        const contentBlock = contentBlockStories.find(item => item.title === contentBlockKey);
         return {
           data: this.normalizeData(contentBlock) as T,
           status: 200,
@@ -168,7 +170,7 @@ export class MockApiService implements ApiService {
         }
       case '/features-section':
         const featuresSectionKey = queryParams.story || 'Default';
-        const featuresSection = featuresSectionStories.find(item => item.Title === featuresSectionKey);
+        const featuresSection = featuresSectionStories.find(item => item.title === featuresSectionKey);
         return {
           data: this.normalizeData(featuresSection) as T,
           status: 200,
@@ -176,9 +178,25 @@ export class MockApiService implements ApiService {
         }
       case '/bento-grid':
         const bentoGridKey = queryParams.story || 'Default';
-        const bentoGrid = bentoGridStories.find(item => item.Title === bentoGridKey);
+        const bentoGrid = bentoGridStories.find(item => item.title === bentoGridKey);
         return {
           data: this.normalizeData(bentoGrid) as T,
+          status: 200,
+          statusText: 'OK'
+        }
+      case '/cta-section':
+        const ctaKey = queryParams.story || 'Default';
+        const cta = ctaSectionStories.find(item => item.title === ctaKey);
+        return {
+          data: this.normalizeData(cta) as T,
+          status: 200,
+          statusText: 'OK'
+        }
+      case '/testimonials':
+        const testimonialsKey = queryParams.story || 'Default';
+        const testimonials = testimonialsStories.find(item => item.title === testimonialsKey);
+        return {
+          data: this.normalizeData(testimonials) as T,
           status: 200,
           statusText: 'OK'
         }
@@ -209,6 +227,8 @@ export class MockApiService implements ApiService {
       { method: 'GET', endpoint: '/content-block', description: 'Returns ContentBlock component config' },
       { method: 'GET', endpoint: '/features-section', description: 'Returns FeaturesSection component config' },
       { method: 'GET', endpoint: '/bento-grid', description: 'Returns BentoGrid component config' },
+      { method: 'GET', endpoint: '/cta-section', description: 'Returns CTASection component config' },
+      { method: 'GET', endpoint: '/testimonials', description: 'Returns Testimonials component config' },
     ];
   }
 }

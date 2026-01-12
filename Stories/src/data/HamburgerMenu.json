@@ -1,6 +1,6 @@
 [
   {
-    "Title": "Default",
+    "title": "Default",
     "Data": {
       "type": "HamburgerMenu",
       "data": {
@@ -65,7 +65,7 @@
     }
   },
   {
-    "Title": "LeftPosition",
+    "title": "LeftPosition",
     "Data": {
       "type": "HamburgerMenu",
       "data": {
@@ -128,7 +128,7 @@
     }
   },
   {
-    "Title": "WithComplexContent",
+    "title": "WithComplexContent",
     "Data": {
       "type": "HamburgerMenu",
       "data": {

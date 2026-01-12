@@ -1,41 +1,38 @@
 import React from 'react';
 import './Testimonials.css';
+import { BaseProps, SectionProps } from '../Common/BaseComponent.interfaces';
 import { Card } from '../Card/Card';
 import { Icon } from '@iconify/react';
 
-export interface TestimonialItem {
-    id: string;
+export interface TestimonialItem extends BaseProps {
     name: string;
     role: string;
     company?: string;
-    avatar?: string;
+    imageSrc?: string;
     quote: string;
     rating?: number;
 }
 
-export interface TestimonialsProps {
-    title: string;
-    subtitle?: string;
-    testimonials: TestimonialItem[];
-    className?: string;
+export interface TestimonialsProps extends SectionProps {
+    items: TestimonialItem[];
 }
 
 export const Testimonials: React.FC<TestimonialsProps> = ({
     title,
     subtitle,
-    testimonials,
+    items,
     className = '',
 }) => {
     return (
         <section className={`testimonials-section ${className}`}>
             <div className="testimonials-container">
                 <div className="testimonials-header">
-                    <h2 className="testimonials-title">{title}</h2>
-                    {subtitle && <p className="testimonials-subtitle">{subtitle}</p>}
+                    <h2 className="section-title testimonials-title">{title}</h2>
+                    {subtitle && <p className="section-subtitle testimonials-subtitle">{subtitle}</p>}
                 </div>
 
                 <div className="testimonials-grid">
-                    {testimonials.map((item) => (
+                    {items.map((item) => (
                         <Card key={item.id} elevation="sm" className="testimonial-card">
                             <div className="testimonial-card-content">
                                 <div className="testimonial-stars">
@@ -49,9 +46,9 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
                                 </blockquote>
 
                                 <div className="testimonial-author">
-                                    {item.avatar ? (
+                                    {item.imageSrc ? (
                                         <img
-                                            src={item.avatar}
+                                            src={item.imageSrc}
                                             alt={item.name}
                                             className="testimonial-avatar"
                                         />

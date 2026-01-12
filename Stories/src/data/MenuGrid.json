@@ -1,6 +1,6 @@
 [
   {
-    "Title": "Default",
+    "title": "Default",
     "Data": {
       "type": "MenuGrid",
       "data": {
@@ -46,7 +46,7 @@
     }
   },
   {
-    "Title": "TwoColumns",
+    "title": "TwoColumns",
     "Data": {
       "type": "MenuGrid",
       "data": {
@@ -80,7 +80,7 @@
     }
   },
   {
-    "Title": "FourColumns",
+    "title": "FourColumns",
     "Data": {
       "type": "MenuGrid",
       "data": {
@@ -130,7 +130,7 @@
     }
   },
   {
-    "Title": "SingleColumn",
+    "title": "SingleColumn",
     "Data": {
       "type": "MenuGrid",
       "data": {
@@ -174,7 +174,7 @@
     }
   },
   {
-    "Title": "ManyItems",
+    "title": "ManyItems",
     "Data": {
       "type": "MenuGrid",
       "data": {
@@ -249,7 +249,7 @@
     }
   },
   {
-    "Title": "Compact",
+    "title": "Compact",
     "Data": {
       "type": "MenuGrid",
       "data": {
@@ -303,7 +303,7 @@
     }
   },
   {
-    "Title": "WithMixedContent",
+    "title": "WithMixedContent",
     "Data": {
       "type": "MenuGrid",
       "data": {
@@ -340,7 +340,7 @@
     }
   },
   {
-    "Title": "Empty",
+    "title": "Empty",
     "Data": {
       "type": "MenuGrid",
       "data": {
@@ -352,7 +352,7 @@
     }
   },
   {
-    "Title": "ResponsiveTest",
+    "title": "ResponsiveTest",
     "Data": {
       "type": "MenuGrid",
       "data": {

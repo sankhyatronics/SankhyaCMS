@@ -1,10 +1,10 @@
 [
     {
-        "Title": "Default",
+        "title": "Default",
         "Data": {
             "type": "Footer",
             "data": {
-                "logo": "MyCompany",
+                "companyName": "MyCompany",
                 "description": "Making the world a better place through constructing elegant hierarchies.",
                 "copyright": "© 2024 MyCompany, Inc. All rights reserved.",
                 "socialLinks": [

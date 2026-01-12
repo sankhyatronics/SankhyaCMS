@@ -1,10 +1,10 @@
 [
     {
-        "Title": "Default",
+        "title": "Default",
         "Data": {
             "type": "Stats",
             "data": {
-                "stats": [
+                "items": [
                     {
                         "value": "100%",
                         "label": "Uptime",

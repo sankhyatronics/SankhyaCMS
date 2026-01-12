@@ -1,40 +1,41 @@
 import React from 'react';
 import './CTASection.css';
 
-export interface CTASectionProps {
-    title: string;
-    description?: string;
-    ActionLabel?: string;
-    onActionClick?: () => void;
-    className?: string;
-    backgroundImage?: string;
+import { SectionProps, ActionableProps } from '../Common/BaseComponent.interfaces';
+
+export interface CTASectionProps extends SectionProps, ActionableProps {
+    imageSrc?: string;
+    inverted?: boolean;
 }
+
+
 
 export const CTASection: React.FC<CTASectionProps> = ({
     title,
-    description,
-    ActionLabel,
-    onActionClick,
+    subtitle,
+    actionLabel,
+    onAction,
     className = '',
-    backgroundImage,
+    imageSrc,
+    inverted = false,
 }) => {
-    const style = backgroundImage
-        ? { backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+    const style = imageSrc
+        ? { backgroundImage: `url(${imageSrc})`, backgroundSize: 'cover', backgroundPosition: 'center' }
         : {};
 
     return (
-        <section className={`cta-section ${className}`} style={style}>
+        <section className={`cta-section ${inverted ? 'theme-inverted' : ''} ${className}`} style={style}>
             <div className="cta-container">
-                <h2 className="cta-title">{title}</h2>
-                {description && <p className="cta-description">{description}</p>}
+                <h2 className="section-title cta-title">{title}</h2>
+                {subtitle && <p className="section-subtitle cta-description">{subtitle}</p>}
 
-                {ActionLabel && (
+                {actionLabel && (
                     <div className="cta-actions">
-                        {ActionLabel && (
+                        {actionLabel && (
                             <button
-                                onClick={onActionClick}
+                                onClick={onAction}
                             >
-                                {ActionLabel}
+                                {actionLabel}
                             </button>
                         )}
                     </div>

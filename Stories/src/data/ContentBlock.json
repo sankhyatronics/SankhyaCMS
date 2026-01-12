@@ -1,6 +1,6 @@
 [
     {
-        "Title": "Default",
+        "title": "Default",
         "Data": {
             "type": "ContentBlock",
             "data": {
@@ -8,7 +8,7 @@
                 "subtitle": "Authoring content with Markdown",
                 "format": "markdown",
                 "image": {
-                    "src": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "imageSrc": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                     "alt": "Code editor",
                     "caption": "Writing in Markdown"
                 },

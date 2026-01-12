@@ -1,6 +1,6 @@
 [
     {
-        "Title": "Lorem ipsum dolor sit amet.",
+        "title": "Lorem ipsum dolor sit amet.",
         "Data": {
             "type": "Header",
             "data": {
@@ -10,7 +10,7 @@
                 "mobileBreakpoint": 768,
                 "logoHref": "/",
                 "logoClassName": "w-[10vw]",
-                "logoSrc": "https://picsum.photos/100/100",
+                "imageSrc": "https://picsum.photos/100/100",
                 "altText": "Placeholder image",
                 "children": [
                     {

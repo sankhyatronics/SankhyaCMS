@@ -1,12 +1,12 @@
 [
     {
-        "Title": "Lorem ipsum dolor sit amet.",
+        "title": "Lorem ipsum dolor sit amet.",
         "Data": {
             "type": "Hero",
             "data": {
-                "Title": "Lorem ipsum dolor sit amet.",
-                "SubTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                "ImageUrl": "https://picsum.photos/900/1600",
+                "title": "Lorem ipsum dolor sit amet.",
+                "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "imageSrc": "https://picsum.photos/900/1600",
                 "textPosition": "left",
                 "textAlignment": "left",
                 "padding": "none",
@@ -15,7 +15,7 @@
         }
     },
     {
-        "Title": "Lorem ipsum dolor sit amet.",
+        "title": "Lorem ipsum dolor sit amet.",
         "Data": {
             "type": "FeaturesSection",
             "data": {

@@ -1,4 +1,4 @@
-export type ComponentList = 'Dropdown' | 'Header' | 'MenuItem' | 'MenuGrid' | 'MenuGridItem' | 'Hero' | 'IconButton' | 'HamburgerMenu' | 'ItemsAccordion' | 'Footer' | 'Stats' | 'FeatureSplit' | 'ContentBlock' | 'FeaturesSection' | 'BentoGrid' | 'FeatureItem';
+export type ComponentList = 'Dropdown' | 'Header' | 'MenuItem' | 'MenuGrid' | 'MenuGridItem' | 'Hero' | 'IconButton' | 'HamburgerMenu' | 'ItemsAccordion' | 'Footer' | 'Stats' | 'FeatureSplit' | 'ContentBlock' | 'FeaturesSection' | 'BentoGrid' | 'FeatureItem' | 'CTASection' | 'Testimonials';
 
 export interface IDynamicRendererProps {
     config: IComponent | IComponent[] | any;

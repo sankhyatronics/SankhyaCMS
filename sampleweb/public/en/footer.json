@@ -1,11 +1,11 @@
 [
     {
-        "Title": "Lorem ipsum dolor sit amet.",
+        "title": "Lorem ipsum dolor sit amet.",
         "Data": {
             "type": "Footer",
             "data": {
                 "companyName": "",
-                "logoUrl": "https://placehold.co/400x120/2E6305/FFFFFF?text=SankhyaUI",
+                "imageSrc": "https://placehold.co/400x120/2E6305/FFFFFF?text=SankhyaUI",
                 "inverted": true,
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit fugiat nulla pariatur.",
                 "copyright": "\u00a9 2026 Sankhyatronics. All rights reserved.",

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import './Footer.css';
 import { Icon } from '@iconify/react';
+import { BaseProps } from '../Common/BaseComponent.interfaces';
 
 export interface FooterLink {
     label: string;
@@ -13,19 +14,18 @@ export interface FooterColumn {
     links: FooterLink[];
 }
 
-export interface FooterProps {
-    logoUrl?: string;
+export interface FooterProps extends BaseProps {
+    imageSrc?: string;
     companyName?: string;
     description?: string;
     columns: FooterColumn[];
     socialLinks?: { icon: string; href: string }[];
     copyright?: string;
     inverted?: boolean;
-    className?: string;
 }
 
 export const Footer: React.FC<FooterProps> = ({
-    logoUrl,
+    imageSrc,
     companyName,
     description,
     columns,
@@ -37,12 +37,12 @@ export const Footer: React.FC<FooterProps> = ({
     const footerClasses = `footer ${inverted ? 'theme-inverted' : ''} ${className}`.trim();
 
     const renderLogo = () => {
-        if (!logoUrl && !companyName) return null;
+        if (!imageSrc && !companyName) return null;
 
         return (
             <div className="footer-logo-container flex items-center gap-2 text-xl font-bold">
-                {logoUrl && (
-                    <img src={logoUrl} alt={companyName || 'Logo'} className="footer-logo-img h-8 w-auto" />
+                {imageSrc && (
+                    <img src={imageSrc} alt={companyName || 'Logo'} className="footer-logo-img h-8 w-auto" />
                 )}
                 {companyName && <span className="footer-company-name">{companyName}</span>}
             </div>

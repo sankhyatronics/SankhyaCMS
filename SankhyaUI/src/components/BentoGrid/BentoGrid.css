@@ -14,15 +14,7 @@
 }
 
 .bento-grid-title {
-    font-size: var(--text-4xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary-950);
     margin: 0 0 16px 0;
-}
-
-.bento-grid-subtitle {
-    font-size: var(--text-lg);
-    color: var(--color-primary-600);
 }
 
 .bento-grid {
@@ -119,17 +111,13 @@
 }
 
 .bento-card-title {
-    font-size: var(--text-2xl);
-    font-weight: var(--font-weight-semibold);
     color: var(--color-primary-100);
     margin: 0;
 }
 
 .bento-card-description {
-    font-size: var(--text-base);
     color: var(--color-primary-100);
     margin: 0;
-    line-height: 1.5;
 }
 
 /* Grid Spans */

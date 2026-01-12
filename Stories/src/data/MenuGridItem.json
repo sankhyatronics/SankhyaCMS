@@ -1,6 +1,6 @@
 [
   {
-    "Title": "Default",
+    "title": "Default",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -17,7 +17,7 @@
     }
   },
   {
-    "Title": "Compact",
+    "title": "Compact",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -34,7 +34,7 @@
     }
   },
   {
-    "Title": "WithoutIcon",
+    "title": "WithoutIcon",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -50,7 +50,7 @@
     }
   },
   {
-    "Title": "WithoutBadge",
+    "title": "WithoutBadge",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -66,7 +66,7 @@
     }
   },
   {
-    "Title": "WithoutDescription",
+    "title": "WithoutDescription",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -82,7 +82,7 @@
     }
   },
   {
-    "Title": "Minimal",
+    "title": "Minimal",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -97,7 +97,7 @@
     }
   },
   {
-    "Title": "LongTitle",
+    "title": "LongTitle",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -114,7 +114,7 @@
     }
   },
   {
-    "Title": "LongDescription",
+    "title": "LongDescription",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -131,7 +131,7 @@
     }
   },
   {
-    "Title": "SpecialBadge",
+    "title": "SpecialBadge",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -148,7 +148,7 @@
     }
   },
   {
-    "Title": "CustomColors",
+    "title": "CustomColors",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -165,7 +165,7 @@
     }
   },
   {
-    "Title": "DisabledStyle",
+    "title": "DisabledStyle",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -181,7 +181,7 @@
     }
   },
   {
-    "Title": "MultipleBadges",
+    "title": "MultipleBadges",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -198,7 +198,7 @@
     }
   },
   {
-    "Title": "ExternalLink",
+    "title": "ExternalLink",
     "Data": {
       "type": "MenuGridItem",
       "data": {
@@ -215,7 +215,7 @@
     }
   },
   {
-    "Title": "PremiumFeature",
+    "title": "PremiumFeature",
     "Data": {
       "type": "MenuGridItem",
       "data": {

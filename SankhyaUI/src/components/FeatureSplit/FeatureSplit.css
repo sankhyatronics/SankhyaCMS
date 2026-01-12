@@ -46,9 +46,6 @@
 }
 
 .feature-split-title {
-    font-size: 2.5rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary-950);
     line-height: 1.2;
     margin: 0;
 }
@@ -135,9 +132,6 @@
 }
 
 .feature-split-item-title {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-primary-900);
     margin: 0 0 8px 0;
 }
 

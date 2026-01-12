@@ -3,6 +3,7 @@ import './FeatureSplit.css';
 import { Icon } from '@iconify/react';
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
+import { SectionProps, ActionableProps } from '../Common/BaseComponent.interfaces';
 
 export interface FeatureSplitItem {
     icon?: string;
@@ -10,40 +11,35 @@ export interface FeatureSplitItem {
     description: string;
 }
 
-export interface FeatureSplitProps {
-    title: string;
-    description?: string;
+export interface FeatureSplitProps extends SectionProps, ActionableProps {
     items?: FeatureSplitItem[];
     image: {
-        src: string;
+        imageSrc: string;
         alt: string;
     };
     imagePosition?: 'left' | 'right' | 'top';
-    className?: string;
-    actionLabel?: string;
-    actionHref?: string;
 }
 
 export const FeatureSplit: React.FC<FeatureSplitProps> = ({
     title,
-    description,
+    subtitle,
     items = [],
     image,
     imagePosition = 'right',
     className = '',
     actionLabel,
-    actionHref,
+    href,
 }) => {
     return (
         <section className={`feature-split-section ${className} image-${imagePosition}`}>
             <div className="feature-split-container">
                 <div className="feature-split-content">
-                    <div className="feature-split-title">{title}</div>
+                    <div className="section-title feature-split-title">{title}</div>
 
-                    {description && (
+                    {subtitle && (
                         <div className="feature-split-description">
                             <ReactMarkdown remarkPlugins={[remarkBreaks]}>
-                                {description}
+                                {subtitle}
                             </ReactMarkdown>
                         </div>
                     )}
@@ -58,7 +54,7 @@ export const FeatureSplit: React.FC<FeatureSplitProps> = ({
                                         </div>
                                     )}
                                     <div>
-                                        <h3 className="feature-split-item-title">{item.title}</h3>
+                                        <h3 className="card-title feature-split-item-title">{item.title}</h3>
                                         <div className="feature-split-item-description">
                                             <ReactMarkdown remarkPlugins={[remarkBreaks]}>
                                                 {item.description}
@@ -70,10 +66,10 @@ export const FeatureSplit: React.FC<FeatureSplitProps> = ({
                         </div>
                     )}
 
-                    {actionLabel && actionHref && (
+                    {actionLabel && href && (
                         <div className="feature-split-actions">
                             <button
-                                onClick={() => window.location.href = actionHref}
+                                onClick={() => window.location.href = href}
                             >
                                 {actionLabel}
                             </button>
@@ -82,7 +78,7 @@ export const FeatureSplit: React.FC<FeatureSplitProps> = ({
                 </div>
 
                 <div className="feature-split-image-wrapper">
-                    <img src={image.src} alt={image.alt} className="feature-split-image" />
+                    <img src={image.imageSrc} alt={image.alt} className="feature-split-image" />
                 </div>
             </div>
         </section>

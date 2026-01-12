@@ -1,6 +1,6 @@
 [
     {
-        "Title": "Default",
+        "title": "Default",
         "Data": {
             "type": "BentoGrid",
             "data": {
@@ -13,7 +13,7 @@
                         "colSpan": 2,
                         "rowSpan": 2,
                         "image": {
-                            "src": "https://picsum.photos/300/400",
+                            "imageSrc": "https://picsum.photos/300/400",
                             "alt": "Earth from space"
                         }
                     },
@@ -41,7 +41,7 @@
                         "description": "Push to git and we handle the rest.",
                         "colSpan": 4,
                         "image": {
-                            "src": "https://picsum.photos/800/200",
+                            "imageSrc": "https://picsum.photos/800/200",
                             "alt": "Code on screen"
                         }
                     }

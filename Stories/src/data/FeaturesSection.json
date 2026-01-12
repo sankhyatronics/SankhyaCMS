@@ -1,12 +1,12 @@
 [
     {
-        "Title": "Default",
+        "title": "Default",
         "Data": {
             "type": "FeaturesSection",
             "data": {
                 "title": "Why Choose Us",
                 "subtitle": "We provide the best solutions for your business needs.",
-                "features": [
+                "items": [
                     {
                         "icon": "mdi:rocket-launch",
                         "title": "Fast Performance",

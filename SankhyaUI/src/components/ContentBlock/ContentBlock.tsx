@@ -3,42 +3,50 @@ import './ContentBlock.css';
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
 
-export interface ContentBlockProps {
-    title?: string;
-    subtitle?: string;
-    content: string; // Markdown string
+import { SectionProps } from '../Common/BaseComponent.interfaces';
+
+export interface ContentBlockProps extends SectionProps {
+    content?: string; // Markdown string
+    format?: 'html' | 'markdown';
     image?: {
-        src: string;
+        imageSrc: string;
         alt: string;
         caption?: string;
     };
     className?: string;
+    inverted?: boolean;
 }
 
 export const ContentBlock: React.FC<ContentBlockProps> = ({
     title,
     subtitle,
     content,
-    image,
+    format = 'markdown',
     className = '',
+    image,
+    inverted = false,
 }) => {
     return (
-        <section className={`content-block-section ${className}`}>
+        <section className={`content-block-section ${inverted ? 'theme-inverted' : ''} ${className}`}>
             <div className="content-block-container">
                 <div className="content-block-header">
-                    {title && <div className="content-block-title">{title}</div>}
-                    {subtitle && <div className="content-block-subtitle">{subtitle}</div>}
+                    {title && <div className="section-title content-block-title">{title}</div>}
+                    {subtitle && <div className="section-subtitle content-block-subtitle">{subtitle}</div>}
                 </div>
 
                 {image && (
                     <div className="content-block-featured-image">
-                        <img src={image.src} alt={image.alt} />
+                        <img src={image.imageSrc} alt={image.alt} />
                         {image.caption && <figcaption>{image.caption}</figcaption>}
                     </div>
                 )}
 
                 <div className="content-block-body markdown-body">
-                    <ReactMarkdown remarkPlugins={[remarkBreaks]}>{content}</ReactMarkdown>
+                    {format === 'html' ? (
+                        <div dangerouslySetInnerHTML={{ __html: content || '' }} />
+                    ) : (
+                        <ReactMarkdown remarkPlugins={[remarkBreaks]}>{content || ''}</ReactMarkdown>
+                    )}
                 </div>
             </div>
         </section>

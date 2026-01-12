@@ -4,43 +4,41 @@ import '../Common/Common.css';
 
 import { FeatureItem, FeatureItemProps } from './FeatureItem';
 
-export interface FeaturesSectionProps {
-    title: string;
-    subtitle?: string;
-    features?: FeatureItemProps[];
+import { SectionProps, ActionableProps } from '../Common/BaseComponent.interfaces';
+
+export interface FeaturesSectionProps extends SectionProps, ActionableProps {
+    items?: FeatureItemProps[];
     children?: React.ReactNode;
-    className?: string;
     columns?: number;
-    featureLinkText?: string;
 }
 
 export const FeaturesSection: React.FC<FeaturesSectionProps> = ({
     title,
     subtitle,
-    features,
+    items,
     children,
     className = '',
     columns,
-    featureLinkText = 'Learn more',
+    actionLabel = 'Learn more',
+    inverted = false,
 }) => {
     const gridStyle = columns ? { '--features-columns': columns } as React.CSSProperties : {};
 
     return (
-        <section className={`features-section ${className}`}>
+        <section className={`features-section ${inverted ? 'theme-inverted' : ''} ${className}`}>
             <div className="features-container">
                 <div className="features-header">
-                    <div className="features-title">{title}</div>
-                    {subtitle && <div className="features-subtitle">{subtitle}</div>}
+                    <div className="section-title features-title">{title}</div>
+                    {subtitle && <div className="section-subtitle features-subtitle">{subtitle}</div>}
                 </div>
 
                 <div className="features-grid" style={gridStyle}>
                     {children}
-                    {features && features.map((feature, index) => (
-                        <FeatureItem key={index} {...feature} featureLinkText={featureLinkText} />
+                    {items && items.map((item, index) => (
+                        <FeatureItem key={index} {...item} actionLabel={actionLabel} inverted={inverted} />
                     ))}
                 </div>
             </div>
         </section>
     );
 };
-

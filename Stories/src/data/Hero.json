@@ -1,14 +1,14 @@
 [
   {
-    "Title": "Default",
+    "title": "Default",
     "Data": {
       "type": "Hero",
       "data": {
-        "Title": "Give Your Business the Attention that it Deserves",
-        "SubTitle": "Unlock Your Potential: Let Us Handle IT Solutions While You Excel",
-        "ButtonText": "Schedule Call",
-        "Link": "#",
-        "ImageUrl": "https://picsum.photos/800/400",
+        "title": "Give Your Business the Attention that it Deserves",
+        "subtitle": "Unlock Your Potential: Let Us Handle IT Solutions While You Excel",
+        "actionLabel": "Schedule Call",
+        "href": "#",
+        "imageSrc": "https://picsum.photos/800/400",
         "textPosition": "left",
         "textAlignment": "left",
         "padding": "none",

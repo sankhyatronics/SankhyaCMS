@@ -1,6 +1,6 @@
 [
   {
-    "Title": "Default",
+    "title": "Default",
     "Data": {
       "type": "Header",
       "data": {
@@ -9,7 +9,7 @@
         "className": "bg-primary shadow-md",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "logoSrc": "https://picsum.photos/100/100",
+        "imageSrc": "https://picsum.photos/100/100",
         "logoClassName": "w-[84px]",
         "altText": "Company Logo",
         "children": [
@@ -85,7 +85,7 @@
     }
   },
   {
-    "Title": "Sticky",
+    "title": "Sticky",
     "Data": {
       "type": "Header",
       "data": {
@@ -94,7 +94,7 @@
         "className": "bg-primary shadow-lg",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "logoSrc": "/Logo.jpg",
+        "imageSrc": "/Logo.jpg",
         "logoClassName": "w-[84px]",
         "altText": "Company Logo",
         "children": [
@@ -139,7 +139,7 @@
     }
   },
   {
-    "Title": "Minimal",
+    "title": "Minimal",
     "Data": {
       "type": "Header",
       "data": {
@@ -148,7 +148,7 @@
         "className": "bg-primary shadow-lg",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "logoSrc": "/Logo.jpg",
+        "imageSrc": "/Logo.jpg",
         "logoClassName": "w-[84px]",
         "altText": "Minimal Logo",
         "children": [
@@ -166,7 +166,7 @@
     }
   },
   {
-    "Title": "WithMultipleDropdowns",
+    "title": "WithMultipleDropdowns",
     "Data": {
       "type": "Header",
       "data": {
@@ -175,7 +175,7 @@
         "className": "bg-primary shadow-lg",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "logoSrc": "/Logo.jpg",
+        "imageSrc": "/Logo.jpg",
         "logoClassName": "w-[84px]",
         "altText": "Logo",
         "children": [
@@ -271,7 +271,7 @@
     }
   },
   {
-    "Title": "WithNoMenu",
+    "title": "WithNoMenu",
     "Data": {
       "type": "Header",
       "data": {
@@ -280,7 +280,7 @@
         "className": "bg-primary",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "logoSrc": "/Logo.jpg",
+        "imageSrc": "/Logo.jpg",
         "logoClassName": "w-[84px]",
         "altText": "Logo",
         "children": [
@@ -300,7 +300,7 @@
     }
   },
   {
-    "Title": "WithManyUtilityButtons",
+    "title": "WithManyUtilityButtons",
     "Data": {
       "type": "Header",
       "data": {
@@ -309,7 +309,7 @@
         "className": "bg-primary",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "logoSrc": "/Logo.jpg",
+        "imageSrc": "/Logo.jpg",
         "logoClassName": "w-[84px]",
         "altText": "Logo",
         "children": [
@@ -363,7 +363,7 @@
     }
   },
   {
-    "Title": "WithCTAs",
+    "title": "WithCTAs",
     "Data": {
       "type": "Header",
       "data": {
@@ -372,7 +372,7 @@
         "className": "bg-primary",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "logoSrc": "/Logo.jpg",
+        "imageSrc": "/Logo.jpg",
         "logoClassName": "w-[84px]",
         "altText": "Logo",
         "children": [

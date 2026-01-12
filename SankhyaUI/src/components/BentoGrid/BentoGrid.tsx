@@ -1,26 +1,23 @@
 import React from 'react';
 import './BentoGrid.css';
 import { Icon } from '@iconify/react';
+import { BaseProps, SectionProps } from '../Common/BaseComponent.interfaces';
 
-export interface BentoGridItem {
+export interface BentoGridItem extends BaseProps {
     title: string;
     description?: string;
     icon?: string;
     image?: {
-        src: string;
+        imageSrc: string;
         alt: string;
     };
     colSpan?: 1 | 2 | 3 | 4;
     rowSpan?: 1 | 2;
     href?: string;
-    className?: string;
 }
 
-export interface BentoGridProps {
-    title?: string;
-    subtitle?: string;
+export interface BentoGridProps extends SectionProps {
     items: BentoGridItem[];
-    className?: string;
 }
 
 export const BentoGrid: React.FC<BentoGridProps> = ({
@@ -28,14 +25,15 @@ export const BentoGrid: React.FC<BentoGridProps> = ({
     subtitle,
     items,
     className = '',
+    inverted = false,
 }) => {
     return (
-        <section className={`bento-grid-section ${className}`}>
+        <section className={`bento-grid-section ${inverted ? 'theme-inverted' : ''} ${className}`}>
             <div className="bento-grid-container">
                 {(title || subtitle) && (
                     <div className="bento-grid-header">
-                        {title && <h2 className="bento-grid-title">{title}</h2>}
-                        {subtitle && <p className="bento-grid-subtitle">{subtitle}</p>}
+                        {title && <h2 className="section-title bento-grid-title">{title}</h2>}
+                        {subtitle && <p className="section-subtitle bento-grid-subtitle">{subtitle}</p>}
                     </div>
                 )}
 
@@ -45,13 +43,13 @@ export const BentoGrid: React.FC<BentoGridProps> = ({
                         const rowSpanClass = item.rowSpan ? `row-span-${item.rowSpan}` : 'row-span-1';
 
                         const ContentWrapper = item.href ? 'a' : 'div';
-                        const wrapperProps = item.href ? { href: item.href, className: `bento-card ${colSpanClass} ${rowSpanClass} ${item.className || ''} clickable` } : { className: `bento-card ${colSpanClass} ${rowSpanClass} ${item.className || ''}` };
+                        const wrapperProps = item.href ? { href: item.href, className: `bento-card ${colSpanClass} ${rowSpanClass} ${item.className || ''} ${inverted ? 'theme-inverted' : ''} clickable` } : { className: `bento-card ${colSpanClass} ${rowSpanClass} ${item.className || ''} ${inverted ? 'theme-inverted' : ''}` };
 
                         return (
                             <ContentWrapper key={index} {...wrapperProps}>
                                 {item.image && (
                                     <div className="bento-card-image-wrapper">
-                                        <img src={item.image.src} alt={item.image.alt} className="bento-card-image" />
+                                        <img src={item.image.imageSrc} alt={item.image.alt} className="bento-card-image" />
                                     </div>
                                 )}
                                 <div className="bento-card-content">
@@ -61,8 +59,8 @@ export const BentoGrid: React.FC<BentoGridProps> = ({
                                         </div>
                                     )}
                                     <div className="bento-card-text">
-                                        <h3 className="bento-card-title">{item.title}</h3>
-                                        {item.description && <p className="bento-card-description">{item.description}</p>}
+                                        <h3 className="card-title bento-card-title">{item.title}</h3>
+                                        {item.description && <p className="card-description bento-card-description">{item.description}</p>}
                                     </div>
                                 </div>
                             </ContentWrapper>

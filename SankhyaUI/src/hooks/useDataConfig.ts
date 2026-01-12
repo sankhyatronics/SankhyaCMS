@@ -52,3 +52,11 @@ export function useFeaturesSectionConfig(story: string, apiService: ApiService, 
 export function useBentoGridConfig(story: string, apiService: ApiService, variant?: string) {
   return useTypedApiConfig({ component: 'BentoGrid', story, apiService, variant });
 }
+
+export function useCTASectionConfig(story: string, apiService: ApiService, variant?: string) {
+  return useTypedApiConfig({ component: 'CTASection', story, apiService, variant });
+}
+
+export function useTestimonialsConfig(story: string, apiService: ApiService, variant?: string) {
+  return useTypedApiConfig({ component: 'Testimonials', story, apiService, variant });
+}
