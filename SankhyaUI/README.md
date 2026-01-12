@@ -1,18 +1,18 @@
-# @sankhyatronics/SankhyaCMS
+# @sankhyatronics/SankhyaUI
 
-The core UI library for the SankhyaCMS system. Build dynamic, JSON-driven portals with ease.
+The core UI library for the SankhyaUI system. Build dynamic, JSON-driven portals with ease.
 
 ## Installation
 
 ```bash
-pnpm add @sankhyatronics/SankhyaCMS
+pnpm add @sankhyatronics/SankhyaUI
 ```
 
 ## Quick Start
 
 ```tsx
-import { DynamicRenderer } from '@sankhyatronics/SankhyaCMS';
-import '@sankhyatronics/SankhyaCMS/styles';
+import { DynamicRenderer } from '@sankhyatronics/SankhyaUI';
+import '@sankhyatronics/SankhyaUI/styles';
 
 const pageData = [
   {

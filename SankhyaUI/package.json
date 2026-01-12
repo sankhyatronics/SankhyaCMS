@@ -1,5 +1,5 @@
 {
-  "name": "@sankhyatronics/sankhya-cms",
+  "name": "@sankhyatronics/sankhya-ui",
   "description": "Pure view React components (React 19) for making portals. These components are designed to use with headless CMS.",
   "version": "0.1.0-alpha.0",
   "main": "dist/index.umd.js",
@@ -35,13 +35,13 @@
     "tailwindcss": "catalog:"
   },
   "dependencies": {
-    "@emotion/is-prop-valid": "^1.4.0",
+    "@emotion/is-prop-valid": "catalog:",
     "@iconify/react": "catalog:",
     "motion": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-markdown": "catalog:",
-    "remark-breaks": "^4.0.0"
+    "remark-breaks": "catalog:"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",

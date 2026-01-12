@@ -1,5 +1,5 @@
 packages:
-  - SankhyaCMS
+  - SankhyaUI
   - Stories
   - sampleweb
 
@@ -42,3 +42,5 @@ catalog:
   "@vitest/browser-playwright": "^4.0.16"
   "vitest": "^4.0.16"
   "@vitest/coverage-v8": "^4.0.16"
+  "@emotion/is-prop-valid": "^1.4.0"
+  "remark-breaks": "^4.0.0"

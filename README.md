@@ -9,7 +9,7 @@ Built for the era of Headless CMS, SankhyaCMS allows developers to provide non-t
 
 ## 📦 Project Structure
 This repository is a monorepo managed with `pnpm`:
-- `/components`: The core `@sankhyatronics/SankhyaCMS` library.
+- `/SankhyaUI`: The core `@sankhyatronics/SankhyaUI` library.
 - `/Stories`: Comprehensive Storybook documentation and testing suite.
 - `/sampleweb`: A reference implementation app showing SankhyaCMS in action.
 
