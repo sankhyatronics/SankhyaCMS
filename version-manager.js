@@ -3,9 +3,9 @@ const { execSync } = require('child_process');
 const path = require('path');
 
 const packages = [
-    { name: 'omniportal', path: './components/package.json' },
+    { name: 'SankhyaCMS', path: './SankhyaCMS/package.json' },
     { name: 'sampleweb', path: './sampleweb/package.json' },
-    { name: 'stories', path: './omni-stories/package.json' }
+    { name: 'Stories', path: './Stories/package.json' }
 ];
 
 const rootPkgJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));

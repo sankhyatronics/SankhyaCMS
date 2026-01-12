@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DynamicRenderer } from "@sankhyatronics/omniportal";
-import { registerComponent } from "@sankhyatronics/omniportal";
-import { MenuGridItem } from "@sankhyatronics/omniportal";
-import { useMenuGridItemConfig } from "@sankhyatronics/omniportal";
+import { DynamicRenderer } from "@sankhyatronics/SankhyaCMS";
+import { registerComponent } from "@sankhyatronics/SankhyaCMS";
+import { MenuGridItem } from "@sankhyatronics/SankhyaCMS";
+import { useMenuGridItemConfig } from "@sankhyatronics/SankhyaCMS";
 import { mockApi } from "./data/mockApiService";
 // Register the component
 registerComponent('MenuGridItem', MenuGridItem);

@@ -1,5 +1,5 @@
 import { useApiConfig, ApiService } from './useApiConfig';
-import { IComponent } from '../../src/components/Common/DynamicRenderer.interfaces';
+import { IComponent } from '../components/Common/DynamicRenderer.interfaces';
 
 interface UseTypedApiConfigOptions {
   component: ComponentType;

@@ -15,7 +15,7 @@
     "react-dom": "catalog:",
     "tailwindcss": "catalog:",
     "react-router": "catalog:",
-    "@sankhyatronics/omniportal": "workspace:"
+    "@sankhyatronics/sankhya-cms": "workspace:"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",

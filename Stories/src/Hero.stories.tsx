@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DynamicRenderer } from "@sankhyatronics/omniportal";
-import { registerComponent } from "@sankhyatronics/omniportal";
-import { useHeroConfig } from "@sankhyatronics/omniportal";
-import { Hero } from "@sankhyatronics/omniportal";
+import { DynamicRenderer } from "@sankhyatronics/SankhyaCMS";
+import { registerComponent } from "@sankhyatronics/SankhyaCMS";
+import { useHeroConfig } from "@sankhyatronics/SankhyaCMS";
+import { Hero } from "@sankhyatronics/SankhyaCMS";
 import { mockApi } from "./data/mockApiService";
 // Register all components
 registerComponent('Hero', Hero);

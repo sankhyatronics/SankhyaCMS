@@ -5,7 +5,7 @@
             "type": "Footer",
             "data": {
                 "companyName": "",
-                "logoUrl": "https://placehold.co/400x120/2E6305/FFFFFF?text=OmniPortal",
+                "logoUrl": "https://placehold.co/400x120/2E6305/FFFFFF?text=SankhyaCMS",
                 "inverted": true,
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
                 "copyright": "\u00a9 2026 Sankhyatronics. All rights reserved.",
@@ -16,7 +16,7 @@
                     },
                     {
                         "icon": "mdi:github",
-                        "href": "https://github.com/sankhyatronics/omniportal"
+                        "href": "https://github.com/sankhyatronics/SankhyaCMS"
                     }
                 ],
                 "columns": [

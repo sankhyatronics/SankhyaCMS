@@ -1,5 +1,5 @@
 {
-  "name": "@sankhyatronics/omniportal-stories",
+  "name": "@sankhyatronics/stories",
   "private": true,
   "version": "0.1.0-alpha.0",
   "type": "module",
@@ -8,7 +8,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@sankhyatronics/omniportal": "workspace:*",
+    "@sankhyatronics/sankhya-cms": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "catalog:"

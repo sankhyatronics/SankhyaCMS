@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DropdownProvider } from "@sankhyatronics/omniportal";
-import { DynamicRenderer } from "@sankhyatronics/omniportal";
-import { registerComponent } from "@sankhyatronics/omniportal";
-import { Dropdown } from "@sankhyatronics/omniportal";
-import { useDropdownConfig } from "@sankhyatronics/omniportal";
+import { DropdownProvider } from "@sankhyatronics/SankhyaCMS";
+import { DynamicRenderer } from "@sankhyatronics/SankhyaCMS";
+import { registerComponent } from "@sankhyatronics/SankhyaCMS";
+import { Dropdown } from "@sankhyatronics/SankhyaCMS";
+import { useDropdownConfig } from "@sankhyatronics/SankhyaCMS";
 import { mockApi } from "./data/mockApiService";
 registerComponent('Dropdown', Dropdown);
 

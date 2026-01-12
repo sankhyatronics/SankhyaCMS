@@ -1,18 +1,18 @@
-# @sankhyatronics/omniportal
+# @sankhyatronics/SankhyaCMS
 
-The core UI library for the OmniPortal system. Build dynamic, JSON-driven portals with ease.
+The core UI library for the SankhyaCMS system. Build dynamic, JSON-driven portals with ease.
 
 ## Installation
 
 ```bash
-pnpm add @sankhyatronics/omniportal
+pnpm add @sankhyatronics/SankhyaCMS
 ```
 
 ## Quick Start
 
 ```tsx
-import { DynamicRenderer } from '@sankhyatronics/omniportal';
-import '@sankhyatronics/omniportal/styles';
+import { DynamicRenderer } from '@sankhyatronics/SankhyaCMS';
+import '@sankhyatronics/SankhyaCMS/styles';
 
 const pageData = [
   {

@@ -1,5 +1,5 @@
 {
-  "name": "@sankhyatronics/omniportal",
+  "name": "@sankhyatronics/sankhya-cms",
   "description": "Pure view React components (React 19) for making portals. These components are designed to use with headless CMS.",
   "version": "0.1.0-alpha.0",
   "main": "dist/index.umd.js",
