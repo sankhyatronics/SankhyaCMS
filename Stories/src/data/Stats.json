@@ -1,27 +1,27 @@
 [
-    {
-        "title": "Default",
-        "Data": {
-            "type": "Stats",
-            "data": {
-                "items": [
-                    {
-                        "value": "100%",
-                        "label": "Uptime",
-                        "description": "We guarantee 100% uptime for all our services."
-                    },
-                    {
-                        "value": "24/7",
-                        "label": "Support",
-                        "description": "Our support team is available 24/7 to help you."
-                    },
-                    {
-                        "value": "100k+",
-                        "label": "Users",
-                        "description": "Trusted by over 100k users worldwide."
-                    }
-                ]
-            }
-        }
+  {
+    "title": "Default",
+    "data": {
+      "type": "Stats",
+      "data": {
+        "items": [
+          {
+            "value": "100%",
+            "label": "Uptime",
+            "description": "We guarantee 100% uptime for all our services."
+          },
+          {
+            "value": "24/7",
+            "label": "Support",
+            "description": "Our support team is available 24/7 to help you."
+          },
+          {
+            "value": "100k+",
+            "label": "Users",
+            "description": "Trusted by over 100k users worldwide."
+          }
+        ]
+      }
     }
+  }
 ]

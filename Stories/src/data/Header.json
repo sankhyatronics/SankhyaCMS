@@ -1,7 +1,7 @@
 [
   {
     "title": "Default",
-    "Data": {
+    "data": {
       "type": "Header",
       "data": {
         "id": "header-default",
@@ -86,7 +86,7 @@
   },
   {
     "title": "Sticky",
-    "Data": {
+    "data": {
       "type": "Header",
       "data": {
         "id": "header-sticky",
@@ -140,7 +140,7 @@
   },
   {
     "title": "Minimal",
-    "Data": {
+    "data": {
       "type": "Header",
       "data": {
         "id": "header-minimal",
@@ -167,7 +167,7 @@
   },
   {
     "title": "WithMultipleDropdowns",
-    "Data": {
+    "data": {
       "type": "Header",
       "data": {
         "id": "header-multi-dropdown",
@@ -272,7 +272,7 @@
   },
   {
     "title": "WithNoMenu",
-    "Data": {
+    "data": {
       "type": "Header",
       "data": {
         "id": "header-no-menu",
@@ -301,7 +301,7 @@
   },
   {
     "title": "WithManyUtilityButtons",
-    "Data": {
+    "data": {
       "type": "Header",
       "data": {
         "id": "header-many-utility",
@@ -364,7 +364,7 @@
   },
   {
     "title": "WithCTAs",
-    "Data": {
+    "data": {
       "type": "Header",
       "data": {
         "id": "header-with-cta",

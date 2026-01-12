@@ -32,15 +32,21 @@ export class MockApiService implements ApiService {
   private normalizeData(item: any) {
     if (!item) return null;
 
-    // If data is nested under data.data, extract it
-    if (item.Data && item.Data.type && item.Data.data) {
-      return {
-        ...item.Data.data,
-        type: item.Data.type  // Preserve the type if needed
-      };
+    // Handle standard structure: { title: "...", data: { type: "...", data: { ... } } }
+    // Support both uppercase and lowercase keys for robustness
+    const topData = item.Data || item.data;
+    if (topData && topData.type) {
+      const innerData = topData.data || topData.Data;
+      if (innerData) {
+        return {
+          ...innerData,
+          type: topData.type
+        };
+      }
+      return topData;
     }
 
-    return item.Data;
+    return item;
   }
 
   private parseEndpoint(endpoint: string): {

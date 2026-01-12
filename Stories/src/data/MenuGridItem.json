@@ -1,7 +1,7 @@
 [
   {
     "title": "Default",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-default",
@@ -18,7 +18,7 @@
   },
   {
     "title": "Compact",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-compact",
@@ -35,7 +35,7 @@
   },
   {
     "title": "WithoutIcon",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-no-icon",
@@ -51,7 +51,7 @@
   },
   {
     "title": "WithoutBadge",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-no-badge",
@@ -67,7 +67,7 @@
   },
   {
     "title": "WithoutDescription",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-no-desc",
@@ -83,7 +83,7 @@
   },
   {
     "title": "Minimal",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-minimal",
@@ -98,7 +98,7 @@
   },
   {
     "title": "LongTitle",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-long-title",
@@ -115,7 +115,7 @@
   },
   {
     "title": "LongDescription",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-long-desc",
@@ -132,7 +132,7 @@
   },
   {
     "title": "SpecialBadge",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-special-badge",
@@ -149,7 +149,7 @@
   },
   {
     "title": "CustomColors",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-custom-colors",
@@ -166,7 +166,7 @@
   },
   {
     "title": "DisabledStyle",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-disabled",
@@ -182,7 +182,7 @@
   },
   {
     "title": "MultipleBadges",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-multi-badge",
@@ -199,7 +199,7 @@
   },
   {
     "title": "ExternalLink",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-external",
@@ -216,7 +216,7 @@
   },
   {
     "title": "PremiumFeature",
-    "Data": {
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-premium",

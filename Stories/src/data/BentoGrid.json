@@ -1,52 +1,52 @@
 [
-    {
-        "title": "Default",
-        "Data": {
-            "type": "BentoGrid",
-            "data": {
-                "title": "Built for scale",
-                "subtitle": "Everything you need to build your next great idea.",
-                "items": [
-                    {
-                        "title": "Global Infrastructure",
-                        "description": "Deploy closer to your users with our global edge network.",
-                        "colSpan": 2,
-                        "rowSpan": 2,
-                        "image": {
-                            "imageSrc": "https://picsum.photos/300/400",
-                            "alt": "Earth from space"
-                        }
-                    },
-                    {
-                        "title": "Real-time Analytics",
-                        "description": "Monitor performance in real-time.",
-                        "colSpan": 1,
-                        "icon": "mdi:chart-bar"
-                    },
-                    {
-                        "title": "Secure by Default",
-                        "description": "Enterprise-grade security.",
-                        "colSpan": 1,
-                        "icon": "mdi:shield-check"
-                    },
-                    {
-                        "title": "Team Collaboration",
-                        "description": "Work together seamlessly.",
-                        "colSpan": 2,
-                        "icon": "mdi:account-group",
-                        "className": "bg-primary-50"
-                    },
-                    {
-                        "title": "Instant Deployments",
-                        "description": "Push to git and we handle the rest.",
-                        "colSpan": 4,
-                        "image": {
-                            "imageSrc": "https://picsum.photos/800/200",
-                            "alt": "Code on screen"
-                        }
-                    }
-                ]
+  {
+    "title": "Default",
+    "data": {
+      "type": "BentoGrid",
+      "data": {
+        "title": "Built for scale",
+        "subtitle": "Everything you need to build your next great idea.",
+        "items": [
+          {
+            "title": "Global Infrastructure",
+            "description": "Deploy closer to your users with our global edge network.",
+            "colSpan": 2,
+            "rowSpan": 2,
+            "image": {
+              "imageSrc": "https://picsum.photos/300/400",
+              "alt": "Earth from space"
             }
-        }
+          },
+          {
+            "title": "Real-time Analytics",
+            "description": "Monitor performance in real-time.",
+            "colSpan": 1,
+            "icon": "mdi:chart-bar"
+          },
+          {
+            "title": "Secure by Default",
+            "description": "Enterprise-grade security.",
+            "colSpan": 1,
+            "icon": "mdi:shield-check"
+          },
+          {
+            "title": "Team Collaboration",
+            "description": "Work together seamlessly.",
+            "colSpan": 2,
+            "icon": "mdi:account-group",
+            "className": "bg-primary-50"
+          },
+          {
+            "title": "Instant Deployments",
+            "description": "Push to git and we handle the rest.",
+            "colSpan": 4,
+            "image": {
+              "imageSrc": "https://picsum.photos/800/200",
+              "alt": "Code on screen"
+            }
+          }
+        ]
+      }
     }
+  }
 ]
