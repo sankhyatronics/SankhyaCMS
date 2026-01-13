@@ -205,8 +205,9 @@
 .theme-inverted .section-title,
 .theme-inverted .card-title,
 .theme-inverted .hero-title {
-  color: var(--color-primary-50, #f0f7ff);
+  color: var(--color-primary, #f0f7ff);
 }
+
 
 .theme-inverted .section-subtitle,
 .theme-inverted .card-description,

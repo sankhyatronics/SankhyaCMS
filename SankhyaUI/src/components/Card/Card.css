@@ -7,6 +7,12 @@
     border: 1px solid var(--color-primary-100);
 }
 
+.card.theme-inverted {
+    background-color: var(--color-primary-900);
+    border-color: var(--color-primary-800);
+}
+
+
 .card-bordered {
     border: 1px solid var(--color-primary-200);
 }

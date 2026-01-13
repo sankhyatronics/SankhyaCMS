@@ -18,6 +18,7 @@ export interface FeatureSplitProps extends SectionProps, ActionableProps {
         alt: string;
     };
     imagePosition?: 'left' | 'right' | 'top';
+    inverted?: boolean;
 }
 
 export const FeatureSplit: React.FC<FeatureSplitProps> = ({
@@ -29,9 +30,10 @@ export const FeatureSplit: React.FC<FeatureSplitProps> = ({
     className = '',
     actionLabel,
     href,
+    inverted = false,
 }) => {
     return (
-        <section className={`feature-split-section ${className} image-${imagePosition}`}>
+        <section className={`feature-split-section ${className} image-${imagePosition} ${inverted ? 'theme-inverted' : ''}`}>
             <div className="feature-split-container">
                 <div className="feature-split-content">
                     <div className="section-title feature-split-title">{title}</div>

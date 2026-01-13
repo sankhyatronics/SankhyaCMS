@@ -14,11 +14,28 @@
 }
 
 .features-title {
+    margin: 0;
     color: var(--color-primary-950);
 }
 
 .features-subtitle {
     margin: 0 auto;
+    color: var(--color-primary-600);
+}
+
+/* Inverted Theme */
+.features-section.theme-inverted {
+    background-color: var(--color-primary-950);
+}
+
+.features-section.theme-inverted .features-title,
+.features-section.theme-inverted .section-title {
+    color: var(--color-primary) !important;
+}
+
+.features-section.theme-inverted .features-subtitle,
+.features-section.theme-inverted .section-subtitle {
+    color: var(--color-primary-200) !important;
 }
 
 .features-grid {
@@ -70,6 +87,21 @@
 .feature-description {
     margin: 0;
 }
+
+/* Inverted card sub-elements */
+.card.theme-inverted .feature-icon-wrapper {
+    background-color: var(--color-primary-800);
+    color: var(--color-primary-100);
+}
+
+.card.theme-inverted .feature-link {
+    color: var(--color-primary-300);
+}
+
+.card.theme-inverted .feature-link:hover {
+    color: var(--color-primary-100);
+}
+
 
 @media (max-width: 768px) {
     .features-section {

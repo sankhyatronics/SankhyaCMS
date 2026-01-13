@@ -11,6 +11,7 @@ export interface FeatureItemProps extends BaseProps, ActionableProps {
     icon?: string;
     title: string;
     description: string;
+    inverted?: boolean;
 }
 
 export const FeatureItem: React.FC<FeatureItemProps> = ({
@@ -20,9 +21,11 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     href,
     actionLabel = 'Learn more',
     className = '',
+    inverted = false,
 }) => {
     return (
-        <Card hoverable elevation="sm" className={`feature-card ${className}`}>
+        <Card hoverable elevation="sm" className={`feature-card ${className}`} inverted={inverted}>
+
             <div className="feature-card-content">
                 {icon && (
                     <div className="feature-icon-wrapper">
