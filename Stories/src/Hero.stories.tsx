@@ -15,21 +15,39 @@ const meta: Meta<typeof DynamicRenderer> = {
     layout: "fullscreen",
   },
   tags: ["autodocs"],
+  argTypes: {
+    focalPoint: {
+      control: 'select',
+      options: ['top', 'left', 'right', 'bottom', 'center'],
+      description: 'Sets the focal point of the background image',
+      table: {
+        defaultValue: { summary: 'center' },
+      },
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof DynamicRenderer>;
 
-const StoryData = ({ storyName = 'Default' }: { storyName?: string }) => {
+const StoryData = ({ storyName = 'Default', ...props }: { storyName?: string;[key: string]: any }) => {
   const { data, loading, error } = useHeroConfig(storyName, mockApi);
 
   if (loading) return <div className="bg-green-200">Loading...</div>;
   if (error) return <div className="bg-red-">Error: {error}</div>;
 
+  if (data) {
+    // Merge props into the component data
+    data.data = { ...data.data, ...props };
+  }
+
   return data ? <DynamicRenderer config={data} /> : null;
 };
 
 export const Default: Story = {
-  render: () => <StoryData storyName="Default" />,
+  render: (args) => <StoryData storyName="Default" {...args} />,
+  args: {
+    focalPoint: 'center',
+  } as any,
 };
 

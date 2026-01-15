@@ -9,6 +9,7 @@ export interface HeroProps extends SectionProps, ActionableProps {
     textAlignment?: 'left' | 'center' | 'right' | 'justify';
     padding?: 'none' | 'small' | 'medium' | 'large';
     inverted?: boolean;
+    focalPoint?: 'top' | 'left' | 'right' | 'bottom' | 'center';
 }
 
 export const Hero: React.FC<HeroProps> = ({
@@ -21,8 +22,20 @@ export const Hero: React.FC<HeroProps> = ({
     padding = 'none',
     className = '',
     inverted = false,
+    focalPoint = 'center',
 }) => {
-    const backgroundStyle = imageSrc ? { backgroundImage: `url(${imageSrc})` } : {};
+    const backgroundPositionMap = {
+        top: 'center top',
+        left: 'left center',
+        right: 'right center',
+        bottom: 'center bottom',
+        center: 'center center'
+    };
+
+    const backgroundStyle = imageSrc ? {
+        backgroundImage: `url(${imageSrc})`,
+        backgroundPosition: backgroundPositionMap[focalPoint]
+    } : {};
 
     // Responsive text alignment
     const alignmentClasses = {
