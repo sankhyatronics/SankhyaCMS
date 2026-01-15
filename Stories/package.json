@@ -8,7 +8,7 @@
     "build": "storybook build"
   },
   "dependencies": {
-    "@sankhyatronics/sankhya-ui": "workspace:*",
+    "@sankhyatronics/sankhya-ui": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "catalog:"

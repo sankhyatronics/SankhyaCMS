@@ -15,7 +15,7 @@
     "react-dom": "catalog:",
     "tailwindcss": "catalog:",
     "react-router": "catalog:",
-    "@sankhyatronics/sankhya-ui": "workspace:*"
+    "@sankhyatronics/sankhya-ui": "catalog:"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",

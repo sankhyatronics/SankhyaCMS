@@ -55,7 +55,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
       </div>
 
       {/* Desktop Navigation */}
-      <div className={`header-right ${isMobile ? 'hidden' : 'flex'}`} >
+      <div className={`header-right ${isMobile ? 'header-right-hidden' : ''}`} >
         {/* Main Navigation (left side) */}
         <div className="header-nav">
           {menuBar}
@@ -70,7 +70,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
 
       {/* Mobile: Hamburger Menu */}
       {isMobile && (
-        <div className="header-mobile-wrapper md:hidden">
+        <div className="header-mobile-wrapper">
           {/* Utility buttons in mobile header (optional) */}
           {utilityButtons && utilityButtons.length > 0 && (
             <div className="header-mobile-utility">

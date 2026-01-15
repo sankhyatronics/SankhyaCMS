@@ -31,8 +31,7 @@
     "@iconify/react": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-router": "catalog:",
-    "tailwindcss": "catalog:"
+    "react-router": "catalog:"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "catalog:",

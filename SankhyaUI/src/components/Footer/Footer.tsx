@@ -40,9 +40,9 @@ export const Footer: React.FC<FooterProps> = ({
         if (!imageSrc && !companyName) return null;
 
         return (
-            <div className="footer-logo-container flex items-center gap-2 text-xl font-bold">
+            <div className="footer-logo-container">
                 {imageSrc && (
-                    <img src={imageSrc} alt={companyName || 'Logo'} className="footer-logo-img h-8 w-auto" />
+                    <img src={imageSrc} alt={companyName || 'Logo'} className="footer-logo-img" />
                 )}
                 {companyName && <span className="footer-company-name">{companyName}</span>}
             </div>

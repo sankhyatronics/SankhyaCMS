@@ -1,3 +1,4 @@
+import './index.css';
 export { BentoGrid } from './components/BentoGrid/BentoGrid';
 export { Card } from './components/Card/Card';
 export { DynamicRenderer } from './components/Common/DynamicRenderer';

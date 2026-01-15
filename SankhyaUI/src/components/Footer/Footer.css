@@ -28,6 +28,19 @@
     color: var(--color-primary-950);
 }
 
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-bold);
+}
+
+.footer-logo-img {
+    height: 32px;
+    width: auto;
+}
+
 .footer-description {
     color: var(--color-primary-600);
     line-height: 1.6;
