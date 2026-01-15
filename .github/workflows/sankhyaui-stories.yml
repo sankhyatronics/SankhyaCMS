@@ -1,4 +1,4 @@
-name: SankhyaUI Sample
+name: SankhyaUI Stories
 
 on:
   workflow_dispatch:
