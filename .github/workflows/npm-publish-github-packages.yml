@@ -1,36 +1,41 @@
-name: Publihs SankhyaUI
+name: Publish SankhyaUI
 
 on:
   release:
     types: [created]
 
 jobs:
+  build-and-publish:
     name: Build and Publish
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
 
     steps:
-      - name: git-checkou
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24.10.1
-          registry-url: https://npm.pkg.github.com/
 
       - uses: pnpm/action-setup@v4
         name: Setup pnpm
-      
-      - name: Install all dependencies
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com/
+          scope: '@sankhyatronics'
+
+      - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: pnpm build
         working-directory: SankhyaUI
+        run: pnpm build
 
       - name: Publish
-        run: pnpm publish --tag alpha
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         working-directory: SankhyaUI
+        run: pnpm publish --tag alpha --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
