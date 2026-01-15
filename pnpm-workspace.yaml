@@ -44,4 +44,3 @@ catalog:
   "@vitest/coverage-v8": "^4.0.16"
   "@emotion/is-prop-valid": "^1.4.0"
   "remark-breaks": "^4.0.0"
-  # "@sankhyatronics/sankhya-ui": "1.0.0-alpha"
