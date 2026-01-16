@@ -14,6 +14,7 @@ import featuresSectionStories from './FeaturesSection.json';
 import bentoGridStories from './BentoGrid.json';
 import ctaSectionStories from './CTASection.json';
 import testimonialsStories from './Testimonials.json';
+import selectStories from './Select.json';
 
 
 // Simple mock API service
@@ -206,6 +207,14 @@ export class MockApiService implements ApiService {
           status: 200,
           statusText: 'OK'
         }
+      case '/select':
+        const selectKey = queryParams.story || 'Default';
+        const select = selectStories.find(item => item.title === selectKey);
+        return {
+          data: this.normalizeData(select) as T,
+          status: 200,
+          statusText: 'OK'
+        }
       default:
         return {
           data: { message: 'Default endpoint', endpoint } as T,
@@ -266,5 +275,6 @@ export const mockApiFetchers = {
   getContentBlock: () => mockFetch('/content-block'),
   getFeaturesSection: () => mockFetch('/features-section'),
   getBentoGrid: () => mockFetch('/bento-grid'),
+  getSelect: () => mockFetch('/select'),
 
 };

@@ -125,12 +125,16 @@ export const DynamicRenderer: React.FC<IDynamicRendererProps> = ({
     if (type === 'Header') {
       const renderedChildren = handleChildren(children);
       if (renderedChildren && Array.isArray(renderedChildren)) {
-        const menuItems = renderedChildren.filter(child =>
-          child?.props.config.type !== 'IconButton'
-        );
-        const utilityButtons = renderedChildren.filter(child =>
-          child?.props.config.type === 'IconButton'
-        );
+        const menuItems = renderedChildren.filter(child => {
+          const config = child?.props?.config;
+          const position = config?.['data-position'] || config?.data?.['data-position'];
+          return position !== 'far-item';
+        });
+        const utilityButtons = renderedChildren.filter(child => {
+          const config = child?.props?.config;
+          const position = config?.['data-position'] || config?.data?.['data-position'];
+          return position === 'far-item';
+        });
 
         componentProps.menuBar = menuItems;
         componentProps.utilityButtons = utilityButtons;

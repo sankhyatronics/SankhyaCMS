@@ -1,0 +1,111 @@
+[
+    {
+        "id": "select-default",
+        "type": "Select",
+        "title": "Default",
+        "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+        "data": {
+            "id": "select-basic",
+            "placeholder": "Choose an option",
+            "options": [
+                {
+                    "value": "option1",
+                    "label": "Option 1"
+                },
+                {
+                    "value": "option2",
+                    "label": "Option 2"
+                },
+                {
+                    "value": "option3",
+                    "label": "Option 3"
+                }
+            ]
+        }
+    },
+    {
+        "id": "select-icon",
+        "type": "Select",
+        "title": "WithIcons",
+        "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+        "data": {
+            "id": "select-icons",
+            "placeholder": "Select platform",
+            "options": [
+                {
+                    "value": "github",
+                    "label": "GitHub",
+                    "icon": "mdi:github"
+                },
+                {
+                    "value": "twitter",
+                    "label": "Twitter",
+                    "icon": "mdi:twitter"
+                },
+                {
+                    "value": "linkedin",
+                    "label": "LinkedIn",
+                    "icon": "mdi:linkedin"
+                }
+            ]
+        }
+    },
+    {
+        "id": "select-preselected",
+        "type": "Select",
+        "title": "PreSelected",
+        "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+        "data": {
+            "id": "select-preselected",
+            "placeholder": "Select value",
+            "defaultValue": "option2",
+            "options": [
+                {
+                    "value": "option1",
+                    "label": "Option 1"
+                },
+                {
+                    "value": "option2",
+                    "label": "Option 2 (Default)"
+                },
+                {
+                    "value": "option3",
+                    "label": "Option 3"
+                }
+            ]
+        }
+    },
+    {
+        "id": "select-language",
+        "type": "Select",
+        "title": "Language",
+        "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+        "data": {
+            "id": "select-lang",
+            "placeholder": "Select Language",
+            "defaultValue": "en",
+            "options": [
+                {
+                    "value": "en",
+                    "label": "",
+                    "icon": "circle-flags:us"
+                },
+                {
+                    "value": "es",
+                    "label": "",
+                    "icon": "circle-flags:es"
+                },
+                {
+                    "value": "fr",
+                    "label": "",
+                    "icon": "circle-flags:fr"
+                },
+                {
+                    "value": "de",
+                    "label": "",
+                    "icon": "circle-flags:de"
+                }
+            ]
+        }
+    }
+]

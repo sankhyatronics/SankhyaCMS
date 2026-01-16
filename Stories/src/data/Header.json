@@ -14,11 +14,47 @@
         "altText": "Company Logo",
         "children": [
           {
+            "id": "select-language",
+            "type": "Select",
+            "data-position": "far-item",
+            "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+            "title": "Language",
+            "hideSelectedLabel": true,
+            "data": {
+              "id": "select-lang",
+              "placeholder": "Select Language",
+              "defaultValue": "en",
+              "options": [
+                {
+                  "value": "en",
+                  "label": "",
+                  "icon": "circle-flags:us"
+                },
+                {
+                  "value": "es",
+                  "label": "",
+                  "icon": "circle-flags:es"
+                },
+                {
+                  "value": "fr",
+                  "label": "",
+                  "icon": "circle-flags:fr"
+                },
+                {
+                  "value": "de",
+                  "label": "",
+                  "icon": "circle-flags:de"
+                }
+              ]
+            }
+          },
+          {
             "type": "IconButton",
             "data": {
               "id": "sticky-cart",
               "icon": "mdi:cart",
               "onClick": "@action:onCartClick",
+              "data-position": "far-item",
               "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
             }
           },
@@ -131,6 +167,7 @@
               "id": "sticky-cart",
               "icon": "mdi:cart",
               "onClick": "@action:onCartClick",
+              "data-position": "far-item",
               "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
             }
           }
@@ -263,6 +300,7 @@
               "id": "header-search-2",
               "icon": "mdi:magnify",
               "onClick": "@action:onSearchClick",
+              "data-position": "far-item",
               "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-full"
             }
           }
@@ -292,7 +330,8 @@
               "title": "Login",
               "onClick": "@action:onLoginClick",
               "className": "bg-primary hover:bg-primary-200 text-primary-950 px-4 py-2 rounded",
-              "href": "/login"
+              "href": "/login",
+              "data-position": "far-item"
             }
           }
         ]
@@ -328,6 +367,7 @@
               "id": "util-notifications",
               "icon": "mdi:bell",
               "onClick": "@action:onNotificationClick",
+              "data-position": "far-item",
               "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-full"
             }
           },
@@ -337,6 +377,7 @@
               "id": "util-messages",
               "icon": "mdi:message",
               "onClick": "@action:onMessageClick",
+              "data-position": "far-item",
               "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-full"
             }
           },
@@ -346,6 +387,7 @@
               "id": "util-settings",
               "icon": "mdi:cog",
               "onClick": "@action:onSettingsClick",
+              "data-position": "far-item",
               "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-full"
             }
           },
@@ -355,6 +397,7 @@
               "id": "util-help",
               "icon": "mdi:help-circle",
               "onClick": "@action:onHelpClick",
+              "data-position": "far-item",
               "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-full"
             }
           }
@@ -393,7 +436,8 @@
               "icon": "ic:round-assignment-ind",
               "onClick": "@action:onSignUpClick",
               "className": "bg-primary hover:bg-primary-200 text-primary-950 px-4 py-2 rounded",
-              "href": "/signup"
+              "href": "/signup",
+              "data-position": "far-item"
             }
           },
           {
@@ -404,7 +448,8 @@
               "icon": "mdi:login",
               "onClick": "@action:onLoginClick",
               "className": "bg-primary hover:bg-primary-200 text-primary-950 px-4 py-2 rounded",
-              "href": "/login"
+              "href": "/login",
+              "data-position": "far-item"
             }
           }
         ]

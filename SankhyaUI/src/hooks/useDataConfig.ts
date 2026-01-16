@@ -60,3 +60,7 @@ export function useCTASectionConfig(story: string, apiService: ApiService, varia
 export function useTestimonialsConfig(story: string, apiService: ApiService, variant?: string) {
   return useTypedApiConfig({ component: 'Testimonials', story, apiService, variant });
 }
+
+export function useSelectConfig(story: string, apiService: ApiService, variant?: string) {
+  return useTypedApiConfig({ component: 'Select', story, apiService, variant });
+}
