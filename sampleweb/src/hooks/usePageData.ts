@@ -8,10 +8,15 @@ export interface PageSection {
 }
 
 export interface SectionConfig {
-    Title: string;
-    Data: {
+    Title?: string;
+    title?: string;
+    Data?: {
         type: string;
-        data: any;
+        data?: any;
+    };
+    data?: {
+        type: string;
+        data?: any;
     };
 }
 

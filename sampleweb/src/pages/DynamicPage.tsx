@@ -64,7 +64,7 @@ export const DynamicPage: React.FC = () => {
             {data.map((section, index) => (
                 <DynamicRenderer
                     key={index}
-                    config={section.Data}
+                    config={section.data || section.Data}
                 />
             ))}
         </div>

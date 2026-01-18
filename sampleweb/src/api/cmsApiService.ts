@@ -45,17 +45,19 @@ export async function cmsFetch<T>(endpoint: string, lang: string = 'en', options
     // AUTO-NORMALIZE: Handle Array (Storybook format)
     // This is critical because CMS files (Footer.json, Header.json) are arrays of stories.
     if (!options.skipStoryNormalization && Array.isArray(data)) {
-      const story = data.find((item: any) => item.Title === 'Default') || data[0];
-      if (story && story.Data) {
+      const story = data.find((item: any) => (item.Title === 'Default' || item.title === 'Default')) || data[0];
+      const storyData = story?.Data || story?.data;
+      if (storyData) {
         // Flatten logic: if Data contains nested type/data, spread the inner data up
         // This is required for DynamicRenderer to see 'children' at top level for Header processing
-        if (story.Data.type && story.Data.data) {
+        const innerData = storyData.data || storyData.Data;
+        if (storyData.type && innerData) {
           data = {
-            ...story.Data.data,
-            type: story.Data.type
+            ...innerData,
+            type: storyData.type
           };
         } else {
-          data = story.Data;
+          data = storyData;
         }
       }
     }

@@ -9,19 +9,20 @@ body,
 }
 
 @theme base {
-    --color-primary: #f0f3ff;
-    --color-primary-100: #e4ebff;
-    --color-primary-200: #c9d7fe;
-    --color-primary-300: #adc3fe;
-    --color-primary-400: #8eaffe;
-    --color-primary-500: #6599fd;
-    --color-primary-600: #2f87fd;
-    --color-primary-700: #1075e4;
-    --color-primary-800: #0c64c5;
-    --color-primary-900: #03346b;
-    --color-primary-950: #011d41;
+    --color-primary: #f8fafc;
+    --color-primary-100: #f1f5f9;
+    --color-primary-200: #e2e8f0;
+    --color-primary-300: #cbd5e1;
+    --color-primary-400: #94a3b8;
+    --color-primary-500: #64748b;
+    --color-primary-600: #475569;
+    --color-primary-700: #334155;
+    --color-primary-800: #1e293b;
+    --color-primary-900: #0f172a;
+    --color-primary-950: #020617;
 }
 
+/* 1. LIGHT - Modern Corporate (Clean & Airy) */
 [data-theme='light'] {
     --color-primary: #f0f3ff;
     --color-primary-100: #e4ebff;
@@ -36,87 +37,62 @@ body,
     --color-primary-950: #011d41;
 }
 
+/* 2. MIDNIGHT - Premium Dark (Professional & Sharp) */
 [data-theme='dark'] {
-    --color-primary: #0c64c5;
-    --color-primary-100: #0b5fbc;
-    --color-primary-200: #0853a6;
-    --color-primary-300: #064a95;
-    --color-primary-400: #053f80;
-    --color-primary-500: #03366f;
-    --color-primary-600: #022b5c;
-    --color-primary-700: #02234c;
-    --color-primary-800: #01193a;
-    --color-primary-900: #01102a;
-    --color-primary-950: #000718;
+    --color-primary: #0f172a;
+    --color-primary-100: #1e293b;
+    --color-primary-200: #334155;
+    --color-primary-300: #475569;
+    --color-primary-400: #64748b;
+    --color-primary-500: #94a3b8;
+    --color-primary-600: #cbd5e1;
+    --color-primary-700: #e2e8f0;
+    --color-primary-800: #f1f5f9;
+    --color-primary-900: #f8fafc;
+    --color-primary-950: #ffffff;
 }
 
-[data-theme='lavender'] {
-    --color-primary: #f4f2fe;
-    --color-primary-100: #e7e2fe;
-    --color-primary-200: #d0c5fc;
-    --color-primary-300: #baa7fb;
-    --color-primary-400: #a78bfa;
-    --color-primary-500: #9065f8;
-    --color-primary-600: #7a33f5;
-    --color-primary-700: #5e15c8;
-    --color-primary-800: #430c92;
-    --color-primary-900: #27055a;
-    --color-primary-950: #17023c;
-}
-
+/* 3. SLATE - Modern Enterprise (Neutral & Trustworthy) */
 [data-theme='slate'] {
-    --color-primary: #eef1f5;
-    --color-primary-100: #dee3eb;
-    --color-primary-200: #b9c4d7;
-    --color-primary-300: #98aac4;
-    --color-primary-400: #7c8fab;
+    --color-primary: #f8fafc;
+    --color-primary-100: #f1f5f9;
+    --color-primary-200: #e2e8f0;
+    --color-primary-300: #cbd5e1;
+    --color-primary-400: #94a3b8;
     --color-primary-500: #64748b;
-    --color-primary-600: #505d70;
-    --color-primary-700: #3b4554;
-    --color-primary-800: #272f39;
-    --color-primary-900: #171c23;
-    --color-primary-950: #0d1117;
+    --color-primary-600: #475569;
+    --color-primary-700: #334155;
+    --color-primary-800: #1e293b;
+    --color-primary-900: #0f172a;
+    --color-primary-950: #020617;
 }
 
-
-[data-theme='desert'] {
-    --color-primary: #fbf2ee;
-    --color-primary-100: #f7e4dd;
-    --color-primary-200: #f0cab8;
-    --color-primary-300: #eaac8b;
-    --color-primary-400: #d58d5f;
-    --color-primary-500: #af734d;
-    --color-primary-600: #8b5a3b;
-    --color-primary-700: #68432b;
-    --color-primary-800: #4a2e1c;
-    --color-primary-900: #2c190e;
-    --color-primary-950: #1b0e06;
+/* 4. INDIGO - High-End Consulting (Deep & Stable) */
+[data-theme='indigo'] {
+    --color-primary: #f5f3ff;
+    --color-primary-100: #ede9fe;
+    --color-primary-200: #ddd6fe;
+    --color-primary-300: #c4b5fd;
+    --color-primary-400: #a78bfa;
+    --color-primary-500: #8b5cf6;
+    --color-primary-600: #7c3aed;
+    --color-primary-700: #6d28d9;
+    --color-primary-800: #5b21b6;
+    --color-primary-900: #4c1d95;
+    --color-primary-950: #2e1065;
 }
 
-[data-theme='fire'] {
-    --color-primary: #ffedeb;
-    --color-primary-100: #ffdedb;
-    --color-primary-200: #ffb7b2;
-    --color-primary-300: #ff9287;
-    --color-primary-400: #ff6249;
-    --color-primary-500: #ea3e00;
-    --color-primary-600: #bf3100;
-    --color-primary-700: #902200;
-    --color-primary-800: #681600;
-    --color-primary-900: #3f0a00;
-    --color-primary-950: #290400;
-}
-
-[data-theme='jungle'] {
-    --color-primary: #cbfce2;
-    --color-primary-100: #95f9c8;
-    --color-primary-200: #68e2aa;
-    --color-primary-300: #5ac795;
-    --color-primary-400: #4dac81;
-    --color-primary-500: #40916c;
-    --color-primary-600: #327456;
-    --color-primary-700: #24573f;
-    --color-primary-800: #163b2a;
-    --color-primary-900: #092217;
-    --color-primary-950: #04140c;
+/* 5. EMERALD - Global Growth (Sustainable & Tech Forward) */
+[data-theme='emerald'] {
+    --color-primary: #f0fdf4;
+    --color-primary-100: #dcfce7;
+    --color-primary-200: #bbf7d0;
+    --color-primary-300: #86efac;
+    --color-primary-400: #4ade80;
+    --color-primary-500: #22c55e;
+    --color-primary-600: #16a34a;
+    --color-primary-700: #15803d;
+    --color-primary-800: #166534;
+    --color-primary-900: #14532d;
+    --color-primary-950: #064e3b;
 }
