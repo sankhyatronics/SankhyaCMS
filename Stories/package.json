@@ -1,14 +1,14 @@
 {
   "name": "@sankhyatronics/stories",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build": "storybook build"
   },
   "dependencies": {
-    "@sankhyatronics/sankhya-ui": "workspace:*",
+    "@sankhyatronics/sankhya-ui": "latest",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "catalog:"
