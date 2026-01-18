@@ -1,8 +1,8 @@
 import React from 'react';
 import { Footer, DropdownProvider, DynamicRenderer } from '@sankhyatronics/sankhya-ui';
 import { Outlet } from 'react-router';
-import { cmsApiFetchers } from '../../api/cmsApiService';
-import { useUser } from '../../contexts/UserContext';
+import { cmsApiFetchers } from '../api/cmsApiService';
+import { useUser } from '../contexts/UserContext';
 
 export const Shell: React.FC = () => {
     const [headerData, setHeaderData] = React.useState<any>(null);
@@ -13,9 +13,14 @@ export const Shell: React.FC = () => {
         onThemeChangeClick: () => {
             toggleTheme();
         },
-        onLanguageChangeToEn: () => { setLanguage('en'); window.location.reload() },
-        onLanguageChangeToDk: () => { setLanguage('dk'); window.location.reload() },
-        onLanguageChangeToDe: () => { setLanguage('de'); window.location.reload() },
+        onLanguageChangeToEn: () => {
+            alert('en');
+            setLanguage('en'); window.location.reload()
+        },
+        onLanguageChangeToDk: () => {
+            alert('dk');
+            setLanguage('dk'); window.location.reload()
+        }
     };
 
     React.useEffect(() => {

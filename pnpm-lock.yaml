@@ -235,8 +235,8 @@ importers:
   sampleweb:
     dependencies:
       '@sankhyatronics/sankhya-ui':
-        specifier: 0.0.3
-        version: 0.0.3(@iconify/react@6.0.2(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react-router@7.11.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
+        specifier: 'workspace:'
+        version: link:../SankhyaUI
       '@tailwindcss/vite':
         specifier: 'catalog:'
         version: 4.1.18(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2))

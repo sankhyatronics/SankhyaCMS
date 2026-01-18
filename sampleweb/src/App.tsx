@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router';
-import { Shell } from './components/Layout/Shell';
+import { Shell } from './components/Shell';
 import { UserProvider } from './contexts/UserContext';
 import { DynamicPage } from './pages/DynamicPage';
 

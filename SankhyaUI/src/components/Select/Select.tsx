@@ -7,6 +7,7 @@ export interface SelectOption {
     value: string;
     label?: string;
     icon?: string;
+    onClick?: () => void;
 }
 
 export interface SelectProps {
@@ -35,11 +36,12 @@ export const Select: React.FC<SelectProps> = ({
     const isControlled = value !== undefined;
     const currentValue = isControlled ? value : internalValue;
 
-    const handleSelect = (newValue: string) => {
+    const handleSelect = (option: SelectOption) => {
         if (!isControlled) {
-            setInternalValue(newValue);
+            setInternalValue(option.value);
         }
-        onChange?.(newValue);
+        onChange?.(option.value);
+        option.onClick?.();
     };
 
     const selectedOption = options.find((opt) => opt.value === currentValue);
@@ -62,7 +64,7 @@ export const Select: React.FC<SelectProps> = ({
                 <div
                     key={option.value}
                     className={`select-option ${option.value === currentValue ? 'selected' : ''} ${className}`}
-                    onClick={() => handleSelect(option.value)}
+                    onClick={() => handleSelect(option)}
                     role="option"
                     aria-selected={option.value === currentValue}
                 >

@@ -1,7 +1,7 @@
 {
   "name": "@sankhyatronics/sampleweb",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,7 +15,7 @@
     "react-dom": "catalog:",
     "tailwindcss": "catalog:",
     "react-router": "catalog:",
-    "@sankhyatronics/sankhya-ui": "0.0.3"
+    "@sankhyatronics/sankhya-ui": "0.0.4"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",

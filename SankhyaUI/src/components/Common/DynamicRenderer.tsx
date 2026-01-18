@@ -64,25 +64,38 @@ export const DynamicRenderer: React.FC<IDynamicRendererProps> = ({
     return null;
   }
 
+  // Process props for action handlers
+  const processHandlers = (props: any): any => {
+    if (!props || typeof props !== 'object') return props;
+    if (React.isValidElement(props)) return props; // Skip React elements
+
+    if (Array.isArray(props)) {
+      return props.map(item => processHandlers(item));
+    }
+
+    const newProps: any = { ...props };
+    Object.keys(newProps).forEach(key => {
+      const value = newProps[key];
+      if (typeof value === 'string' && value.startsWith('@action:')) {
+        const actionName = value.replace('@action:', '');
+        if (handlers && handlers[actionName]) {
+          newProps[key] = handlers[actionName];
+        }
+      } else if (typeof value === 'object' && value !== null) {
+        newProps[key] = processHandlers(value);
+      }
+    });
+    return newProps;
+  };
+
+  const processedData = processHandlers(data);
+
   // Prepare component props
   const componentProps: Record<string, any> = {
-    ...data,
+    ...processedData,
     ...rest,
     id: id || data?.id
   };
-
-  // Process props for action handlers
-  if (handlers) {
-    Object.keys(componentProps).forEach(key => {
-      const value = componentProps[key];
-      if (typeof value === 'string' && value.startsWith('@action:')) {
-        const actionName = value.replace('@action:', '');
-        if (handlers[actionName]) {
-          componentProps[key] = handlers[actionName];
-        }
-      }
-    });
-  }
 
   // Add className if provided
   if (className) {

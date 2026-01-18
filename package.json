@@ -1,7 +1,7 @@
 {
   "name": "sankhya-cms",
   "author": "Sankhyatronics",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "description": "",
   "main": "index.js",
