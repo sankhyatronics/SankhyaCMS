@@ -42,7 +42,3 @@ export const Default: Story = {
 export const LeftPosition: Story = {
   render: () => <StoryData storyName="LeftPosition" />,
 };
-
-export const WithComplexContent: Story = {
-  render: () => <StoryData storyName="WithComplexContent" />,
-};

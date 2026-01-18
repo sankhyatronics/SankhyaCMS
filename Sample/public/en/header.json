@@ -66,9 +66,7 @@
                             "id": "nav-services",
                             "title": "Services",
                             "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
-                            "itemGroupClassName": "bg-primary text-primary-950 p-4",
-                            "icon": "mdi:chevron-down",
-                            "iconPosition": "right"
+                            "itemGroupClassName": "bg-primary text-primary-950 p-4"
                         },
                         "children": [
                             {

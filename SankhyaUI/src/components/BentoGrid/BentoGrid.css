@@ -90,7 +90,7 @@
 .bento-card:has(.bento-card-image-wrapper) .bento-card-title,
 .bento-card:has(.bento-card-image-wrapper) .bento-card-description,
 .bento-card:has(.bento-card-image-wrapper) .bento-card-icon {
-    color: var(--color-primary-400);
+    color: var(--color-primary);
 }
 
 .bento-card-icon {
@@ -110,14 +110,19 @@
     backdrop-filter: blur(4px);
 }
 
+.bento-card-text {
+    border-radius: 8px;
+    padding: 16px;
+    color: var(--color-primary);
+}
+
 .bento-card-title {
-    color: var(--color-primary-100);
-    margin: 0;
+    font-size: 1rem;
+
 }
 
 .bento-card-description {
-    color: var(--color-primary-100);
-    margin: 0;
+    font-size: 0.875rem;
 }
 
 /* Grid Spans */

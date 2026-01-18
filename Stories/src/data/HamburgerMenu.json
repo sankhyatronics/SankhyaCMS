@@ -7,61 +7,21 @@
         "id": "hamburger-default",
         "className": "relative bg-primary text-primary-950",
         "position": "right",
-        "label": "Toggle navigation menu"
-      },
-      "children": [
-        {
-          "type": "MenuGrid",
-          "data": {
-            "id": "mobile-menu-grid",
-            "columns": 1,
-            "className": "p-4",
-            "gridClassName": "gap-4",
-            "children": [
-              {
-                "type": "MenuItem",
-                "data": {
-                  "id": "mobile-home",
-                  "title": "Home",
-                  "href": "/",
-                  "icon": "mdi:home",
-                  "className": "text-lg"
-                }
-              },
-              {
-                "type": "MenuItem",
-                "data": {
-                  "id": "mobile-about",
-                  "title": "About",
-                  "href": "/about",
-                  "icon": "mdi:information",
-                  "className": "text-lg"
-                }
-              },
-              {
-                "type": "MenuItem",
-                "data": {
-                  "id": "mobile-services",
-                  "title": "Services",
-                  "href": "/services",
-                  "icon": "mdi:briefcase",
-                  "className": "text-lg"
-                }
-              },
-              {
-                "type": "MenuItem",
-                "data": {
-                  "id": "mobile-contact",
-                  "title": "Contact",
-                  "href": "/contact",
-                  "icon": "mdi:email",
-                  "className": "text-lg"
-                }
-              }
-            ]
+        "label": "Toggle navigation menu",
+        "children": [
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "menu-grid-item-compact",
+              "title": "Mobile App",
+              "href": "#mobile",
+              "icon": "mdi:cellphone",
+              "compact": true,
+              "className": "bg-primary text-primary-950 shadow-md w-48 m-6"
+            }
           }
-        }
-      ]
+        ]
+      }
     }
   },
   {
@@ -72,158 +32,21 @@
         "id": "hamburger-left",
         "className": "relative bg-primary text-primary-950",
         "position": "left",
-        "label": "Toggle left menu"
-      },
-      "children": {
-        "type": "MenuGrid",
-        "data": {
-          "id": "left-menu-grid",
-          "columns": 1,
-          "className": "p-4",
-          "gridClassName": "gap-3"
-        },
+        "label": "Toggle left menu",
         "children": [
           {
-            "type": "MenuItem",
+            "type": "MenuGridItem",
             "data": {
-              "id": "left-dashboard",
-              "title": "Dashboard",
-              "href": "/dashboard",
-              "icon": "mdi:view-dashboard",
-              "className": "py-3"
-            }
-          },
-          {
-            "type": "MenuItem",
-            "data": {
-              "id": "left-profile",
-              "title": "Profile",
-              "href": "/profile",
-              "icon": "mdi:account",
-              "className": "py-3"
-            }
-          },
-          {
-            "type": "MenuItem",
-            "data": {
-              "id": "left-settings",
-              "title": "Settings",
-              "href": "/settings",
-              "icon": "mdi:cog",
-              "className": "py-3"
-            }
-          },
-          {
-            "type": "MenuItem",
-            "data": {
-              "id": "left-logout",
-              "title": "Logout",
-              "href": "/logout",
-              "icon": "mdi:logout",
-              "className": "py-3 text-red-600"
+              "id": "menu-grid-item-compact",
+              "title": "Mobile App",
+              "href": "#mobile",
+              "icon": "mdi:cellphone",
+              "compact": true,
+              "className": "bg-primary text-primary-950 shadow-md w-48 m-6"
             }
           }
         ]
       }
-    }
-  },
-  {
-    "title": "WithComplexContent",
-    "data": {
-      "type": "HamburgerMenu",
-      "data": {
-        "id": "hamburger-complex",
-        "className": "relative bg-primary text-primary-950",
-        "position": "right",
-        "label": "Toggle main menu"
-      },
-      "children": [
-        {
-          "type": "Header",
-          "data": {
-            "id": "menu-header",
-            "title": "Main Menu",
-            "className": "text-xl font-bold mb-4"
-          }
-        },
-        {
-          "type": "MenuGrid",
-          "data": {
-            "id": "main-links-grid",
-            "columns": 1,
-            "gridClassName": "gap-2",
-            "children": [
-              {
-                "type": "MenuItem",
-                "data": {
-                  "id": "menu-home",
-                  "title": "Home",
-                  "href": "/",
-                  "icon": "mdi:home",
-                  "className": "py-3 px-4 hover:bg-primary-50 rounded-lg"
-                }
-              },
-              {
-                "type": "MenuItem",
-                "data": {
-                  "id": "menu-products",
-                  "title": "Products",
-                  "href": "/products",
-                  "icon": "mdi:package",
-                  "className": "py-3 px-4 hover:bg-primary-50 rounded-lg"
-                }
-              },
-              {
-                "type": "MenuItem",
-                "data": {
-                  "id": "menu-pricing",
-                  "title": "Pricing",
-                  "href": "/pricing",
-                  "icon": "mdi:tag",
-                  "className": "py-3 px-4 hover:bg-primary-50 rounded-lg"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "Divider",
-          "data": {
-            "id": "menu-divider",
-            "className": "my-4"
-          }
-        },
-        {
-          "type": "MenuGrid",
-          "data": {
-            "id": "secondary-links-grid",
-            "columns": 1,
-            "gridClassName": "gap-2",
-            "children": [
-              {
-                "type": "MenuItem",
-                "data": {
-                  "id": "menu-help",
-                  "title": "Help & Support",
-                  "href": "/help",
-                  "icon": "mdi:help-circle",
-                  "className": "py-3 px-4 hover:bg-primary-50 rounded-lg"
-                }
-              },
-              {
-                "type": "MenuItem",
-                "data": {
-                  "id": "menu-docs",
-                  "title": "Documentation",
-                  "href": "/docs",
-                  "icon": "mdi:book-open",
-                  "className": "py-3 px-4 hover:bg-primary-50 rounded-lg"
-                }
-              }
-            ]
-          }
-        }
-      ]
     }
   }
 ]

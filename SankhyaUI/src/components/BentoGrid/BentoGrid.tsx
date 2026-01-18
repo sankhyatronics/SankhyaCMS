@@ -14,6 +14,7 @@ export interface BentoGridItem extends BaseProps {
     colSpan?: 1 | 2 | 3 | 4;
     rowSpan?: 1 | 2;
     href?: string;
+    cardTextClassName?: string;
 }
 
 export interface BentoGridProps extends SectionProps {
@@ -58,9 +59,9 @@ export const BentoGrid: React.FC<BentoGridProps> = ({
                                             <Icon icon={item.icon} width="24" height="24" />
                                         </div>
                                     )}
-                                    <div className="bento-card-text">
-                                        <h3 className="card-title bento-card-title">{item.title}</h3>
-                                        {item.description && <p className="card-description bento-card-description">{item.description}</p>}
+                                    <div className={`bento-card-text ${item.cardTextClassName}`}>
+                                        <h3 className="bento-card-title">{item.title}</h3>
+                                        {item.description && <p className="bento-card-description">{item.description}</p>}
                                     </div>
                                 </div>
                             </ContentWrapper>

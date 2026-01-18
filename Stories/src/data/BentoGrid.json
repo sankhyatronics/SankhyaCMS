@@ -10,6 +10,7 @@
           {
             "title": "Global Infrastructure",
             "description": "Deploy closer to your users with our global edge network.",
+            "cardTextClassName": "bg-primary-950/50",
             "colSpan": 2,
             "rowSpan": 2,
             "image": {
@@ -39,6 +40,7 @@
           {
             "title": "Instant Deployments",
             "description": "Push to git and we handle the rest.",
+            "cardTextClassName": "bg-primary-950/50",
             "colSpan": 4,
             "image": {
               "imageSrc": "https://picsum.photos/800/200",

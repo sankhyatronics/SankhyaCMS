@@ -26,10 +26,10 @@
                 {
                     "type": "ContentBlock",
                     "data": {
-                        "title": "Københavns kontor",
+                        "title": "Office 1",
                         "className": "shadow-lg rounded-lg p-6 bg-primary-50",
                         "format": "markdown",
-                        "content": "### Hovedkontor\n\nStrandgade 100\n1401 København K\nDanmark\n\n**E-mail:** hello@sankhyatronics.dk\n**Telefon:** +45 12 34 56 78"
+                        "content": "### Main Hub\n\nStsstndgade 100\nKøbenhavn K\nDanmark\n\n**Phone:** +xx xx xx xx xx"
                     }
                 },
                 {
@@ -38,7 +38,7 @@
                         "title": "Global Support",
                         "className": "shadow-lg rounded-lg p-6 bg-primary-100",
                         "format": "markdown",
-                        "content": "### Digital First\n\nVi arbejder med klienter over hele verden. Kontakt vores globale supportteam for enhver forespørgsel.\n\n**Salg:** sales@sankhyatronics.com\n**Support:** support@sankhyatronics.com"
+                        "content": "### Main Hub\n\nStsstndgade 100\nKøbenhavn K\nDanmark\n\n**Phone:** +xx xx xx xx xx"
                     }
                 }
             ]

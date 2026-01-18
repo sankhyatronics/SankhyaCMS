@@ -9,7 +9,7 @@
         "className": "bg-primary shadow-md",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "imageSrc": "https://picsum.photos/100/100",
+        "imageSrc": "/logo.svg",
         "logoClassName": "w-[84px]",
         "altText": "Company Logo",
         "children": [
@@ -130,7 +130,7 @@
         "className": "bg-primary shadow-lg",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "imageSrc": "/Logo.jpg",
+        "imageSrc": "/logo.svg",
         "logoClassName": "w-[84px]",
         "altText": "Company Logo",
         "children": [
@@ -185,7 +185,7 @@
         "className": "bg-primary shadow-lg",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "imageSrc": "/Logo.jpg",
+        "imageSrc": "/logo.svg",
         "logoClassName": "w-[84px]",
         "altText": "Minimal Logo",
         "children": [
@@ -212,7 +212,7 @@
         "className": "bg-primary shadow-lg",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "imageSrc": "/Logo.jpg",
+        "imageSrc": "/logo.svg",
         "logoClassName": "w-[84px]",
         "altText": "Logo",
         "children": [
@@ -318,7 +318,7 @@
         "className": "bg-primary",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "imageSrc": "/Logo.jpg",
+        "imageSrc": "/logo.svg",
         "logoClassName": "w-[84px]",
         "altText": "Logo",
         "children": [
@@ -348,7 +348,7 @@
         "className": "bg-primary",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "imageSrc": "/Logo.jpg",
+        "imageSrc": "/logo.svg",
         "logoClassName": "w-[84px]",
         "altText": "Logo",
         "children": [
@@ -415,7 +415,7 @@
         "className": "bg-primary",
         "mobileBreakpoint": 768,
         "logoHref": "/",
-        "imageSrc": "/Logo.jpg",
+        "imageSrc": "/logo.svg",
         "logoClassName": "w-[84px]",
         "altText": "Logo",
         "children": [

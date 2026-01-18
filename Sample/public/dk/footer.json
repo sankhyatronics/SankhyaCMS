@@ -4,7 +4,7 @@
         "Data": {
             "type": "Footer",
             "data": {
-                "companyName": "Sankhyatronics",
+                "companyName": "Sample",
                 "imageSrc": "https://picsum.photos/100/100",
                 "inverted": true,
                 "description": "Førende inden for moderne CMS-løsninger og Agentic AI-udvikling.",
@@ -16,7 +16,7 @@
                     },
                     {
                         "icon": "mdi:github",
-                        "href": "https://github.com/sankhyatronics/SankhyaUI"
+                        "href": "https://github.com/sankhyatronics/SankhyaCMS"
                     }
                 ],
                 "columns": [
