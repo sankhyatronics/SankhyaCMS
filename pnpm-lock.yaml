@@ -174,8 +174,8 @@ importers:
   Stories:
     dependencies:
       '@sankhyatronics/sankhya-ui':
-        specifier: latest
-        version: 0.0.1(@iconify/react@6.0.2(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react-router@7.11.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
+        specifier: 0.0.3
+        version: 0.0.3(@iconify/react@6.0.2(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react-router@7.11.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
       react:
         specifier: 'catalog:'
         version: 19.2.0
@@ -235,8 +235,8 @@ importers:
   sampleweb:
     dependencies:
       '@sankhyatronics/sankhya-ui':
-        specifier: latest
-        version: 0.0.1(@iconify/react@6.0.2(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react-router@7.11.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
+        specifier: 0.0.3
+        version: 0.0.3(@iconify/react@6.0.2(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react-router@7.11.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
       '@tailwindcss/vite':
         specifier: 'catalog:'
         version: 4.1.18(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2))
@@ -884,8 +884,8 @@ packages:
   '@rushstack/ts-command-line@5.1.5':
     resolution: {integrity: sha512-YmrFTFUdHXblYSa+Xc9OO9FsL/XFcckZy0ycQ6q7VSBsVs5P0uD9vcges5Q9vctGlVdu27w+Ct6IuJ458V0cTQ==}
 
-  '@sankhyatronics/sankhya-ui@0.0.1':
-    resolution: {integrity: sha512-DVFLHQXRx7yroyG65Jj9LbJAoHsCgRk4qNpGnMRixc6NiNMB/OwnkR9Ii2tf+RppiLRp8IWCG2a1O1LC6CzJyQ==}
+  '@sankhyatronics/sankhya-ui@0.0.3':
+    resolution: {integrity: sha512-5m8KiTLndelP3Yc/cgbQs66vQ8MlMsvCh7SMPbknymhoLfZ8zwhFL9Hxx7tbABnBqVT0Nm4bXUU4yTQWi+PcMA==}
     peerDependencies:
       '@iconify/react': 6.0.2
       react: 19.2.0
@@ -3230,7 +3230,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@sankhyatronics/sankhya-ui@0.0.1(@iconify/react@6.0.2(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react-router@7.11.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)':
+  '@sankhyatronics/sankhya-ui@0.0.3(@iconify/react@6.0.2(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react-router@7.11.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@emotion/is-prop-valid': 1.4.0
       '@iconify/react': 6.0.2(react@19.2.0)

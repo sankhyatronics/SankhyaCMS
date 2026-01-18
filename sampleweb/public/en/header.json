@@ -15,6 +15,7 @@
                 "children": [
                     {
                         "type": "IconButton",
+                        "data-position": "far-item",
                         "data": {
                             "id": "util-theme",
                             "onClick": "@action:onThemeChangeClick",
@@ -23,36 +24,39 @@
                         }
                     },
                     {
-                        "type": "IconButton",
+                        "id": "select-language",
+                        "type": "Select",
+                        "data-position": "far-item",
+                        "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+                        "title": "Language",
+                        "hideSelectedLabel": true,
                         "data": {
-                            "id": "util-language",
-                            "icon": "mdi:translate",
-                            "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2",
-                            "ariaLabel": "Lorem ipsum dolor sit amet."
-                        },
-                        "children": [
-                            {
-                                "type": "MenuGrid",
-                                "data": {
-                                    "id": "language-grid",
-                                    "columns": 1,
-                                    "className": "rounded-sm shadow-md",
-                                    "gridClassName": "bg-primary text-primary-950 rounded-sm"
+                            "id": "select-lang",
+                            "placeholder": "Select Language",
+                            "defaultValue": "en",
+                            "options": [
+                                {
+                                    "value": "en",
+                                    "label": "",
+                                    "icon": "circle-flags:us"
                                 },
-                                "children": [
-                                    {
-                                        "type": "IconButton",
-                                        "data": {
-                                            "id": "lang-en",
-                                            "title": "Lorem ipsum dolor sit amet.",
-                                            "href": "#en",
-                                            "onClick": "@action:onLanguageChangeToEn",
-                                            "icon": "flag:us-4x3"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
+                                {
+                                    "value": "es",
+                                    "label": "",
+                                    "icon": "circle-flags:es"
+                                },
+                                {
+                                    "value": "fr",
+                                    "label": "",
+                                    "icon": "circle-flags:fr"
+                                },
+                                {
+                                    "value": "de",
+                                    "label": "",
+                                    "icon": "circle-flags:de"
+                                }
+                            ]
+                        }
                     },
                     {
                         "type": "MenuItem",
