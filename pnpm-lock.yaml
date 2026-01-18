@@ -174,8 +174,8 @@ importers:
   Stories:
     dependencies:
       '@sankhyatronics/sankhya-ui':
-        specifier: 0.0.3
-        version: 0.0.3(@iconify/react@6.0.2(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react-router@7.11.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
+        specifier: workspace:*
+        version: link:../SankhyaUI
       react:
         specifier: 'catalog:'
         version: 19.2.0
@@ -235,7 +235,7 @@ importers:
   sampleweb:
     dependencies:
       '@sankhyatronics/sankhya-ui':
-        specifier: 'workspace:'
+        specifier: workspace:*
         version: link:../SankhyaUI
       '@tailwindcss/vite':
         specifier: 'catalog:'
@@ -883,14 +883,6 @@ packages:
 
   '@rushstack/ts-command-line@5.1.5':
     resolution: {integrity: sha512-YmrFTFUdHXblYSa+Xc9OO9FsL/XFcckZy0ycQ6q7VSBsVs5P0uD9vcges5Q9vctGlVdu27w+Ct6IuJ458V0cTQ==}
-
-  '@sankhyatronics/sankhya-ui@0.0.3':
-    resolution: {integrity: sha512-5m8KiTLndelP3Yc/cgbQs66vQ8MlMsvCh7SMPbknymhoLfZ8zwhFL9Hxx7tbABnBqVT0Nm4bXUU4yTQWi+PcMA==}
-    peerDependencies:
-      '@iconify/react': 6.0.2
-      react: 19.2.0
-      react-dom: 19.2.0
-      react-router: 7.11.0
 
   '@storybook/addon-docs@10.1.11':
     resolution: {integrity: sha512-Jwm291Fhim2eVcZIVlkG1B2skb0ZI9oru6nqMbJxceQZlvZmcIa4oxvS1oaMTKw2DJnCv97gLm57P/YvRZ8eUg==}
@@ -3229,20 +3221,6 @@ snapshots:
       string-argv: 0.3.2
     transitivePeerDependencies:
       - '@types/node'
-
-  '@sankhyatronics/sankhya-ui@0.0.3(@iconify/react@6.0.2(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react-router@7.11.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)':
-    dependencies:
-      '@emotion/is-prop-valid': 1.4.0
-      '@iconify/react': 6.0.2(react@19.2.0)
-      motion: 12.24.7(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      react: 19.2.0
-      react-dom: 19.2.0(react@19.2.0)
-      react-markdown: 9.0.3(@types/react@19.2.5)(react@19.2.0)
-      react-router: 7.11.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      remark-breaks: 4.0.0
-    transitivePeerDependencies:
-      - '@types/react'
-      - supports-color
 
   '@storybook/addon-docs@10.1.11(@types/react@19.2.5)(esbuild@0.25.12)(rollup@4.54.0)(storybook@10.1.11(@testing-library/dom@10.4.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2))':
     dependencies:
