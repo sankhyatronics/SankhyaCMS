@@ -10,6 +10,14 @@ const config: StorybookConfig = {
     "@storybook/addon-themes"
   ],
   "framework": "@storybook/react-vite",
-  "staticDirs": ['./public'],
+  async viteFinal(config) {
+    return {
+      ...config,
+      build: {
+        ...config.build,
+        chunkSizeWarningLimit: 2000,
+      },
+    };
+  },
 };
 export default config;

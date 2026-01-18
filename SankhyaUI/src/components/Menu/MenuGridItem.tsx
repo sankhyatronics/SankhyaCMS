@@ -63,7 +63,7 @@ export const MenuGridItem: React.FC<MenuGridItemProps> = (props) => {
               </motion.div>
             )}
 
-            <span className="menu-grid-title text-truncate">
+            <span className="menu-grid-title">
               {title}
             </span>
           </div>
@@ -99,7 +99,7 @@ export const MenuGridItem: React.FC<MenuGridItemProps> = (props) => {
               </motion.div>
             )}
 
-            <span className="menu-grid-title text-truncate">
+            <span className="menu-grid-title">
               {title}
             </span>
           </div>

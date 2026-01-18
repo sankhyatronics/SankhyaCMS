@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Contact Us",
+        "Data": {
+            "type": "Hero",
+            "data": {
+                "title": "Get in Touch",
+                "subtitle": "Have a question or want to discuss a project? Our team is here to help you build your digital future.",
+                "imageSrc": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                "textAlignment": "center",
+                "padding": "medium",
+                "className": "min-h-[40vh] bg-primary text-primary-950"
+            }
+        }
+    },
+    {
+        "title": "Our Offices",
+        "Data": {
+            "type": "FeaturesSection",
+            "data": {
+                "title": "Visit Us",
+                "subtitle": "Stop by one of our global offices or reach out to us digitally.",
+                "columns": 2
+            },
+            "children": [
+                {
+                    "type": "ContentBlock",
+                    "data": {
+                        "title": "Copenhagen Office",
+                        "className": "shadow-lg rounded-lg p-6 bg-primary-50",
+                        "format": "markdown",
+                        "content": "### Main Hub\n\nStrandgade 100\n1401 København K\nDanmark\n\n**Email:** hello@sankhyatronics.dk\n**Phone:** +45 12 34 56 78"
+                    }
+                },
+                {
+                    "type": "ContentBlock",
+                    "data": {
+                        "title": "Global Support",
+                        "className": "shadow-lg rounded-lg p-6 bg-primary-100",
+                        "format": "markdown",
+                        "content": "### Digital First\n\nWe work with clients worldwide. Reach out to our global support team for any inquiries.\n\n**Sales:** sales@sankhyatronics.com\n**Support:** support@sankhyatronics.com"
+                    }
+                }
+            ]
+        }
+    }
+]

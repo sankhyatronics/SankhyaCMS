@@ -1,3 +1,4 @@
+import './index.css';
 export { BentoGrid } from './components/BentoGrid/BentoGrid';
 export { Card } from './components/Card/Card';
 export { DynamicRenderer } from './components/Common/DynamicRenderer';
@@ -22,3 +23,4 @@ export { Testimonials } from './components/Testimonials/Testimonials';
 export { DropdownProvider } from './contexts/DropdownContext';
 export { type ApiService, type ApiResponse } from './hooks/useApiConfig';
 export * from './hooks/useDataConfig';
+export { Select } from './components/Select/Select';

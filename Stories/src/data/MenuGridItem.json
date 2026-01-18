@@ -1,7 +1,7 @@
 [
   {
-    "Title": "Default",
-    "Data": {
+    "title": "Default",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-default",
@@ -17,8 +17,8 @@
     }
   },
   {
-    "Title": "Compact",
-    "Data": {
+    "title": "Compact",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-compact",
@@ -34,8 +34,8 @@
     }
   },
   {
-    "Title": "WithoutIcon",
-    "Data": {
+    "title": "WithoutIcon",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-no-icon",
@@ -50,8 +50,8 @@
     }
   },
   {
-    "Title": "WithoutBadge",
-    "Data": {
+    "title": "WithoutBadge",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-no-badge",
@@ -66,8 +66,8 @@
     }
   },
   {
-    "Title": "WithoutDescription",
-    "Data": {
+    "title": "WithoutDescription",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-no-desc",
@@ -82,8 +82,8 @@
     }
   },
   {
-    "Title": "Minimal",
-    "Data": {
+    "title": "Minimal",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-minimal",
@@ -97,8 +97,8 @@
     }
   },
   {
-    "Title": "LongTitle",
-    "Data": {
+    "title": "LongTitle",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-long-title",
@@ -114,8 +114,8 @@
     }
   },
   {
-    "Title": "LongDescription",
-    "Data": {
+    "title": "LongDescription",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-long-desc",
@@ -131,8 +131,8 @@
     }
   },
   {
-    "Title": "SpecialBadge",
-    "Data": {
+    "title": "SpecialBadge",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-special-badge",
@@ -148,8 +148,8 @@
     }
   },
   {
-    "Title": "CustomColors",
-    "Data": {
+    "title": "CustomColors",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-custom-colors",
@@ -165,8 +165,8 @@
     }
   },
   {
-    "Title": "DisabledStyle",
-    "Data": {
+    "title": "DisabledStyle",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-disabled",
@@ -181,8 +181,8 @@
     }
   },
   {
-    "Title": "MultipleBadges",
-    "Data": {
+    "title": "MultipleBadges",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-multi-badge",
@@ -198,8 +198,8 @@
     }
   },
   {
-    "Title": "ExternalLink",
-    "Data": {
+    "title": "ExternalLink",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-external",
@@ -215,8 +215,8 @@
     }
   },
   {
-    "Title": "PremiumFeature",
-    "Data": {
+    "title": "PremiumFeature",
+    "data": {
       "type": "MenuGridItem",
       "data": {
         "id": "menu-grid-item-premium",

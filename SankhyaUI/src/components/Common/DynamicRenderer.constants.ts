@@ -13,6 +13,9 @@ import { FeatureItem } from '../FeaturesSection/FeatureItem';
 import { BentoGrid } from '../BentoGrid/BentoGrid';
 import { Dropdown } from '../Dropdown/Dropdown';
 import { Stats } from '../Stats/Stats';
+import { CTASection } from '../CTASection/CTASection';
+import { Testimonials } from '../Testimonials/Testimonials';
+import { Select } from '../Select/Select';
 
 // Base components (excluding Dropdown to avoid circular dependency)
 export const baseComponents = {
@@ -29,7 +32,10 @@ export const baseComponents = {
     FeaturesSection,
     FeatureItem,
     BentoGrid,
-    Stats
+    Stats,
+    CTASection,
+    Testimonials,
+    Select
 } as const;
 
 // Type-safe component registry

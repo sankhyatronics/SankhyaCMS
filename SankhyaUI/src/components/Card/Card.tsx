@@ -9,6 +9,7 @@ export interface CardProps {
     hoverable?: boolean;
     elevation?: 'none' | 'sm' | 'md' | 'lg';
     onClick?: () => void;
+    inverted?: boolean;
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -19,6 +20,7 @@ export const Card: React.FC<CardProps> = ({
     hoverable = false,
     elevation = 'sm',
     onClick,
+    inverted = false,
 }) => {
     const classes = [
         'card',
@@ -26,8 +28,10 @@ export const Card: React.FC<CardProps> = ({
         `card-padding-${padding}`,
         propsToClass('elevation', elevation),
         hoverable ? 'card-hoverable' : '',
+        inverted ? 'theme-inverted' : '',
         className,
     ].filter(Boolean).join(' ');
+
 
     return (
         <div className={classes} onClick={onClick}>

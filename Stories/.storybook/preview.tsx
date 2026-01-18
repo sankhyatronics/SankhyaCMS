@@ -7,17 +7,16 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <MemoryRouter>
-      <Story />
+        <Story />
       </MemoryRouter>
     ),
     withThemeByDataAttribute<ReactRenderer>({
       themes: {
         Light: 'light',
         Dark: 'dark',
-        Ocean: 'ocean',
-        Forest: 'forest',
-        Desert: 'desert',
-        Sankhyatronics: 'sankhyatronics'
+        slate: 'slate',
+        indigo: 'indigo',
+        emerald: 'emerald'
       },
       defaultTheme: 'light',
       attributeName: 'data-theme',

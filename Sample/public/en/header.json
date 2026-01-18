@@ -1,0 +1,142 @@
+[
+    {
+        "title": "Main Header",
+        "Data": {
+            "type": "Header",
+            "data": {
+                "id": "header-main",
+                "sticky": true,
+                "className": "bg-primary shadow-md max-w-[1920px] mx-auto",
+                "mobileBreakpoint": 768,
+                "logoHref": "/",
+                "logoClassName": "w-[120px]",
+                "imageSrc": "https://picsum.photos/100/100",
+                "altText": "SankhyaCMS",
+                "children": [
+                    {
+                        "type": "IconButton",
+                        "data-position": "far-item",
+                        "data": {
+                            "id": "util-theme",
+                            "onClick": "@action:onThemeChangeClick",
+                            "icon": "mdi:theme-light-dark",
+                            "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-full"
+                        }
+                    },
+                    {
+                        "id": "select-language",
+                        "type": "Select",
+                        "data-position": "far-item",
+                        "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+                        "title": "Language",
+                        "defaultValue": "en",
+                        "hideSelectedLabel": true,
+                        "data": {
+                            "id": "select-lang",
+                            "placeholder": "Select Language",
+                            "defaultValue": "en",
+                            "options": [
+                                {
+                                    "value": "en",
+                                    "label": "",
+                                    "onClick": "@action:onLanguageChangeToEn",
+                                    "icon": "circle-flags:us"
+                                },
+                                {
+                                    "value": "dk",
+                                    "label": "",
+                                    "onClick": "@action:onLanguageChangeToDk",
+                                    "icon": "circle-flags:dk"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "MenuItem",
+                        "data": {
+                            "id": "nav-home",
+                            "title": "Home",
+                            "href": "/",
+                            "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+                        }
+                    },
+                    {
+                        "type": "Dropdown",
+                        "data": {
+                            "id": "nav-services",
+                            "title": "Services",
+                            "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+                            "itemGroupClassName": "bg-primary text-primary-950 p-4",
+                            "icon": "mdi:chevron-down",
+                            "iconPosition": "right"
+                        },
+                        "children": [
+                            {
+                                "type": "MenuGrid",
+                                "data": {
+                                    "id": "services-grid",
+                                    "columns": 2,
+                                    "className": "rounded-sm shadow-md",
+                                    "gridClassName": "gap-6 bg-primary text-primary-950 rounded-sm px-4 py-2 shadow-md w-148"
+                                },
+                                "children": [
+                                    {
+                                        "type": "MenuGridItem",
+                                        "data": {
+                                            "title": "Consultancy",
+                                            "description": "Strategic advisory and technology roadmaps.",
+                                            "href": "/services#consultancy",
+                                            "icon": "mdi:account-tie-outline",
+                                            "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+                                        }
+                                    },
+                                    {
+                                        "type": "MenuGridItem",
+                                        "data": {
+                                            "title": "Managed Services",
+                                            "description": "24/7 support and infrastructure management.",
+                                            "href": "/services#managed",
+                                            "icon": "mdi:server-network",
+                                            "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+                                        }
+                                    },
+                                    {
+                                        "type": "MenuGridItem",
+                                        "data": {
+                                            "id": "nav-ai",
+                                            "title": "AI Development",
+                                            "description": "Custom Agentic AI solutions for automation.",
+                                            "href": "/services#ai",
+                                            "icon": "mdi:robot-outline",
+                                            "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+                                        }
+                                    },
+                                    {
+                                        "type": "MenuGridItem",
+                                        "data": {
+                                            "title": "All Services",
+                                            "description": "View our complete catalog of solutions.",
+                                            "href": "/services",
+                                            "icon": "mdi:arrow-right",
+                                            "className": "bg-primary-300 hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "MenuItem",
+                        "data": {
+                            "id": "nav-contact",
+                            "title": "Contact Us",
+                            "href": "/contact-us",
+                            "inverted": true,
+                            "className": "bg-primary-600 hover:bg-primary-400 text-primary rounded-sm px-4 py-2"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+]

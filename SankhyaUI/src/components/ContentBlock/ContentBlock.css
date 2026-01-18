@@ -16,18 +16,10 @@
 }
 
 .content-block-title {
-    font-size: 1.5rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary-950);
     margin: 0 0 16px 0;
     line-height: 1.1;
 }
 
-.content-block-subtitle {
-    font-size: var(--text-lg);
-    color: var(--color-primary-600);
-    line-height: 1.5;
-}
 
 .content-block-featured-image {
     margin-bottom: 48px;
@@ -113,9 +105,6 @@
         padding: 48px 24px;
     }
 
-    .content-block-title {
-        font-size: var(--text-2xl);
-    }
 
     .content-block-body {
         font-size: var(--text-base);

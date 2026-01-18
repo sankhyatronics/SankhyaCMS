@@ -23,7 +23,10 @@ type ComponentType =
   | 'FeatureSplit'
   | 'ContentBlock'
   | 'FeaturesSection'
-  | 'BentoGrid';
+  | 'BentoGrid'
+  | 'CTASection'
+  | 'Testimonials'
+  | 'Select';
 
 const componentEndpoints: Record<ComponentType, string> = {
   MenuGridItem: '/menu-grid-item',
@@ -40,6 +43,9 @@ const componentEndpoints: Record<ComponentType, string> = {
   ContentBlock: '/content-block',
   FeaturesSection: '/features-section',
   BentoGrid: '/bento-grid',
+  CTASection: '/cta-section',
+  Testimonials: '/testimonials',
+  Select: '/select',
 };
 
 export function useTypedApiConfig(options: UseTypedApiConfigOptions) {

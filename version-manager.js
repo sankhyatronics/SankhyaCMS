@@ -4,7 +4,6 @@ const path = require('path');
 
 const packages = [
     { name: 'SankhyaUI', path: './SankhyaUI/package.json' },
-    { name: 'sampleweb', path: './sampleweb/package.json' },
     { name: 'Stories', path: './Stories/package.json' }
 ];
 

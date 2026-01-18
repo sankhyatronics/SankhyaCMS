@@ -1,0 +1,57 @@
+[
+    {
+        "title": "Main Footer",
+        "Data": {
+            "type": "Footer",
+            "data": {
+                "companyName": "Sankhyatronics",
+                "imageSrc": "https://picsum.photos/100/100",
+                "inverted": true,
+                "description": "Leading the way in modern CMS solutions and Agentic AI development.",
+                "copyright": "© 2026 Sankhyatronics. All rights reserved.",
+                "socialLinks": [
+                    {
+                        "icon": "mdi:linkedin",
+                        "href": "https://www.linkedin.com/company/sankhyatronics"
+                    },
+                    {
+                        "icon": "mdi:github",
+                        "href": "https://github.com/sankhyatronics/SankhyaUI"
+                    }
+                ],
+                "columns": [
+                    {
+                        "title": "Site Map",
+                        "links": [
+                            {
+                                "label": "Home",
+                                "href": "/"
+                            },
+                            {
+                                "label": "Services",
+                                "href": "/services"
+                            },
+                            {
+                                "label": "Contact Us",
+                                "href": "/contact-us"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Legal",
+                        "links": [
+                            {
+                                "label": "Privacy Policy",
+                                "href": "#"
+                            },
+                            {
+                                "label": "Terms of Use",
+                                "href": "#"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+]

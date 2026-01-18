@@ -1,0 +1,104 @@
+[
+    {
+        "title": "Welcome to SankhyaCMS",
+        "Data": {
+            "type": "Hero",
+            "data": {
+                "title": "Build Your Digital Excellence",
+                "subtitle": "Modern CMS solutions powered by SankhyaUI and Agentic AI. We deliver high-performance, accessible, and beautiful web experiences.",
+                "actionLabel": "Explore Services",
+                "href": "/services",
+                "imageSrc": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                "textPosition": "left",
+                "textAlignment": "left",
+                "padding": "none",
+                "className": "min-h-[50vh] md:min-h-[70vh] bg-primary text-primary-950"
+            }
+        }
+    },
+    {
+        "title": "Our Impact",
+        "Data": {
+            "type": "Stats",
+            "data": {
+                "items": [
+                    {
+                        "value": "150+",
+                        "label": "Projects Completed",
+                        "description": "Successfully delivered digital solutions across 20+ countries."
+                    },
+                    {
+                        "value": "99.9%",
+                        "label": "Uptime Guarantee",
+                        "description": "Reliable infrastructure for your mission-critical applications."
+                    },
+                    {
+                        "value": "24/7",
+                        "label": "Expert Support",
+                        "description": "Around-the-clock assistance from our dedicated engineering team."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "title": "What Our Clients Say",
+        "Data": {
+            "type": "Testimonials",
+            "data": {
+                "title": "Trusted by Industry Leaders",
+                "subtitle": "Discover why developers and business owners choose SankhyaCMS for their digital projects.",
+                "items": [
+                    {
+                        "id": "t1",
+                        "name": "Alex Johnson",
+                        "role": "CTO",
+                        "company": "TechFlow Systems",
+                        "quote": "SankhyaCMS has transformed how we manage our digital assets. The integration with SankhyaUI is seamless and incredibly fast.",
+                        "rating": 5
+                    },
+                    {
+                        "id": "t2",
+                        "name": "Sarah Miller",
+                        "role": "Product Manager",
+                        "company": "DesignCo",
+                        "quote": "The dynamic rendering capabilities allow us to iterate on our landing pages in record time. A game-changer for our marketing team.",
+                        "rating": 5
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "title": "Core Expertise",
+        "Data": {
+            "type": "FeaturesSection",
+            "data": {
+                "title": "Empowering Your Business",
+                "subtitle": "We combine strategy, design, and technology to help you scale your business in the digital era.",
+                "actionLabel": "View All Solutions",
+                "columns": 2
+            },
+            "children": [
+                {
+                    "type": "FeatureItem",
+                    "data": {
+                        "icon": "mdi:briefcase-check-outline",
+                        "title": "Strategic Outsourcing",
+                        "href": "/outsourcing",
+                        "description": "Scale your team with elite engineering talent. We provide dedicated developers and integrated teams to accelerate your roadmap."
+                    }
+                },
+                {
+                    "type": "FeatureItem",
+                    "data": {
+                        "icon": "mdi:account-star-outline",
+                        "title": "Talent Solutions",
+                        "href": "/talent",
+                        "description": "Connect with top-tier professionals vetted for your specific industry needs. We help you find the right fit for your unique culture."
+                    }
+                }
+            ]
+        }
+    }
+]
