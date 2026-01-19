@@ -14,7 +14,6 @@ const meta: Meta<typeof DynamicRenderer> = {
   parameters: {
     layout: "fullscreen",
   },
-  tags: ["autodocs"],
   argTypes: {
     focalPoint: {
       control: 'select',
@@ -41,7 +40,7 @@ const StoryData = ({ storyName = 'Default', ...props }: { storyName?: string;[ke
     data.data = { ...data.data, ...props };
   }
 
-  return data ? <DynamicRenderer config={data} /> : null;
+  return data ? <div className="bg-primary min-h-64 overflow-hidden"><DynamicRenderer config={data} /></div> : null;
 };
 
 export const Default: Story = {

@@ -1,0 +1,77 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as HeaderStories from './Header.stories';
+
+<Meta of={HeaderStories} />
+
+<Canvas of={HeaderStories.Default} />
+
+# Header
+
+A versatile header component with support for sticky positioning, mobile responsiveness, and various navigation elements.
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `menuBar` | `ReactNode[]` | Array of navigation items (e.g., `MenuItem`, `Dropdown`). |
+| `utilityButtons` | `ReactNode[]` | Array of utility items (e.g., icons, buttons). |
+| `sticky` | `boolean` | Whether the header sticks to the top. Default: `false`. |
+| `mobileBreakpoint` | `number` | Width in pixels to switch to mobile view. Default: `768`. |
+| `imageSrc` | `string` | URL for the logo image. |
+| `logoHref` | `string` | URL the logo links to. |
+| `logoTarget` | `string` | Target for the logo link. Default: `'_self'`. |
+| `altText` | `string` | Alt text for the logo. Default: `'Logo'`. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+| `logoClassName` | `string` | Optional CSS class for the logo anchor. |
+| `inverted` | `boolean` | Whether to use inverted theme colors. Default: `false`. |
+
+## JSON Data Example
+
+```json
+{
+  "type": "Header",
+  "data": {
+    "id": "header-default",
+    "sticky": false,
+    "className": "bg-primary shadow-md",
+    "mobileBreakpoint": 768,
+    "logoHref": "/",
+    "imageSrc": "/logo.svg",
+    "logoClassName": "w-[84px]",
+    "altText": "Company Logo",
+    "children": [
+      {
+        "type": "Dropdown",
+        "data": {
+          "id": "dropdown-default",
+          "title": "Products",
+          "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+          "itemGroupClassName": "bg-primary text-primary-950 p-4",
+          "icon": "mdi:apps"
+        },
+        "children": [
+          {
+            "type": "MenuGrid",
+            "data": {
+              "id": "menugrid-default",
+              "columns": 3,
+              "className": "rounded-sm shadow-md",
+              "gridClassName": "gap-6 bg-primary text-primary-950 rounded-sm px-4 py-2 shadow-md w-148"
+            }
+          }
+        ]
+      },
+      {
+        "type": "IconButton",
+        "data": {
+          "id": "sticky-cart",
+          "icon": "mdi:cart",
+          "onClick": "@action:onCartClick",
+          "data-position": "far-item",
+          "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
+        }
+      }
+    ]
+  }
+}
+```

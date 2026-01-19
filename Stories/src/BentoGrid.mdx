@@ -1,0 +1,91 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as BentoGridStories from './BentoGrid.stories';
+
+<Meta of={BentoGridStories} />
+
+# BentoGrid
+
+A flexible grid layout component for displaying content in a bento-box style.
+
+Use BentoGrid to display a grid of items.
+
+<Canvas of={BentoGridStories.Default} />
+
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `items` | `BentoGridItem[]` | Array of items to display in the grid. |
+| `title` | `string` | Optional title for the section. |
+| `subtitle` | `string` | Optional subtitle for the section. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+| `inverted` | `boolean` | Whether to use inverted theme colors. Default: `false`. |
+
+### BentoGridItem Interface
+
+| Property | Type | Description |
+|---|---|---|
+| `title` | `string` | Title of the card. |
+| `description` | `string` | Optional description text. |
+| `icon` | `string` | Optional Iconify icon name (e.g., "mdi:chart-bar"). |
+| `image` | `object` | Optional image object with `imageSrc` and `alt` properties. |
+| `colSpan` | `1 \| 2 \| 3 \| 4` | Number of columns the item should span. Default: `1`. |
+| `rowSpan` | `1 \| 2` | Number of rows the item should span. Default: `1`. |
+| `href` | `string` | Optional URL to link to. If provided, the card becomes a link. |
+| `cardTextClassName` | `string` | Optional CSS class for the text container. |
+| `className` | `string` | Optional CSS class for the card wrapper. |
+
+## JSON Data Example
+
+```json
+{
+  "type": "BentoGrid",
+  "data": {
+    "title": "Built for scale",
+    "subtitle": "Everything you need to build your next great idea.",
+    "items": [
+      {
+        "title": "Global Infrastructure",
+        "description": "Deploy closer to your users with our global edge network.",
+        "cardTextClassName": "bg-primary-950/50",
+        "colSpan": 2,
+        "rowSpan": 2,
+        "image": {
+          "imageSrc": "https://picsum.photos/300/400",
+          "alt": "Earth from space"
+        }
+      },
+      {
+        "title": "Real-time Analytics",
+        "description": "Monitor performance in real-time.",
+        "colSpan": 1,
+        "icon": "mdi:chart-bar"
+      },
+      {
+        "title": "Secure by Default",
+        "description": "Enterprise-grade security.",
+        "colSpan": 1,
+        "icon": "mdi:shield-check"
+      },
+      {
+        "title": "Team Collaboration",
+        "description": "Work together seamlessly.",
+        "colSpan": 2,
+        "icon": "mdi:account-group",
+        "className": "bg-primary-50"
+      },
+      {
+        "title": "Instant Deployments",
+        "description": "Push to git and we handle the rest.",
+        "cardTextClassName": "bg-primary-950/50",
+        "colSpan": 4,
+        "image": {
+          "imageSrc": "https://picsum.photos/800/200",
+          "alt": "Code on screen"
+        }
+      }
+    ]
+  }
+}
+```

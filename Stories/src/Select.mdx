@@ -1,0 +1,59 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as SelectStories from './Select.stories';
+
+<Meta of={SelectStories} />
+
+<Canvas of={SelectStories.Default} />
+
+# Select
+
+A customizable dropdown select component.
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `options` | `SelectOption[]` | Array of options to display. |
+| `defaultValue` | `string` | The initial value of the select. |
+| `value` | `string` | Controlled value of the select. |
+| `onChange` | `(value: string) => void` | Callback function when value changes. |
+| `icon` | `string` | Optional default icon. |
+| `id` | `string` | Optional unique identifier. |
+| `hideSelectedLabel` | `boolean` | Whether to hide the label of the selected option. Default: `false`. |
+| `className` | `string` | Optional CSS class name. |
+
+### SelectOption Interface
+
+| Property | Type | Description |
+|---|---|---|
+| `value` | `string` | IDs unique value of the option. |
+| `label` | `string` | Display label (optional, defaults to value if not provided). |
+| `icon` | `string` | Optional Iconify icon name. |
+| `onClick` | `() => void` | Optional specific click handler for this option. |
+
+## JSON Data Example
+
+```json
+{
+  "type": "Select",
+  "data": {
+    "id": "select-basic",
+    "placeholder": "Choose an option",
+    "defaultValue": "option2",
+    "options": [
+      {
+        "value": "option1",
+        "label": "Option 1"
+      },
+      {
+        "value": "option2",
+        "label": "Option 2"
+      },
+      {
+        "value": "option3",
+        "label": "Option 3"
+      }
+    ]
+  }
+}
+```

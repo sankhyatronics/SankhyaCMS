@@ -1,0 +1,92 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FooterStories from './Footer.stories';
+
+<Meta of={FooterStories} />
+
+<Canvas of={FooterStories.Default} />
+
+# Footer
+
+A comprehensive footer component supporting multiple columns, social links, and company information.
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `columns` | `FooterColumn[]` | Array of columns containing links. |
+| `imageSrc` | `string` | Optional URL for the company logo. |
+| `companyName` | `string` | Optional company name. |
+| `description` | `string` | Optional description or tagline. |
+| `socialLinks` | `{ icon: string; href: string }[]` | Array of social media links. |
+| `copyright` | `string` | Copyright text. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+| `inverted` | `boolean` | Whether to use inverted theme colors. Default: `false`. |
+
+### FooterColumn Interface
+
+| Property | Type | Description |
+|---|---|---|
+| `title` | `string` | Title of the column. |
+| `links` | `FooterLink[]` | Array of links in the column. |
+
+### FooterLink Interface
+
+| Property | Type | Description |
+|---|---|---|
+| `label` | `string` | Text label for the link. |
+| `href` | `string` | URL for the link. |
+
+## JSON Data Example
+
+```json
+{
+  "type": "Footer",
+  "data": {
+    "companyName": "MyCompany",
+    "description": "Making the world a better place through constructing elegant hierarchies.",
+    "copyright": "© 2024 MyCompany, Inc. All rights reserved.",
+    "socialLinks": [
+      {
+        "icon": "mdi:twitter",
+        "href": "https://twitter.com"
+      },
+      {
+        "icon": "mdi:github",
+        "href": "https://github.com"
+      },
+      {
+        "icon": "mdi:instagram",
+        "href": "https://instagram.com"
+      }
+    ],
+    "columns": [
+      {
+        "title": "Solutions",
+        "links": [
+          {
+            "label": "Marketing",
+            "href": "#"
+          },
+          {
+            "label": "Analytics",
+            "href": "#"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "About",
+            "href": "#"
+          },
+          {
+            "label": "Blog",
+            "href": "#"
+          }
+        ]
+      }
+    ]
+  }
+}
+```

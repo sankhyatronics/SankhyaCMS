@@ -1,0 +1,37 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as CTASectionStories from './CTASection.stories';
+
+<Meta of={CTASectionStories} />
+
+<Canvas of={CTASectionStories.Default} />
+
+# CTASection
+
+A call-to-action section component designed to prompt user interaction.
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `title` | `string` | Title of the section. |
+| `subtitle` | `string` | Optional subtitle or description text. |
+| `actionLabel` | `string` | Label for the action button. |
+| `onAction` | `() => void` | Callback function when the action button is clicked. |
+| `imageSrc` | `string` | Optional background image URL. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+| `inverted` | `boolean` | Whether to use inverted theme colors. Default: `false`. |
+
+## JSON Data Example
+
+```json
+{
+  "type": "CTASection",
+  "data": {
+    "title": "Ready to Transform Your Workflow?",
+    "subtitle": "Join thousands of teams who are already scaling faster with our platform.",
+    "actionLabel": "Get Started Now",
+    "className": "bg-primary-500/25 rounded-md",
+    "imageSrc": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80"
+  }
+}
+```

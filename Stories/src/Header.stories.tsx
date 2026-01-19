@@ -20,7 +20,6 @@ const meta: Meta<typeof DynamicRenderer> = {
   parameters: {
     layout: "fullscreen",
   },
-  tags: ["autodocs"],
   decorators: [DropdownProviderDecorator],
   argTypes: {
     config: {
@@ -49,7 +48,7 @@ const StoryData = ({ storyName = 'Default' }: { storyName?: string }) => {
   if (loading) return <div className="bg-green-200">Loading...</div>;
   if (error) return <div className="bg-red-">Error: {error}</div>;
 
-  return data ? <DynamicRenderer config={data} handlers={handlers} /> : null;
+  return data ? <div className="bg-primary min-h-64 overflow-hidden"><DynamicRenderer config={data} handlers={handlers} /></div> : null;
 };
 
 export const Default: Story = {

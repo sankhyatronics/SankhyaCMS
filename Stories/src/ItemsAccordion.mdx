@@ -1,0 +1,54 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as ItemsAccordionStories from './ItemsAccordion.stories';
+
+<Meta of={ItemsAccordionStories} />
+
+<Canvas of={ItemsAccordionStories.Default} />
+
+# ItemsAccordion
+
+A collapsible accordion component useful for FAQs or organizing content into expandable sections.
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `items` | `AccordionItem[]` | Array of items to display. |
+| `title` | `string` | Optional title for the section. |
+| `subtitle` | `string` | Optional subtitle for the section. |
+| `allowMultiple` | `boolean` | Whether multiple items can be open at once. Default: `false`. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+
+### AccordionItem Interface
+
+| Property | Type | Description |
+|---|---|---|
+| `id` | `string` | Unique identifier for the item. |
+| `title` | `string` | Title or question text. |
+| `content` | `ReactNode` | Content or answer text to display when expanded. |
+
+## JSON Data Example
+
+```json
+{
+  "type": "ItemsAccordion",
+  "data": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about the product.",
+    "className": "custom-accordion-class",
+    "allowMultiple": false,
+    "items": [
+      {
+        "id": "item-1",
+        "title": "What is the return policy?",
+        "content": "You can return any item within 30 days of purchase."
+      },
+      {
+        "id": "item-2",
+        "title": "Do you ship internationally?",
+        "content": "Yes, we ship to over 50 countries worldwide."
+      }
+    ]
+  }
+}
+```

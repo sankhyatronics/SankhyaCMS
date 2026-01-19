@@ -1,0 +1,68 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FeaturesSectionStories from './FeaturesSection.stories';
+
+<Meta of={FeaturesSectionStories} />
+
+<Canvas of={FeaturesSectionStories.Default} />
+
+# FeaturesSection
+
+A component to display a grid of features, often used to highlight key aspects of a product or service.
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `items` | `FeatureItemProps[]` | Array of feature items to display. |
+| `title` | `string` | Optional title for the section. |
+| `subtitle` | `string` | Optional subtitle for the section. |
+| `columns` | `number` | Number of columns in the grid. |
+| `actionLabel` | `string` | Label for the action button on items. Default: `'Learn more'`. |
+| `children` | `ReactNode` | Optional children to render inside the grid. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+| `inverted` | `boolean` | Whether to use inverted theme colors. Default: `false`. |
+
+### FeatureItemProps Interface
+
+| Property | Type | Description |
+|---|---|---|
+| `title` | `string` | Title of the feature. |
+| `description` | `string` | Description text. |
+| `icon` | `string` | Optional Iconify icon name. |
+| `actionLabel` | `string` | Optional label for the item's action button. |
+| `href` | `string` | Optional URL for the item's action. |
+| `className` | `string` | Optional CSS class for the item. |
+
+## JSON Data Example
+
+```json
+{
+  "type": "FeaturesSection",
+  "data": {
+    "title": "Why Choose Us",
+    "subtitle": "We provide the best solutions for your business needs.",
+    "items": [
+      {
+        "icon": "mdi:rocket-launch",
+        "title": "Fast Performance",
+        "description": "Optimized for speed and efficiency to ensure the best user experience."
+      },
+      {
+        "icon": "mdi:security",
+        "title": "Secure Architecture",
+        "description": "Built with security in mind to protect your data and users."
+      },
+      {
+        "icon": "mdi:responsive",
+        "title": "Responsive Design",
+        "description": "Looks great on all devices, from desktops to mobile phones."
+      },
+      {
+        "icon": "mdi:api",
+        "title": "Easy Integration",
+        "description": "Simple API makes it easy to integrate with your existing systems."
+      }
+    ]
+  }
+}
+```

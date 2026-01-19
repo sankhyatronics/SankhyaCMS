@@ -11,12 +11,13 @@
     "@sankhyatronics/sankhya-ui": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-router": "catalog:"
+    "react-router": "catalog:",
+    "remark-gfm": "catalog:"
   },
   "devDependencies": {
     "@storybook/addon-docs": "catalog:",
-    "@storybook/blocks": "catalog:",
     "@storybook/addon-themes": "catalog:",
+    "@storybook/blocks": "catalog:",
     "@storybook/react-vite": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "@types/node": "catalog:",

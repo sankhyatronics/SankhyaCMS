@@ -1,0 +1,41 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as ContentBlockStories from './ContentBlock.stories';
+
+<Meta of={ContentBlockStories} />
+
+<Canvas of={ContentBlockStories.Default} />
+
+# ContentBlock
+
+A flexible content component that supports both Markdown and HTML rendering.
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `title` | `string` | Optional title for the section. |
+| `subtitle` | `string` | Optional subtitle for the section. |
+| `content` | `string` | The content to render (Markdown or HTML). |
+| `format` | `'html' \| 'markdown'` | Format of the content. Default: `'markdown'`. |
+| `image` | `object` | Optional image object with `imageSrc`, `alt`, and optional `caption`. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+| `inverted` | `boolean` | Whether to use inverted theme colors. Default: `false`. |
+
+## JSON Data Example
+
+```json
+{
+  "type": "ContentBlock",
+  "data": {
+    "title": "Markdown Support Example",
+    "subtitle": "Authoring content with Markdown",
+    "format": "markdown",
+    "image": {
+      "imageSrc": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      "alt": "Code editor",
+      "caption": "Writing in Markdown"
+    },
+    "content": "## Why Markdown?\n\nMarkdown is a lightweight markup language that you can use to add formatting elements to plain text text documents. Created by John Gruber in 2004, Markdown is now one of the world's most popular markup languages.\n\n### Features\n\n*   **Easy to ready:** No complex tags.\n*   **Portable:** Can be converted to HTML, PDF, etc.\n*   **Fast:** Write without lifting your fingers from the keyboard.\n\nHere is a list of things:\n\n1.  First item\n2.  Second item\n3.  Third item\n\nAnd some code:\n\n```javascript\nconsole.log('Hello, Markdown!');\n```\n\n> Markdown is intended to be as easy-to-read and easy-to-write as is feasible.\n"
+  }
+}
+```

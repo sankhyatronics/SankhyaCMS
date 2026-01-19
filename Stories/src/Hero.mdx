@@ -1,0 +1,45 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as HeroStories from './Hero.stories';
+
+<Meta of={HeroStories} />
+
+<Canvas of={HeroStories.Default} />
+
+# Hero
+
+A prominent hero section component with background image support and flexible text positioning.
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `title` | `string` | Main headline text. |
+| `subtitle` | `string` | Optional subtitle text. |
+| `imageSrc` | `string` | Background image URL. |
+| `actionLabel` | `string` | Label for the primary call-to-action button. |
+| `href` | `string` | URL for the call-to-action button. |
+| `textAlignment` | `'left' \| 'center' \| 'right' \| 'justify'` | Alignment of the text content. Default: `'left'`. |
+| `padding` | `'none' \| 'small' \| 'medium' \| 'large'` | Padding size. Default: `'none'`. |
+| `focalPoint` | `'top' \| 'left' \| 'right' \| 'bottom' \| 'center'` | Focal point for background image positioning. Default: `'center'`. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+| `inverted` | `boolean` | Whether to use inverted theme colors. Default: `false`. |
+
+## JSON Data Example
+
+```json
+{
+  "type": "Hero",
+  "data": {
+    "title": "Give Your Business the Attention that it Deserves",
+    "subtitle": "Unlock Your Potential: Let Us Handle IT Solutions While You Excel",
+    "actionLabel": "Schedule Call",
+    "href": "#",
+    "imageSrc": "https://picsum.photos/800/400",
+    "textPosition": "left",
+    "textAlignment": "left",
+    "padding": "none",
+    "className": "min-h-[50vh] md:min-h-[70vh] bg-primary text-primary-950",
+    "focalPoint": "center"
+  }
+}
+```

@@ -1,0 +1,94 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as MenuGridStories from './MenuGrid.stories';
+
+<Meta of={MenuGridStories} />
+
+<Canvas of={MenuGridStories.Default} />
+
+# Menu Components
+
+A set of components for building versatile menu structures, including grids and standard items.
+
+## MenuGrid
+
+A grid container for menu items.
+
+### Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `children` | `ReactNode` | Content of the grid, typically `MenuGridItem`s. |
+| `columns` | `number` | Number of columns in the grid. Default: `3`. |
+| `className` | `string` | Optional CSS class for the wrapper. |
+| `gridClassName` | `string` | Optional CSS class for the grid element. |
+
+## MenuGridItem
+
+An individual item within a `MenuGrid`.
+
+### Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `title` | `string` | Title of the item. |
+| `href` | `string` | URL to link to. |
+| `description` | `string` | Optional description text. |
+| `icon` | `string` | Optional Iconify icon name. |
+| `badge` | `string` | Optional badge text. |
+| `compact` | `boolean` | Whether to use a compact layout. Default: `false`. |
+| `showDescription` | `boolean` | Whether to show the description. Default: `true`. |
+| `className` | `string` | Optional CSS class name. |
+
+## MenuItem
+
+A standard menu link item.
+
+### Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `title` | `string` | Title of the item. |
+| `href` | `string` | URL to link to. |
+| `description` | `string` | Optional description text. |
+| `icon` | `string` | Optional Iconify icon name. |
+| `badge` | `string \| number` | Optional badge text or number. |
+| `isActive` | `boolean` | Whether the item is currently active. Default: `false`. |
+| `compact` | `boolean` | Whether to use a compact layout. Default: `false`. |
+| `className` | `string` | Optional CSS class name. |
+
+## JSON Data Example (MenuGrid)
+
+```json
+{
+  "type": "MenuGrid",
+  "data": {
+    "id": "menugrid-default",
+    "columns": 3,
+    "className": "p-6",
+    "gridClassName": "gap-6 bg-primary text-primary-950 rounded-sm px-4 py-2 shadow-md",
+    "children": [
+      {
+        "type": "MenuGridItem",
+        "data": {
+          "id": "menugrid-item-1",
+          "title": "Web Development",
+          "description": "Build modern web applications",
+          "href": "#web",
+          "icon": "mdi:web",
+          "badge": "Popular"
+        }
+      },
+      {
+        "type": "MenuGridItem",
+        "data": {
+          "id": "menugrid-item-2",
+          "title": "Mobile Apps",
+          "description": "iOS and Android applications",
+          "href": "#mobile",
+          "icon": "mdi:cellphone"
+        }
+      }
+    ]
+  }
+}
+```

@@ -1,0 +1,52 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as StatsStories from './Stats.stories';
+
+<Meta of={StatsStories} />
+
+<Canvas of={StatsStories.Default} />
+
+# Stats
+
+A component to display statistical numbers or metrics.
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `items` | `StatItem[]` | Array of statistics to display. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+
+### StatItem Interface
+
+| Property | Type | Description |
+|---|---|---|
+| `value` | `string` | The main numerical value or text (e.g., "100%", "24/7"). |
+| `label` | `string` | The label for the statistic. |
+| `description` | `string` | Optional description text. |
+
+## JSON Data Example
+
+```json
+{
+  "type": "Stats",
+  "data": {
+    "items": [
+      {
+        "value": "100%",
+        "label": "Uptime",
+        "description": "We guarantee 100% uptime for all our services."
+      },
+      {
+        "value": "24/7",
+        "label": "Support",
+        "description": "Our support team is available 24/7 to help you."
+      },
+      {
+        "value": "100k+",
+        "label": "Users",
+        "description": "Trusted by over 100k users worldwide."
+      }
+    ]
+  }
+}
+```

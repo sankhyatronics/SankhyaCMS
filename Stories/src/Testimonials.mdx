@@ -1,0 +1,53 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as TestimonialsStories from './Testimonials.stories';
+
+<Meta of={TestimonialsStories} />
+
+<Canvas of={TestimonialsStories.Default} />
+
+# Testimonials
+
+A component to display customer testimonials or reviews.
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `items` | `TestimonialItem[]` | Array of testimonials to display. |
+| `title` | `string` | Optional title for the section. |
+| `subtitle` | `string` | Optional subtitle for the section. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+
+### TestimonialItem Interface
+
+| Property | Type | Description |
+|---|---|---|
+| `name` | `string` | Name of the person. |
+| `role` | `string` | Role or job title of the person. |
+| `quote` | `string` | The testimonial text. |
+| `company` | `string` | Optional company name. |
+| `imageSrc` | `string` | Optional URL for the person's photo. |
+| `rating` | `number` | Optional rating (e.g., number of stars). |
+
+## JSON Data Example
+
+```json
+{
+  "type": "Testimonials",
+  "data": {
+    "title": "Trusted by Industry Leaders",
+    "subtitle": "See what our clients have to say about their experience with us.",
+    "items": [
+      {
+        "id": "1",
+        "name": "Sarah Johnson",
+        "role": "CTO",
+        "company": "TechFlow",
+        "quote": "This platform has completely transformed how our engineering team operates.",
+        "rating": 5,
+        "imageSrc": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"
+      }
+    ]
+  }
+}
+```

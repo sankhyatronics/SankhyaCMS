@@ -1,0 +1,92 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as DropdownStories from './Dropdown.stories';
+
+<Meta of={DropdownStories} />
+
+<Canvas of={DropdownStories.Default} sourceState="none"/>
+
+# Dropdown
+
+A versatile dropdown component that helps organize navigation and actions.
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `children` | `ReactNode` | Content related to the dropdown, often `MenuGrid`. |
+| `title` | `string` | Title text displayed on the dropdown trigger. |
+| `icon` | `string` | Optional Iconify icon name. |
+| `iconPosition` | `'left' \| 'right'` | Position of the icon relative to text. Default: `'left'`. |
+| `iconSize` | `string` | CSS size string for the icon. Default: `'1.2rem'`. |
+| `iconColor` | `string` | CSS color string for the icon. Default: `'currentColor'`. |
+| `href` | `string` | Optional URL. If provided, the title becomes a link. |
+| `id` | `string` | Unique identifier for the dropdown. Defaults to title/icon or 'dropdown'. |
+| `target` | `string` | Link target attribute. Default: `'_self'`. |
+| `className` | `string` | Optional CSS class for the trigger button/link. |
+| `itemGroupClassName` | `string` | Optional CSS class for the dropdown container. |
+| `itemClassName` | `string` | Optional CSS class for items (if applicable). |
+
+## JSON Data Example
+
+```json
+{
+  "type": "Dropdown",
+  "data": {
+    "id": "dropdown-default",
+    "title": "Products",
+    "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2",
+    "itemGroupClassName": "bg-primary text-primary-950 p-4",
+    "icon": "mdi:apps",
+    "iconPosition": "left",
+    "iconSize": "1.2rem",
+    "iconColor": "currentColor",
+    "href": "#products",
+    "target": "_self",
+    "children": [
+      {
+        "type": "MenuGrid",
+        "data": {
+          "id": "menugrid-default",
+          "columns": 3,
+          "className": "rounded-sm shadow-md",
+          "gridClassName": "gap-6 bg-primary text-primary-950 rounded-sm px-4 py-2 shadow-md"
+        },
+        "children": [
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "menugrid-item-1",
+              "title": "Web Development",
+              "description": "Build modern web applications",
+              "href": "#web",
+              "icon": "mdi:web",
+              "badge": "Popular"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "menugrid-item-2",
+              "title": "Mobile Apps",
+              "description": "iOS and Android applications",
+              "href": "#mobile",
+              "icon": "mdi:cellphone"
+            }
+          },
+          {
+            "type": "MenuGridItem",
+            "data": {
+              "id": "menugrid-item-3",
+              "title": "Cloud Services",
+              "description": "Scalable cloud infrastructure",
+              "href": "#cloud",
+              "icon": "mdi:cloud",
+              "badge": "New"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
