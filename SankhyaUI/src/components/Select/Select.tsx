@@ -14,7 +14,6 @@ export interface SelectProps {
     options: SelectOption[];
     value?: string;
     defaultValue: string;
-    onChange?: (value: string) => void;
     className?: string;
     icon?: string;
     id?: string;
@@ -25,7 +24,6 @@ export const Select: React.FC<SelectProps> = ({
     options = [],
     value,
     defaultValue,
-    onChange,
     className,
     icon,
     id,
@@ -40,7 +38,6 @@ export const Select: React.FC<SelectProps> = ({
         if (!isControlled) {
             setInternalValue(option.value);
         }
-        onChange?.(option.value);
         option.onClick?.();
     };
 

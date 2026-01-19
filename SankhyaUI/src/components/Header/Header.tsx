@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Icon } from '@iconify/react';
 import './Header.css';
 import '../Common/Common.css';
-import { HamburgerMenu } from '../HamburgerMenu/HamburgerMenu';
-import { useTouchDevice } from '../../hooks/useBreakpointTouch';
 import { BaseProps } from '../Common/BaseComponent.interfaces';
 
 export interface HeaderProps extends BaseProps {
   sticky?: boolean;
-  mobileBreakpoint?: number;
   logoHref?: string;
   logoTarget?: string;
   logoClassName?: string;
@@ -23,7 +21,6 @@ export const Header: React.FC<HeaderProps> = (props) => {
     utilityButtons,
     sticky = false,
     className = '',
-    mobileBreakpoint = 768,
     logoHref,
     imageSrc,
     logoTarget = '_self',
@@ -32,7 +29,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
     inverted = false,
   } = props;
 
-  const isMobile = useTouchDevice({ breakpoint: mobileBreakpoint });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className={`header ${sticky ? 'header-sticky' : ''} ${inverted ? 'theme-inverted' : ''} ${className}`}>
@@ -48,62 +45,34 @@ export const Header: React.FC<HeaderProps> = (props) => {
             <img
               src={imageSrc}
               alt={altText}
-              className="header-logo-img"
             />
           </a>
         )}
       </div>
 
-      {/* Desktop Navigation */}
-      <div className={`header-right ${isMobile ? 'header-right-hidden' : ''}`} >
-        {/* Main Navigation (left side) */}
+      {/* Nav Toggle (Mobile only via CSS) */}
+      <button
+        className="header-toggle"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        aria-label="Toggle navigation"
+      >
+        <Icon icon={isMenuOpen ? "mdi:close" : "mdi:menu"} />
+      </button>
+
+      {/* Navigation Layer (Single Render) */}
+      <div className={`header-nav-container ${isMenuOpen ? 'active' : ''}`}>
+        {/* Main Navigation */}
         <div className="header-nav">
           {menuBar}
         </div>
-        {/* Utility Buttons (right side) */}
+
+        {/* Utility Buttons */}
         {utilityButtons && utilityButtons.length > 0 && (
           <div className="header-utility">
             {utilityButtons}
           </div>
         )}
       </div>
-
-      {/* Mobile: Hamburger Menu */}
-      {isMobile && (
-        <div className="header-mobile-wrapper">
-          {/* Utility buttons in mobile header (optional) */}
-          {utilityButtons && utilityButtons.length > 0 && (
-            <div className="header-mobile-utility">
-              {utilityButtons}
-            </div>
-          )}
-
-          {/* Hamburger Menu */}
-          <div className="header-hamburger">
-            <HamburgerMenu
-              position="right"
-              label="Navigation menu"
-            >
-              <div className="header-mobile-menu-content">
-                {/* Main navigation in mobile menu */}
-                {menuBar}
-
-                {/* Utility buttons in mobile menu (optional) */}
-                {utilityButtons && utilityButtons.length > 0 && (
-                  <>
-                    <div className="header-mobile-settings">
-                      <h3 className="header-mobile-settings-title">
-                        Settings
-                      </h3>
-                      {utilityButtons}
-                    </div>
-                  </>
-                )}
-              </div>
-            </HamburgerMenu>
-          </div>
-        </div>
-      )}
     </header>
   );
 };

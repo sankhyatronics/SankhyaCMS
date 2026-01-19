@@ -7,9 +7,8 @@
                 "id": "header-main",
                 "sticky": true,
                 "className": "bg-primary shadow-md max-w-[1920px] mx-auto",
-                "mobileBreakpoint": 768,
                 "logoHref": "/",
-                "logoClassName": "w-[120px]",
+                "logoClassName": "w-[120px] md:w-[160px] lg:w-[180px]",
                 "imageSrc": "https://picsum.photos/100/100",
                 "altText": "SankhyaCMS",
                 "children": [
@@ -20,7 +19,7 @@
                             "id": "util-theme",
                             "onClick": "@action:onThemeChangeClick",
                             "icon": "mdi:theme-light-dark",
-                            "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-full"
+                            "className": "bg-primary hover:bg-primary-200 text-primary-950 p-2 rounded-sm"
                         }
                     },
                     {
@@ -83,7 +82,7 @@
                                         "data": {
                                             "title": "Rådgivning",
                                             "description": "Strategisk rådgivning og teknologiske roadmaps.",
-                                            "href": "/services#consultancy",
+                                            "href": "/consultancy",
                                             "icon": "mdi:account-tie-outline",
                                             "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
                                         }
@@ -93,7 +92,7 @@
                                         "data": {
                                             "title": "Managed Services",
                                             "description": "24/7 support og infrastrukturstyring.",
-                                            "href": "/services#managed",
+                                            "href": "/managed-services",
                                             "icon": "mdi:server-network",
                                             "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
                                         }
@@ -103,7 +102,7 @@
                                         "data": {
                                             "title": "AI Udvikling",
                                             "description": "Skræddersyede Agentic AI løsninger til automatisering.",
-                                            "href": "/services#ai",
+                                            "href": "/ai-development",
                                             "icon": "mdi:robot-outline",
                                             "className": "bg-primary hover:bg-primary-200 text-primary-950 rounded-sm px-4 py-2"
                                         }
