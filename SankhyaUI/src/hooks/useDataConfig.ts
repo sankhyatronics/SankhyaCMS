@@ -13,10 +13,6 @@ export function useDropdownConfig(story: string, apiService: ApiService, variant
   return useTypedApiConfig({ component: 'Dropdown', story, apiService, variant });
 }
 
-export function useHamburgerMenuConfig(story: string, apiService: ApiService, variant?: string) {
-  return useTypedApiConfig({ component: 'HamburgerMenu', story, apiService, variant });
-}
-
 export function useHeroConfig(story: string, apiService: ApiService, variant?: string) {
   return useTypedApiConfig({ component: 'Hero', story, apiService, variant });
 }

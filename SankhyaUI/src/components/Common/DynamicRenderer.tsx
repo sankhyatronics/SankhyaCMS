@@ -165,10 +165,6 @@ export const DynamicRenderer: React.FC<IDynamicRendererProps> = ({
       const renderedChildren = handleChildren(children);
       componentProps.children = renderedChildren;
     }
-    // For HamburgerMenu - children become children prop
-    else if (type === 'HamburgerMenu') {
-      componentProps.children = handleChildren(children);
-    }
     // For other components - pass as regular children prop
     else {
       componentProps.children = handleChildren(children);

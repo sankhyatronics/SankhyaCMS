@@ -10,7 +10,6 @@ export { FeatureSplit } from './components/FeatureSplit/FeatureSplit';
 export { FeaturesSection } from './components/FeaturesSection/FeaturesSection';
 export { FeatureItem } from './components/FeaturesSection/FeatureItem';
 export { Footer } from './components/Footer/Footer';
-export { HamburgerMenu } from './components/HamburgerMenu/HamburgerMenu';
 export { Header } from './components/Header/Header';
 export { Hero } from './components/Hero/Hero';
 export { IconButton } from './components/IconButton/IconButton';

@@ -2,7 +2,6 @@ import { ApiService, ApiResponse } from '@sankhyatronics/sankhya-ui';
 import menuGridItemStories from "./MenuGridItem.json";
 import menuGridStories from "./MenuGrid.json";
 import dropdownStories from './Dropdown.json';
-import hamburgStories from './HamburgerMenu.json';
 import headerStories from './Header.json';
 import heroStories from './Hero.json';
 import itemsAccordionStories from './ItemsAccordion.json';
@@ -108,14 +107,6 @@ export class MockApiService implements ApiService {
         const dropdown = dropdownStories.find(item => item.title === dropdownKey);
         return {
           data: this.normalizeData(dropdown) as T,
-          status: 200,
-          statusText: 'OK'
-        }
-      case '/hamburger-menu':
-        const hamburgerKey = queryParams.story || 'Default';
-        const hamburger = hamburgStories.find(item => item.title === hamburgerKey);
-        return {
-          data: this.normalizeData(hamburger) as T,
           status: 200,
           statusText: 'OK'
         }
@@ -265,7 +256,6 @@ export const mockApiFetchers = {
   getMenuGridItems: () => mockFetch('/menu-grid-item'),
   getMenuGrid: () => mockFetch('/menu-grid'),
   getDropdown: () => mockFetch('/dropdown'),
-  getHamburgerMenu: () => mockFetch('/hamburger-menu'),
   getHeader: () => mockFetch('/header'),
   getHero: () => mockFetch('/hero'),
   getItemsAccordion: () => mockFetch('/items-accordion'),

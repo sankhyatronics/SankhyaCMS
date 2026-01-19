@@ -9,7 +9,7 @@
                 "className": "bg-primary shadow-md max-w-[1920px] mx-auto",
                 "logoHref": "/",
                 "logoClassName": "w-[120px] md:w-[160px] lg:w-[180px]",
-                "imageSrc": "https://picsum.photos/100/100",
+                "imageSrc": "https://picsum.photos/300/80",
                 "altText": "SankhyaCMS",
                 "children": [
                     {

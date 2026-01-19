@@ -15,7 +15,6 @@ type ComponentType =
   | 'Dropdown'
   | 'Header'
   | 'Hero'
-  | 'HamburgerMenu'
   | 'Card'
   | 'ItemsAccordion'
   | 'Footer'
@@ -33,7 +32,6 @@ const componentEndpoints: Record<ComponentType, string> = {
   MenuGrid: '/menu-grid',
   Dropdown: '/dropdown',
   Header: '/header',
-  HamburgerMenu: '/hamburger-menu',
   Hero: '/hero',
   Card: '/card',
   ItemsAccordion: '/items-accordion',

@@ -5,7 +5,6 @@ import { MenuGrid } from '../Menu/MenuGrid';
 import { MenuGridItem } from '../Menu/MenuGridItem';
 import { Hero } from '../Hero/Hero';
 import { IconButton } from '../IconButton/IconButton';
-import { HamburgerMenu } from '../HamburgerMenu/HamburgerMenu';
 import { FeatureSplit } from '../FeatureSplit/FeatureSplit';
 import { ContentBlock } from '../ContentBlock/ContentBlock';
 import { FeaturesSection } from '../FeaturesSection/FeaturesSection';
@@ -26,7 +25,6 @@ export const baseComponents = {
     Dropdown,
     Hero,
     IconButton,
-    HamburgerMenu,
     FeatureSplit,
     ContentBlock,
     FeaturesSection,
