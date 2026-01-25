@@ -14,6 +14,7 @@ import bentoGridStories from './BentoGrid.json';
 import ctaSectionStories from './CTASection.json';
 import testimonialsStories from './Testimonials.json';
 import selectStories from './Select.json';
+import carouselStories from './Carousel.json';
 
 
 // Simple mock API service
@@ -206,6 +207,14 @@ export class MockApiService implements ApiService {
           status: 200,
           statusText: 'OK'
         }
+      case '/carousel':
+        const carouselKey = queryParams.story || 'Default';
+        const carousel = carouselStories.find(item => item.title === carouselKey);
+        return {
+          data: this.normalizeData(carousel) as T,
+          status: 200,
+          statusText: 'OK'
+        }
       default:
         return {
           data: { message: 'Default endpoint', endpoint } as T,
@@ -266,5 +275,6 @@ export const mockApiFetchers = {
   getFeaturesSection: () => mockFetch('/features-section'),
   getBentoGrid: () => mockFetch('/bento-grid'),
   getSelect: () => mockFetch('/select'),
+  getCarousel: () => mockFetch('/carousel'),
 
 };

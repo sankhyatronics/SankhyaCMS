@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DynamicRenderer, Testimonials, registerComponent, useTestimonialsConfig } from '@sankhyatronics/sankhya-ui';
 import { mockApi } from './data/mockApiService';
 
@@ -15,8 +15,8 @@ const meta: Meta<typeof DynamicRenderer> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const StoryData = ({ storyName = 'Default', inverted = false }: { storyName?: string, inverted?: boolean }) => {
-    const { data, loading, error } = useTestimonialsConfig(storyName, mockApi);
+const StoryData = ({ storyName = 'Default', dataTitle, inverted = false, ...props }: { storyName?: string, dataTitle?: string, inverted?: boolean;[key: string]: any }) => {
+    const { data, loading, error } = useTestimonialsConfig(dataTitle || storyName, mockApi);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -28,17 +28,18 @@ const StoryData = ({ storyName = 'Default', inverted = false }: { storyName?: st
         ...data,
         data: {
             ...data.data,
+            ...props,
             inverted
         }
     };
 
-    return <div className="bg-primary min-h-64 overflow-hidden"><DynamicRenderer config={data} /></div>;
+    return <div className="bg-primary min-h-64 overflow-hidden"><DynamicRenderer config={config} /></div>;
 };
 
 export const Default: Story = {
-    render: () => <StoryData storyName="Default" />,
+    render: (args) => <StoryData storyName="Default" dataTitle="Default" {...args} />,
 };
 
 export const Inverted: Story = {
-    render: () => <StoryData storyName="Default" inverted={true} />,
+    render: (args) => <StoryData storyName="Default" dataTitle="Default" inverted={true} {...args} />,
 };

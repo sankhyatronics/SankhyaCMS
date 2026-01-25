@@ -27,42 +27,46 @@ const meta: Meta<typeof DynamicRenderer> = {
 export default meta;
 type Story = StoryObj<typeof DynamicRenderer>;
 
-const StoryData = ({ storyName = 'Default' }: { storyName?: string }) => {
-  const { data, loading, error } = useMenuGridConfig(storyName, mockApi);
+const StoryData = ({ storyName = 'Default', dataTitle, ...props }: { storyName?: string;[key: string]: any }) => {
+  const { data, loading, error } = useMenuGridConfig(dataTitle || storyName, mockApi);
 
   if (loading) return <div className="bg-green-200">Loading...</div>;
   if (error) return <div className="bg-red-">Error: {error}</div>;
+
+  if (data) {
+    data.data = { ...data.data, ...props };
+  }
 
   return data ? <div className="bg-primary min-h-64 overflow-hidden"><DynamicRenderer config={data} /></div> : null;
 };
 
 export const Default: Story = {
-  render: () => <StoryData storyName="Default" />,
+  render: (args) => <StoryData storyName="Default" dataTitle="Default" {...args} />,
 };
 
 export const TwoColumns: Story = {
-  render: () => <StoryData storyName="TwoColumns" />,
+  render: (args) => <StoryData storyName="TwoColumns" dataTitle="TwoColumns" {...args} />,
 };
 
 
 export const FourColumns: Story = {
-  render: () => <StoryData storyName="FourColumns" />,
+  render: (args) => <StoryData storyName="FourColumns" dataTitle="FourColumns" {...args} />,
 };
 export const SingleColumn: Story = {
-  render: () => <StoryData storyName="SingleColumn" />,
+  render: (args) => <StoryData storyName="SingleColumn" dataTitle="SingleColumn" {...args} />,
 };
 export const ManyItems: Story = {
-  render: () => <StoryData storyName="ManyItems" />,
+  render: (args) => <StoryData storyName="ManyItems" dataTitle="ManyItems" {...args} />,
 };
 export const Compact: Story = {
-  render: () => <StoryData storyName="Compact" />,
+  render: (args) => <StoryData storyName="Compact" dataTitle="Compact" {...args} />,
 };
 export const WithMixedContent: Story = {
-  render: () => <StoryData storyName="WithMixedContent" />,
+  render: (args) => <StoryData storyName="WithMixedContent" dataTitle="WithMixedContent" {...args} />,
 };
 export const Empty: Story = {
-  render: () => <StoryData storyName="Empty" />,
+  render: (args) => <StoryData storyName="Empty" dataTitle="Empty" {...args} />,
 };
 export const ResponsiveTest: Story = {
-  render: () => <StoryData storyName="ResponsiveTest" />,
+  render: (args) => <StoryData storyName="ResponsiveTest" dataTitle="ResponsiveTest" {...args} />,
 };

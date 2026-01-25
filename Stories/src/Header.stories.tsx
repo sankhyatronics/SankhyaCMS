@@ -32,8 +32,8 @@ const meta: Meta<typeof DynamicRenderer> = {
 export default meta;
 type Story = StoryObj<typeof DynamicRenderer>;
 
-const StoryData = ({ storyName = 'Default' }: { storyName?: string }) => {
-  const { data, loading, error } = useHeaderConfig(storyName, mockApi);
+const StoryData = ({ storyName = 'Default', dataTitle, ...props }: { storyName?: string;[key: string]: any }) => {
+  const { data, loading, error } = useHeaderConfig(dataTitle || storyName, mockApi);
 
   const handlers = {
     onCartClick: () => alert('Cart clicked!'),
@@ -48,35 +48,39 @@ const StoryData = ({ storyName = 'Default' }: { storyName?: string }) => {
   if (loading) return <div className="bg-green-200">Loading...</div>;
   if (error) return <div className="bg-red-">Error: {error}</div>;
 
+  if (data) {
+    data.data = { ...data.data, ...props };
+  }
+
   return data ? <div className="bg-primary min-h-64 overflow-hidden"><DynamicRenderer config={data} handlers={handlers} /></div> : null;
 };
 
 export const Default: Story = {
-  render: () => <StoryData storyName="Default" />,
+  render: (args) => <StoryData storyName="Default" dataTitle="Default" {...args} />,
 };
 
 export const Sticky: Story = {
-  render: () => <StoryData storyName="Sticky" />,
+  render: (args) => <StoryData storyName="Sticky" dataTitle="Sticky" {...args} />,
 };
 
 export const Minimal: Story = {
-  render: () => <StoryData storyName="Minimal" />,
+  render: (args) => <StoryData storyName="Minimal" dataTitle="Minimal" {...args} />,
 };
 
 export const WithMultipleDropdowns: Story = {
-  render: () => <StoryData storyName="WithMultipleDropdowns" />,
+  render: (args) => <StoryData storyName="WithMultipleDropdowns" dataTitle="WithMultipleDropdowns" {...args} />,
 };
 
 export const WithNoMenu: Story = {
-  render: () => <StoryData storyName="WithNoMenu" />,
+  render: (args) => <StoryData storyName="WithNoMenu" dataTitle="WithNoMenu" {...args} />,
 };
 
 export const WithManyUtilityButtons: Story = {
-  render: () => <StoryData storyName="WithManyUtilityButtons" />,
+  render: (args) => <StoryData storyName="WithManyUtilityButtons" dataTitle="WithManyUtilityButtons" {...args} />,
 };
 
 export const WithCTAs: Story = {
-  render: () => <StoryData storyName="WithCTAs" />,
+  render: (args) => <StoryData storyName="WithCTAs" dataTitle="WithCTAs" {...args} />,
 };
 
 

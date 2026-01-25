@@ -25,7 +25,8 @@ type ComponentType =
   | 'BentoGrid'
   | 'CTASection'
   | 'Testimonials'
-  | 'Select';
+  | 'Select'
+  | 'Carousel';
 
 const componentEndpoints: Record<ComponentType, string> = {
   MenuGridItem: '/menu-grid-item',
@@ -44,6 +45,7 @@ const componentEndpoints: Record<ComponentType, string> = {
   CTASection: '/cta-section',
   Testimonials: '/testimonials',
   Select: '/select',
+  Carousel: '/carousel',
 };
 
 export function useTypedApiConfig(options: UseTypedApiConfigOptions) {

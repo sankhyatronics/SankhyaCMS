@@ -1,0 +1,87 @@
+[
+    {
+        "title": "UsingHero",
+        "data": {
+            "type": "Carousel",
+            "data": {
+                "autoPlay": true,
+                "interval": 5000,
+                "showArrows": true,
+                "effect": "slide",
+                "children": [
+                    {
+                        "type": "Hero",
+                        "data": {
+                            "title": "Hero 1",
+                            "subtitle": "Subtitle 1",
+                            "imageSrc": "https://picsum.photos/800/400",
+                            "textPosition": "left",
+                            "textAlignment": "left",
+                            "padding": "none",
+                            "className": "min-h-[50vh] md:min-h-[70vh] bg-primary text-primary-950",
+                            "focalPoint": "center"
+                        }
+                    },
+                    {
+                        "type": "Hero",
+                        "data": {
+                            "title": "Hero 2",
+                            "subtitle": "Subtitle 2",
+                            "imageSrc": "https://picsum.photos/800/400",
+                            "textPosition": "left",
+                            "textAlignment": "left",
+                            "padding": "none",
+                            "className": "min-h-[50vh] md:min-h-[70vh] bg-primary text-primary-950",
+                            "focalPoint": "center"
+                        }
+                    },
+                    {
+                        "type": "Hero",
+                        "data": {
+                            "title": "Hero 3",
+                            "subtitle": "Subtitle 3",
+                            "imageSrc": "https://picsum.photos/800/400",
+                            "textPosition": "left",
+                            "textAlignment": "left",
+                            "padding": "none",
+                            "className": "min-h-[50vh] md:min-h-[70vh] bg-primary text-primary-950",
+                            "focalPoint": "center"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "title": "UsingCTASection",
+        "data": {
+            "type": "Carousel",
+            "data": {
+                "autoPlay": true,
+                "interval": 5000,
+                "sh owArrows": true,
+                "showIndicators": true,
+                "children": [
+                    {
+                        "type": "CTASection",
+                        "data": {
+                            "title": "CTA Section Title 1",
+                            "subtitle": "CTA Section Subtitle 1",
+                            "className": "bg-primary-500/25 rounded-md w-96",
+                            "imageSrc": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80"
+                        }
+                    },
+                    {
+                        "type": "CTASection",
+                        "data": {
+                            "title": "CTA Section Title 2",
+                            "subtitle": "CTA Section Subtitle 2",
+                            "className": "bg-primary-500/25 rounded-md",
+                            "imageSrc": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+]

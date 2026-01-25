@@ -32,26 +32,30 @@ const meta: Meta<typeof DynamicRenderer> = {
 export default meta;
 type Story = StoryObj<typeof DynamicRenderer>;
 
-const StoryData = ({ storyName = 'Default' }: { storyName?: string }) => {
-    const { data, loading, error } = useSelectConfig(storyName, mockApi);
+const StoryData = ({ storyName = 'Default', dataTitle, ...props }: { storyName?: string;[key: string]: any }) => {
+    const { data, loading, error } = useSelectConfig(dataTitle || storyName, mockApi);
 
     if (loading) return <div className="p-4">Loading...</div>;
     if (error) return <div className="p-4 text-red-500">Error: {error}</div>;
+
+    if (data) {
+        data.data = { ...data.data, ...props };
+    }
 
     return data ? <div className="bg-primary min-h-64 overflow-hidden"><DynamicRenderer config={data} /></div> : null;
 };
 
 export const Default: Story = {
-    render: () => <StoryData storyName="Default" />,
+    render: (args) => <StoryData storyName="Default" dataTitle="Default" {...args} />,
 };
 
 export const WithIcons: Story = {
-    render: () => <StoryData storyName="WithIcons" />,
+    render: (args) => <StoryData storyName="WithIcons" dataTitle="WithIcons" {...args} />,
 };
 
 export const PreSelected: Story = {
-    render: () => <StoryData storyName="PreSelected" />,
+    render: (args) => <StoryData storyName="PreSelected" dataTitle="PreSelected" {...args} />,
 };
 export const Language: Story = {
-    render: () => <StoryData storyName="Language" />,
+    render: (args) => <StoryData storyName="Language" dataTitle="Language" {...args} />,
 };

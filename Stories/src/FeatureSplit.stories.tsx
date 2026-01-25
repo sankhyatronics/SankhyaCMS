@@ -18,19 +18,23 @@ const meta: Meta<typeof DynamicRenderer> = {
 export default meta;
 type Story = StoryObj<typeof DynamicRenderer>;
 
-const StoryData = ({ storyName = 'Default' }: { storyName?: string }) => {
-    const { data, loading, error } = useFeatureSplitConfig(storyName, mockApi);
+const StoryData = ({ storyName = 'Default', dataTitle, ...props }: { storyName?: string;[key: string]: any }) => {
+    const { data, loading, error } = useFeatureSplitConfig(dataTitle || storyName, mockApi);
 
     if (loading) return <div className="bg-green-200">Loading...</div>;
     if (error) return <div className="bg-red-200">Error: {error}</div>;
+
+    if (data) {
+        data.data = { ...data.data, ...props };
+    }
 
     return data ? <div className="bg-primary min-h-64 overflow-hidden"><DynamicRenderer config={data} /></div> : null;
 };
 
 export const Default: Story = {
-    render: () => <StoryData storyName="Default" />,
+    render: (args) => <StoryData storyName="Default" dataTitle="Default" {...args} />,
 };
 
 export const ImageLeft: Story = {
-    render: () => <StoryData storyName="ImageLeft" />,
+    render: (args) => <StoryData storyName="ImageLeft" dataTitle="ImageLeft" {...args} />,
 };

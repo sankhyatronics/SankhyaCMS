@@ -118,6 +118,7 @@ function LandingPage() {
 
 ### Branding & Marketing
 - **Hero**: Top-of-page hero section.
+- **Carousel**: A sliding carousel component for displaying multiple Hero items. 
 - **Stats**: Section to display statistics or numbers.
 - **Testimonials**: Section for user feedback and reviews.
 

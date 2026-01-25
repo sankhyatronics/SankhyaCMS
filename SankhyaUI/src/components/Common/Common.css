@@ -16,6 +16,16 @@
   border: 2px solid currentColor;
 }
 
+.btn-primary {
+  background-color: var(--color-primary-600, #2563eb);
+  color: var(--color-white, #ffffff);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-500, #3b82f6);
+  transform: translateY(-2px);
+}
+
 /* ===== ANIMATION & TRANSITIONS ===== */
 /* Delay utilities */
 .delay-100 {
@@ -242,6 +252,22 @@
 
 .items-end {
   align-items: flex-end;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
 
 /* Responsive Padding */

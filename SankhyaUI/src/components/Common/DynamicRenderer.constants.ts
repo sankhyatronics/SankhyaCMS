@@ -15,6 +15,7 @@ import { Stats } from '../Stats/Stats';
 import { CTASection } from '../CTASection/CTASection';
 import { Testimonials } from '../Testimonials/Testimonials';
 import { Select } from '../Select/Select';
+import { Carousel } from '../Carousel/Carousel';
 
 // Base components (excluding Dropdown to avoid circular dependency)
 export const baseComponents = {
@@ -33,7 +34,8 @@ export const baseComponents = {
     Stats,
     CTASection,
     Testimonials,
-    Select
+    Select,
+    Carousel
 } as const;
 
 // Type-safe component registry

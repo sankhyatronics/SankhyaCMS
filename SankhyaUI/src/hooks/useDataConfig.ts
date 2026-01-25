@@ -60,3 +60,7 @@ export function useTestimonialsConfig(story: string, apiService: ApiService, var
 export function useSelectConfig(story: string, apiService: ApiService, variant?: string) {
   return useTypedApiConfig({ component: 'Select', story, apiService, variant });
 }
+
+export function useCarouselConfig(story: string, apiService: ApiService, variant?: string) {
+  return useTypedApiConfig({ component: 'Carousel', story, apiService, variant });
+}

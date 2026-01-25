@@ -12,6 +12,7 @@ export { FeatureItem } from './components/FeaturesSection/FeatureItem';
 export { Footer } from './components/Footer/Footer';
 export { Header } from './components/Header/Header';
 export { Hero } from './components/Hero/Hero';
+export { Carousel } from './components/Carousel/Carousel';
 export { IconButton } from './components/IconButton/IconButton';
 export { ItemsAccordion } from './components/ItemsAccordion/ItemsAccordion';
 export { MenuGrid } from './components/Menu/MenuGrid';

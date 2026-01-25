@@ -165,6 +165,11 @@ export const DynamicRenderer: React.FC<IDynamicRendererProps> = ({
       const renderedChildren = handleChildren(children);
       componentProps.children = renderedChildren;
     }
+    // For Carousel - children are the slides
+    else if (type === 'Carousel') {
+      const renderedChildren = handleChildren(children);
+      componentProps.children = renderedChildren;
+    }
     // For other components - pass as regular children prop
     else {
       componentProps.children = handleChildren(children);

@@ -29,8 +29,8 @@ const meta: Meta<typeof DynamicRenderer> = {
 export default meta;
 type Story = StoryObj<typeof DynamicRenderer>;
 
-const StoryData = ({ storyName = 'Default', ...props }: { storyName?: string;[key: string]: any }) => {
-  const { data, loading, error } = useHeroConfig(storyName, mockApi);
+const StoryData = ({ storyName = 'Default', dataTitle, ...props }: { storyName?: string;[key: string]: any }) => {
+  const { data, loading, error } = useHeroConfig(dataTitle || storyName, mockApi);
 
   if (loading) return <div className="bg-green-200">Loading...</div>;
   if (error) return <div className="bg-red-">Error: {error}</div>;
@@ -44,7 +44,7 @@ const StoryData = ({ storyName = 'Default', ...props }: { storyName?: string;[ke
 };
 
 export const Default: Story = {
-  render: (args) => <StoryData storyName="Default" {...args} />,
+  render: (args) => <StoryData storyName="Default" dataTitle="Default" {...args} />,
   args: {
     focalPoint: 'center',
   } as any,

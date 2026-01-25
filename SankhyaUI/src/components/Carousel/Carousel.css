@@ -1,0 +1,87 @@
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    /* Ensure it takes height of content or set a min-height if needed, 
+       but usually Hero has its own aspect ratio or padding */
+}
+
+.carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    color: white;
+    font-size: 1.5rem;
+}
+
+.carousel-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-prev {
+    left: 20px;
+}
+
+.carousel-next {
+    right: 20px;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    padding: 0;
+}
+
+.carousel-dot:hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.carousel-dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* Ensure mobile compatibility */
+@media (max-width: 640px) {
+    .carousel-nav-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+
+    .carousel-prev {
+        left: 10px;
+    }
+
+    .carousel-next {
+        right: 10px;
+    }
+}

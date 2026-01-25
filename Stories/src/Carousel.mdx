@@ -1,0 +1,49 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as CarouselStories from './Carousel.stories';
+
+<Meta of={CarouselStories} />
+
+<Canvas of={CarouselStories.UsingHero} />
+
+# Carousel
+
+A responsive carousel component for cycling through multiple content items like Hero sections or other components.
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `children` | `React.ReactNode[]` | Array of child components to display as slides. |
+| `autoPlay` | `boolean` | Whether to automatically cycle through slides. Default: `true`. |
+| `interval` | `number` | Time in milliseconds between auto-transitions. Default: `5000`. |
+| `showArrows` | `boolean` | Whether to show navigation arrows. Default: `true`. |
+| `showIndicators` | `boolean` | Whether to show slide position indicators. Default: `true`. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+
+## JSON Data Example
+
+```json
+{
+  "type": "Carousel",
+  "data": {
+    "autoPlay": true,
+    "interval": 5000,
+    "children": [
+      {
+        "type": "Hero",
+        "data": {
+          "title": "Slide 1",
+          /* ... Hero props ... */
+        }
+      },
+      {
+        "type": "Hero",
+        "data": {
+          "title": "Slide 2",
+          /* ... Hero props ... */
+        }
+      }
+    ]
+  }
+}
+```

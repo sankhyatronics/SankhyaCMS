@@ -18,59 +18,63 @@ const meta: Meta<typeof DynamicRenderer> = {
 export default meta;
 type Story = StoryObj<typeof DynamicRenderer>;
 
-const StoryData = ({ storyName = 'Default' }: { storyName?: string }) => {
-  const { data, loading, error } = useMenuGridItemConfig(storyName, mockApi);
+const StoryData = ({ storyName = 'Default', dataTitle, ...props }: { storyName?: string;[key: string]: any }) => {
+  const { data, loading, error } = useMenuGridItemConfig(dataTitle || storyName, mockApi);
 
   if (loading) return <div className="bg-green-200">Loading...</div>;
   if (error) return <div className="bg-red-">Error: {error}</div>;
+
+  if (data) {
+    data.data = { ...data.data, ...props };
+  }
 
   return data ? <div className="bg-primary min-h-64 overflow-hidden"><DynamicRenderer config={data} /></div> : null;
 };
 
 
 export const Default: Story = {
-  render: () => <StoryData storyName="Default" />,
+  render: (args) => <StoryData storyName="Default" dataTitle="Default" {...args} />,
 };
 
 export const Compact: Story = {
-  render: () => <StoryData storyName="Compact" />,
+  render: (args) => <StoryData storyName="Compact" dataTitle="Compact" {...args} />,
 };
 
 export const WithoutBadge: Story = {
-  render: () => <StoryData storyName="WithoutBadge" />,
+  render: (args) => <StoryData storyName="WithoutBadge" dataTitle="WithoutBadge" {...args} />,
 };
 export const WithoutDescription: Story = {
-  render: () => <StoryData storyName="WithoutDescription" />,
+  render: (args) => <StoryData storyName="WithoutDescription" dataTitle="WithoutDescription" {...args} />,
 };
 export const Minimal: Story = {
-  render: () => <StoryData storyName="Minimal" />,
+  render: (args) => <StoryData storyName="Minimal" dataTitle="Minimal" {...args} />,
 };
 export const LongTitle: Story = {
-  render: () => <StoryData storyName="LongTitle" />,
+  render: (args) => <StoryData storyName="LongTitle" dataTitle="LongTitle" {...args} />,
 };
 export const LongDescription: Story = {
-  render: () => <StoryData storyName="LongDescription" />,
+  render: (args) => <StoryData storyName="LongDescription" dataTitle="LongDescription" {...args} />,
 };
 export const SpecialBadge: Story = {
-  render: () => <StoryData storyName="SpecialBadge" />,
+  render: (args) => <StoryData storyName="SpecialBadge" dataTitle="SpecialBadge" {...args} />,
 };
 export const CustomColors: Story = {
-  render: () => <StoryData storyName="CustomColors" />,
+  render: (args) => <StoryData storyName="CustomColors" dataTitle="CustomColors" {...args} />,
 };
 export const DisabledStyle: Story = {
-  render: () => <StoryData storyName="DisabledStyle" />,
+  render: (args) => <StoryData storyName="DisabledStyle" dataTitle="DisabledStyle" {...args} />,
 };
 export const WithoutIcon: Story = {
-  render: () => <StoryData storyName="WithoutIcon" />,
+  render: (args) => <StoryData storyName="WithoutIcon" dataTitle="WithoutIcon" {...args} />,
 };
 export const MultipleBadges: Story = {
-  render: () => <StoryData storyName="MultipleBadges" />,
+  render: (args) => <StoryData storyName="MultipleBadges" dataTitle="MultipleBadges" {...args} />,
 };
 export const ExternalLink: Story = {
-  render: () => <StoryData storyName="ExternalLink" />,
+  render: (args) => <StoryData storyName="ExternalLink" dataTitle="ExternalLink" {...args} />,
 };
 export const PremiumFeature: Story = {
-  render: () => <StoryData storyName="PremiumFeature" />,
+  render: (args) => <StoryData storyName="PremiumFeature" dataTitle="PremiumFeature" {...args} />,
 };
 
 
