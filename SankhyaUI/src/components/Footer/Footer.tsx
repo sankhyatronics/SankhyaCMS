@@ -21,6 +21,8 @@ export interface FooterProps extends BaseProps {
     columns: FooterColumn[];
     socialLinks?: { icon: string; href: string }[];
     copyright?: string;
+    poweredBy?: string;
+    poweredByLink?: string;
     inverted?: boolean;
 }
 
@@ -30,6 +32,8 @@ export const Footer: React.FC<FooterProps> = ({
     description,
     columns,
     socialLinks,
+    poweredBy,
+    poweredByLink,
     copyright,
     inverted = false,
     className = '',
@@ -95,10 +99,8 @@ export const Footer: React.FC<FooterProps> = ({
 
                 <div className="footer-bottom">
                     <div className="footer-copyright">
-                        {copyright || `© ${new Date().getFullYear()} Company Name. All rights reserved.`}
-                    </div>
-                    <div className="footer-legal">
-                        {/* Optional legal links could go here */}
+                        <span>{copyright || `© ${new Date().getFullYear()} Company Name. All rights reserved.`}</span>
+                        {poweredBy && <a href={poweredByLink} target="_blank" rel="noopener noreferrer" className="footer-powered-by">{poweredBy}</a>}
                     </div>
                 </div>
             </div>

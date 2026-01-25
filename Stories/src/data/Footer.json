@@ -6,7 +6,9 @@
       "data": {
         "companyName": "MyCompany",
         "description": "Making the world a better place through constructing elegant hierarchies.",
-        "copyright": "© 2024 MyCompany, Inc. All rights reserved.",
+        "copyright": "© 2026 MyCompany, Inc. All rights reserved.",
+        "poweredBy": "Powered by SankhyaUI",
+        "poweredByLink": "https://sankhyaui.sankhyatronics.com/?path=/docs/introduction--docs",
         "socialLinks": [
           {
             "icon": "mdi:twitter",

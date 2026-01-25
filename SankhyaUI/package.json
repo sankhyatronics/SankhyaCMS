@@ -1,7 +1,22 @@
 {
   "name": "@sankhyatronics/sankhya-ui",
   "description": "Pure view React components (React 19) for making portals. These components are designed to use with headless CMS.",
-  "version": "0.0.7",
+  "keywords": [
+    "react",
+    "react19",
+    "ui-library",
+    "headless-cms",
+    "contentful",
+    "dynamic-rendering",
+    "json-driven",
+    "sankhya-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sankhyatronics/sankhya-ui.git"
+  },
+  "license": "MIT",
+  "version": "0.0.8",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",

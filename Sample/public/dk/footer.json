@@ -9,6 +9,8 @@
                 "inverted": true,
                 "description": "Førende inden for moderne CMS-løsninger og Agentic AI-udvikling.",
                 "copyright": "© 2026 Sankhyatronics. Alle rettigheder forbeholdes.",
+                "poweredBy": "Powered by SankhyaUI",
+                "poweredByLink": "https://sankhyaui.sankhyatronics.com/?path=/docs/introduction--docs",
                 "socialLinks": [
                     {
                         "icon": "mdi:linkedin",

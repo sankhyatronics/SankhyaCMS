@@ -60,6 +60,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
   }, [shouldShow, activeDropdown, id, setActiveDropdown]);
 
   const handleTitleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (children) {
       e.preventDefault();
       setActiveDropdown(isActive ? null : id);

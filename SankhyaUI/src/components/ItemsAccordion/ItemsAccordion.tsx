@@ -55,7 +55,10 @@ export const ItemsAccordion: React.FC<ItemsAccordionProps> = ({
                             <div key={item.id} className={`accordion-item ${isOpen ? 'open' : ''}`}>
                                 <button
                                     className="accordion-trigger"
-                                    onClick={() => toggleItem(item.id)}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        toggleItem(item.id);
+                                    }}
                                     aria-expanded={isOpen}
                                     aria-controls={`content-${item.id}`}
                                 >

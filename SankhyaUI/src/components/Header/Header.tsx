@@ -60,7 +60,10 @@ export const Header: React.FC<HeaderProps> = (props) => {
       </button>
 
       {/* Navigation Layer (Single Render) */}
-      <div className={`header-nav-container ${isMenuOpen ? 'active' : ''}`}>
+      <div 
+        className={`header-nav-container ${isMenuOpen ? 'active' : ''}`}
+        onClick={() => setIsMenuOpen(false)}
+      >
         {/* Main Navigation */}
         <div className="header-nav">
           {menuBar}
