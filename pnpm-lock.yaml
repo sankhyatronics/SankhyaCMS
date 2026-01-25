@@ -188,6 +188,9 @@ importers:
       remark-breaks:
         specifier: 'catalog:'
         version: 4.0.0
+      remark-gfm:
+        specifier: 'catalog:'
+        version: 4.0.1
     devDependencies:
       '@eslint/js':
         specifier: 'catalog:'

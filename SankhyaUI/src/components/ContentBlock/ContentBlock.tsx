@@ -2,6 +2,7 @@ import React from 'react';
 import './ContentBlock.css';
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
+import remarkGfm from 'remark-gfm';
 
 import { SectionProps } from '../Common/BaseComponent.interfaces';
 
@@ -45,7 +46,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = ({
                     {format === 'html' ? (
                         <div dangerouslySetInnerHTML={{ __html: content || '' }} />
                     ) : (
-                        <ReactMarkdown remarkPlugins={[remarkBreaks]}>{content || ''}</ReactMarkdown>
+                        <ReactMarkdown remarkPlugins={[remarkBreaks, remarkGfm]}>{content || ''}</ReactMarkdown>
                     )}
                 </div>
             </div>

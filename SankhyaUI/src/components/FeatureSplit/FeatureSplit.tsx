@@ -3,6 +3,7 @@ import './FeatureSplit.css';
 import { Icon } from '@iconify/react';
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
+import remarkGfm from 'remark-gfm';
 import { SectionProps, ActionableProps } from '../Common/BaseComponent.interfaces';
 
 export interface FeatureSplitItem {
@@ -40,7 +41,7 @@ export const FeatureSplit: React.FC<FeatureSplitProps> = ({
 
                     {subtitle && (
                         <div className="feature-split-description">
-                            <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+                            <ReactMarkdown remarkPlugins={[remarkBreaks, remarkGfm]}>
                                 {subtitle}
                             </ReactMarkdown>
                         </div>
@@ -58,7 +59,7 @@ export const FeatureSplit: React.FC<FeatureSplitProps> = ({
                                     <div>
                                         <h3 className="card-title feature-split-item-title">{item.title}</h3>
                                         <div className="feature-split-item-description">
-                                            <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+                                            <ReactMarkdown remarkPlugins={[remarkBreaks, remarkGfm]}>
                                                 {item.description}
                                             </ReactMarkdown>
                                         </div>

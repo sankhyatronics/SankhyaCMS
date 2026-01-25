@@ -4,6 +4,7 @@ import { Card } from '../Card/Card';
 import { Icon } from '@iconify/react';
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
+import remarkGfm from 'remark-gfm';
 
 import { BaseProps, ActionableProps } from '../Common/BaseComponent.interfaces';
 
@@ -34,7 +35,7 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
                 )}
                 <h3 className="card-title feature-title">{title}</h3>
                 <div className="card-description feature-description">
-                    <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+                    <ReactMarkdown remarkPlugins={[remarkBreaks, remarkGfm]}>
                         {description}
                     </ReactMarkdown>
                 </div>

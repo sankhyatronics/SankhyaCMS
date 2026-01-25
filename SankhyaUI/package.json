@@ -17,7 +17,7 @@
   },
   "homepage": "https://sankhyaui.sankhyatronics.com/?path=/docs/introduction--docs",
   "license": "MIT",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -53,7 +53,8 @@
     "@emotion/is-prop-valid": "catalog:",
     "motion": "catalog:",
     "react-markdown": "catalog:",
-    "remark-breaks": "catalog:"
+    "remark-breaks": "catalog:",
+    "remark-gfm": "catalog:"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
