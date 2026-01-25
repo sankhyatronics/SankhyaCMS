@@ -15,8 +15,9 @@
     "type": "git",
     "url": "git+https://github.com/sankhyatronics/sankhya-ui.git"
   },
+  "homepage": "https://sankhyaui.sankhyatronics.com/?path=/docs/introduction--docs",
   "license": "MIT",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",

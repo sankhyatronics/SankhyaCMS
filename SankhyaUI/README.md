@@ -3,9 +3,11 @@
 [![npm version](https://img.shields.io/npm/v/@sankhyatronics/sankhya-ui.svg)](https://www.npmjs.com/package/@sankhyatronics/sankhya-ui)
 
 The core UI library for the SankhyaUI system. Build **dynamic, JSON-driven portals** with ease.  
-**Pure view React components (React 19)** designed for seamless integration with **headless CMS** platforms like **Storyblok**, **Contentful**, or any custom API.
+**Pure view React components (React 19)** designed for seamless integration with **headless CMS** platforms.
 
 [**Explore the Docs & Storybook »**](https://sankhyaui.sankhyatronics.com/?path=/docs/introduction--docs)
+
+[**Sample App »**](https://sample-ui.sankhyatronics.com/)
 
 ## Features
 
