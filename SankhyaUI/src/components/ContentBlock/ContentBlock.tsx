@@ -5,10 +5,10 @@ import remarkBreaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 
 import { SectionProps } from '../Common/BaseComponent.interfaces';
+import { useMarkdown } from '../../hooks/useMarkdown';
 
 export interface ContentBlockProps extends SectionProps {
-    content?: string; // Markdown string
-    format?: 'html' | 'markdown';
+    contentUrl?: string; // URL to Markdown file
     image?: {
         imageSrc: string;
         alt: string;
@@ -21,12 +21,13 @@ export interface ContentBlockProps extends SectionProps {
 export const ContentBlock: React.FC<ContentBlockProps> = ({
     title,
     subtitle,
-    content,
-    format = 'markdown',
+    contentUrl,
     className = '',
     image,
     inverted = false,
 }) => {
+    const { content, loading, error } = useMarkdown(contentUrl);
+
     return (
         <section className={`content-block-section ${inverted ? 'theme-inverted' : ''} ${className}`}>
             <div className="content-block-container">
@@ -43,9 +44,9 @@ export const ContentBlock: React.FC<ContentBlockProps> = ({
                 )}
 
                 <div className="content-block-body markdown-body">
-                    {format === 'html' ? (
-                        <div dangerouslySetInnerHTML={{ __html: content || '' }} />
-                    ) : (
+                    {loading && <div>Loading content...</div>}
+                    {error && <div>Error loading content.</div>}
+                    {!loading && !error && (
                         <ReactMarkdown remarkPlugins={[remarkBreaks, remarkGfm]}>{content || ''}</ReactMarkdown>
                     )}
                 </div>

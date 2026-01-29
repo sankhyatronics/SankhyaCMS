@@ -5,7 +5,7 @@ import { Icon } from '@iconify/react';
 export interface AccordionItem {
     id: string;
     title: string;
-    content: React.ReactNode;
+    content: string;
 }
 
 export interface ItemsAccordionProps {
