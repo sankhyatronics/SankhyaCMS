@@ -35,3 +35,33 @@ packages.forEach(pkg => {
     fs.writeFileSync(pkg.path, JSON.stringify(pkgJson, null, 2));
     console.log(`✓ Updated ${pkg.name} ${pkg.type === 'client' ? `dependency to ${pkgJson.dependencies['@sankhyatronics/sankhya-ui']}` : `to v${newVersion}`}`);
 });
+
+// Update pnpm-workspace.yaml catalog
+const workspacePath = './pnpm-workspace.yaml';
+try {
+    let workspaceContent = fs.readFileSync(workspacePath, 'utf8');
+    const catalogEntry = `'@sankhyatronics/sankhya-ui': ${isResetMode ? 'workspace:*' : newVersion}`;
+
+    // Regex to find the catalog entry. Handles potential quotes and spacing.
+    // It looks for '@sankhyatronics/sankhya-ui': ... (until end of line)
+    const regex = /('@sankhyatronics\/sankhya-ui'\s*:\s*)(.*)/;
+
+    if (regex.test(workspaceContent)) {
+        workspaceContent = workspaceContent.replace(regex, `$1${isResetMode ? 'workspace:*' : newVersion}`);
+        console.log(`✓ Updated pnpm-workspace.yaml catalog to ${isResetMode ? 'workspace:*' : newVersion}`);
+    } else {
+        // If not found, append to catalog section (simple append, assuming catalog exists)
+        // This is a bit risky with simple strings, but assuming structure is maintained
+        if (workspaceContent.includes('catalog:')) {
+            workspaceContent = workspaceContent.replace('catalog:', `catalog:\n  ${catalogEntry}`);
+            console.log(`✓ Added pnpm-workspace.yaml catalog entry ${isResetMode ? 'workspace:*' : newVersion}`);
+        } else {
+            console.log('! Could not find catalog section in pnpm-workspace.yaml');
+        }
+    }
+
+    fs.writeFileSync(workspacePath, workspaceContent, 'utf8');
+
+} catch (e) {
+    console.error('Error updating pnpm-workspace.yaml:', e);
+}
