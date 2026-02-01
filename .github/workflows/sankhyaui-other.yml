@@ -20,7 +20,7 @@ jobs:
         name: Install pnpm
       
       - name: Install all dependencies
-        run: pnpm install && pnpm setversion
+        run: pnpm setversion && pnpm install
 
       - name: Build
         run: pnpm build
