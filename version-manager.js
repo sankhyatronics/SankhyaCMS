@@ -4,7 +4,9 @@ const path = require('path');
 
 const packages = [
     { name: 'SankhyaUI', path: './SankhyaUI/package.json' },
-    { name: 'Stories', path: './Stories/package.json' }
+    { name: 'Stories', path: './Stories/package.json' },
+    { name: 'Sample', path: './Sample/package.json' },
+    { name: 'sankhyaui-docs', path: './sankhyaui-docs/package.json' }
 ];
 
 const rootPkgJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));

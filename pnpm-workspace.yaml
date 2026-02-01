@@ -2,7 +2,7 @@ packages:
   - SankhyaUI
   - Stories
   - Sample
-
+  - sankhyaui-docs
 
 catalog:
   '@eslint/js': 9.39.1
@@ -33,6 +33,15 @@ catalog:
   vite: 7.2.4
   vite-plugin-dts: 4.5.4
   vite-plugin-lib-inject-css: 2.2.2
-  "@emotion/is-prop-valid": "^1.4.0"
-  "remark-breaks": "^4.0.0"
-  "remark-gfm": "^4.0.1"
+  '@emotion/is-prop-valid': 1.4.0
+  remark-breaks: 4.0.0
+  remark-gfm: 4.0.1
+  '@docusaurus/core': 3.9.2
+  '@docusaurus/preset-classic': 3.9.2
+  '@mdx-js/react': 3.0.0
+  clsx: 2.0.0
+  prism-react-renderer: 2.3.0
+  '@docusaurus/module-type-aliases': 3.9.2
+  '@docusaurus/tsconfig': 3.9.2
+  '@docusaurus/types': 3.9.2
+  '@docusaurus/theme-common': 3.9.2

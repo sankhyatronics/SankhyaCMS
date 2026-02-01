@@ -1,0 +1,40 @@
+# ContentBlock
+
+A flexible content component that supports both Markdown and HTML rendering.
+
+import StorybookEmbed from '../../src/components/StorybookEmbed';
+
+## Component Preview
+
+<StorybookEmbed id="components-contentblock--default" height="500px" />
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `title` | `string` | Optional title for the section. |
+| `subtitle` | `string` | Optional subtitle for the section. |
+| `content` | `url` | Url of content to render (Markdown file). |
+| `format` | `'html' \| 'markdown'` | Format of the content. Default: `'markdown'`. |
+| `image` | `object` | Optional image object with `imageSrc`, `alt`, and optional `caption`. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+| `inverted` | `boolean` | Whether to use inverted theme colors. Default: `false`. |
+
+## JSON Data Example
+
+```json
+{
+  "type": "ContentBlock",
+  "data": {
+    "title": "Markdown Support Example",
+    "subtitle": "Authoring content with Markdown",
+    "format": "markdown",
+    "image": {
+      "imageSrc": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      "alt": "Code editor",
+      "caption": "Writing in Markdown"
+    },
+    "content": "./Content.MD"
+  }
+}
+```
