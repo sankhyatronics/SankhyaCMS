@@ -1,0 +1,48 @@
+name: SankhyaUI Stories, Sample and Docs
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    name: Deployment
+    steps:
+      - name: git-checkout
+        uses: actions/checkout@v4
+        
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+      
+      - name: Install all dependencies
+        run: pnpm install && pnpm setversion
+
+      - name: Build
+        run: pnpm build
+
+      - name: Deploy Stories
+        uses: sebastianpopp/ftp-action@releases/v2
+        with:
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}.sankhyaui-stories.sankhyatronics.com
+          password: ${{ secrets.FTP_PASSWORD }}
+          localDir: "Stories/storybook-static"
+          remoteDir: "/public_html"
+
+      - name: Deploy Sample
+        uses: sebastianpopp/ftp-action@releases/v2
+        with:
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}.sankhyaui-sample.sankhyatronics.com
+          password: ${{ secrets.FTP_PASSWORD }}
+          localDir: "Sample/dist"
+          remoteDir: "/public_html"
+
+      - name: Deploy Documentation
+        uses: sebastianpopp/ftp-action@releases/v2
+        with:
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}.sankhyaui.sankhyatronics.com
+          password: ${{ secrets.FTP_PASSWORD }}
+          localDir: "sankhyaui-docs/build"
+          remoteDir: "/public_html"

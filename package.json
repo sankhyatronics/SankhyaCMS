@@ -6,11 +6,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "pnpm update-version && pnpm -r --workspace-concurrency=1 build",
+    "build": "pnpm -r --workspace-concurrency=1 build",
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",
     "dev": "pnpm -r dev",
-    "update-version": "node version-manager.js"
+    "setversion": "node version-manager.js --set",
+    "resetversion": "node version-manager.js --reset"
   },
   "keywords": [],
   "license": "ISC",
