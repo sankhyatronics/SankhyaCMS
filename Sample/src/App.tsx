@@ -1,10 +1,12 @@
 import { Route, Routes } from 'react-router';
 import { Shell } from './components/Shell';
-import { UserProvider } from './contexts/UserContext';
+import { UserProvider } from '@sankhyatronics/sankhya-ui';
 import { DynamicPage } from './pages/DynamicPage';
+import ScrollToTop from './components/ScrollToTop';
 
 const App = () => (
   <UserProvider>
+    <ScrollToTop />
     <Routes>
       <Route element={<Shell />}>
         {/* Home route */}

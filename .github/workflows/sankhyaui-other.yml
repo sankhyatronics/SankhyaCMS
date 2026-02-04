@@ -33,6 +33,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           localDir: "Stories/storybook-static"
           remoteDir: "/public_html"
+          options: "--delete --asci"
 
       - name: Deploy Sample
         uses: sebastianpopp/ftp-action@releases/v2
@@ -42,6 +43,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           localDir: "Sample/dist"
           remoteDir: "/public_html"
+          options: "--delete --asci"
 
       - name: Deploy Documentation
         uses: sebastianpopp/ftp-action@releases/v2
@@ -51,3 +53,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           localDir: "sankhyaui-docs/build"
           remoteDir: "/public_html"
+          options: "--delete --asci"

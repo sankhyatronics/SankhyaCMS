@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
+import { Link } from 'react-router';
 import './Header.css';
 import '../Common/Common.css';
 import { BaseProps } from '../Common/BaseComponent.interfaces';
@@ -31,22 +32,38 @@ export const Header: React.FC<HeaderProps> = (props) => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const isLogoInternal = logoHref && logoHref.startsWith('/') && logoTarget === '_self';
+
+  const LogoContent = (
+    <img
+      src={imageSrc}
+      alt={altText}
+    />
+  );
+
   return (
     <header className={`header ${sticky ? 'header-sticky' : ''} ${inverted ? 'theme-inverted' : ''} ${className}`}>
       {/* Logo */}
       <div className="header-logo-wrapper">
         {imageSrc && (
-          <a
-            href={logoHref || '#'}
-            target={logoTarget}
-            className={`${logoClassName} hover-lift`}
-            aria-label="Home"
-          >
-            <img
-              src={imageSrc}
-              alt={altText}
-            />
-          </a>
+          isLogoInternal ? (
+            <Link
+              to={logoHref}
+              className={`${logoClassName} hover-lift`}
+              aria-label="Home"
+            >
+              {LogoContent}
+            </Link>
+          ) : (
+            <a
+              href={logoHref || '#'}
+              target={logoTarget}
+              className={`${logoClassName} hover-lift`}
+              aria-label="Home"
+            >
+              {LogoContent}
+            </a>
+          )
         )}
       </div>
 
@@ -60,7 +77,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
       </button>
 
       {/* Navigation Layer (Single Render) */}
-      <div 
+      <div
         className={`header-nav-container ${isMenuOpen ? 'active' : ''}`}
         onClick={() => setIsMenuOpen(false)}
       >

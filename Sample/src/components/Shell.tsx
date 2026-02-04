@@ -1,12 +1,12 @@
 import React from 'react';
-import { Footer, DropdownProvider, DynamicRenderer } from '@sankhyatronics/sankhya-ui';
+import { Footer, DropdownProvider, DynamicRenderer, useUser, CookieConsent } from '@sankhyatronics/sankhya-ui';
 import { Outlet } from 'react-router';
 import { cmsApiFetchers } from '../api/cmsApiService';
-import { useUser } from '../contexts/UserContext';
 
 export const Shell: React.FC = () => {
     const [headerData, setHeaderData] = React.useState<any>(null);
     const [footerData, setFooterData] = React.useState<any>(null);
+    const [cookieConsentData, setCookieConsentData] = React.useState<any>(null);
     const { language, setLanguage, toggleTheme } = useUser();
 
     const handlers = {
@@ -21,15 +21,19 @@ export const Shell: React.FC = () => {
         }
     };
 
+
+
     React.useEffect(() => {
         const fetchData = async () => {
             try {
                 const header = await cmsApiFetchers.getHeader(language);
                 const footer = await cmsApiFetchers.getFooter(language);
+                const cookieConsent = await cmsApiFetchers.getCookieConsent(language);
 
                 // Clone data to ensure new references and trigger rerenders
                 const updatedHeader = JSON.parse(JSON.stringify(header));
                 const updatedFooter = JSON.parse(JSON.stringify(footer?.data || footer));
+                const updatedCookieConsent = JSON.parse(JSON.stringify(cookieConsent));
 
                 // Inject current language as defaultValue and value for the language selector
                 const findAndSetLanguage = (config: any) => {
@@ -64,6 +68,7 @@ export const Shell: React.FC = () => {
 
                 setHeaderData(updatedHeader);
                 setFooterData(updatedFooter);
+                setCookieConsentData(updatedCookieConsent);
             } catch (e) {
                 console.error("Failed to load shell data", e);
             }
@@ -83,6 +88,11 @@ export const Shell: React.FC = () => {
             {footerData && (
                 <Footer
                     {...footerData}
+                />
+            )}
+            {cookieConsentData && (
+                <CookieConsent
+                    {...cookieConsentData}
                 />
             )}
         </div>

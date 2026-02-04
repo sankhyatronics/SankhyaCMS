@@ -112,7 +112,7 @@ function LandingPage() {
 - **Dropdown**: Dropdown menu component.
 
 ### Inputs & Actions
-- **CTASection**: Call-to-Action section to drive user engagement.
+- **PromoBanner**: Call-to-Action section to drive user engagement.
 - **IconButton**: Button with an icon.
 - **Select**: Dropdown selection input.
 

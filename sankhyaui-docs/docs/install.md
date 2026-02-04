@@ -73,7 +73,7 @@ function Page() {
 SankhyaUI offers a comprehensive set of components categorized for different needs:
 
 - **Layout**: `BentoGrid`, `Card`, `ContentBlock`, `FeatureSplit`
-- **Marketing**: `Hero`, `Carousel`, `Stats`, `Testimonials`, `CTASection`
+- **Marketing**: `Hero`, `Carousel`, `Stats`, `Testimonials`, `PromoBanner`
 - **Navigation**: `Header`, `Footer`, `MenuGrid`, `Dropdown`
 - **Forms & Actions**: `Select`, `IconButton`
 

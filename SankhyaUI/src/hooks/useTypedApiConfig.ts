@@ -23,9 +23,10 @@ type ComponentType =
   | 'ContentBlock'
   | 'FeaturesSection'
   | 'BentoGrid'
-  | 'CTASection'
+  | 'PromoBanner'
   | 'Testimonials'
   | 'Select'
+  | 'CookieConsent'
   | 'Carousel';
 
 const componentEndpoints: Record<ComponentType, string> = {
@@ -42,9 +43,10 @@ const componentEndpoints: Record<ComponentType, string> = {
   ContentBlock: '/content-block',
   FeaturesSection: '/features-section',
   BentoGrid: '/bento-grid',
-  CTASection: '/cta-section',
+  PromoBanner: '/cta-section',
   Testimonials: '/testimonials',
   Select: '/select',
+  CookieConsent: '/cookie-consent',
   Carousel: '/carousel',
 };
 

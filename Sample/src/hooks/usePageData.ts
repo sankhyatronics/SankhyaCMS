@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { cmsApiFetchers } from '../api/cmsApiService';
-import { useUser } from '../contexts/UserContext';
+import { useUser } from '@sankhyatronics/sankhya-ui';
 
 export interface PageSection {
     type: string;

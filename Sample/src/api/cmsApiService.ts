@@ -91,6 +91,7 @@ export function normalizeData<T>(response: any): T {
 export const cmsApiFetchers = {
   getHeader: (lang: string = 'en') => cmsFetch<any>('header.json', lang),
   getFooter: (lang: string = 'en') => cmsFetch<any>('footer.json', lang),
+  getCookieConsent: (lang: string = 'en') => cmsFetch<any>('cookieConsent.json', lang),
 
   // Generic page fetcher
   getPage: (pageId: string, lang: string = 'en') => {
@@ -100,10 +101,5 @@ export const cmsApiFetchers = {
     // For pages (which are arrays of sections), we usually want the raw array
     // unless you specifically wrapped them in a story object. 
     return cmsFetch<any[]>(filename, lang, { skipStoryNormalization: true });
-  },
-
-  // Specific pages (shortcuts)
-  getHome: (lang: string = 'en') => cmsApiFetchers.getPage('home', lang),
-  getAbout: (lang: string = 'en') => cmsApiFetchers.getPage('about', lang),
-  getServices: (lang: string = 'en') => cmsApiFetchers.getPage('services', lang),
+  }
 };

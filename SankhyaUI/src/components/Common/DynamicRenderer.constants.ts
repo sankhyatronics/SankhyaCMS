@@ -12,10 +12,11 @@ import { FeatureItem } from '../FeaturesSection/FeatureItem';
 import { BentoGrid } from '../BentoGrid/BentoGrid';
 import { Dropdown } from '../Dropdown/Dropdown';
 import { Stats } from '../Stats/Stats';
-import { CTASection } from '../CTASection/CTASection';
+import { PromoBanner } from '../PromoBanner/PromoBanner';
 import { Testimonials } from '../Testimonials/Testimonials';
 import { Select } from '../Select/Select';
 import { Carousel } from '../Carousel/Carousel';
+import { CookieConsent } from '../CookieConsent/CookieConsent';
 
 // Base components (excluding Dropdown to avoid circular dependency)
 export const baseComponents = {
@@ -32,10 +33,11 @@ export const baseComponents = {
     FeatureItem,
     BentoGrid,
     Stats,
-    CTASection,
+    PromoBanner,
     Testimonials,
     Select,
-    Carousel
+    Carousel,
+    CookieConsent
 } as const;
 
 // Type-safe component registry

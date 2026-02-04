@@ -49,8 +49,8 @@ export function useBentoGridConfig(story: string, apiService: ApiService, varian
   return useTypedApiConfig({ component: 'BentoGrid', story, apiService, variant });
 }
 
-export function useCTASectionConfig(story: string, apiService: ApiService, variant?: string) {
-  return useTypedApiConfig({ component: 'CTASection', story, apiService, variant });
+export function usePromoBannerConfig(story: string, apiService: ApiService, variant?: string) {
+  return useTypedApiConfig({ component: 'PromoBanner', story, apiService, variant });
 }
 
 export function useTestimonialsConfig(story: string, apiService: ApiService, variant?: string) {
@@ -63,4 +63,8 @@ export function useSelectConfig(story: string, apiService: ApiService, variant?:
 
 export function useCarouselConfig(story: string, apiService: ApiService, variant?: string) {
   return useTypedApiConfig({ component: 'Carousel', story, apiService, variant });
+}
+
+export function useCookieConsentConfig(story: string, apiService: ApiService, variant?: string) {
+  return useTypedApiConfig({ component: 'CookieConsent', story, apiService, variant });
 }

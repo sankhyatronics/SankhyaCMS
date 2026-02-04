@@ -37,6 +37,6 @@ export const UsingHero: Story = {
     render: (args) => <StoryData storyName="Using Hero" dataTitle="UsingHero" {...args} />,
 };
 
-export const UsingCTASection: Story = {
-    render: (args) => <StoryData storyName="Using CTASection" dataTitle="UsingCTASection" {...args} />,
+export const UsingPromoBanner: Story = {
+    render: (args) => <StoryData storyName="Using PromoBanner" dataTitle="UsingPromoBanner" {...args} />,
 };

@@ -24,7 +24,13 @@ const StoryData = ({ storyName = 'Default', dataTitle, ...props }: { storyName?:
     if (loading) return <div className="bg-green-200">Loading...</div>;
     if (error) return <div className="bg-red-200">Error: {error}</div>;
 
-    if (data) {
+    // If data is an array (e.g. Footer + CookieConsent), we apply props to the Footer component
+    if (Array.isArray(data)) {
+        const footerIndex = data.findIndex((item: any) => item.type === 'Footer');
+        if (footerIndex !== -1) {
+            data[footerIndex].data = { ...data[footerIndex].data, ...props };
+        }
+    } else if (data) {
         data.data = { ...data.data, ...props };
     }
 

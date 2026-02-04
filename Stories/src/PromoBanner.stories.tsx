@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { DynamicRenderer, CTASection, registerComponent, useCTASectionConfig } from '@sankhyatronics/sankhya-ui';
+import { DynamicRenderer, PromoBanner, registerComponent, usePromoBannerConfig } from '@sankhyatronics/sankhya-ui';
 import { mockApi } from './data/mockApiService';
 
-registerComponent('CTASection', CTASection);
+registerComponent('PromoBanner', PromoBanner);
 
 const meta: Meta<typeof DynamicRenderer> = {
-    title: 'Components/CTASection',
+    title: 'Components/PromoBanner',
     component: DynamicRenderer,
     parameters: {
         layout: 'fullscreen',
@@ -16,7 +16,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const StoryData = ({ storyName = 'Default', dataTitle, inverted = false, ...props }: { storyName?: string, dataTitle?: string, inverted?: boolean;[key: string]: any }) => {
-    const { data, loading, error } = useCTASectionConfig(dataTitle || storyName, mockApi);
+    const { data, loading, error } = usePromoBannerConfig(dataTitle || storyName, mockApi);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;

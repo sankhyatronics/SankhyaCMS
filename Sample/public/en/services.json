@@ -61,7 +61,7 @@
     {
         "title": "Get Started",
         "Data": {
-            "type": "CTASection",
+            "type": "PromoBanner",
             "data": {
                 "title": "Ready to Transform Your Business?",
                 "subtitle": "Join hundreds of leaders who rely on SankhyaCMS for their digital strategy.",

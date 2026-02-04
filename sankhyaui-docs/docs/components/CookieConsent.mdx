@@ -1,0 +1,65 @@
+# CookieConsent
+
+A component that displays a cookie consent banner at the bottom of the screen. It checks `localStorage` to see if the user has already accepted or refused cookies.
+
+import StorybookEmbed from '../../src/components/StorybookEmbed';
+
+## Component Preview
+
+<StorybookEmbed id="components-cookieconsent--default" height="200px" />
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `message` | `ReactNode` | Custom message content. Defaults to a standard cookie message. |
+| `acceptButtonText` | `string` | Text for the accept button. Default: `Accept`. |
+| `refuseButtonText` | `string` | Text for the refuse button. Default: `Refuse`. |
+| `onAccept` | `() => void` | Callback function when the accept button is clicked. |
+| `onRefuse` | `() => void` | Callback function when the refuse button is clicked. |
+| `privacyPolicyLink` | `string` | URL for the privacy policy link. |
+| `privacyPolicyText` | `string` | Text for the privacy policy link. Default: `Privacy Policy`. |
+| `storageKey` | `string` | localStorage key to store consent status. Default: `sankhya_ui_cookie_consent`. |
+| `className` | `string` | Optional CSS class name for the wrapper. |
+
+## Usage Example
+
+```tsx
+import { CookieConsent, UserProvider } from '@sankhyatronics/sankhya-ui';
+
+function App() {
+  return (
+    <UserProvider>
+        <CookieConsent
+        privacyPolicyLink="/privacy"
+        onAccept={() => console.log('Accepted')}
+        />
+        <MainContent />
+    </UserProvider>
+  );
+}
+```
+
+## Controlling Behavior
+
+The `CookieConsent` component integrates with the `UserProvider` to store the user's choice. You can access this choice using the `useUser` hook to conditionally render content or initialize scripts.
+
+```tsx
+import { useUser } from '@sankhyatronics/sankhya-ui';
+import { useEffect } from 'react';
+
+const AnalyticsComponent = () => {
+    const { cookieConsent } = useUser();
+
+    useEffect(() => {
+        if (cookieConsent === 'accepted') {
+            // Initialize analytics
+            console.log('Initializing Analytics...');
+        }
+    }, [cookieConsent]);
+
+    if (cookieConsent !== 'accepted') return null;
+
+    return <div>Analytics Active</div>;
+};
+```

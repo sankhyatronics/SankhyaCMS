@@ -1,0 +1,12 @@
+[
+    {
+        "title": "Default",
+        "data": {
+            "type": "CookieConsent",
+            "data": {
+                "privacyPolicyLink": "https://example.com/privacy",
+                "storageKey": "cookie_consent_demo_default"
+            }
+        }
+    }
+]

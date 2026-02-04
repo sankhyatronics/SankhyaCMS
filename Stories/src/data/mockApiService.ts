@@ -11,10 +11,11 @@ import featureSplitStories from './FeatureSplit.json';
 import contentBlockStories from './ContentBlock.json';
 import featuresSectionStories from './FeaturesSection.json';
 import bentoGridStories from './BentoGrid.json';
-import ctaSectionStories from './CTASection.json';
+import PromoBannerStories from './PromoBanner.json';
 import testimonialsStories from './Testimonials.json';
 import selectStories from './Select.json';
 import carouselStories from './Carousel.json';
+import CookieConsentStories from './CookieConsent.json';
 
 
 // Simple mock API service
@@ -36,6 +37,15 @@ export class MockApiService implements ApiService {
     // Handle standard structure: { title: "...", data: { type: "...", data: { ... } } }
     // Support both uppercase and lowercase keys for robustness
     const topData = item.Data || item.data;
+
+    // console.log('normalizeData item:', item);
+    // console.log('normalizeData topData:', topData, 'isArray:', Array.isArray(topData));
+
+    // Handle array config (e.g. multiple components)
+    if (Array.isArray(topData)) {
+      return topData;
+    }
+
     if (topData && topData.type) {
       const innerData = topData.data || topData.Data;
       if (innerData) {
@@ -185,7 +195,7 @@ export class MockApiService implements ApiService {
         }
       case '/cta-section':
         const ctaKey = queryParams.story || 'Default';
-        const cta = ctaSectionStories.find(item => item.title === ctaKey);
+        const cta = PromoBannerStories.find(item => item.title === ctaKey);
         return {
           data: this.normalizeData(cta) as T,
           status: 200,
@@ -212,6 +222,14 @@ export class MockApiService implements ApiService {
         const carousel = carouselStories.find(item => item.title === carouselKey);
         return {
           data: this.normalizeData(carousel) as T,
+          status: 200,
+          statusText: 'OK'
+        }
+      case '/cookie-consent':
+        const cookieConsentKey = queryParams.story || 'Default';
+        const cookieConsent = CookieConsentStories.find(item => item.title === cookieConsentKey);
+        return {
+          data: this.normalizeData(cookieConsent) as T,
           status: 200,
           statusText: 'OK'
         }
@@ -242,8 +260,9 @@ export class MockApiService implements ApiService {
       { method: 'GET', endpoint: '/content-block', description: 'Returns ContentBlock component config' },
       { method: 'GET', endpoint: '/features-section', description: 'Returns FeaturesSection component config' },
       { method: 'GET', endpoint: '/bento-grid', description: 'Returns BentoGrid component config' },
-      { method: 'GET', endpoint: '/cta-section', description: 'Returns CTASection component config' },
+      { method: 'GET', endpoint: '/cta-section', description: 'Returns PromoBanner component config' },
       { method: 'GET', endpoint: '/testimonials', description: 'Returns Testimonials component config' },
+      { method: 'GET', endpoint: '/cookie-consent', description: 'Returns CookieConsent component config' },
     ];
   }
 }
@@ -276,5 +295,6 @@ export const mockApiFetchers = {
   getBentoGrid: () => mockFetch('/bento-grid'),
   getSelect: () => mockFetch('/select'),
   getCarousel: () => mockFetch('/carousel'),
+  getCookieConsent: () => mockFetch('/cookie-consent'),
 
 };

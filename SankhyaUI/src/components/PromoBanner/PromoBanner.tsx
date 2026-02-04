@@ -1,14 +1,14 @@
 import React from 'react';
-import './CTASection.css';
+import './PromoBanner.css';
 import '../Common/Common.css';
 import { SectionProps, ActionableProps } from '../Common/BaseComponent.interfaces';
 
-export interface CTASectionProps extends SectionProps, ActionableProps {
+export interface PromoBannerProps extends SectionProps, ActionableProps {
     imageSrc?: string;
     inverted?: boolean;
 }
 
-export const CTASection: React.FC<CTASectionProps> = ({
+export const PromoBanner: React.FC<PromoBannerProps> = ({
     title,
     subtitle,
     actionLabel,

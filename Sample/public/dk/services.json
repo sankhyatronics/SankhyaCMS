@@ -61,7 +61,7 @@
     {
         "title": "Kom i gang",
         "Data": {
-            "type": "CTASection",
+            "type": "PromoBanner",
             "data": {
                 "title": "Klar til at transformere din forretning?",
                 "subtitle": "Slut dig til hundredvis af ledere, der stoler på SankhyaCMS til deres digitale strategi.",

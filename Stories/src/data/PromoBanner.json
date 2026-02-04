@@ -2,7 +2,7 @@
   {
     "title": "Default",
     "data": {
-      "type": "CTASection",
+      "type": "PromoBanner",
       "data": {
         "title": "Ready to Transform Your Workflow?",
         "subtitle": "Join thousands of teams who are already scaling faster with our platform.",

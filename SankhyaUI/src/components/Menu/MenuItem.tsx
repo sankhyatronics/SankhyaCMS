@@ -1,5 +1,6 @@
 import { Icon } from '@iconify/react';
 import { motion } from "motion/react";
+import { Link } from 'react-router';
 import './MenuItem.css';
 import '../Common/Common.css';
 
@@ -40,16 +41,8 @@ export const MenuItem: React.FC<MenuItemProps> = (props) => {
     className
   ].filter(Boolean).join(' ');
 
-  return (
-    <motion.a
-      href={href}
-      target={target}
-      onClick={onClick}
-      className={menuItemClasses}
-      whileHover={{ scale: 1.01, x: 4 }}
-      whileTap={{ scale: 0.99 }}
-      transition={{ duration: 0.1 }}
-    >
+  const Content = (
+    <>
       {/* Icon */}
       {icon && (
         <motion.div
@@ -93,6 +86,37 @@ export const MenuItem: React.FC<MenuItemProps> = (props) => {
           </motion.p>
         )}
       </div>
+    </>
+  );
+
+  const isInternal = href && href.startsWith('/') && target === '_self';
+
+  if (isInternal) {
+    return (
+      <Link to={href} className={menuItemClasses} onClick={onClick}>
+        <motion.div
+          whileHover={{ scale: 1.01, x: 4 }}
+          whileTap={{ scale: 0.99 }}
+          transition={{ duration: 0.1 }}
+          style={{ display: 'flex', alignItems: 'center', width: '100%' }}
+        >
+          {Content}
+        </motion.div>
+      </Link>
+    );
+  }
+
+  return (
+    <motion.a
+      href={href}
+      target={target}
+      onClick={onClick}
+      className={menuItemClasses}
+      whileHover={{ scale: 1.01, x: 4 }}
+      whileTap={{ scale: 0.99 }}
+      transition={{ duration: 0.1 }}
+    >
+      {Content}
     </motion.a>
   );
 };
