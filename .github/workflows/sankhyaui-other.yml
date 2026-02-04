@@ -20,7 +20,7 @@ jobs:
         name: Install pnpm
       
       - name: Install all dependencies
-        run: pnpm setversion && pnpm install
+        run: pnpm setversion && pnpm install --no-frozen-lockfile
 
       - name: Build
         run: pnpm build

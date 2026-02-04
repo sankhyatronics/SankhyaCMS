@@ -26,7 +26,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
-        run: pnpm install && pnpm setversion
+        run: pnpm install --no-frozen-lockfile && pnpm setversion
 
       - name: Build
         working-directory: SankhyaUI
