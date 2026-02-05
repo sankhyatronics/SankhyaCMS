@@ -29,7 +29,7 @@
                         "title": "Office 1",
                         "className": "shadow-lg rounded-lg p-6 bg-primary-50",
                         "format": "markdown",
-                        "content": "### Main Hub\n\nStsstndgade 100\nKøbenhavn K\nDanmark\n\n**Phone:** +xx xx xx xx xx"
+                        "contentUrl": "address.md"
                     }
                 },
                 {
@@ -38,7 +38,7 @@
                         "title": "Global Support",
                         "className": "shadow-lg rounded-lg p-6 bg-primary-100",
                         "format": "markdown",
-                        "content": "### Main Hub\n\nStsstndgade 100\nKøbenhavn K\nDanmark\n\n**Phone:** +xx xx xx xx xx"
+                        "contentUrl": "address.md"
                     }
                 }
             ]

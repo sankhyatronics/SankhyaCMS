@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Terms of Use & Disclaimer",
+        "data": {
+            "type": "Hero",
+            "data": {
+                "title": "Terms of Use",
+                "subtitle": "Global disclaimers and legal limitations.",
+                "imageSrc": "/images/BusinessAttention0210.webp",
+                "textPosition": "left",
+                "textAlignment": "left",
+                "padding": "none",
+                "className": "min-h-[24dvh] bg-primary text-primary-950 mt-20"
+            }
+        }
+    },
+    {
+        "title": "Disclaimer Content",
+        "data": {
+            "type": "ContentBlock",
+            "data": {
+                "title": "Disclaimers & Liability",
+                "contentUrl": "en/disclaimers-liability.md"
+            }
+        }
+    }
+]

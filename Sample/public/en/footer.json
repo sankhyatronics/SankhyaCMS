@@ -44,11 +44,11 @@
                         "links": [
                             {
                                 "label": "Privacy Policy",
-                                "href": "#"
+                                "href": "/privacy-policy"
                             },
                             {
                                 "label": "Terms of Use",
-                                "href": "#"
+                                "href": "/terms-of-use"
                             }
                         ]
                     }
