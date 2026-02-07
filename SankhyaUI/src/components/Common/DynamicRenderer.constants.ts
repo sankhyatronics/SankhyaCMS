@@ -17,6 +17,7 @@ import { Testimonials } from '../Testimonials/Testimonials';
 import { Select } from '../Select/Select';
 import { Carousel } from '../Carousel/Carousel';
 import { CookieConsent } from '../CookieConsent/CookieConsent';
+import { Footer } from '../Footer/Footer';
 
 // Base components (excluding Dropdown to avoid circular dependency)
 export const baseComponents = {
@@ -32,6 +33,7 @@ export const baseComponents = {
     FeaturesSection,
     FeatureItem,
     BentoGrid,
+    Footer,
     Stats,
     PromoBanner,
     Testimonials,

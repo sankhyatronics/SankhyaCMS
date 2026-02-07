@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Managed Services",
+        "data": {
+            "type": "Hero",
+            "data": {
+                "title": "Managed Services",
+                "subtitle": "We offer managed services.",
+                "textPosition": "left",
+                "textAlignment": "left",
+                "padding": "none",
+                "className": "min-h-[24dvh] bg-primary text-primary-950 mt-20"
+            }
+        }
+    },
+    {
+        "title": "Managed Services Content",
+        "data": {
+            "type": "ContentBlock",
+            "data": {
+                "title": "We offer",
+                "contentUrl": "en/lipsum.md"
+            }
+        }
+    }
+]

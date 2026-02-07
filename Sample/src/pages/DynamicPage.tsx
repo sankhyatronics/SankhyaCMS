@@ -28,7 +28,7 @@ export const DynamicPage: React.FC = () => {
     // If there's an error and we haven't tried the 'not-found' page yet, fall back to it
     React.useEffect(() => {
         if (error && activePageId !== 'not-found.json') {
-            setActivePageId('not-found.json');
+            setActivePageId('not-found');
         }
     }, [error, activePageId]);
 
