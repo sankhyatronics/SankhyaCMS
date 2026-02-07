@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router';
 import { Shell } from './components/Shell';
 import { UserProvider } from '@sankhyatronics/sankhya-ui';
 import { DynamicPage } from './pages/DynamicPage';
-import ScrollToTop from './components/ScrollToTop';
+import { ScrollToTop } from '@sankhyatronics/sankhya-ui';
 
 const App = () => (
   <UserProvider>

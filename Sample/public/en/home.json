@@ -1,7 +1,7 @@
 [
     {
         "title": "Welcome to SankhyaCMS",
-        "Data": {
+        "data": {
             "type": "Hero",
             "data": {
                 "title": "Build Your Digital Excellence",
@@ -18,7 +18,7 @@
     },
     {
         "title": "Our Impact",
-        "Data": {
+        "data": {
             "type": "Stats",
             "data": {
                 "items": [
@@ -43,7 +43,7 @@
     },
     {
         "title": "What Our Clients Say",
-        "Data": {
+        "data": {
             "type": "Testimonials",
             "data": {
                 "title": "Trusted by Industry Leaders",
@@ -71,7 +71,7 @@
     },
     {
         "title": "Core Expertise",
-        "Data": {
+        "data": {
             "type": "FeaturesSection",
             "data": {
                 "title": "Empowering Your Business",

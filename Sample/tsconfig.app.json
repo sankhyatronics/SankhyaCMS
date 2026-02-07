@@ -30,6 +30,7 @@
   },
   "include": [
     "src",
-    "../components/src/services"
+    "../components/src/services",
+    "../SankhyaUI/src/api"
   ]
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Footer, DropdownProvider, DynamicRenderer, useUser, CookieConsent } from '@sankhyatronics/sankhya-ui';
 import { Outlet } from 'react-router';
-import { cmsApiFetchers } from '../api/cmsApiService';
+import { fetchLocalContent } from '@sankhyatronics/sankhya-ui';
 
 export const Shell: React.FC = () => {
-    const [headerData, setHeaderData] = React.useState<any>(null);
-    const [footerData, setFooterData] = React.useState<any>(null);
-    const [cookieConsentData, setCookieConsentData] = React.useState<any>(null);
+    const [headerConfig, setHeaderConfig] = React.useState<any>(null);
+    const [footerProps, setFooterProps] = React.useState<any>(null);
+    const [cookieConsentProps, setCookieConsentProps] = React.useState<any>(null);
     const { language, setLanguage, toggleTheme } = useUser();
 
     const handlers = {
@@ -26,14 +26,24 @@ export const Shell: React.FC = () => {
     React.useEffect(() => {
         const fetchData = async () => {
             try {
-                const header = await cmsApiFetchers.getHeader(language);
-                const footer = await cmsApiFetchers.getFooter(language);
-                const cookieConsent = await cmsApiFetchers.getCookieConsent(language);
+                const header = await fetchLocalContent('header.json', { lang: language });
+                const footer = await fetchLocalContent('footer.json', { lang: language });
+                const cookieConsent = await fetchLocalContent('cookie-consent.json', { lang: language });
 
-                // Clone data to ensure new references and trigger rerenders
-                const updatedHeader = JSON.parse(JSON.stringify(header));
-                const updatedFooter = JSON.parse(JSON.stringify(footer?.data || footer));
-                const updatedCookieConsent = JSON.parse(JSON.stringify(cookieConsent));
+                // Unwrap PageContent (PageSection[]) to get component config/props
+                const headerConfig = Array.isArray(header) ? header.map((section: any) => section.data) : [];
+
+                // For Footer and CookieConsent, we expect a single section/component
+                const footerSection = Array.isArray(footer) ? footer[0] : null;
+                const footerProps = footerSection?.data?.data || null;
+
+                const cookieConsentSection = Array.isArray(cookieConsent) ? cookieConsent[0] : null;
+                const cookieConsentProps = cookieConsentSection?.data?.data || null;
+
+                // Clone to ensure new references (though we just extracted them, so they are new refs from the fetch result)
+                const updatedHeaderConfig = JSON.parse(JSON.stringify(headerConfig));
+                const updatedFooterProps = footerProps ? JSON.parse(JSON.stringify(footerProps)) : null;
+                const updatedCookieConsentProps = cookieConsentProps ? JSON.parse(JSON.stringify(cookieConsentProps)) : null;
 
                 // Inject current language as defaultValue and value for the language selector
                 const findAndSetLanguage = (config: any) => {
@@ -64,11 +74,14 @@ export const Shell: React.FC = () => {
                     if (config.data?.items) findAndSetLanguage(config.data.items);
                 };
 
-                findAndSetLanguage(updatedHeader);
+                // Apply language injection to Header config
+                if (updatedHeaderConfig) {
+                    updatedHeaderConfig.forEach((config: any) => findAndSetLanguage(config));
+                }
 
-                setHeaderData(updatedHeader);
-                setFooterData(updatedFooter);
-                setCookieConsentData(updatedCookieConsent);
+                setHeaderConfig(updatedHeaderConfig);
+                setFooterProps(updatedFooterProps);
+                setCookieConsentProps(updatedCookieConsentProps);
             } catch (e) {
                 console.error("Failed to load shell data", e);
             }
@@ -79,20 +92,20 @@ export const Shell: React.FC = () => {
     return (
         <div className="flex flex-col min-h-screen bg-primary">
             <DropdownProvider>
-                <DynamicRenderer config={headerData} handlers={handlers} />
+                <DynamicRenderer config={headerConfig} handlers={handlers} />
             </DropdownProvider>
             <main className="flex-1 w-full">
                 <Outlet />
             </main>
 
-            {footerData && (
+            {footerProps && (
                 <Footer
-                    {...footerData}
+                    {...footerProps}
                 />
             )}
-            {cookieConsentData && (
+            {cookieConsentProps && (
                 <CookieConsent
-                    {...cookieConsentData}
+                    {...cookieConsentProps}
                 />
             )}
         </div>

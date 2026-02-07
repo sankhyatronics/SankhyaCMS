@@ -1,11 +1,11 @@
 [
     {
         "title": "Lorem ipsum dolor sit amet.",
-        "Data": {
+        "data": {
             "type": "FeaturesSection",
             "data": {
-                "title": "Lorem ipsum dolor sit amet.",
-                "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                "title": "404",
+                "subtitle": " We're sorry, the page you're looking for doesn't exist. Additionally, we encountered an error while trying to load the custom error page."
             }
         }
     }
