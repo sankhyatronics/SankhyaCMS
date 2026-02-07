@@ -28,7 +28,7 @@ export function usePageData(pageId: string) {
         if (pageId) {
             fetchPage();
         }
-    }, [pageId]);
+    }, [pageId, language]);
 
     return { data, loading, error };
 }

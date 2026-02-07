@@ -5,7 +5,7 @@ import { DynamicPage } from './pages/DynamicPage';
 import { ScrollToTop } from '@sankhyatronics/sankhya-ui';
 
 const App = () => (
-  <UserProvider>
+  <UserProvider defaultLanguage="en" defaultTheme="light" languages={['en', 'dk']} themes={['light', 'dark', 'lavender', 'slate', 'indigo', 'emerald']} storageKeyPrefix="sam-">
     <ScrollToTop />
     <Routes>
       <Route element={<Shell />}>
