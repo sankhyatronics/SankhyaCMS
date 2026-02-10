@@ -1,8 +1,7 @@
 import type { ReactNode } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import data from './en/index.json';
-import { Carousel, DynamicRenderer, fetchLocalContent, Hero } from '@sankhyatronics/sankhya-ui';
+import { DynamicRenderer, fetchLocalContent } from '@sankhyatronics/sankhya-ui';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import { useEffect, useState } from 'react';
 
