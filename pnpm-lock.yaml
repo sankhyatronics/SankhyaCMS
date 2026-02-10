@@ -340,6 +340,9 @@ importers:
       '@mdx-js/react':
         specifier: 'catalog:'
         version: 3.0.0(@types/react@19.2.5)(react@19.2.0)
+      '@sankhyatronics/sankhya-ui':
+        specifier: workspace:*
+        version: link:../SankhyaUI
       clsx:
         specifier: 'catalog:'
         version: 2.0.0

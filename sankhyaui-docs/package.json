@@ -1,6 +1,6 @@
 {
   "name": "@sankhyatronics/sankhyaui-docs",
-  "version": "0.0.13",
+  "version": "0.0.15",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -22,7 +22,8 @@
     "clsx": "catalog:",
     "prism-react-renderer": "catalog:",
     "react": "catalog:",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:",
+    "@sankhyatronics/sankhya-ui": "workspace:*"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "catalog:",

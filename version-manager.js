@@ -9,7 +9,7 @@ const packages = [
     { name: 'SankhyaUI', type: 'library', path: './SankhyaUI/package.json' },
     { name: 'Stories', type: 'client', path: './Stories/package.json' },
     { name: 'Sample', type: 'client', path: './Sample/package.json' },
-    { name: 'sankhyaui-docs', type: 'docs', path: './sankhyaui-docs/package.json' }
+    { name: 'sankhyaui-docs', type: 'client', path: './sankhyaui-docs/package.json' }
 ];
 
 const rootPkgJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));

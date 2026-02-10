@@ -1,43 +1,56 @@
-import type {ReactNode} from 'react';
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
+import type { ReactNode } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
+import data from './en/index.json';
+import { Carousel, DynamicRenderer, fetchLocalContent, Hero } from '@sankhyatronics/sankhya-ui';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import { useEffect, useState } from 'react';
 
-import styles from './index.module.css';
-
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
 
 export default function Home(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState<any>(null);
+  useEffect(() => {
+    async function fetchPage() {
+      setLoading(true);
+      setError(null);
+      try {
+        // Use the page fetcher with the current language
+        const result = await fetchLocalContent("index.json", { lang: 'en' });
+        setData(result);
+      } catch (err: any) {
+        setError(err.message || 'Failed to load page');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchPage();
+  }, []);
+
+  const BrowserOnlyComponent = (props) => {
+    return (
+      <BrowserOnly fallback={<div>Loading...</div>}>
+        {() => {
+          return <DynamicRenderer {...props} />;
+        }}
+      </BrowserOnly>
+    );
+  };
+
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
+      title={`${siteConfig.title}`}
+      description={`${siteConfig.tagline}`}>
       <main>
-        <HomepageFeatures />
+        {data?.map((section, index) => (
+          <BrowserOnlyComponent
+            key={index}
+            config={section}
+          />
+        ))}
       </main>
     </Layout>
   );
