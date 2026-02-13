@@ -25,32 +25,32 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Deploy Stories
-        uses: sebastianpopp/ftp-action@releases/v2
+      - name: 📂 Deploy stories
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
-          host: ${{ secrets.FTP_SERVER }}
+          server: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}.sankhyaui-stories.sankhyatronics.com
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: "Stories/storybook-static"
-          remoteDir: "/public_html"
-          options: "--delete --asci"
-
-      - name: Deploy Sample
-        uses: sebastianpopp/ftp-action@releases/v2
+          dangerous-clean-slate: true 
+          server-dir: ./public_html/
+          local-dir: "Stories/storybook-static"
+      
+      - name: 📂 Deploy sample
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
-          host: ${{ secrets.FTP_SERVER }}
+          server: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}.sankhyaui-sample.sankhyatronics.com
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: "Sample/dist"
-          remoteDir: "/public_html"
-          options: "--delete --asci"
+          dangerous-clean-slate: true 
+          server-dir: ./public_html/
+          local-dir: "Sample/dist"
 
-      - name: Deploy Documentation
-        uses: sebastianpopp/ftp-action@releases/v2
+      - name: 📂 Deploy documentation
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
-          host: ${{ secrets.FTP_SERVER }}
+          server: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}.sankhyaui.sankhyatronics.com
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: "sankhyaui-docs/build"
-          remoteDir: "/public_html"
-          options: "--delete --asci"
+          dangerous-clean-slate: true 
+          server-dir: ./public_html/
+          local-dir: "sankhyaui-docs/build"
