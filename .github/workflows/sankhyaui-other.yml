@@ -29,7 +29,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}.sankhyaui-stories.sankhyatronics.com
+          username: ${{ secrets.FTP_USERNAME }}.sankhyaui-stories.sankhyatronics.com
           password: ${{ secrets.FTP_PASSWORD }}
           dangerous-clean-slate: true 
           server-dir: ./public_html/
@@ -39,7 +39,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}.sankhyaui-sample.sankhyatronics.com
+          username: ${{ secrets.FTP_USERNAME }}.sankhyaui-sample.sankhyatronics.com
           password: ${{ secrets.FTP_PASSWORD }}
           dangerous-clean-slate: true 
           server-dir: ./public_html/
@@ -49,7 +49,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}.sankhyaui.sankhyatronics.com
+          username: ${{ secrets.FTP_USERNAME }}.sankhyaui.sankhyatronics.com
           password: ${{ secrets.FTP_PASSWORD }}
           dangerous-clean-slate: true 
           server-dir: ./public_html/
