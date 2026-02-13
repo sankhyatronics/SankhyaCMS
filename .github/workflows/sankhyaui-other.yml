@@ -33,7 +33,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           dangerous-clean-slate: true 
           server-dir: ./public_html/
-          local-dir: "Stories/storybook-static"
+          local-dir: "Stories/storybook-static/"
       
       - name: 📂 Deploy sample
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
@@ -43,7 +43,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           dangerous-clean-slate: true 
           server-dir: ./public_html/
-          local-dir: "Sample/dist"
+          local-dir: "Sample/dist/"
 
       - name: 📂 Deploy documentation
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
@@ -53,4 +53,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           dangerous-clean-slate: true 
           server-dir: ./public_html/
-          local-dir: "sankhyaui-docs/build"
+          local-dir: "sankhyaui-docs/build/"
