@@ -18,12 +18,13 @@
     "@docusaurus/core": "catalog:",
     "@docusaurus/preset-classic": "catalog:",
     "@docusaurus/theme-common": "catalog:",
+    "@docusaurus/theme-mermaid": "catalog:",
     "@mdx-js/react": "catalog:",
+    "@sankhyatronics/sankhya-ui": "workspace:*",
     "clsx": "catalog:",
     "prism-react-renderer": "catalog:",
     "react": "catalog:",
-    "react-dom": "catalog:",
-    "@sankhyatronics/sankhya-ui": "workspace:*"
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "catalog:",

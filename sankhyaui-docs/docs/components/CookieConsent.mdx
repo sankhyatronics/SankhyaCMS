@@ -40,6 +40,18 @@ function App() {
 }
 ```
 
+## JSON Data Example
+
+```json
+{
+    "type": "CookieConsent",
+    "data": {
+        "privacyPolicyLink": "https://example.com/privacy",
+        "storageKey": "cookie_consent_demo_default"
+    }
+}
+```
+
 ## Controlling Behavior
 
 The `CookieConsent` component integrates with the `UserProvider` to store the user's choice. You can access this choice using the `useUser` hook to conditionally render content or initialize scripts.

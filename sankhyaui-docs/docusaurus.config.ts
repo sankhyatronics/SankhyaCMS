@@ -10,6 +10,10 @@ const config: Config = {
   future: {
     v4: true,
   },
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
 
   url: 'https://sankhyaui.sankhyatronics.com/',
   baseUrl: '/',
