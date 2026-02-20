@@ -1,12 +1,14 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Language = 'en' | 'dk' | 'de';
+export type Language = string;
 export type CookieConsentStatus = 'accepted' | 'refused' | null;
 
 interface UserContextType {
     language: Language;
+    languages: string[];
     setLanguage: (lang: Language) => void;
     theme: string;
+    themes: string[];
     setTheme: (theme: string) => void;
     toggleTheme: () => void;
     cookieConsent: CookieConsentStatus;
@@ -17,16 +19,20 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export interface UserProviderProps {
     children: React.ReactNode;
-    defaultLanguage?: Language;
-    defaultTheme?: string;
-    storageKeyPrefix?: string;
+    defaultLanguage: Language;
+    defaultTheme: string;
+    languages: string[];
+    themes: string[];
+    storageKeyPrefix: string;
 }
 
 export const UserProvider: React.FC<UserProviderProps> = ({
     children,
-    defaultLanguage = 'en',
-    defaultTheme = 'light',
-    storageKeyPrefix = 'app-'
+    defaultLanguage,
+    defaultTheme,
+    languages,
+    themes,
+    storageKeyPrefix
 }) => {
     // Language State
     const [language, setLanguageState] = useState<Language>(() => {
@@ -76,10 +82,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({
     };
 
     const toggleTheme = () => {
-        // Updated theme list: 4 light-based, 4 dark-based
-        const themes = [
-            'light', 'dark', 'lavender', 'slate', 'fire', 'jungle', 'ocean', 'desert'
-        ];
         const currentThemeIndex = themes.indexOf(theme || 'light');
         const newTheme = themes[(currentThemeIndex + 1) % themes.length];
         setThemeState(newTheme);
@@ -92,8 +94,10 @@ export const UserProvider: React.FC<UserProviderProps> = ({
     return (
         <UserContext.Provider value={{
             language,
+            languages,
             setLanguage,
             theme,
+            themes,
             setTheme,
             toggleTheme,
             cookieConsent,

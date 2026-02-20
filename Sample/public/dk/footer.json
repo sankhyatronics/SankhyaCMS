@@ -1,7 +1,7 @@
 [
     {
         "title": "Hovedbund",
-        "Data": {
+        "data": {
             "type": "Footer",
             "data": {
                 "companyName": "Sample",
@@ -44,11 +44,11 @@
                         "links": [
                             {
                                 "label": "Privatlivspolitik",
-                                "href": "#"
+                                "href": "/privacy-policy"
                             },
                             {
                                 "label": "Betingelser for brug",
-                                "href": "#"
+                                "href": "/terms-of-use"
                             }
                         ]
                     }

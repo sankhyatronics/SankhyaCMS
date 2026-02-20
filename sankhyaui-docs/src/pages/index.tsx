@@ -1,43 +1,57 @@
-import type {ReactNode} from 'react';
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
-import styles from './index.module.css';
+// 1. Define a sub-component that handles the library logic
+function HomeClientContent() {
+  const [data, setData] = useState<any[] | null>(null);
+  const [Library, setLibrary] = useState<any>(null);
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+  useEffect(() => {
+    // 2. Dynamically import the library ONLY when the component mounts in the browser
+    async function loadLibraryAndData() {
+      try {
+        const lib = await import('@sankhyatronics/sankhya-ui');
+        setLibrary(lib);
+
+        const result = await lib.fetchLocalContent("index.json", { lang: 'en' });
+        setData(result);
+      } catch (error) {
+        console.error("Build-time safety catch:", error);
+      }
+    }
+    loadLibraryAndData();
+  }, []);
+
+  if (!Library || !data) {
+    return <div style={{ minHeight: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Loading content...</div>;
+  }
+
+  const { DynamicRenderer } = Library;
+
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
+    <>
+      {data.map((section, index) => (
+        <DynamicRenderer key={index} config={section} />
+      ))}
+    </>
   );
 }
 
 export default function Home(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
+
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
+      title={`${siteConfig.title}`}
+      description={`${siteConfig.tagline}`}>
       <main>
-        <HomepageFeatures />
+        {/* 3. Wrap the dynamic component in BrowserOnly */}
+        <BrowserOnly fallback={<div>Loading...</div>}>
+          {() => <HomeClientContent />}
+        </BrowserOnly>
       </main>
     </Layout>
   );

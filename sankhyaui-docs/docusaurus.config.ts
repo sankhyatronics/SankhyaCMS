@@ -10,6 +10,10 @@ const config: Config = {
   future: {
     v4: true,
   },
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
 
   url: 'https://sankhyaui.sankhyatronics.com/',
   baseUrl: '/',
@@ -72,7 +76,6 @@ const config: Config = {
       ],
     },
     footer: {
-      style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} Sankhyatronics Solutions Private Limited.`,
     },
     prism: {

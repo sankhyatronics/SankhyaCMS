@@ -25,7 +25,7 @@ catalog:
   react: 19.2.0
   react-dom: 19.2.0
   react-markdown: 9.0.3
-  react-router: 7.11.0
+  react-router: 7.13.0
   storybook: 10.1.11
   tailwindcss: 4.1.18
   typescript: 5.9.3
@@ -45,3 +45,4 @@ catalog:
   '@docusaurus/tsconfig': 3.9.2
   '@docusaurus/types': 3.9.2
   '@docusaurus/theme-common': 3.9.2
+  '@docusaurus/theme-mermaid': 3.9.2

@@ -1,7 +1,7 @@
 [
     {
         "title": "Vores Services",
-        "Data": {
+        "data": {
             "type": "Hero",
             "data": {
                 "title": "Omfattende digitale løsninger",
@@ -13,7 +13,7 @@
     },
     {
         "title": "Serviceområder",
-        "Data": {
+        "data": {
             "type": "BentoGrid",
             "data": {
                 "title": "Vores Ekspertise",
@@ -60,7 +60,7 @@
     },
     {
         "title": "Kom i gang",
-        "Data": {
+        "data": {
             "type": "PromoBanner",
             "data": {
                 "title": "Klar til at transformere din forretning?",

@@ -23,11 +23,11 @@ export const DynamicPage: React.FC = () => {
         setActivePageId(initialPageId);
     }, [initialPageId]);
 
-    const { data, loading, error } = usePageData(activePageId);
+    const { data, loading, error } = usePageData(`${activePageId}.json`);
 
     // If there's an error and we haven't tried the 'not-found' page yet, fall back to it
     React.useEffect(() => {
-        if (error && activePageId !== 'not-found') {
+        if (error && activePageId !== 'not-found.json') {
             setActivePageId('not-found');
         }
     }, [error, activePageId]);
@@ -40,23 +40,6 @@ export const DynamicPage: React.FC = () => {
         );
     }
 
-    // If even the 'not-found' page fails, show a generic error message
-    if (error && activePageId === 'not-found') {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-                <h1 className="text-4xl font-bold text-primary-600 mb-4">404</h1>
-                <h2 className="text-xl font-semibold mb-2">Page Not Found</h2>
-                <p className="text-gray-600 max-w-md">
-                    We're sorry, the page you're looking for doesn't exist.
-                    Additionally, we encountered an error while trying to load the custom error page.
-                </p>
-                <a href="/" className="mt-8 px-6 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition">
-                    Back to Home
-                </a>
-            </div>
-        );
-    }
-
     if (!data) return null;
 
     return (
@@ -64,7 +47,7 @@ export const DynamicPage: React.FC = () => {
             {data.map((section, index) => (
                 <DynamicRenderer
                     key={index}
-                    config={section.data || section.Data}
+                    config={section.data}
                 />
             ))}
         </div>

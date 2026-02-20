@@ -1,0 +1,112 @@
+[
+    {
+        "type": "Carousel",
+        "title": "Carousel",
+        "data": {
+            "autoPlay": true,
+            "interval": 5000,
+            "showArrows": true,
+            "effect": "slide",
+            "children": [
+                {
+                    "type": "Hero",
+                    "data": {
+                        "title": "Pure view react components",
+                        "subtitle": "Build beautiful, high-performance web applications with ease.",
+                        "imageSrc": "https://picsum.photos/800/400",
+                        "textPosition": "left",
+                        "textAlignment": "left",
+                        "padding": "none",
+                        "className": "min-h-[70vh] md:min-h-[100vh] bg-primary text-primary-950",
+                        "focalPoint": "center"
+                    }
+                },
+                {
+                    "type": "Hero",
+                    "data": {
+                        "title": "For Headless css",
+                        "subtitle": "Build for headless css.",
+                        "imageSrc": "https://picsum.photos/800/400",
+                        "textPosition": "left",
+                        "textAlignment": "left",
+                        "padding": "none",
+                        "className": "min-h-[70vh] md:min-h-[100vh] bg-primary text-primary-950",
+                        "focalPoint": "center"
+                    }
+                },
+                {
+                    "type": "Hero",
+                    "data": {
+                        "title": "Developer friendly",
+                        "subtitle": "Developer friendly components, easy to use and customize.",
+                        "imageSrc": "https://picsum.photos/800/400",
+                        "textPosition": "left",
+                        "textAlignment": "left",
+                        "padding": "none",
+                        "className": "min-h-[70vh] md:min-h-[100vh] bg-primary text-primary-950",
+                        "focalPoint": "center"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "type": "FeatureSplit",
+        "data": {
+            "title": "Experience the difference",
+            "subtitle": "Our platform provides everything you need to scale your business efficiently.",
+            "imagePosition": "right",
+            "image": {
+                "imageSrc": "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80",
+                "alt": "Team working together"
+            },
+            "items": [
+                {
+                    "icon": "mdi:speedometer",
+                    "title": "Lightning Fast",
+                    "subtitle": "Deploy in seconds, not minutes. Global edge network ensures low latency."
+                },
+                {
+                    "icon": "mdi:shield-check",
+                    "title": "Secure by Default",
+                    "subtitle": "Enterprise-grade security with automatic SSL and DDoS protection."
+                },
+                {
+                    "icon": "mdi:chart-box",
+                    "title": "Based on latest tech stack",
+                    "subtitle": "Built with latest tech stack to ensure the best performance."
+                }
+            ]
+        }
+    },
+    {
+        "type": "FeaturesSection",
+        "data": {
+            "title": "Why to use Sankhya UI",
+            "inverted": true,
+            "subtitle": "Sankhya UI is a UI library for React and React Native that provides a set of pre-built components that can be used to build beautiful, high-performance web applications with ease.",
+            "items": [
+                {
+                    "icon": "mdi:rocket-launch",
+                    "title": "Fast Performance",
+                    "description": "Optimized for speed and efficiency to ensure the best user experience."
+                },
+                {
+                    "icon": "mdi:security",
+                    "title": "open source",
+                    "description": "Open source and free to use."
+                },
+                {
+                    "icon": "mdi:responsive",
+                    "title": "Responsive Design",
+                    "description": "Looks great on all devices, from desktops to mobile phones."
+                },
+                {
+                    "icon": "mdi:api",
+                    "title": "Easy Integration",
+                    "description": "Simple API makes it easy to integrate with your existing systems."
+                }
+            ]
+        }
+    }
+]

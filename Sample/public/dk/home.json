@@ -1,7 +1,7 @@
 [
     {
         "title": "Velkommen til SankhyaCMS",
-        "Data": {
+        "data": {
             "type": "Hero",
             "data": {
                 "title": "Byg din digitale excellence",
@@ -18,7 +18,7 @@
     },
     {
         "title": "Vores indflydelse",
-        "Data": {
+        "data": {
             "type": "Stats",
             "data": {
                 "items": [
@@ -43,7 +43,7 @@
     },
     {
         "title": "Hvad vores kunder siger",
-        "Data": {
+        "data": {
             "type": "Testimonials",
             "data": {
                 "title": "Betroet af industriledere",
@@ -71,7 +71,7 @@
     },
     {
         "title": "Kernekompetencer",
-        "Data": {
+        "data": {
             "type": "FeaturesSection",
             "data": {
                 "title": "Vi styrker din virksomhed",

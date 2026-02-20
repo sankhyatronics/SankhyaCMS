@@ -7,7 +7,7 @@ sidebar_position: 3
 The repository includes a sample application located in the `Sample` directory. This project demonstrates a minimal setup using **React**, **TypeScript**, and **Vite**, integrated with `@sankhyatronics/sankhya-ui`.
 
 - **Live Demo**: [https://sample-ui.sankhyatronics.com/](https://sample-ui.sankhyatronics.com/)
-- **Source Code**: [https://github.com/sankhyatronics/SankhyaUI-Sample](https://github.com/sankhyatronics/SankhyaUI-Sample)
+- **Source Code**: [https://github.com/sankhyatronics/SankhyaCMS](https://github.com/sankhyatronics/SankhyaCMS)
 
 ## Features
 - **Framework**: React 19 + TypeScript

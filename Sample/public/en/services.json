@@ -1,7 +1,7 @@
 [
     {
         "title": "Our Services",
-        "Data": {
+        "data": {
             "type": "Hero",
             "data": {
                 "title": "Comprehensive Digital Solutions",
@@ -13,7 +13,7 @@
     },
     {
         "title": "Service Areas",
-        "Data": {
+        "data": {
             "type": "BentoGrid",
             "data": {
                 "title": "Our Expertise",
@@ -60,7 +60,7 @@
     },
     {
         "title": "Get Started",
-        "Data": {
+        "data": {
             "type": "PromoBanner",
             "data": {
                 "title": "Ready to Transform Your Business?",

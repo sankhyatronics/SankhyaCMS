@@ -36,7 +36,9 @@ export const DynamicRenderer: React.FC<IDynamicRendererProps> = ({
     return null;
   }
 
-  const { type, data, children, id, ...rest } = config;
+  const { type, data, id, ...rest } = config;
+  // Check for children in config or inside data
+  const children = config.children || data?.children;
   const componentKey = id || data?.id || type;
 
   // Validate component type

@@ -26,3 +26,8 @@ export * from './hooks/useDataConfig';
 export { Select } from './components/Select/Select';
 export * from './contexts/UserContext';
 export { CookieConsent } from './components/CookieConsent/CookieConsent';
+export { type GithubContentOptions, fetchGithubContent } from './api/githubContentService';
+export { type LocalContentOptions, fetchLocalContent } from './api/localContentService';
+export * from './api/datatypes';
+export { ScrollToTop } from './components/Common/ScrollToTop';
+

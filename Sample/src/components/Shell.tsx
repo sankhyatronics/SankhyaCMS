@@ -1,13 +1,15 @@
 import React from 'react';
-import { Footer, DropdownProvider, DynamicRenderer, useUser, CookieConsent } from '@sankhyatronics/sankhya-ui';
+import { DropdownProvider, DynamicRenderer, useUser } from '@sankhyatronics/sankhya-ui';
 import { Outlet } from 'react-router';
-import { cmsApiFetchers } from '../api/cmsApiService';
+import { usePageData } from '../hooks/usePageData';
 
 export const Shell: React.FC = () => {
-    const [headerData, setHeaderData] = React.useState<any>(null);
-    const [footerData, setFooterData] = React.useState<any>(null);
-    const [cookieConsentData, setCookieConsentData] = React.useState<any>(null);
     const { language, setLanguage, toggleTheme } = useUser();
+
+    // Use hooks to fetch data
+    const { data: headerData } = usePageData('header.json');
+    const { data: footerData } = usePageData('footer.json');
+    const { data: cookieConsentData } = usePageData('cookie-consent.json');
 
     const handlers = {
         onThemeChangeClick: () => {
@@ -21,79 +23,80 @@ export const Shell: React.FC = () => {
         }
     };
 
+    // Process Header Data
+    const headerConfig = React.useMemo(() => {
+        if (!headerData) return null;
 
+        // Unwrap PageContent (PageSection[]) to get component config
+        const configList = Array.isArray(headerData) ? headerData.map((section: any) => section.data) : [];
 
-    React.useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const header = await cmsApiFetchers.getHeader(language);
-                const footer = await cmsApiFetchers.getFooter(language);
-                const cookieConsent = await cmsApiFetchers.getCookieConsent(language);
+        // Clone to ensure new references
+        const updatedConfig = JSON.parse(JSON.stringify(configList));
 
-                // Clone data to ensure new references and trigger rerenders
-                const updatedHeader = JSON.parse(JSON.stringify(header));
-                const updatedFooter = JSON.parse(JSON.stringify(footer?.data || footer));
-                const updatedCookieConsent = JSON.parse(JSON.stringify(cookieConsent));
+        // Inject current language as defaultValue and value for the language selector
+        const findAndSetLanguage = (config: any) => {
+            if (!config || typeof config !== 'object') return;
 
-                // Inject current language as defaultValue and value for the language selector
-                const findAndSetLanguage = (config: any) => {
-                    if (!config || typeof config !== 'object') return;
-
-                    if (Array.isArray(config)) {
-                        config.forEach(child => findAndSetLanguage(child));
-                        return;
-                    }
-
-                    // Check if this component is the language selector
-                    if (config.id === 'select-language' || config.data?.id === 'select-lang' || config.type === 'Select') {
-                        // Double check if it's the language selection one by checking options if possible
-                        // const isLangSelect = config.data?.options?.some((opt: any) => opt.value === 'en' || opt.value === 'dk');
-                        if (config.id === 'select-language' || config.data?.id === 'select-lang') {
-                            config.value = language;
-                            config.defaultValue = language;
-                            if (config.data) {
-                                config.data.value = language;
-                                config.data.defaultValue = language;
-                            }
-                        }
-                    }
-
-                    // Recurse into children and items
-                    if (config.children) findAndSetLanguage(config.children);
-                    if (config.data?.children) findAndSetLanguage(config.data.children);
-                    if (config.data?.items) findAndSetLanguage(config.data.items);
-                };
-
-                findAndSetLanguage(updatedHeader);
-
-                setHeaderData(updatedHeader);
-                setFooterData(updatedFooter);
-                setCookieConsentData(updatedCookieConsent);
-            } catch (e) {
-                console.error("Failed to load shell data", e);
+            if (Array.isArray(config)) {
+                config.forEach(child => findAndSetLanguage(child));
+                return;
             }
+
+            // Check if this component is the language selector
+            // We check id, data.id, or type to identify likely candidates
+            if (config.id === 'select-language' || config.data?.id === 'select-lang' || config.type === 'Select') {
+                if (config.id === 'select-language' || config.data?.id === 'select-lang') {
+                    config.value = language;
+                    config.defaultValue = language;
+                    if (config.data) {
+                        config.data.value = language;
+                        config.data.defaultValue = language;
+                    }
+                }
+            }
+
+            // Recurse into children and items
+            if (config.children) findAndSetLanguage(config.children);
+            if (config.data?.children) findAndSetLanguage(config.data.children);
+            if (config.data?.items) findAndSetLanguage(config.data.items);
         };
-        fetchData();
-    }, [language]);
+
+        if (updatedConfig) {
+            updatedConfig.forEach((config: any) => findAndSetLanguage(config));
+        }
+
+        return updatedConfig;
+    }, [headerData, language]);
+
+    // Process Footer Data
+    const footerConfig = React.useMemo(() => {
+        if (!footerData) return null;
+        const footerSection = Array.isArray(footerData) ? footerData[0] : null;
+        return footerSection?.data || null;
+    }, [footerData]);
+
+    // Process Cookie Consent Data
+    const cookieConsentConfig = React.useMemo(() => {
+        if (!cookieConsentData) return null;
+        const cookieSection = Array.isArray(cookieConsentData) ? cookieConsentData[0] : null;
+        return cookieSection?.data || null;
+    }, [cookieConsentData]);
+
 
     return (
         <div className="flex flex-col min-h-screen bg-primary">
             <DropdownProvider>
-                <DynamicRenderer config={headerData} handlers={handlers} />
+                <DynamicRenderer config={headerConfig} handlers={handlers} />
             </DropdownProvider>
             <main className="flex-1 w-full">
                 <Outlet />
             </main>
 
-            {footerData && (
-                <Footer
-                    {...footerData}
-                />
+            {footerConfig && (
+                <DynamicRenderer config={footerConfig} />
             )}
-            {cookieConsentData && (
-                <CookieConsent
-                    {...cookieConsentData}
-                />
+            {cookieConsentConfig && (
+                <DynamicRenderer config={cookieConsentConfig} />
             )}
         </div>
     );
