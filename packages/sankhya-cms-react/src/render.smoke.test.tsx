@@ -6,9 +6,9 @@ import { describe, expect, it, vi } from 'vitest';
 import { DynamicRenderer } from './components/Common/DynamicRenderer';
 import { DropdownProvider } from './contexts/DropdownContext';
 import { UserProvider } from './contexts/UserContext';
-import type { ComponentNode } from './components/Common/node';
+import type { ComponentNode } from '@sankhyatronics/sankhya-cms/schema';
 
-const publicDir = path.resolve(import.meta.dirname, '../test/fixtures/en');
+const publicDir = path.resolve(import.meta.dirname, '../../sankhya-cms/test/fixtures/en');
 const pages = fs.readdirSync(publicDir).filter(name => name.endsWith('.json'));
 
 const handlers = new Proxy({}, { get: () => () => {} }) as Record<string, () => void>;

@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DynamicRenderer } from './DynamicRenderer';
 import { registerComponent } from './DynamicRenderer.constants';
-import type { ComponentNode } from './node';
+import type { ComponentNode } from '@sankhyatronics/sankhya-cms/schema';
 
 const Box: React.FC<{ id?: string; className?: string; children?: React.ReactNode }> = ({ id, className, children }) => (
     <div id={id} className={className}>{children}</div>

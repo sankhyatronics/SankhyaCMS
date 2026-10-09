@@ -1,9 +1,9 @@
 import type { ComponentProps } from 'react';
 import type { baseComponents } from './DynamicRenderer.constants';
-import type { ActionRef, ComponentNode, NodeEnvelope } from './node';
+import type { ActionRef, ComponentNode, NodeEnvelope } from '@sankhyatronics/sankhya-cms/schema';
 
-export { isComponentNode } from './node';
-export type { ActionRef, ComponentNode, PageContent } from './node';
+export { isComponentNode } from '@sankhyatronics/sankhya-cms/schema';
+export type { ActionRef, ComponentNode, PageContent } from '@sankhyatronics/sankhya-cms/schema';
 
 /** Every `type` the renderer knows out of the box. Derived from the registry so it can't drift. */
 export type ComponentList = keyof typeof baseComponents;

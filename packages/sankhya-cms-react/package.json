@@ -34,8 +34,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "oxlint",
     "test": "vitest run",
-    "clean": "rimraf dist",
-    "migrate-json": "node scripts/migrate-json.mjs"
+    "clean": "rimraf dist"
   },
   "peerDependencies": {
     "react": "catalog:",

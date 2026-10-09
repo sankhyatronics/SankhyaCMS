@@ -7,3 +7,4 @@ Public repo. Two published packages: `packages/sankhya-cms` (Lit, `st-*` element
 - TypeScript is pinned to 6.0.x: TS 7 (native) breaks tsup's dts build. Revisit when tsup supports it.
 - Consumers: `apps` (via `@sankhyatronics/suite-components`) and `SankhyaPortals`. Both install published versions — keep changes backward compatible, new options optional.
 - New component: folder under `packages/sankhya-cms/src/`, add an `exports` entry and add it to the `tsup` source list.
+- The JSON contract (`ComponentNode`, `componentTags` type→element map, `validatePage`, `patchNodeById`) lives in `sankhya-cms/schema`, framework-free, with the fixtures in `packages/sankhya-cms/test/fixtures` and `scripts/migrate-json.mjs`. Bindings (React today) only render it. A new base component needs: its Lit element, a `componentTags` entry, and a binding wrapper — the guard tests fail if they disagree.

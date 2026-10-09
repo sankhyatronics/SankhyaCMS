@@ -1,5 +1,5 @@
 import { useApiConfig, ApiService } from './useApiConfig';
-import type { ComponentNode } from '../components/Common/node';
+import type { ComponentNode } from '@sankhyatronics/sankhya-cms/schema';
 
 interface UseTypedApiConfigOptions {
   component: ComponentType;

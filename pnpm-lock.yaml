@@ -229,6 +229,9 @@ importers:
       '@sankhyatronics/typescript-config':
         specifier: workspace:*
         version: link:../../tooling/typescript-config
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.4
       oxlint:
         specifier: 'catalog:'
         version: 1.87.0
@@ -241,6 +244,9 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.3(@types/node@26.6.4)(vite@8.3.4(@types/node@26.6.4)(esbuild@0.27.7))
 
   packages/sankhya-cms-react:
     dependencies:

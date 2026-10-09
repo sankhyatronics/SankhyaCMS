@@ -1,1 +1,1 @@
-export type { ComponentNode, PageContent } from '../components/Common/node';
+export type { ComponentNode, PageContent } from '@sankhyatronics/sankhya-cms/schema';

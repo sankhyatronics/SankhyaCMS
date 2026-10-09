@@ -1,6 +1,6 @@
 import React from 'react';
 import { ActionHandlers, IDynamicRendererProps } from './DynamicRenderer.interfaces';
-import { ComponentNode, isComponentNode } from './node';
+import { ComponentNode, isComponentNode } from '@sankhyatronics/sankhya-cms/schema';
 import { getComponent, getSlots } from './DynamicRenderer.constants';
 
 const ACTION_PREFIX = '@action:';
