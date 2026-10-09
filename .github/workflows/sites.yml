@@ -1,0 +1,44 @@
+name: Deploy Storybook and docs
+
+# Builds the component Storybook and the docs site and uploads them over FTP to their subdomains
+# (the same hosts the previous SankhyaUI workflow used). Manual only.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+          STORYBOOK_DISABLE_TELEMETRY: '1'
+
+      - name: Deploy Storybook
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}.sankhyaui-stories.sankhyatronics.com
+          password: ${{ secrets.FTP_PASSWORD }}
+          dangerous-clean-slate: true
+          server-dir: ./public_html/
+          local-dir: storybook/storybook-static/
+
+      - name: Deploy docs
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}.sankhyaui.sankhyatronics.com
+          password: ${{ secrets.FTP_PASSWORD }}
+          dangerous-clean-slate: true
+          server-dir: ./public_html/
+          local-dir: docs/build/

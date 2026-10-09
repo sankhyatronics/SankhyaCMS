@@ -114,20 +114,27 @@
     "./schema": {
       "types": "./dist/schema/index.d.ts",
       "import": "./dist/schema/index.js"
-    }
+    },
+    "./theming": {
+      "types": "./dist/theming/index.d.ts",
+      "import": "./dist/theming/index.js"
+    },
+    "./custom-elements.json": "./custom-elements.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "custom-elements.json"
   ],
   "sideEffects": true,
   "scripts": {
-    "build": "tsup src/index.ts src/schema/index.ts src/shared/styles.ts src/shared/icons.ts src/bento-grid/index.ts src/card/index.ts src/carousel/index.ts src/content-block/index.ts src/cookie-consent/index.ts src/dropdown/index.ts src/feature-split/index.ts src/features-section/index.ts src/footer/index.ts src/header/index.ts src/hero/index.ts src/icon-button/index.ts src/items-accordion/index.ts src/markdown/index.ts src/menu-grid/index.ts src/menu-grid-item/index.ts src/menu-item/index.ts src/promo-banner/index.ts src/select/index.ts src/stats/index.ts src/testimonials/index.ts --format esm --dts --sourcemap --clean && node scripts/copy-theme.mjs",
+    "build": "tsup src/index.ts src/schema/index.ts src/theming/index.ts src/shared/styles.ts src/shared/icons.ts src/bento-grid/index.ts src/card/index.ts src/carousel/index.ts src/content-block/index.ts src/cookie-consent/index.ts src/dropdown/index.ts src/feature-split/index.ts src/features-section/index.ts src/footer/index.ts src/header/index.ts src/hero/index.ts src/icon-button/index.ts src/items-accordion/index.ts src/markdown/index.ts src/menu-grid/index.ts src/menu-grid-item/index.ts src/menu-item/index.ts src/promo-banner/index.ts src/select/index.ts src/stats/index.ts src/testimonials/index.ts --format esm --dts --sourcemap --clean && node scripts/copy-theme.mjs && cem analyze",
     "dev": "tsup src/index.ts --watch --format esm --dts",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint",
     "clean": "rimraf dist",
     "test": "vitest run",
-    "migrate-json": "node scripts/migrate-json.mjs"
+    "migrate-json": "node scripts/migrate-json.mjs",
+    "analyze": "cem analyze"
   },
   "dependencies": {
     "dompurify": "^3.4.16",
@@ -143,12 +150,14 @@
     "tsup": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:",
-    "@types/node": "catalog:"
+    "@types/node": "catalog:",
+    "@custom-elements-manifest/analyzer": "catalog:"
   },
   "keywords": [
     "web-components",
     "lit",
     "cms"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "customElements": "custom-elements.json"
 }

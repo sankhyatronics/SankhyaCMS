@@ -1,0 +1,37 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Theming" />
+
+# Theming
+
+Load the base tokens once, then the optional theme classes and the CMS display sizes:
+
+```ts
+import '@sankhyatronics/sankhya-cms/theme.css';
+import '@sankhyatronics/sankhya-cms/themes.css';
+import '@sankhyatronics/sankhya-cms/cms-theme.css';
+```
+
+Every component styles itself with `var(--st-…)` custom properties, which inherit through shadow DOM. Override them at `:root` (or any ancestor) to re-skin or re-scale the whole tree.
+
+| Layer | Tokens | Override for |
+|---|---|---|
+| Primaries | `--st-primary-color`, `--st-primary-background`, `--st-brand-color`, `--st-font-family` | A full rebrand |
+| Neutral ramp | `--st-neutral-50` … `--st-neutral-950` | A different grey scale |
+| Semantic | `--st-color-text`, `--st-color-surface`, `--st-radius-md`, `--st-text-sm`, … | A single exception |
+| CMS display sizes | `--st-cms-text-display`, `--st-cms-section-padding`, `--st-cms-container-max` | Rescaling marketing sections |
+
+Theme classes (`dark`, `red`, `amber`, `lime`, `teal`, `cyan`, `sky`, `blue`, `indigo`, `fuchsia`, `pink`) go on `<html>`:
+
+```html
+<html class="dark">
+```
+
+A custom theme only has to set the primaries:
+
+```css
+:root {
+  --st-primary-color: oklch(13.9% 0.04 261);
+  --st-primary-background: oklch(98.4% 0.003 248);
+}
+```

@@ -7,6 +7,11 @@ Open-source building blocks for JSON-driven portals.
 | `@sankhyatronics/sankhya-cms` | Lit web components (`st-*`) — the single implementation of every base component |
 | `@sankhyatronics/sankhya-cms-react` | Thin React wrappers over the Lit components plus the JSON renderer |
 
+| Workspace | What it is |
+|---|---|
+| `storybook/` | Storybook for every Lit component; prop/slot/event tables come from `custom-elements.json` |
+| `docs/` | Docusaurus site; component pages are generated from `custom-elements.json` |
+
 ## Rules
 
 - Base components are **Lit only**. React packages wrap them; they never re-implement them.

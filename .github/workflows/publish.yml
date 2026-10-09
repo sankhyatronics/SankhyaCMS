@@ -1,28 +1,47 @@
 name: Publish packages to npm
 
+# Publishes @sankhyatronics/sankhya-cms and @sankhyatronics/sankhya-cms-react (in dependency order)
+# at the version in the root package.json. Run it from a GitHub release, or by hand — a manual run
+# defaults to a dry run so nothing is published by accident.
+
 on:
-  workflow_dispatch:
   release:
-    types: [created]
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: Build, test and pack only — do not publish
+        type: boolean
+        default: true
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
+      id-token: write # npm provenance
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:
           node-version: 26
+          cache: pnpm
           registry-url: https://registry.npmjs.org
+
       - run: pnpm install --frozen-lockfile
       - run: pnpm update-version
+      - run: pnpm lint
+      - run: pnpm typecheck
       - run: pnpm build
         env:
           NODE_OPTIONS: --max-old-space-size=8192
-      - run: pnpm --filter @sankhyatronics/sankhya-cms --filter @sankhyatronics/sankhya-cms-react publish --tag latest --no-git-checks --access public
+      - run: pnpm test
+
+      - name: Publish (or dry run)
+        run: >
+          pnpm --filter @sankhyatronics/sankhya-cms --filter @sankhyatronics/sankhya-cms-react publish
+          --recursive --tag latest --access public --provenance --no-git-checks
+          ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && '--dry-run' || '' }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

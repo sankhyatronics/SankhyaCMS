@@ -1,0 +1,4 @@
+build
+.docusaurus
+# generated from custom-elements.json by scripts/gen-components.mjs
+docs/components

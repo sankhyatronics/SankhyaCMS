@@ -1,0 +1,27 @@
+{
+  "name": "sankhya-cms-storybook",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint"
+  },
+  "dependencies": {
+    "@sankhyatronics/sankhya-cms": "workspace:*",
+    "lit": "catalog:"
+  },
+  "devDependencies": {
+    "@sankhyatronics/oxlint-config": "workspace:*",
+    "@storybook/addon-a11y": "catalog:",
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/addon-themes": "catalog:",
+    "@storybook/web-components-vite": "catalog:",
+    "oxlint": "catalog:",
+    "storybook": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}

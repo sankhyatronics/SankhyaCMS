@@ -1,0 +1,28 @@
+:root {
+  --color-primary: #f0f3ff;
+  --color-primary-100: #e4ebff;
+  --color-primary-200: #c9d7fe;
+  --color-primary-300: #adc3fe;
+  --color-primary-400: #8eaffe;
+  --color-primary-500: #6599fd;
+  --color-primary-600: #2f87fd;
+  --color-primary-700: #1075e4;
+  --color-primary-800: #0c64c5;
+  --color-primary-900: #03346b;
+  --color-primary-950: #011d41;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --color-primary: #0f172a;
+  --color-primary-100: #1e293b;
+  --color-primary-200: #334155;
+  --color-primary-300: #475569;
+  --color-primary-400: #64748b;
+  --color-primary-500: #94a3b8;
+  --color-primary-600: #cbd5e1;
+  --color-primary-700: #e2e8f0;
+  --color-primary-800: #f1f5f9;
+  --color-primary-900: #f8fafc;
+  --color-primary-950: #ffffff;
+}
