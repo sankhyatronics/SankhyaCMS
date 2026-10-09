@@ -78,6 +78,13 @@ export class Hero extends LitElement {
       margin: 0 auto;
       text-align: center;
       align-items: center;
+      /* Set here, not only on :host: text sits on the image/overlay, so a colour class the page puts
+         on the host (e.g. a theme text colour) must not turn it dark. */
+      color: var(--st-hero-text-color, var(--st-color-on-solid));
+    }
+
+    :host([inverted]) .content {
+      color: var(--st-hero-text-color, var(--st-color-text-strong));
     }
 
     :host([text-alignment='left']) .content { text-align: left; align-items: flex-start; }

@@ -185,9 +185,6 @@ catalogs:
     '@docusaurus/types':
       specifier: 3.10.2
       version: 3.10.2
-    '@lit/react':
-      specifier: 1.0.8
-      version: 1.0.8
     '@mdx-js/react':
       specifier: 3.1.1
       version: 3.1.1
@@ -314,7 +311,7 @@ importers:
         specifier: ^3.0.3
         version: 3.0.3
       lit:
-        specifier: 'catalog:'
+        specifier: ^3.3.3
         version: 3.3.3
       marked:
         specifier: ^18.1.0
@@ -351,13 +348,13 @@ importers:
   packages/sankhya-cms-react:
     dependencies:
       '@lit/react':
-        specifier: 'catalog:'
+        specifier: ^1.0.8
         version: 1.0.8(@types/react@19.3.0)
       '@sankhyatronics/sankhya-cms':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../sankhya-cms
       lit:
-        specifier: 'catalog:'
+        specifier: ^3.3.3
         version: 3.3.3
     devDependencies:
       '@sankhyatronics/oxlint-config':
