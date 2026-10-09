@@ -6,6 +6,7 @@ packages:
 
 allowBuilds:
   esbuild: true
+  '@swc/core': false
   core-js: false # postinstall only prints a donation banner
   rs-module-lexer: false # native binary ships prebuilt via optional deps
 
