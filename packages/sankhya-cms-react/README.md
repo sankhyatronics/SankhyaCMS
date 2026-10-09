@@ -1,4 +1,4 @@
-# @sankhyatronics/sankhya-ui
+# @sankhyatronics/sankhya-cms-react
 
 React wrappers for the [`@sankhyatronics/sankhya-cms`](../sankhya-cms) Lit components, plus `DynamicRenderer`, which renders JSON page content (flat `ComponentNode` schema) with them.
 
@@ -11,7 +11,7 @@ import '@sankhyatronics/sankhya-cms/cms-theme.css';
 ```
 
 ```tsx
-import { DynamicRenderer } from '@sankhyatronics/sankhya-ui';
+import { DynamicRenderer } from '@sankhyatronics/sankhya-cms-react';
 
 <DynamicRenderer config={pageJson} handlers={{ onThemeChangeClick }} />
 ```

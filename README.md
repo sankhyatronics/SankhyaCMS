@@ -5,7 +5,7 @@ Open-source building blocks for JSON-driven portals.
 | Package | What it is |
 |---|---|
 | `@sankhyatronics/sankhya-cms` | Lit web components (`st-*`) — the single implementation of every base component |
-| `@sankhyatronics/sankhya-ui` | Thin React wrappers over the Lit components plus the JSON renderer |
+| `@sankhyatronics/sankhya-cms-react` | Thin React wrappers over the Lit components plus the JSON renderer |
 
 ## Rules
 

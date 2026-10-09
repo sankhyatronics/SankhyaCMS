@@ -23,6 +23,6 @@ jobs:
       - run: pnpm build
         env:
           NODE_OPTIONS: --max-old-space-size=8192
-      - run: pnpm --filter @sankhyatronics/sankhya-cms --filter @sankhyatronics/sankhya-ui publish --tag latest --no-git-checks --access public
+      - run: pnpm --filter @sankhyatronics/sankhya-cms --filter @sankhyatronics/sankhya-cms-react publish --tag latest --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

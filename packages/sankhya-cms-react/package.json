@@ -1,22 +1,18 @@
 {
-  "name": "@sankhyatronics/sankhya-ui",
+  "name": "@sankhyatronics/sankhya-cms-react",
   "description": "React wrappers for the Sankhya CMS Lit components, plus the JSON renderer (DynamicRenderer)",
   "keywords": [
     "react",
-    "react19",
-    "ui-library",
-    "headless-cms",
-    "contentful",
-    "dynamic-rendering",
-    "json-driven",
-    "sankhya-ui"
+    "lit",
+    "web-components",
+    "cms",
+    "json-driven"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/sankhyatronics/SankhyaCMS.git",
-    "directory": "packages/sankhya-ui"
+    "directory": "packages/sankhya-cms-react"
   },
-  "homepage": "https://sankhyaui.sankhyatronics.com/?path=/docs/introduction--docs",
   "license": "MIT",
   "version": "0.0.9",
   "main": "./dist/index.js",
