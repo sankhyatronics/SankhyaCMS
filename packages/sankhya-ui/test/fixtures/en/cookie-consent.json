@@ -1,0 +1,8 @@
+[
+    {
+        "type": "CookieConsent",
+        "label": "Default",
+        "privacyPolicyLink": "https://sankhyatronics.com/privacy-policy",
+        "storageKey": "cookie_consent_demo_default"
+    }
+]

@@ -1,0 +1,24 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero",
+        "title": "Contact Us",
+        "textAlignment": "top",
+        "className": "min-h-[24dvh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Contact us",
+        "title": "Locations",
+        "columns": 2,
+        "children": [
+            {
+                "type": "ContentBlock",
+                "title": "India",
+                "className": "shadow-lg shadow-(color:--st-shadow-color-lg) rounded-lg",
+                "format": "markdown",
+                "contentSrc": "./india-contact.md"
+            }
+        ]
+    }
+]

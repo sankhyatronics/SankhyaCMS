@@ -1,0 +1,18 @@
+[
+    {
+        "type": "Hero",
+        "label": "Privacy Policy",
+        "title": "Privacy Policy",
+        "subtitle": "How we protect and manage your personal data.",
+        "imageSrc": "/images/BusinessAttention0210.webp",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[24dvh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20"
+    },
+    {
+        "type": "ContentBlock",
+        "label": "Privacy Policy Content",
+        "title": "Your Privacy Matters",
+        "contentSrc": "en/privacy-policy.md"
+    }
+]

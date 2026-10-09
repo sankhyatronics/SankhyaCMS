@@ -1,0 +1,97 @@
+.hero-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+  z-index: 1;
+}
+
+/* Always light: the text sits on the image with its dark overlay, in every theme (the theme's surface
+   colour is dark in dark mode). */
+.hero-text-primary {
+  color: var(--hero-text-color, #ffffff);
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-btn-primary {
+  background-color: var(--st-color-accent);
+  color: var(--st-color-on-solid);
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+.hero-btn-primary:hover {
+  background-color: var(--st-color-accent);
+}
+
+@media (min-width: 640px) {
+
+  /* sm */
+  .hero-actions {
+    flex-direction: row;
+  }
+
+  .hero-btn-primary {
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+
+  /* md */
+  .hero-text {
+    padding: 2rem;
+  }
+
+  .hero-btn-primary {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+
+  /* lg */
+  .hero-text {
+    padding: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+
+  /* xl */
+}

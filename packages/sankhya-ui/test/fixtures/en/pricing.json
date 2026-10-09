@@ -1,0 +1,63 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Competitive Pricing",
+        "subtitle": "Building your own digital team or paying for large amount of consultancy help may not be the best option for you and your organization. Choosing the right setup and combination of in-house and outsourcing will save you money while ensuring your digital success.",
+        "imageSrc": "/images/Pricing.webp",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[50vh] md:min-h-[70vh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20 rounded-b-lg"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Strategic Digitalization",
+        "title": "Strategic Digitalization",
+        "subtitle": "Strategic digitalization has become a central part of most businesses, driven by technology availability and demand for efficiency.",
+        "imagePosition": "left",
+        "items": [
+            {
+                "icon": "heroicons:banknotes",
+                "title": "Cost Concerns",
+                "description": "Cost is still the number two highest concern of CIOs in the Nordics. 86% of companies outsourcing Finance and Accounting say cost reduction was the key driver."
+            },
+            {
+                "icon": "heroicons:adjustments-horizontal",
+                "title": "Flexible Scalability",
+                "description": "Outsourcing gives businesses the freedom to scale their resources up and down as needed, without the complexities of hiring and firing."
+            }
+        ],
+        "imageSrc": "/images/FourHands.webp",
+        "imageAlt": "Strategic Collaboration"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Our Solutions",
+        "title": "Smart Outsourcing Solutions",
+        "subtitle": "Solving the challenge of high costs while ensuring quality and control.",
+        "columns": 2,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:globe-alt",
+                "title": "Offshore Partners",
+                "description": "Partnering with offshore teams in countries with lower labor costs to significantly reduce the overall cost of outsourcing."
+            },
+            {
+                "icon": "heroicons:shield-check",
+                "title": "Quality Standards",
+                "description": "Not all offshore partners are created equal. We emphasize the importance of high quality standards alongside cost benefits."
+            },
+            {
+                "icon": "heroicons:user-group",
+                "title": "Vetted Expertise",
+                "description": "Carefully vetting potential offshore partners to ensure they meet the specific requirements of your strategic digital products."
+            },
+            {
+                "icon": "heroicons:rocket-launch",
+                "title": "Competitive Advantage",
+                "description": "Harvesting a competitive cost advantage and the high quality required to propel your business forward."
+            }
+        ]
+    }
+]

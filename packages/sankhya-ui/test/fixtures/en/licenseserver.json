@@ -1,0 +1,105 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "License Server",
+        "subtitle": "Issue, validate and meter licenses for your own SaaS products, with resellers, trials and a full audit trail.",
+        "imageSrc": "/images/cloud_infra.png",
+        "textAlignment": "left",
+        "padding": "none",
+        "actionLabel": "Start free",
+        "href": "https://apps.sankhyatronics.com",
+        "className": "min-h-[50vh] md:min-h-[70vh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20 rounded-b-lg"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Key Features",
+        "title": "A complete licensing platform",
+        "subtitle": "Everything between your product and a paying customer",
+        "columns": 3,
+        "className": "my-20",
+        "items": [
+            {
+                "icon": "heroicons:server",
+                "title": "Usage metering and quotas",
+                "description": "Track API calls per organisation against a quota for each billing period, and enforce it automatically."
+            },
+            {
+                "icon": "heroicons:cloud",
+                "title": "SaaS licensing",
+                "description": "Seats plus an API-call quota per period, checked online and tracked per organisation."
+            },
+            {
+                "icon": "heroicons:users",
+                "title": "Seat management",
+                "description": "Assign seats to end users, with overflow handling and automatic promotion when seats free up."
+            },
+            {
+                "icon": "heroicons:share",
+                "title": "Resellers and clients",
+                "description": "Authorise resellers per product and let them onboard their own client organisations."
+            },
+            {
+                "icon": "heroicons:clock",
+                "title": "Trials and grace periods",
+                "description": "Instant trials, grace windows and converting a trial to a paid plan in one step."
+            },
+            {
+                "icon": "heroicons:clipboard-document-list",
+                "title": "Audit trail",
+                "description": "Every issue, renewal, suspension and revocation is recorded and searchable."
+            }
+        ]
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Integration",
+        "title": "Drop-in clients for your apps",
+        "className": "my-20 theme-inverted",
+        "subtitle": "Gate your own application with a few lines. The client activates, checks in, verifies the signed token and fails closed when a licence lapses.",
+        "imagePosition": "left",
+        "items": [
+            {
+                "icon": "heroicons:finger-print",
+                "title": "Signed tokens",
+                "description": "Ed25519 or RSA signed licence tokens that your app verifies on every check."
+            },
+            {
+                "icon": "heroicons:key",
+                "title": "Integration keys",
+                "description": "Rotate machine API keys from the admin portal without redeploying."
+            }
+        ],
+        "imageSrc": "/images/database_devops.png",
+        "imageAlt": "License Server client integration"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Pricing",
+        "title": "Pricing",
+        "subtitle": "Priced by number of licensed organisations, billed monthly.",
+        "columns": 3,
+        "actionLabel": "Get started",
+        "className": "my-20",
+        "items": [
+            {
+                "icon": "heroicons:code-bracket",
+                "title": "Developer",
+                "description": "**$0** free\n\n- 1 product\n- 5 client organisations\n- 100 active seats\n- Community support",
+                "href": "https://apps.sankhyatronics.com"
+            },
+            {
+                "icon": "heroicons:chart-bar",
+                "title": "Growth",
+                "description": "**$99** per month\n\n- 5 products\n- 100 client organisations\n- 5,000 active seats\n- Reseller management\n- Usage metering and quotas\n- Email support",
+                "href": "https://apps.sankhyatronics.com"
+            },
+            {
+                "icon": "heroicons:building-library",
+                "title": "Enterprise",
+                "description": "**Custom** pricing\n\n- Unlimited products and organisations\n- Dedicated support\n- Custom SLA",
+                "href": "contact-us"
+            }
+        ]
+    }
+]

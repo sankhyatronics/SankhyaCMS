@@ -1,0 +1,74 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Cloud Services",
+        "subtitle": "Elevate your business with cloud-native innovation and seamless migration.",
+        "imageSrc": "/images/cloud_infra.png",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[24dvh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Modern Cloud Foundations",
+        "title": "Scalable & Automated Infrastructure",
+        "className": "my-20",
+        "subtitle": "Build your cloud foundation on automation and resilience with our advanced engineering services.",
+        "imagePosition": "right",
+        "items": [
+            {
+                "icon": "heroicons:command-line",
+                "title": "Infrastructure as Code (IaC)",
+                "description": "Utilizing Terraform and Bicep to automate environment provisioning, ensuring consistency and rapid deployment."
+            },
+            {
+                "icon": "heroicons:cube-transparent",
+                "title": "Cloud Native Applications",
+                "description": "Architecting high-performance systems using Kubernetes (AKS) and Azure Container Apps for maximum scalability."
+            }
+        ],
+        "imageSrc": "/images/software-developer-on-php-code.jpg",
+        "imageAlt": "Modern Cloud Foundations"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Our Expertise",
+        "title": "Cloud Success Stack",
+        "subtitle": "Technical Excellence for High-Performing Enterprises",
+        "columns": 3,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:share",
+                "title": "API Management",
+                "description": "Creating and exposing secure, scalable APIs using Azure API Management to power your integrations."
+            },
+            {
+                "icon": "heroicons:bolt",
+                "title": "Serverless Computing",
+                "description": "Leveraging Azure Functions to build event-driven solutions with zero infrastructure overhead."
+            },
+            {
+                "icon": "heroicons:arrow-path",
+                "title": "DevOps & CI/CD",
+                "description": "Implementing robust pipelines with Azure DevOps and GitHub Actions for continuous quality delivery."
+            },
+            {
+                "icon": "heroicons:banknotes",
+                "title": "Cloud Cost Optimization",
+                "description": "Analyzing and refining your cloud spend with FinOps practices to ensure maximum ROI."
+            },
+            {
+                "icon": "heroicons:shield-check",
+                "title": "Governance & Security",
+                "description": "Enforcing policies and security guardrails through Azure Policy and Microsoft Defender for Cloud."
+            },
+            {
+                "icon": "heroicons:magnifying-glass",
+                "title": "Monitoring & Observability",
+                "description": "Gaining deep insights into your systems with Azure Monitor, Log Analytics, and Application Insights."
+            }
+        ]
+    }
+]

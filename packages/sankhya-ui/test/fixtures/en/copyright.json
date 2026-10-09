@@ -1,0 +1,18 @@
+[
+    {
+        "type": "Hero",
+        "label": "Copyright Notice",
+        "title": "Copyright Notice",
+        "subtitle": "Legal information regarding the usage of our materials.",
+        "imageSrc": "/images/BusinessAttention0210.webp",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[24dvh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20"
+    },
+    {
+        "type": "ContentBlock",
+        "label": "Copyright Content",
+        "title": "Usage Rights & Restrictions",
+        "contentSrc": "en/copyright.md"
+    }
+]

@@ -1,0 +1,107 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Empowering Your Global Digital Innovation",
+        "subtitle": "High-Performance Engineering & Strategic Consulting Targeted for Your Success",
+        "actionLabel": "Contact Us",
+        "href": "/contact-us",
+        "imageSrc": "/images/business-meeting-over-coffee.jpg",
+        "textAlignment": "left",
+        "className": "min-h-[50vh] md:min-h-[70vh] bg-(--st-color-surface) mt-20 rounded-b-lg"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Features Section",
+        "title": "Take Back Control of Your IT Solutions",
+        "subtitle": "We Succeed Together",
+        "actionLabel": "See how",
+        "columns": 2,
+        "children": [
+            {
+                "type": "FeatureItem",
+                "icon": "mdi:briefcase-check-outline",
+                "title": "Controlled Outsourcing",
+                "href": "./Outsourcing",
+                "description": "Some digital investments are just too important! Reclaim control, differentiate yourself with key digital products, and stay ahead in the market. Your business, your control, our expertise. We Empower your business with strategic digital outsourcing with you in control."
+            },
+            {
+                "type": "FeatureItem",
+                "icon": "mdi:account-star-outline",
+                "title": "Access to talent",
+                "href": "./Talent",
+                "description": "Are you also looking in vain for the high-end digital talent you need? Sankhyatronics can help you overcome the challenges of hiring and retaining digital experts in the Nordic region. We provide feasible solutions for your outsourcing and mixed-sourcing efforts. Your success, our talent."
+            },
+            {
+                "type": "FeatureItem",
+                "icon": "mdi:currency-usd",
+                "title": "Competitive Pricing",
+                "href": "./Pricing",
+                "description": "Is the use of consultants or building up your own digital team just too expensive? Navigate the digital landscape with our cost-effective solutions. We offer high-quality offshore services at competitive prices. We are addressing your budget concerns. Quality service, affordable price."
+            },
+            {
+                "type": "FeatureItem",
+                "icon": "mdi:shield-check-outline",
+                "title": "Reliable Service",
+                "href": "./reliable-service",
+                "description": "Do you feel the culture and language barriers to be too steep for distant outsourcing? With 70+ years of partner experience, Sankhyatronics ensures trusted, locally anchored, continuous service. We're ready to hire, upskill, and lead your offshore experts, offering flexible engagement models. Experience reliability with us."
+            }
+        ]
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Digital Differentiators",
+        "title": "We help you achieve your business objectives with Digital Differentiators",
+        "subtitle": "Drive Your Business Forward with IT Solutions Aligned with Your Goals. We work closely with you to understand your operations, challenges, and goals, and tailor your IT strategies and services help you win in your marketplace. Whether you need cloud solutions, cutting edge AI, cybersecurity, VR, or something else, we have the expertise and experience to deliver reliable, cost-effective, and innovative solutions. Contact us today for a free non-committal talk on your problems, needs, and opportunities.",
+        "imagePosition": "right",
+        "items": [],
+        "className": "theme-inverted",
+        "actionLabel": "Schedule Call",
+        "href": "https://outlook.office365.com/owa/calendar/ScheduleaCall@sankhyatronics.com/bookings/",
+        "imageSrc": "/images/fistbump-over-desk.jpg",
+        "imageAlt": "Digital Differentiators"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Digital Differentiators",
+        "title": "How we can help",
+        "subtitle": "Each and every one of our services is a part of our IT Technology Success.",
+        "actionLabel": "Learn more",
+        "columns": 3,
+        "children": [
+            {
+                "type": "FeatureSplit",
+                "title": "Consultancy Services",
+                "subtitle": "How can collaborating with the right partner change your success in the digital space?",
+                "imagePosition": "top",
+                "className": "shadow-lg shadow-(color:--st-shadow-color-lg) rounded-lg",
+                "actionLabel": "Learn more",
+                "href": "./Consultancy-Services",
+                "imageSrc": "/images/developer-leading-planning-session.jpg",
+                "imageAlt": "Consultancy Services"
+            },
+            {
+                "type": "FeatureSplit",
+                "title": "Product Team as a Service",
+                "subtitle": "How can collaborating with the right partner ensure your success in digital product development?",
+                "imagePosition": "top",
+                "className": "shadow-lg shadow-(color:--st-shadow-color-lg) rounded-lg theme-inverted",
+                "actionLabel": "Learn more",
+                "href": "./Product-Team-as-a-Service",
+                "imageSrc": "/images/who_we_are.png",
+                "imageAlt": "Product Team as a Service"
+            },
+            {
+                "type": "FeatureSplit",
+                "title": "Managed Services",
+                "subtitle": "Enable your business's full potential with our Managed Services model!",
+                "imagePosition": "top",
+                "className": "shadow-lg shadow-(color:--st-shadow-color-lg) rounded-lg",
+                "actionLabel": "Learn more",
+                "href": "./Managed-Services",
+                "imageSrc": "/images/man-holding-pen-in-meeting.jpg",
+                "imageAlt": "Managed Services"
+            }
+        ]
+    }
+]

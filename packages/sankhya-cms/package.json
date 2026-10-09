@@ -1,0 +1,144 @@
+{
+  "name": "@sankhyatronics/sankhya-cms",
+  "version": "0.0.9",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sankhyatronics/SankhyaCMS.git",
+    "directory": "packages/sankhya-cms"
+  },
+  "description": "Lit web components for JSON-driven CMS portals (st-* tags)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./cms-theme.css": "./dist/cms-theme.css",
+    "./bento-grid": {
+      "types": "./dist/bento-grid/index.d.ts",
+      "import": "./dist/bento-grid/index.js"
+    },
+    "./card": {
+      "types": "./dist/card/index.d.ts",
+      "import": "./dist/card/index.js"
+    },
+    "./carousel": {
+      "types": "./dist/carousel/index.d.ts",
+      "import": "./dist/carousel/index.js"
+    },
+    "./content-block": {
+      "types": "./dist/content-block/index.d.ts",
+      "import": "./dist/content-block/index.js"
+    },
+    "./cookie-consent": {
+      "types": "./dist/cookie-consent/index.d.ts",
+      "import": "./dist/cookie-consent/index.js"
+    },
+    "./dropdown": {
+      "types": "./dist/dropdown/index.d.ts",
+      "import": "./dist/dropdown/index.js"
+    },
+    "./feature-split": {
+      "types": "./dist/feature-split/index.d.ts",
+      "import": "./dist/feature-split/index.js"
+    },
+    "./features-section": {
+      "types": "./dist/features-section/index.d.ts",
+      "import": "./dist/features-section/index.js"
+    },
+    "./footer": {
+      "types": "./dist/footer/index.d.ts",
+      "import": "./dist/footer/index.js"
+    },
+    "./header": {
+      "types": "./dist/header/index.d.ts",
+      "import": "./dist/header/index.js"
+    },
+    "./hero": {
+      "types": "./dist/hero/index.d.ts",
+      "import": "./dist/hero/index.js"
+    },
+    "./icon-button": {
+      "types": "./dist/icon-button/index.d.ts",
+      "import": "./dist/icon-button/index.js"
+    },
+    "./items-accordion": {
+      "types": "./dist/items-accordion/index.d.ts",
+      "import": "./dist/items-accordion/index.js"
+    },
+    "./markdown": {
+      "types": "./dist/markdown/index.d.ts",
+      "import": "./dist/markdown/index.js"
+    },
+    "./menu-grid": {
+      "types": "./dist/menu-grid/index.d.ts",
+      "import": "./dist/menu-grid/index.js"
+    },
+    "./menu-grid-item": {
+      "types": "./dist/menu-grid-item/index.d.ts",
+      "import": "./dist/menu-grid-item/index.js"
+    },
+    "./menu-item": {
+      "types": "./dist/menu-item/index.d.ts",
+      "import": "./dist/menu-item/index.js"
+    },
+    "./promo-banner": {
+      "types": "./dist/promo-banner/index.d.ts",
+      "import": "./dist/promo-banner/index.js"
+    },
+    "./select": {
+      "types": "./dist/select/index.d.ts",
+      "import": "./dist/select/index.js"
+    },
+    "./stats": {
+      "types": "./dist/stats/index.d.ts",
+      "import": "./dist/stats/index.js"
+    },
+    "./testimonials": {
+      "types": "./dist/testimonials/index.d.ts",
+      "import": "./dist/testimonials/index.js"
+    },
+    "./shared/styles": {
+      "types": "./dist/shared/styles.d.ts",
+      "import": "./dist/shared/styles.js"
+    },
+    "./shared/icons": {
+      "types": "./dist/shared/icons.d.ts",
+      "import": "./dist/shared/icons.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": true,
+  "scripts": {
+    "build": "tsup src/index.ts src/shared/styles.ts src/shared/icons.ts src/bento-grid/index.ts src/card/index.ts src/carousel/index.ts src/content-block/index.ts src/cookie-consent/index.ts src/dropdown/index.ts src/feature-split/index.ts src/features-section/index.ts src/footer/index.ts src/header/index.ts src/hero/index.ts src/icon-button/index.ts src/items-accordion/index.ts src/markdown/index.ts src/menu-grid/index.ts src/menu-grid-item/index.ts src/menu-item/index.ts src/promo-banner/index.ts src/select/index.ts src/stats/index.ts src/testimonials/index.ts --format esm --dts --sourcemap --clean && node scripts/copy-theme.mjs",
+    "dev": "tsup src/index.ts --watch --format esm --dts",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "dompurify": "^3.4.16",
+    "iconify-icon": "^3.0.3",
+    "lit": "catalog:",
+    "marked": "^18.1.0"
+  },
+  "devDependencies": {
+    "@sankhyatronics/oxlint-config": "workspace:*",
+    "@sankhyatronics/typescript-config": "workspace:*",
+    "oxlint": "catalog:",
+    "rimraf": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:"
+  },
+  "keywords": [
+    "web-components",
+    "lit",
+    "cms"
+  ],
+  "license": "ISC"
+}

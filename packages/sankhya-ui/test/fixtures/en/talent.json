@@ -1,0 +1,63 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Access to Talent",
+        "subtitle": "Overcoming the challenges of attracting and retaining qualified digital experts.",
+        "imageSrc": "/images/Accesstotalent.webp",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[50vh] md:min-h-[70vh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20 rounded-b-lg"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Talent Landscape",
+        "title": "The Strategic Digital Workforce",
+        "subtitle": "Organizations are increasingly in-sourcing their digital workforce due to the strategic importance of digital products and the need for control.",
+        "imagePosition": "left",
+        "items": [
+            {
+                "icon": "heroicons:user-group",
+                "title": "In-Sourcing Trends",
+                "description": "Hiring and retaining in-house experts to maintain full control over digital discovery and development."
+            },
+            {
+                "icon": "heroicons:academic-cap",
+                "title": "Specialized Skills",
+                "description": "Accessing highly skilled workers in a competitive market where demand is skyrocketing."
+            }
+        ],
+        "imageSrc": "/images/BusinessAttention0210.webp",
+        "imageAlt": "Digital Talent Expertise"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Our Solutions",
+        "title": "Navigating Talent Challenges",
+        "subtitle": "Bridging the Gap between Demand and Supply",
+        "columns": 2,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:swatch",
+                "title": "Cultural Alignment",
+                "description": "Bridging the gap between traditional corporate culture and the dynamic, agile nature of digital experts."
+            },
+            {
+                "icon": "heroicons:adjustments-horizontal",
+                "title": "Hybrid Workforce Models",
+                "description": "Combining in-house business expertise with high-performing offshore digital teams."
+            },
+            {
+                "icon": "heroicons:banknotes",
+                "title": "Cost Optimization",
+                "description": "Managing the strain on budgets by leveraging efficient offshore in-sourcing strategies."
+            },
+            {
+                "icon": "heroicons:rocket-launch",
+                "title": "Seamless Integration",
+                "description": "Planning and executing in-sourcing efforts to build dedicated, high-value product teams."
+            }
+        ]
+    }
+]

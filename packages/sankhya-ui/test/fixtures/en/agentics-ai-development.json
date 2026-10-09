@@ -1,0 +1,64 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Agentics AI Development",
+        "subtitle": "Revolutionize your digital landscape with Generative AI and Machine Learning.",
+        "imageSrc": "/images/ai_robotics.png",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[24dvh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "The AI Revolution",
+        "title": "Sankhyatronics: Pioneers in AI & Automation",
+        "className": "my-20",
+        "subtitle": "We bring AI and automation to your organization, shaping the future of digital interactions through expert development.",
+        "imagePosition": "right",
+        "items": [
+            {
+                "icon": "heroicons:sparkles",
+                "title": "Generative AI & LLMs",
+                "description": "Designing custom solutions using GPT-4, Llama 3, and specialized models to enhance Digital Employee Experience."
+            },
+            {
+                "icon": "heroicons:chat-bubble-left-right",
+                "title": "Agentic Orchestration",
+                "description": "Developing complex agent workflows using LangChain and Semantic Kernel for autonomous problem-solving."
+            }
+        ],
+        "imageSrc": "/images/robot-8634899_1280.jpg",
+        "imageAlt": "AI Innovation"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Core Capabilities",
+        "title": "Industrial-Grade AI",
+        "subtitle": "Scalable, Secure, and Production-Ready",
+        "columns": 2,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:cpu-chip",
+                "title": "RAG & Knowledge Bases",
+                "description": "Implementing Retrieval-Augmented Generation (RAG) with Azure AI Search and Vector databases for high-precision retrieval."
+            },
+            {
+                "icon": "heroicons:presentation-chart-line",
+                "title": "Advanced ML Ops",
+                "description": "Streamlining model deployment and monitoring using Azure Machine Learning for reliable production environments."
+            },
+            {
+                "icon": "heroicons:shield-check",
+                "title": "Responsible & Secure AI",
+                "description": "Enforcing safety guardrails and ethical standards through Azure AI Content Safety and policy-driven governance."
+            },
+            {
+                "icon": "heroicons:rocket-launch",
+                "title": "Cognitive Services",
+                "description": "Integrating Computer Vision, Speech-to-Text, and Document Intelligence to unlock new business value."
+            }
+        ]
+    }
+]

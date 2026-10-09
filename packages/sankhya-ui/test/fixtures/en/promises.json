@@ -1,0 +1,52 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Our Promises",
+        "subtitle": "We are committed to delivering excellence through these core promises, ensuring a future of mutual success and shared growth.",
+        "imageSrc": "/images/BusinessAttention0210.webp",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[24dvh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Customer Promise",
+        "title": "Customer",
+        "subtitle": "“**We Succeed Together…!**”\n\nWe believe that our success is inextricably linked to our customers' success. We are committed to working with our customers to achieve their long-term goals. We do this by understanding their needs, providing them with innovative solutions, and delivering on our promises. We also believe that it is important to build relationships with our customers based on trust and transparency.",
+        "imagePosition": "left",
+        "className": "my-20",
+        "imageSrc": "/images/promise_customer.png",
+        "imageAlt": "We Succeed Together"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "People Promise",
+        "title": "People",
+        "subtitle": "**Empower everyone every day.**\n\nWe believe that our people are our greatest asset. We are committed to creating a workplace where everyone feels valued and empowered to do their best work. We do this by providing our employees with opportunities to learn and grow, by giving them a voice in decision-making, and by creating a culture of respect and collaboration.",
+        "imagePosition": "right",
+        "className": "my-20 theme-inverted",
+        "imageSrc": "/images/promise_people.png",
+        "imageAlt": "Empower Everyone"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Partners Promise",
+        "title": "Partners",
+        "subtitle": "**Fairness and long-term mutual success.**\n\nWe believe that our partners are essential to our success. We are committed to working with our partners in a fair and transparent way, and to building long-term relationships that are mutually beneficial. We do this by sharing our knowledge and expertise, by providing our partners with access to our resources, and by working together to achieve common goals.",
+        "imagePosition": "left",
+        "className": "my-20",
+        "imageSrc": "/images/promise_partners.png",
+        "imageAlt": "Mutual Success"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Technology Promise",
+        "title": "Technology",
+        "subtitle": "**Security, Safety, Privacy, and Sustainability.**\n\nWe believe that security, safety, privacy, and sustainability are essential for our customers, our partners, and our employees. We are committed to protecting our customers' data, to keeping our partners' systems secure, to ensuring the privacy of everyone, and to protect the planet.\n\nWe do this by using the latest security & privacy technologies and by choosing the most sustainable hosting options, helping our customers stay energy neutral.",
+        "imagePosition": "right",
+        "className": "my-20 theme-inverted",
+        "imageSrc": "/images/promise_technology.png",
+        "imageAlt": "Secure Technology"
+    }
+]

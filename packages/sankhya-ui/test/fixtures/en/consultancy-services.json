@@ -1,0 +1,64 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Consultancy Services",
+        "subtitle": "Expert guidance and seamless solutions for your technology aspirations.",
+        "imageSrc": "/images/developer-leading-planning-session.jpg",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[50vh] md:min-h-[70vh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20 rounded-b-lg"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Guided Transformation",
+        "title": "Strategic Technology Advisory",
+        "className": "my-20",
+        "subtitle": "Navigating the complexities of modern IT requires more than just tools—it requires a vision. We partner with you to design high-impact strategies that align technology with your core business objectives.",
+        "imagePosition": "right",
+        "items": [
+            {
+                "icon": "heroicons:academic-cap",
+                "title": "TOGAF-Aligned Architecture",
+                "description": "Designing robust enterprise architectures that ensure your systems are scalable, secure, and future-proof."
+            },
+            {
+                "icon": "heroicons:presentation-chart-line",
+                "title": "Digital Transformation Roadmap",
+                "description": "Defining clear, actionable milestones for your journey from legacy systems to cloud-native innovation."
+            }
+        ],
+        "imageSrc": "/images/senior-teaching-young-man.jpg",
+        "imageAlt": "Strategic Technology Advisory"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Core Expertise",
+        "title": "Our Advisory Domains",
+        "subtitle": "Proven Methodologies for Enterprise Success",
+        "columns": 2,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:cloud",
+                "title": "Cloud Strategy & Governance",
+                "description": "Expert guidance on Hybrid and Multi-cloud architectures, ensuring optimal performance and cost-efficiency."
+            },
+            {
+                "icon": "heroicons:arrow-path",
+                "title": "Modernization Strategy",
+                "description": "Developing 6R-based assessment frameworks (Re-host, Re-platform, etc.) to transform legacy environments."
+            },
+            {
+                "icon": "heroicons:shield-check",
+                "title": "Cybersecurity Consulting",
+                "description": "Implementing Zero-Trust architectures and conducting rigorous risk assessments to protect your global assets."
+            },
+            {
+                "icon": "heroicons:cog-6-tooth",
+                "title": "ITIL Service Excellence",
+                "description": "Optimizing IT service management processes to drive operational efficiency and superior user satisfaction."
+            }
+        ]
+    }
+]

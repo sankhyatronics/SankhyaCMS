@@ -1,0 +1,63 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Controlled Outsourcing",
+        "subtitle": "Take back control of your digital differentiators and strategic growth.",
+        "imageSrc": "/images/ControlledOutsourcing.webp",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[50vh] md:min-h-[70vh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20 rounded-b-lg"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Strategic Control",
+        "title": "Digital as a Core Differentiator",
+        "subtitle": "Research shows that businesses are taking back control of their outsourcing to ensure digital is a growing key business differentiator.",
+        "imagePosition": "right",
+        "items": [
+            {
+                "icon": "heroicons:light-bulb",
+                "title": "Strategic Discovery",
+                "description": "Process of research, ideation, and user testing to develop unique digital solutions."
+            },
+            {
+                "icon": "heroicons:shield-check",
+                "title": "Strategic Alignment",
+                "description": "Ensuring digital products perfectly match your industry, goals, and customer needs."
+            }
+        ],
+        "imageSrc": "/images/BusinessAttention0210.webp",
+        "imageAlt": "Strategic Outsourcing Control"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Key Technologies",
+        "title": "Digital Differentiators",
+        "subtitle": "Technologies That Set You Apart",
+        "columns": 2,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:cpu-chip",
+                "title": "Artificial Intelligence",
+                "description": "Automate tasks and personalize customer experiences to gain a significant competitive advantage."
+            },
+            {
+                "icon": "heroicons:globe-alt",
+                "title": "Specialized Online Presence",
+                "description": "Reach wider audiences with custom websites and apps tailored to your unique brand."
+            },
+            {
+                "icon": "heroicons:sparkles",
+                "title": "Augmented Reality",
+                "description": "Transform retail and design by letting customers visualize products in their own environment."
+            },
+            {
+                "icon": "heroicons:cloud",
+                "title": "Cloud Computing",
+                "description": "Access global computing resources on demand to scale your operations effortlessly."
+            }
+        ]
+    }
+]

@@ -1,0 +1,74 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Modern Workspace",
+        "subtitle": "Maximize your investments in Modern Workspace and Digital Employee Experience.",
+        "imageSrc": "/images/modern_workspace.png",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[24dvh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Modern Intranet & Platform",
+        "title": "A Unified Digital Hub",
+        "className": "my-20",
+        "subtitle": "Transform how your organization communicates and automates with modern portals and the Power Platform.",
+        "imagePosition": "right",
+        "items": [
+            {
+                "icon": "heroicons:home",
+                "title": "Modern Intranet",
+                "description": "Building beautiful, functional, and engaging intranets using SharePoint Online to keep your workforce connected."
+            },
+            {
+                "icon": "heroicons:bolt",
+                "title": "Power Platform",
+                "description": "Empowering your business with custom apps, complex automation, and insightful data using Power Apps, Power Automate, and Power BI."
+            }
+        ],
+        "imageSrc": "/images/modern-office-meeting-on-rooftop-patio.jpg",
+        "imageAlt": "Modern Workspace Digital Hub"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Tools & Tech",
+        "title": "Workplace Excellence",
+        "subtitle": "Empowering Every Employee with Modern Tools",
+        "columns": 2,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:chat-bubble-left-right",
+                "title": "Teams Apps",
+                "description": "Extending Microsoft Teams with custom apps and integrations to bring your business processes directly into the flow of work."
+            },
+            {
+                "icon": "heroicons:square-3-stack-3d",
+                "title": "SharePoint Apps",
+                "description": "Developing custom SPFx components and applications to extend the capabilities of your modern SharePoint environment."
+            },
+            {
+                "icon": "heroicons:user-group",
+                "title": "Collaboration",
+                "description": "Expertise in Microsoft SharePoint and Teams to foster seamless communication and streamlined workflows."
+            },
+            {
+                "icon": "heroicons:sparkles",
+                "title": "AI & Copilot",
+                "description": "Integrating Azure OpenAI and Microsoft Copilot to provide intelligent assistance and hyper-personalization."
+            },
+            {
+                "icon": "heroicons:heart",
+                "title": "Viva & Wellbeing",
+                "description": "Utilizing Microsoft Viva to create engaging employee experiences and promote continuous learning."
+            },
+            {
+                "icon": "heroicons:globe-alt",
+                "title": "Digital Transformation",
+                "description": "Ensuring technology serves as a bridge to success throughout your holistic digital journey."
+            }
+        ]
+    }
+]
