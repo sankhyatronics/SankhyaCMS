@@ -1,0 +1,64 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Business Operations & Strategy",
+        "subtitle": "Unlocking business value through intelligence and process optimization.",
+        "imageSrc": "/images/business_strategy.png",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[24dvh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Expert Guidance",
+        "title": "Strategic Business Excellence",
+        "className": "my-20",
+        "subtitle": "At Sankhyatronics, we harness the power of cutting-edge technologies within Business Analysis, BI, and Process Optimization to help you maximize your potential.",
+        "imagePosition": "left",
+        "items": [
+            {
+                "icon": "heroicons:chart-bar",
+                "title": "Data Visualization & BI",
+                "description": "Building interactive, real-time dashboards using Power BI and Tableau to transform complex data into strategic foresight."
+            },
+            {
+                "icon": "heroicons:puzzle-piece",
+                "title": "BPMN 2.0 Optimization",
+                "description": "Mapping and optimizing complex workflows using industry-standard BPMN 2.0 and Lean Six Sigma methodologies."
+            }
+        ],
+        "imageSrc": "/images/business-meeting-over-coffee.jpg",
+        "imageAlt": "Business Strategy"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Business Analysis & Data",
+        "title": "Enterprise Intelligence",
+        "subtitle": "Data-Driven Operational Excellence",
+        "columns": 2,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:magnifying-glass-circle",
+                "title": "Strategic Business Analysis",
+                "description": "Utilizing advanced BABOK-aligned techniques to identify gaps and define high-impact business requirements."
+            },
+            {
+                "icon": "heroicons:light-bulb",
+                "title": "Digital Operating Models",
+                "description": "Designing future-ready operating models that integrate people, process, and technology for maximum scalability."
+            },
+            {
+                "icon": "heroicons:arrows-pointing-in",
+                "title": "Data Governance",
+                "description": "Establishing robust frameworks for data quality, lineage, and master data management (MDM) to ensure a single source of truth."
+            },
+            {
+                "icon": "heroicons:rocket-launch",
+                "title": "Change Management",
+                "description": "Facilitating organizational transitions with structured ADKAR or Kotter frameworks to ensure high user adoption."
+            }
+        ]
+    }
+]

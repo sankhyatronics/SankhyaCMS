@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "extends": ["../../tooling/oxlint-config/.oxlintrc.json"],
+  "plugins": ["react", "typescript", "oxc"],
+  "ignorePatterns": ["dist", "scripts"],
+  "rules": {
+    "react/rules-of-hooks": "error"
+  }
+}

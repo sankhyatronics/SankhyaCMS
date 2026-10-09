@@ -1,0 +1,40 @@
+{
+  "name": "sankhya-cms-docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "gen": "node scripts/gen-components.mjs",
+    "start": "pnpm gen && docusaurus start",
+    "build": "pnpm gen && docusaurus build",
+    "serve": "docusaurus serve",
+    "clear": "docusaurus clear",
+    "typecheck": "tsc",
+    "lint": "oxlint"
+  },
+  "dependencies": {
+    "@docusaurus/core": "catalog:",
+    "@docusaurus/faster": "catalog:",
+    "@docusaurus/preset-classic": "catalog:",
+    "@mdx-js/react": "catalog:",
+    "@sankhyatronics/sankhya-cms": "workspace:*",
+    "clsx": "catalog:",
+    "prism-react-renderer": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "catalog:",
+    "@docusaurus/tsconfig": "catalog:",
+    "@docusaurus/types": "catalog:",
+    "@sankhyatronics/oxlint-config": "workspace:*",
+    "oxlint": "catalog:",
+    "typescript": "catalog:"
+  },
+  "browserslist": {
+    "production": [">0.5%", "not dead", "not op_mini all"],
+    "development": ["last 3 chrome version", "last 3 firefox version", "last 5 safari version"]
+  },
+  "engines": {
+    "node": ">=26.0"
+  }
+}

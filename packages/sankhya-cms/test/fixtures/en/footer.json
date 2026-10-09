@@ -1,0 +1,55 @@
+[
+    {
+        "type": "Footer",
+        "label": "Default",
+        "companyName": "",
+        "imageSrc": "/images/Logo_flat_color_2.svg",
+        "inverted": true,
+        "description": "",
+        "copyright": "© 2026 Sankhyatronics. All rights reserved.",
+        "poweredBy": "Powered by SankhyaUI",
+        "poweredByLink": "https://sankhyaui.sankhyatronics.com",
+        "socialLinks": [
+            {
+                "icon": "mdi:linkedin",
+                "href": "https://www.linkedin.com/company/sankhyatronics"
+            },
+            {
+                "icon": "mdi:github",
+                "href": "https://github.com/sankhyatronics"
+            }
+        ],
+        "columns": [
+            {
+                "title": "Policies",
+                "links": [
+                    {
+                        "label": "Privacy Policy",
+                        "href": "Privacy-Policy"
+                    },
+                    {
+                        "label": "Cookie Policy",
+                        "href": "Cookie-Policy"
+                    },
+                    {
+                        "label": "Copyright",
+                        "href": "copyright"
+                    },
+                    {
+                        "label": "Terms of Use",
+                        "href": "terms-of-use"
+                    }
+                ]
+            },
+            {
+                "title": "About Us",
+                "links": [
+                    {
+                        "label": "Contact Us",
+                        "href": "contact-us"
+                    }
+                ]
+            }
+        ]
+    }
+]

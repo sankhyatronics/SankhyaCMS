@@ -1,19 +1,19 @@
 {
   "name": "sankhya-cms",
-  "author": "Sankhyatronics",
-  "version": "0.0.16",
+  "version": "0.1.0",
   "private": true,
-  "description": "",
-  "main": "index.js",
+  "description": "Lit web components (st-*) and thin React wrappers for JSON-driven CMS portals",
+  "license": "ISC",
+  "packageManager": "pnpm@12.10.1",
+  "engines": {
+    "node": ">=26.0"
+  },
   "scripts": {
     "build": "pnpm -r --workspace-concurrency=1 build",
     "lint": "pnpm -r lint",
-    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r --if-present test",
     "dev": "pnpm -r dev",
-    "setversion": "node version-manager.js --set",
-    "resetversion": "node version-manager.js --reset"
-  },
-  "keywords": [],
-  "license": "ISC",
-  "packageManager": "pnpm@10.26.0"
+    "update-version": "node scripts/version-manager.mjs"
+  }
 }

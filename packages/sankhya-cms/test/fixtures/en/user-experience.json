@@ -1,0 +1,64 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "User Experience",
+        "subtitle": "Designing the future of digital interactions with intuition and delight.",
+        "imageSrc": "/images/ux_design.png",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[24dvh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Design Philosophy",
+        "title": "Creating Delightful Experiences",
+        "className": "my-20",
+        "subtitle": "We believe that good design is not just about how a product looks, but also about how it works. A well-crafted UX is key to engaging your customers.",
+        "imagePosition": "left",
+        "items": [
+            {
+                "icon": "heroicons:chat-bubble-bottom-center-text",
+                "title": "HCD Research",
+                "description": "Applying Human-Centered Design (HCD) principles to uncover deep user insights through behavioral analytics and continuous discovery."
+            },
+            {
+                "icon": "heroicons:map",
+                "title": "Systemic Journey Mapping",
+                "description": "Utilizing Figma to map complex user ecosystems and identify high-impact innovation opportunities across the lifecycle."
+            }
+        ],
+        "imageSrc": "/images/feedback-for-web-design-mockups.jpg",
+        "imageAlt": "UX Design Process"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Digital Experience",
+        "title": "Engineering Delight",
+        "subtitle": "High-Fidelity Interaction Design",
+        "columns": 2,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:sparkles",
+                "title": "Design Systems",
+                "description": "Architecting scalable design systems in Figma and documented in Storybook for consistent, high-velocity development."
+            },
+            {
+                "icon": "heroicons:cpu-chip",
+                "title": "Motion & Interactivity",
+                "description": "Crafting fluid micro-animations using GSAP and Framer Motion to provide immediate, delightful feedback."
+            },
+            {
+                "icon": "heroicons:puzzle-piece",
+                "title": "Prototyping & Testing",
+                "description": "Iterating rapidly with high-fidelity interactive prototypes to validate assumptions before a single line of code is written."
+            },
+            {
+                "icon": "heroicons:rocket-launch",
+                "title": "Accessibility Engineering",
+                "description": "Enforcing WCAG 2.1 compliance through rigorous testing, ensuring equitable digital experiences for all users."
+            }
+        ]
+    }
+]

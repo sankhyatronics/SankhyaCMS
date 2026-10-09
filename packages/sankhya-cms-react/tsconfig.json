@@ -1,0 +1,10 @@
+{
+  "extends": "@sankhyatronics/typescript-config/react",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["node"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": ["src"]
+}

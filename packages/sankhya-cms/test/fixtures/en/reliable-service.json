@@ -1,0 +1,58 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Reliable Service",
+        "subtitle": "Experience and understanding are everything when it comes to building strong, coherent, and highly productive teams.",
+        "imageSrc": "/images/ReliableService.webp",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[50vh] md:min-h-[70vh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20 rounded-b-lg"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Our Foundation",
+        "title": "Experience You Can Trust",
+        "subtitle": "With over 75 years of combined experience, our senior partners ensure our teams deliver a continuous and trusted service every day.",
+        "imagePosition": "right",
+        "items": [
+            {
+                "icon": "heroicons:identification",
+                "title": "Combined Expertise",
+                "description": "Four senior partners providing leadership and deep IT industry knowledge."
+            },
+            {
+                "icon": "heroicons:globe-americas",
+                "title": "Cross-Culture Teams",
+                "description": "Building cross-world teams that excel through understanding and collaboration."
+            }
+        ],
+        "imageSrc": "/images/BusinessAttention0210.webp",
+        "imageAlt": "Reliable Service Teams"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Service Models",
+        "title": "Tailored Service Models",
+        "subtitle": "Meeting Your Specific IT Goals",
+        "columns": 3,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:user-plus",
+                "title": "Managing Your Experts",
+                "description": "Helping you hire, up-skill, and manage your own offshore experts with full residential support."
+            },
+            {
+                "icon": "heroicons:cpu-chip",
+                "title": "Rent a Product Team",
+                "description": "Quick access to a full team of on- and off-shore experts for your key digital products."
+            },
+            {
+                "icon": "heroicons:cog-8-tooth",
+                "title": "Managed Solutions",
+                "description": "Complete outsourced IT solutions managing server, networking, and application infrastructure."
+            }
+        ]
+    }
+]

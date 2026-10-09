@@ -1,0 +1,62 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Our Core Values",
+        "subtitle": "We live our values as an integrated part of every decision we make. We believe that only by being deeply grounded in your values can we Succeed Together with you.",
+        "imageSrc": "/images/BusinessAttention0210.webp",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[24dvh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Integrity",
+        "title": "Integrity",
+        "className": "my-20",
+        "subtitle": "Doing the right thing always, even when it is the harder road to travel. This means being honest, transparent, and ethical in all our dealings with clients, employees, and partners. It also means standing up for what we believe in, even when it is not popular.\n\nWe believe that integrity is essential for building trust and long-term relationships. It is also the foundation for our commitment to sustainability and diversity and inclusion.",
+        "imagePosition": "left",
+        "imageSrc": "/images/FourHands.webp",
+        "imageAlt": "Integrity"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Sustainability",
+        "title": "Sustainability",
+        "subtitle": "Sustainable development is development that meets the needs of the present without compromising the ability of future generations to meet their own needs. This means that we must balance economic growth with environmental protection and social equity.\n\nWe believe that sustainability is essential for the long-term health of our planet and our businesses. We are committed to reducing our environmental impact and promoting social responsibility in all our work.",
+        "imagePosition": "right",
+        "className": "my-20 theme-inverted",
+        "imageSrc": "/images/ControlledOutsourcing.webp",
+        "imageAlt": "Sustainability"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Quality",
+        "title": "Quality",
+        "subtitle": "Good is not good enough. We build great solutions. This means that we are constantly striving to improve the quality of our work. We use the latest technologies and techniques, and we are always looking for new ways to innovate.\n\nWe believe that quality is essential for our success. Our clients expect the best, and we are committed to delivering it.",
+        "imagePosition": "left",
+        "className": "my-20",
+        "imageSrc": "/images/ReliableService.webp",
+        "imageAlt": "Quality"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Diversity & Inclusion",
+        "title": "Diversity & Inclusion",
+        "subtitle": "We value and embrace differences. This means that we are committed to creating a workplace where everyone feels welcome and respected.\n\nWe believe that diversity of thought, and experience makes us stronger as a company and able to build even more creative and innovative solutions and services to our customers.",
+        "imagePosition": "right",
+        "className": "my-20 theme-inverted",
+        "imageSrc": "/images/Accesstotalent.webp",
+        "imageAlt": "Diversity & Inclusion"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Innovation",
+        "title": "Innovation",
+        "subtitle": "Being the catalyst for creative change and new ideas. This means that we are always looking for new ways to improve our work and our businesses. We are not afraid to take risks, and we are always willing to experiment.\n\nWe believe that innovation is essential for future success. The world is changing rapidly, and we need to be able to adapt and change with it.",
+        "imagePosition": "left",
+        "className": "my-20",
+        "imageSrc": "/images/FourHands.webp",
+        "imageAlt": "Innovation"
+    }
+]

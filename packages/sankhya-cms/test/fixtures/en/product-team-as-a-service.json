@@ -1,0 +1,64 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Product Team as a Service",
+        "subtitle": "Transforming digital development with agile excellence and expert partnership.",
+        "imageSrc": "/images/business-team-meeting-boardroom.jpg",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[50vh] md:min-h-[70vh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20 rounded-b-lg"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Agile excellence",
+        "title": "High-Performance Agile Delivery",
+        "className": "my-20",
+        "subtitle": "We provide more than just developers; we provide a fully integrated engineering engine. Our teams are optimized for rapid iteration, continuous delivery, and high-quality software engineering.",
+        "imagePosition": "left",
+        "items": [
+            {
+                "icon": "heroicons:clock",
+                "title": "Iterative Sprint Methodology",
+                "description": "2-week sprint cycles with strict ceremonies—Sprint Planning, Daily Stand-ups, and Retrospectives—for continuous improvement."
+            },
+            {
+                "icon": "heroicons:chart-bar",
+                "title": "Metrics-Driven Development",
+                "description": "Real-time tracking of Velocity, Burn-down charts, and Code Quality metrics to ensure predictable delivery."
+            }
+        ],
+        "imageSrc": "/images/startup-desktop.jpg",
+        "imageAlt": "High-Performance Agile Team"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Strategic Advantage",
+        "title": "Your Engineering Command",
+        "subtitle": "Scalable, Pod-Based Delivery Model",
+        "columns": 2,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:user-group",
+                "title": "Specialized Tech Pods",
+                "description": "Access fully-staffed pods including a Scrum Master, Senior Lead, and QA Automation Engineer for end-to-end accountability."
+            },
+            {
+                "icon": "heroicons:arrow-path",
+                "title": "CI/CD Orchestration",
+                "description": "Embedded DevOps expertise ensuring all code is automatically tested, scanned, and deployed through robust pipelines."
+            },
+            {
+                "icon": "heroicons:academic-cap",
+                "title": "Knowledge Retention",
+                "description": "Dedicated long-term teams that build deep institutional knowledge of your business domains and legacy codebases."
+            },
+            {
+                "icon": "heroicons:magnifying-glass",
+                "title": "Quality Engineering",
+                "description": "A focus on 'Shift-Left' testing, with integrated security scans and performance profiling in every sprint."
+            }
+        ]
+    }
+]

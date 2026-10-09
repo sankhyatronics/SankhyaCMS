@@ -1,0 +1,15 @@
+/**
+ * Marketing-scale tokens for the CMS section components (hero, features, stats, ...).
+ * theme.css is tuned for dense app chrome (its largest text step is 20px), so
+ * the display sizes a content page needs live here. Import after theme.css (shipped in this package);
+ * override any of these at :root to rescale the CMS components.
+ */
+:root {
+  --st-cms-text-display: 3.75rem;
+  --st-cms-text-4xl: 2.25rem;
+  --st-cms-text-3xl: 1.875rem;
+  --st-cms-text-xl: 1.25rem;
+  --st-cms-text-lg: 1.125rem;
+  --st-cms-section-padding: 4rem;
+  --st-cms-container-max: 1200px;
+}

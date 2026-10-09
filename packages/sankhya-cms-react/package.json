@@ -1,0 +1,64 @@
+{
+  "name": "@sankhyatronics/sankhya-cms-react",
+  "description": "React wrappers for the Sankhya CMS Lit components, plus the JSON renderer (DynamicRenderer)",
+  "keywords": [
+    "react",
+    "lit",
+    "web-components",
+    "cms",
+    "json-driven"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sankhyatronics/SankhyaCMS.git",
+    "directory": "packages/sankhya-cms-react"
+  },
+  "license": "MIT",
+  "version": "0.0.9",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --sourcemap --clean",
+    "dev": "tsup src/index.ts --watch --format esm --dts",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint",
+    "test": "vitest run",
+    "clean": "rimraf dist"
+  },
+  "peerDependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router": "catalog:"
+  },
+  "dependencies": {
+    "@lit/react": "catalog:",
+    "@sankhyatronics/sankhya-cms": "workspace:*",
+    "lit": "catalog:"
+  },
+  "devDependencies": {
+    "@sankhyatronics/oxlint-config": "workspace:*",
+    "@sankhyatronics/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "oxlint": "catalog:",
+    "rimraf": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router": "catalog:"
+  }
+}

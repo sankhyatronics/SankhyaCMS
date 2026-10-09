@@ -1,0 +1,105 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Template Hub",
+        "subtitle": "Merge Word, Excel and PowerPoint templates with SharePoint list data in five guided steps. Your documents, generated where your data already lives.",
+        "imageSrc": "/images/business_strategy.png",
+        "textAlignment": "left",
+        "padding": "none",
+        "actionLabel": "Start free trial",
+        "href": "https://apps.sankhyatronics.com",
+        "className": "min-h-[50vh] md:min-h-[70vh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20 rounded-b-lg"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Key Features",
+        "title": "Everything you need to generate documents at scale",
+        "subtitle": "From template to saved file, without leaving Microsoft 365",
+        "columns": 3,
+        "className": "my-20",
+        "items": [
+            {
+                "icon": "heroicons:sparkles",
+                "title": "Five-step wizard",
+                "description": "Pick a template, choose list data, choose where to save, adjust file names, generate."
+            },
+            {
+                "icon": "heroicons:document-duplicate",
+                "title": "Word, Excel and PowerPoint",
+                "description": "One placeholder syntax across every Office format, built on the Open XML SDK."
+            },
+            {
+                "icon": "heroicons:queue-list",
+                "title": "SharePoint list data",
+                "description": "Merge one or many list items into documents, with filename patterns and duplicate handling."
+            },
+            {
+                "icon": "heroicons:cpu-chip",
+                "title": "AI document analysis",
+                "description": "Analyse generated documents with Azure OpenAI and review the findings next to the files."
+            },
+            {
+                "icon": "heroicons:squares-plus",
+                "title": "Template management",
+                "description": "Create blank templates, validate placeholders and convert existing documents into templates."
+            },
+            {
+                "icon": "heroicons:shield-check",
+                "title": "Built for Microsoft 365",
+                "description": "Entra ID sign-in, admin consent, per-tenant licensing and role-based admin tools."
+            }
+        ]
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Deployment Options",
+        "title": "Run it your way: SaaS or self-hosted",
+        "className": "my-20 theme-inverted",
+        "subtitle": "Start in minutes on our hosted service, or run Template Hub on your own infrastructure when policy requires it. The product and licensing are the same either way.",
+        "imagePosition": "right",
+        "items": [
+            {
+                "icon": "heroicons:cloud",
+                "title": "SaaS",
+                "description": "We host and update Template Hub. Sign in with your Microsoft 365 account and start generating documents."
+            },
+            {
+                "icon": "heroicons:server-stack",
+                "title": "Self-hosted",
+                "description": "Deploy Template Hub in your own environment and keep it under your own operations and security controls."
+            }
+        ],
+        "imageSrc": "/images/cyber_security.png",
+        "imageAlt": "Template Hub as SaaS or self-hosted"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Pricing",
+        "title": "Simple pricing",
+        "subtitle": "Per tenant, billed monthly. Cancel any time.",
+        "columns": 3,
+        "actionLabel": "Get started",
+        "className": "my-20",
+        "items": [
+            {
+                "icon": "heroicons:rocket-launch",
+                "title": "Starter",
+                "description": "**$0** for 30 days\n\n- Up to 3 users\n- 100 documents per month\n- Word, Excel and PowerPoint\n- Community support",
+                "href": "https://apps.sankhyatronics.com"
+            },
+            {
+                "icon": "heroicons:briefcase",
+                "title": "Business",
+                "description": "**$49** per tenant per month\n\n- Up to 25 users\n- 5,000 documents per month\n- AI document analysis\n- Template management tools\n- Email support",
+                "href": "https://apps.sankhyatronics.com"
+            },
+            {
+                "icon": "heroicons:building-library",
+                "title": "Enterprise",
+                "description": "**Custom** pricing\n\n- Unlimited users and documents\n- Priority support\n- Onboarding assistance",
+                "href": "contact-us"
+            }
+        ]
+    }
+]

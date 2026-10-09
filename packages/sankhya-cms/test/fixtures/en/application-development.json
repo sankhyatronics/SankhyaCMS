@@ -1,0 +1,97 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Application Development",
+        "subtitle": "Building your solutions of tomorrow with innovation and agility.",
+        "imageSrc": "/images/hero_app_dev.png",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[24dvh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Who We Are",
+        "title": "Sankhyatronics: Pioneers Shaping the Future of Technology",
+        "className": "my-20",
+        "subtitle": "We are at the forefront of technological advancement, leveraging the latest methodologies to deliver next-level business solutions.",
+        "imagePosition": "right",
+        "items": [
+            {
+                "icon": "heroicons:light-bulb",
+                "title": "Innovation Leaders",
+                "description": "At the forefront of technological advancement."
+            },
+            {
+                "icon": "heroicons:rocket-launch",
+                "title": "Cutting-Edge Approach",
+                "description": "Leveraging the latest methodologies to deliver next-level business solutions."
+            },
+            {
+                "icon": "heroicons:cpu-chip",
+                "title": "Our Mission",
+                "description": "Building robust applications that drive business growth through expert development."
+            }
+        ],
+        "imageSrc": "/images/who_we_are.png",
+        "imageAlt": "Innovation and Teamwork"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Database & Engineering",
+        "title": "Modern Engineering Foundations",
+        "subtitle": "Robust Backend & Data Architecture",
+        "columns": 2,
+        "items": [
+            {
+                "icon": "heroicons:circle-stack",
+                "title": "Full-Stack Data Solutions",
+                "description": "Architecting high-performance databases using SQL Server, PostgreSQL, and CosmosDB. Expertise in complex data modeling and secure migration."
+            },
+            {
+                "icon": "heroicons:cog-8-tooth",
+                "title": "Modern Backend API",
+                "description": "Building scalable microservices and RESTful APIs using .NET Core, Node.js, and Python, ensuring high availability and performance."
+            }
+        ]
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Frontend & Mobile",
+        "title": "State-of-the-Art Interfaces",
+        "subtitle": "Cross-Platform & Web Excellence",
+        "columns": 2,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:device-phone-mobile",
+                "title": "Cross-Platform Mobile",
+                "description": "Developing high-performance iOS and Android applications using Flutter and React Native for a unified code base."
+            },
+            {
+                "icon": "heroicons:globe-alt",
+                "title": "Modern Web Apps",
+                "description": "Building lightning-fast, responsive web experiences using React, Vite, and Next.js, prioritized for SEO and accessibility."
+            }
+        ]
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Next-Gen Development",
+        "title": "Agility & Automation",
+        "subtitle": "Accelerating Time-to-Market",
+        "columns": 2,
+        "items": [
+            {
+                "icon": "heroicons:bolt",
+                "title": "Low Code Rapid Delivery",
+                "description": "Leveraging OutSystems and Microsoft Power Apps to deliver business-critical applications with unprecedented speed."
+            },
+            {
+                "icon": "heroicons:puzzle-piece",
+                "title": "Gamification & Engagement",
+                "description": "Integrating interactive mechanics using Unity or specialized web frameworks to drive user retention and behavioral change."
+            }
+        ]
+    }
+]

@@ -1,0 +1,74 @@
+[
+    {
+        "type": "Hero",
+        "label": "Hero Section",
+        "title": "Cyber Security Excellence",
+        "subtitle": "Protecting your digital assets with state-of-the-art security solutions.",
+        "imageSrc": "/images/cyber_security.png",
+        "textAlignment": "left",
+        "padding": "none",
+        "className": "min-h-[24dvh] bg-(--st-color-surface) text-(color:--st-color-text-strong) mt-20"
+    },
+    {
+        "type": "FeatureSplit",
+        "label": "Strategy & Defense",
+        "title": "Ironclad Digital Protection",
+        "className": "my-20",
+        "subtitle": "In an era of evolving threats, our proactive defense strategies ensure your business remains resilient and secure.",
+        "imagePosition": "right",
+        "items": [
+            {
+                "icon": "heroicons:shield-exclamation",
+                "title": "Microsoft Defender",
+                "description": "Comprehensive protection across your entire digital estate with Microsoft 365 Defender and Defender for Cloud."
+            },
+            {
+                "icon": "heroicons:lock-closed",
+                "title": "Microsoft Purview",
+                "description": "Governing, protecting, and managing your entire data estate with intelligent data security and compliance."
+            }
+        ],
+        "imageSrc": "/images/security-todo-list-in-notebook.jpg",
+        "imageAlt": "Cyber Security Defense"
+    },
+    {
+        "type": "FeaturesSection",
+        "label": "Security Services",
+        "title": "Our Security Capabilities",
+        "subtitle": "Leveraging Best-in-Class Industry Tools",
+        "columns": 3,
+        "inverted": true,
+        "items": [
+            {
+                "icon": "heroicons:magnifying-glass-circle",
+                "title": "Threat Protection",
+                "description": "Deploying Microsoft Defender for Endpoint and Identity to block sophisticated attacks."
+            },
+            {
+                "icon": "heroicons:fire",
+                "title": "Sentinel SIEM",
+                "description": "Harnessing Microsoft Sentinel for cloud-native security orchestration and automated response."
+            },
+            {
+                "icon": "heroicons:shield-check",
+                "title": "Compliance & Purview",
+                "description": "Managing data governance and insider risks with Microsoft Purview's unified stack."
+            },
+            {
+                "icon": "heroicons:key",
+                "title": "Entra ID",
+                "description": "Modernizing identity security and access with Microsoft Entra's identity management solutions."
+            },
+            {
+                "icon": "heroicons:cloud",
+                "title": "Cloud Security",
+                "description": "Protecting hybrid and multi-cloud environments using Defender for Cloud's advanced posture management."
+            },
+            {
+                "icon": "heroicons:bolt",
+                "title": "Rapid Automation",
+                "description": "Automating incident investigation and remediation to stay ahead of rapid cyber threats."
+            }
+        ]
+    }
+]

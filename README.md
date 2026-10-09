@@ -1,27 +1,31 @@
-# @sankhyatronics/sankhya-ui
+# SankhyaCMS
 
-> **The JSON-Powered Engine for Modern Portals.**
+Open-source building blocks for JSON-driven portals.
 
-SankhyaCMS is an open-source React component library and rendering engine designed to build highly dynamic, high-performance portals. It decouples your UI structure from your application code by using a JSON-driven architecture.
+| Package | What it is |
+|---|---|
+| `@sankhyatronics/sankhya-cms` | Lit web components (`st-*`) — the single implementation of every base component |
+| `@sankhyatronics/sankhya-cms-react` | Thin React wrappers over the Lit components plus the JSON renderer |
 
-## 🚀 Vision
-Built for the era of Headless CMS, SankhyaCMS allows developers to provide non-technical editors with total control over layouts and content without the complexity of traditional "page builders."
+| Workspace | What it is |
+|---|---|
+| `storybook/` | Storybook for every Lit component; prop/slot/event tables come from `custom-elements.json` |
+| `docs/` | Docusaurus site; component pages are generated from `custom-elements.json` |
 
-## 📦 Project Structure
-This repository is a monorepo managed with `pnpm`:
-- `/SankhyaUI`: The core `@sankhyatronics/SankhyaUI` library.
-- `/Stories`: Comprehensive Storybook documentation and testing suite.
-- `/sampleweb`: A reference implementation app showing SankhyaCMS in action.
+## Rules
 
-## 🛠 Features
-- **Pure View Components**: React 19 components with zero side effects.
-- **Dynamic Renderer**: A central engine to convert JSON structures into rich UI.
-- **Markdown Support**: Native Markdown rendering in content blocks.
-- **Thematic Flexibility**: Easy global styling through CSS variables.
-- **Multi-lingual**: Designed to handle localized content blobs seamlessly.
+- Base components are **Lit only**. React packages wrap them; they never re-implement them.
+- **Node 26**, pnpm 12. `pnpm install && pnpm build`.
+- **oxlint** only (shared config in `tooling/oxlint-config`); no ESLint.
+- Page content uses the **simplified flat JSON** schema (`ComponentNode`: flat props, `children`, `slot`, `@action:`).
+- Dependencies are kept at latest; versions live in the `catalog:` of `pnpm-workspace.yaml`.
 
-## 📖 Documentation
-Visit our documentation site: [Storybook Documentation](https://sankhyatronics.github.io/portals/) (once deployed).
+## Commands
 
-## 📄 License
-MIT © [Sankhyatronics](https://github.com/sankhyatronics)
+```
+pnpm install
+pnpm lint | typecheck | build | test
+pnpm update-version   # stamps the root version into every package
+```
+
+Publishing runs from `.github/workflows/publish.yml` (npmjs, needs the `NPM_TOKEN` secret).

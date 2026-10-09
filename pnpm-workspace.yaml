@@ -1,48 +1,55 @@
 packages:
-  - SankhyaUI
-  - Stories
-  - Sample
-  - sankhyaui-docs
+  - "packages/*"
+  - "tooling/*"
+  - "storybook"
+  - "docs"
+
+allowBuilds:
+  esbuild: true
+  '@swc/core': false
+  core-js: false # postinstall only prints a donation banner
+  rs-module-lexer: false # native binary ships prebuilt via optional deps
 
 catalog:
-  '@eslint/js': 9.39.1
-  '@iconify/react': 6.0.2
-  '@storybook/addon-themes': 10.1.11
-  '@storybook/addon-docs': 10.1.11
-  '@storybook/blocks': 8.6.15
-  '@storybook/react-vite': 10.1.11
-  '@tailwindcss/vite': 4.1.18
-  '@types/node': 24.10.1
-  '@types/react': 19.2.5
-  '@types/react-dom': 19.2.3
-  '@vitejs/plugin-react': 5.1.1
-  eslint: 9.39.1
-  eslint-plugin-react-hooks: 7.0.1
-  eslint-plugin-react-refresh: 0.4.24
-  eslint-plugin-storybook: 10.1.11
-  globals: 16.5.0
-  motion: 12.24.7
-  react: 19.2.0
-  react-dom: 19.2.0
-  react-markdown: 9.0.3
-  react-router: 7.13.0
-  storybook: 10.1.11
-  tailwindcss: 4.1.18
-  typescript: 5.9.3
-  typescript-eslint: 8.46.4
-  vite: 7.2.4
-  vite-plugin-dts: 4.5.4
-  vite-plugin-lib-inject-css: 2.2.2
+  '@custom-elements-manifest/analyzer': 0.11.0
+  '@docusaurus/core': 3.10.2
+  '@docusaurus/faster': 3.10.2
+  '@docusaurus/module-type-aliases': 3.10.2
+  '@docusaurus/preset-classic': 3.10.2
+  '@docusaurus/tsconfig': 3.10.2
+  '@docusaurus/types': 3.10.2
   '@emotion/is-prop-valid': 1.4.0
+  '@mdx-js/react': 3.1.1
+  clsx: 2.1.1
+  prism-react-renderer: 2.4.1
+  '@storybook/addon-a11y': 10.6.1
+  '@storybook/addon-docs': 10.6.1
+  '@storybook/addon-themes': 10.6.1
+  '@storybook/web-components-vite': 10.6.1
+  storybook: 10.6.1
+  '@iconify/react': 6.0.2
+  '@lit/react': 1.0.8
+  '@types/node': 26.6.4
+  '@types/react': 19.3.0
+  '@types/react-dom': 19.3.0
+  '@vitejs/plugin-react': 6.1.2
+  jsdom: 30.1.2
+  lit: 3.3.3
+  motion: 14.0.0
+  oxlint: 1.87.0
+  react: 19.3.0
+  react-dom: 19.3.0
+  react-markdown: 10.1.0
+  react-router: 8.4.0
   remark-breaks: 4.0.0
   remark-gfm: 4.0.1
-  '@docusaurus/core': 3.9.2
-  '@docusaurus/preset-classic': 3.9.2
-  '@mdx-js/react': 3.0.0
-  clsx: 2.0.0
-  prism-react-renderer: 2.3.0
-  '@docusaurus/module-type-aliases': 3.9.2
-  '@docusaurus/tsconfig': 3.9.2
-  '@docusaurus/types': 3.9.2
-  '@docusaurus/theme-common': 3.9.2
-  '@docusaurus/theme-mermaid': 3.9.2
+  rimraf: 6.1.3
+  tsup: 8.5.1
+  typescript: 6.0.3  # TS 7 (native) breaks tsup's dts build (rollup-plugin-dts needs the JS compiler API)
+  vite: 8.3.4
+  vite-plugin-dts: 5.1.2
+  vite-plugin-lib-inject-css: 2.2.2
+  vitest: 5.0.3
+
+minimumReleaseAgeExclude:
+  - vite@8.3.4

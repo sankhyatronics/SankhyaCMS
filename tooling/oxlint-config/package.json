@@ -1,0 +1,9 @@
+{
+  "name": "@sankhyatronics/oxlint-config",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./.oxlintrc.json"
+  },
+  "version": "0.0.9"
+}
