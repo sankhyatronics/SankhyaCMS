@@ -1,26 +1,28 @@
 import type { ComponentType } from 'react';
 import type { ComponentList } from './schema';
-import { Header } from '../Header/Header';
-import { MenuItem } from '../Menu/MenuItem';
-import { MenuGrid } from '../Menu/MenuGrid';
-import { MenuGridItem } from '../Menu/MenuGridItem';
-import { Hero } from '../Hero/Hero';
-import { IconButton } from '../IconButton/IconButton';
-import { FeatureSplit } from '../FeatureSplit/FeatureSplit';
-import { ContentBlock } from '../ContentBlock/ContentBlock';
-import { FeaturesSection } from '../FeaturesSection/FeaturesSection';
-import { FeatureItem } from '../FeaturesSection/FeatureItem';
-import { BentoGrid } from '../BentoGrid/BentoGrid';
-import { Dropdown } from '../Dropdown/Dropdown';
-import { Stats } from '../Stats/Stats';
-import { PromoBanner } from '../PromoBanner/PromoBanner';
-import { Testimonials } from '../Testimonials/Testimonials';
-import { Select } from '../Select/Select';
-import { Carousel } from '../Carousel/Carousel';
-import { CookieConsent } from '../CookieConsent/CookieConsent';
-import { Footer } from '../Footer/Footer';
-import { Card } from '../Card/Card';
-import { ItemsAccordion } from '../ItemsAccordion/ItemsAccordion';
+import {
+    BentoGrid,
+    Card,
+    Carousel,
+    ContentBlock,
+    CookieConsent,
+    Dropdown,
+    FeatureItem,
+    FeatureSplit,
+    FeaturesSection,
+    Footer,
+    Header,
+    Hero,
+    IconButton,
+    ItemsAccordion,
+    MenuGrid,
+    MenuGridItem,
+    MenuItem,
+    PromoBanner,
+    Select,
+    Stats,
+    Testimonials
+} from '../lit';
 
 export const baseComponents = {
     Header,

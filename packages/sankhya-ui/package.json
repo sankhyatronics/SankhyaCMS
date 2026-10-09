@@ -1,6 +1,6 @@
 {
   "name": "@sankhyatronics/sankhya-ui",
-  "description": "Pure view React components (React 19) for making portals. These components are designed to use with headless CMS.",
+  "description": "React wrappers for the Sankhya CMS Lit components, plus the JSON renderer (DynamicRenderer)",
   "keywords": [
     "react",
     "react19",
@@ -19,55 +19,51 @@
   "homepage": "https://sankhyaui.sankhyatronics.com/?path=/docs/introduction--docs",
   "license": "MIT",
   "version": "0.0.9",
-  "main": "dist/index.umd.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    },
-    "./styles": "./dist/style.css"
+      "import": "./dist/index.js"
+    }
   },
   "files": [
-    "/dist"
+    "dist"
   ],
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsup src/index.ts --format esm --dts --sourcemap --clean",
+    "dev": "tsup src/index.ts --watch --format esm --dts",
+    "typecheck": "tsc --noEmit",
     "lint": "oxlint",
-    "preview": "vite preview",
     "test": "vitest run",
     "clean": "rimraf dist",
     "migrate-json": "node scripts/migrate-json.mjs"
   },
   "peerDependencies": {
-    "@iconify/react": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "catalog:"
   },
   "dependencies": {
-    "@emotion/is-prop-valid": "catalog:",
-    "motion": "catalog:",
-    "react-markdown": "catalog:",
-    "remark-breaks": "catalog:",
-    "remark-gfm": "catalog:"
+    "@lit/react": "catalog:",
+    "@sankhyatronics/sankhya-cms": "workspace:*",
+    "lit": "catalog:"
   },
   "devDependencies": {
     "@sankhyatronics/oxlint-config": "workspace:*",
+    "@sankhyatronics/typescript-config": "workspace:*",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react": "catalog:",
     "oxlint": "catalog:",
+    "rimraf": "catalog:",
+    "tsup": "catalog:",
     "typescript": "catalog:",
-    "vite": "catalog:",
-    "vite-plugin-dts": "catalog:",
-    "vite-plugin-lib-inject-css": "catalog:",
     "vitest": "catalog:",
-    "rimraf": "catalog:"
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router": "catalog:"
   }
 }

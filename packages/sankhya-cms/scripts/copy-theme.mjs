@@ -1,4 +1,4 @@
 import { copyFileSync, mkdirSync } from 'node:fs';
 
 mkdirSync('dist', { recursive: true });
-copyFileSync('src/cms-theme.css', 'dist/cms-theme.css');
+for (const file of ['theme.css', 'themes.css', 'cms-theme.css']) copyFileSync(`src/${file}`, `dist/${file}`);

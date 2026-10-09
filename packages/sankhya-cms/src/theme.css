@@ -1,0 +1,292 @@
+/**
+ * Design tokens for @sankhyatronics/components.
+ *
+ * Every st-* component reads its styling exclusively via `var(--st-x)` — no
+ * fallback values anywhere — and custom properties inherit through Shadow
+ * DOM, so setting these at :root (or any ancestor of your st-* components)
+ * reskins/rescales the whole tree without forking any component.
+ *
+ * Import this file once. There are three layers, in cascade order:
+ *   1. PRIMARIES — the only literal color values in the system (5 seeds,
+ *      plus the 3 independent file-type brand colors). Override these for a
+ *      full rebrand — everything else follows.
+ *   2. SHADES — an internal color-mix() ramp derived from each primary,
+ *      EXCEPT the neutral ramp: --st-neutral-50 through --st-neutral-950
+ *      (the standard 11-step scale) is the one shade ramp meant to be
+ *      overridden directly — every neutral text/background token below
+ *      resolves to one of these 11 steps.
+ *   3. SEMANTIC TOKENS — what components actually consume
+ *      (--st-color-text, --st-radius-md, --st-text-sm, ...), each pointing
+ *      at one shade/scale step. Override a semantic token for a single
+ *      exception, or override a whole scale (spacing/radius/size/type) for
+ *      a density or typography change.
+ *
+ * Only reach for an individual token override (see component READMEs /
+ * source for the full list) when you need an exception the primaries,
+ * neutral palette, and scales below don't cover.
+ */
+:root {
+   /* =========================================================
+     PRIMARIES — override these for a rebrand.
+     ========================================================= */
+   --st-primary-color: oklch(12.9% 0.042 264.695);
+   --st-primary-background: oklch(98.4% 0.003 247.858);
+   --st-neutral-50: var(--st-primary-background);
+   --st-neutral-950: var(--st-primary-color);
+   --st-neutral-100: oklch(from color-mix(in oklch, var(--st-neutral-950) 8%, var(--st-neutral-50)) l calc(c * 2.1) h);
+   --st-neutral-200: oklch(from color-mix(in oklch, var(--st-neutral-950) 15%, var(--st-neutral-50)) l calc(c * 3.0) h);
+   --st-neutral-300: oklch(from color-mix(in oklch, var(--st-neutral-950) 27%, var(--st-neutral-50)) l calc(c * 4.3) h);
+   --st-neutral-400: oklch(from color-mix(in oklch, var(--st-neutral-950) 36%, var(--st-neutral-50)) l calc(c * 5.2) h);
+   --st-neutral-500: oklch(from color-mix(in oklch, var(--st-neutral-950) 49%, var(--st-neutral-50)) l calc(c * 7.0) h);
+   --st-neutral-600: oklch(from color-mix(in oklch, var(--st-neutral-950) 69%, var(--st-neutral-50)) l calc(c * 5.4) h);
+   --st-neutral-700: oklch(from color-mix(in oklch, var(--st-neutral-950) 86%, var(--st-neutral-50)) l calc(c * 3.0) h);
+   --st-neutral-800: oklch(from color-mix(in oklch, var(--st-neutral-950) 93%, var(--st-neutral-50)) l calc(c * 2.3) h);
+   --st-neutral-900: oklch(from color-mix(in oklch, var(--st-neutral-950) 96%, var(--st-neutral-50)) l calc(c * 1.6) h);
+
+
+   /* Brand-like file-type colors are intentionally independent of the accent
+     seed (Word/Excel/PowerPoint have their own identity) — three extra,
+     narrowly-scoped primaries rather than derived shades. */
+   --st-primary-type-word: oklch(0.55 0.13 250);
+   --st-primary-type-excel: oklch(0.55 0.13 145);
+   --st-primary-type-powerpoint: oklch(0.55 0.13 40);
+
+   --st-primary-neutral: var(--st-neutral-50);
+   /* --st-brand-color is deliberately left undefined: set it (on :root) to
+     make the accent, the solid call-to-action buttons and checkboxes all
+     follow one host-app brand color. Unset, each keeps its own default. */
+   --st-primary-accent: var(--st-brand-color, var(--st-neutral-500));
+   --st-primary-danger: oklch(0.6 0.2 25);
+   --st-primary-warning: oklch(0.75 0.16 40);
+   --st-primary-success: oklch(0.55 0.13 145);
+
+   /* Pure white/black anchors for the color-mix() ramps below and the
+     "text/icon on a solid fill" token — not general-purpose literals. */
+   --st-primary-canvas: var(--st-neutral-50);
+   --st-primary-ink: var(--st-neutral-950);
+
+   --st-accent-subtle: color-mix(in oklch, var(--st-primary-accent) 8%, var(--st-primary-canvas));
+   --st-accent-border: color-mix(in oklch, var(--st-primary-accent) 22%, var(--st-primary-canvas));
+   --st-accent-muted: color-mix(in oklch, var(--st-primary-accent) 55%, var(--st-primary-canvas));
+   --st-accent-text: color-mix(in oklch, var(--st-primary-accent) 78%, var(--st-primary-ink));
+
+   --st-danger-subtle: color-mix(in oklch, var(--st-primary-danger) 10%, var(--st-primary-canvas));
+   --st-danger-border: color-mix(in oklch, var(--st-primary-danger) 28%, var(--st-primary-canvas));
+   --st-danger-text: color-mix(in oklch, var(--st-primary-danger) 70%, var(--st-primary-ink));
+
+   --st-warning-subtle: color-mix(in oklch, var(--st-primary-warning) 10%, var(--st-primary-canvas));
+   --st-warning-border: color-mix(in oklch, var(--st-primary-warning) 28%, var(--st-primary-canvas));
+   --st-warning-text: color-mix(in oklch, var(--st-primary-warning) 70%, var(--st-primary-ink));
+
+   --st-success-subtle: color-mix(in oklch, var(--st-primary-success) 20%, var(--st-primary-canvas));
+   --st-success-text: color-mix(in oklch, var(--st-primary-success) 70%, var(--st-primary-ink));
+
+   /* =========================================================
+     SEMANTIC TOKENS — what components actually consume.
+     ========================================================= */
+
+   /* ---- Neutral surfaces & text ---- */
+   --st-color-page: var(--st-neutral-50);
+   --st-color-surface: var(--st-primary-canvas);
+   --st-color-subtle: var(--st-neutral-100);
+   --st-color-divider: var(--st-neutral-200);
+   --st-color-hover: var(--st-neutral-200);
+   --st-color-border: var(--st-neutral-300);
+   --st-color-skeleton: var(--st-neutral-300);
+   --st-color-folder-icon-bg: var(--st-neutral-300);
+   --st-color-border-strong: var(--st-neutral-400);
+   --st-color-text-faint: var(--st-neutral-600);
+   --st-color-text-muted: var(--st-neutral-600);
+   --st-color-text: var(--st-neutral-600);
+   --st-color-text-strong: var(--st-neutral-900);
+
+   /* Text/icon color for content sitting on a solid/dark fill (buttons,
+     avatars, active pills) — never hardcode "white" at the point of use. */
+   --st-color-on-solid: var(--st-primary-canvas);
+
+   /* ---- Accent ramp — derived from --st-primary-accent ---- */
+   --st-color-accent: var(--st-primary-accent);
+   --st-color-accent-subtle: var(--st-accent-subtle);
+   --st-color-accent-border: var(--st-accent-border);
+   --st-color-accent-muted: var(--st-accent-muted);
+   --st-color-accent-text: var(--st-accent-text);
+
+   /* ---- Semantic state ramps — derived from --st-primary-danger/warning/success ---- */
+   --st-color-danger: var(--st-primary-danger);
+   --st-color-danger-subtle: var(--st-danger-subtle);
+   --st-color-danger-border: var(--st-danger-border);
+   --st-color-danger-text: var(--st-danger-text);
+
+   --st-color-warning: var(--st-primary-warning);
+   --st-color-warning-subtle: var(--st-warning-subtle);
+   --st-color-warning-border: var(--st-warning-border);
+   --st-color-warning-text: var(--st-warning-text);
+
+   --st-color-success: var(--st-primary-success);
+   --st-color-success-subtle: var(--st-success-subtle);
+   --st-color-success-text: var(--st-success-text);
+
+   /* ---- File-type badge colors ---- */
+   --st-color-type-word: var(--st-primary-type-word);
+   --st-color-type-excel: var(--st-primary-type-excel);
+   --st-color-type-powerpoint: var(--st-primary-type-powerpoint);
+
+   /* ---- Standalone brand accent (favorites/star marker) ---- */
+   --st-favorite-accent: #f0b429;
+
+   /* ---- <st-status-pill> override points. Consumers set --st-status-hue
+     (or --st-status-bg/--st-status-color directly) on the host element;
+     these root defaults mean the token always resolves, so call sites
+     never need a fallback. ---- */
+   --st-status-hue: var(--st-neutral-hue);
+   --st-status-bg: oklch(0.95 0.05 var(--st-status-hue));
+   --st-status-color: oklch(0.4 0.13 var(--st-status-hue));
+
+   /* ---- Shadow tint — box-shadows are colors too, so they get tokens. ---- */
+   --st-shadow-color-subtle: var(--st-neutral-300);
+   --st-shadow-color-sm: var(--st-neutral-300);
+   --st-shadow-color-md: var(--st-neutral-300);
+   --st-shadow-color-lg: var(--st-neutral-300);
+   --st-shadow-color-xl: var(--st-neutral-300);
+
+   /* =========================================================
+     SPACING SCALE — padding/margin/gap/inset. Named by their px
+     value for exactness; override one step or the whole scale.
+     ========================================================= */
+   --st-space-0: 0;
+   --st-space-2: 2px;
+   --st-space-3: 3px;
+   --st-space-4: 4px;
+   --st-space-5: 5px;
+   --st-space-6: 6px;
+   --st-space-7: 7px;
+   --st-space-8: 8px;
+   --st-space-9: 9px;
+   --st-space-10: 10px;
+   --st-space-11: 11px;
+   --st-space-12: 12px;
+   --st-space-14: 14px;
+   --st-space-16: 16px;
+   --st-space-18: 18px;
+   --st-space-20: 20px;
+   --st-space-22: 22px;
+   --st-space-24: 24px;
+   --st-space-28: 28px;
+   --st-space-30: 30px;
+   --st-space-32: 32px;
+   --st-space-40: 40px;
+   --st-space-44: 44px;
+   --st-space-48: 48px;
+
+   /* =========================================================
+     RADIUS SCALE
+     ========================================================= */
+   --st-radius-none: 0;
+   --st-radius-xs: 4px;
+   --st-radius-sm: 8px;
+   --st-radius-md: 10px;
+   --st-radius-lg: 12px;
+   --st-radius-full: 999px;
+   --st-radius-circle: 50%;
+
+   /* =========================================================
+     CONTROL-SIZE SCALE — square-ish UI controls (checkboxes,
+     icon buttons, avatars, badges, table icon columns).
+     ========================================================= */
+   --st-size-14: 14px;
+   --st-size-16: 16px;
+   --st-size-18: 18px;
+   --st-size-20: 20px;
+   --st-size-24: 24px;
+   --st-size-26: 26px;
+   --st-size-28: 28px;
+   --st-size-30: 30px;
+   --st-size-32: 32px;
+   --st-size-36: 36px;
+   --st-size-38: 38px;
+   --st-size-40: 40px;
+
+   /* =========================================================
+     TYPOGRAPHY TOKENS
+     ========================================================= */
+   --st-font-family: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+   --st-text-2xs: 10px;
+   --st-text-xs: 11px;
+   --st-text-sm: 12px;
+   --st-text-base: 13px;
+   --st-text-md: 14px;
+   --st-text-lg: 15px;
+   --st-text-xl: 16px;
+   --st-text-2xl: 20px;
+
+   --st-font-weight-regular: 400;
+   --st-font-weight-medium: 500;
+   --st-font-weight-semibold: 600;
+   --st-font-weight-bold: 700;
+   --st-font-weight-extrabold: 800;
+
+   --st-leading-none: 1;
+   --st-leading-snug: 1.35;
+   --st-leading-normal: 1.4;
+
+   --st-tracking-tight: -0.2px;
+   --st-tracking-normal: 0;
+   --st-tracking-wide: 0.3px;
+   --st-tracking-wider: 0.4px;
+
+   /* =========================================================
+     COMPONENT TOKENS — narrowly-scoped overrides for one piece
+     of chrome, each defaulting to a scale step above. Set them
+     on :root or on the component's host element, the same way
+     as --st-primary-color.
+     ========================================================= */
+
+   /* ---- Wizard step heading/description (<st-template-hub>) ---- */
+   --st-step-heading-font-size: var(--st-text-2xl);
+   --st-step-heading-font-weight: var(--st-font-weight-bold);
+   --st-step-heading-color: var(--st-color-text-strong);
+   --st-step-description-font-size: var(--st-text-base);
+   --st-step-description-color: var(--st-color-text-muted);
+
+   /* ---- Buttons. --st-button-font-size sizes the wizard footer
+     (Back/Next/Finish/...); --st-button-font-size-sm the in-content
+     action buttons (Generate/Regenerate). The primary fill applies
+     to every solid call-to-action button. ---- */
+   --st-button-font-size: var(--st-text-md);
+   --st-button-font-size-sm: var(--st-text-base);
+   --st-button-font-weight: var(--st-font-weight-semibold);
+   --st-button-height: var(--st-size-40);
+   --st-button-radius: var(--st-radius-sm);
+   --st-button-primary-bg: var(--st-brand-color, var(--st-color-text-strong));
+   --st-button-primary-color: var(--st-color-on-solid);
+   --st-button-primary-font-weight: var(--st-font-weight-bold);
+
+   /* ---- Checkboxes/radios (native controls, tinted via accent-color).
+     `auto` = the browser's own color. ---- */
+   --st-checkbox-color: var(--st-brand-color, auto);
+
+   /* ---- Keyboard focus ring, an `outline` shorthand. `auto` = the
+     browser's own ring; e.g. `2px solid #0b5cff` for a custom one. ---- */
+   --st-focus-ring: auto;
+   --st-focus-ring-offset: 0px;
+
+   /* ---- Text inputs (search boxes, file names, new folder, pattern) ---- */
+   --st-input-font-family: var(--st-font-family);
+   --st-input-mono-font-family: ui-monospace, monospace;
+   --st-input-font-size: var(--st-text-base);
+   --st-input-color: var(--st-color-text-strong);
+   --st-input-bg: var(--st-color-surface);
+   --st-input-border-color: var(--st-color-border);
+   --st-input-radius: var(--st-radius-sm);
+
+   /* ---- Wizard frame (<st-template-hub>). Set --st-wizard-bg to
+     `transparent` to sit on the host app's own card/page. ---- */
+   --st-wizard-bg: var(--st-color-page);
+   --st-wizard-subheader-bg: var(--st-color-subtle);
+   --st-wizard-footer-bg: var(--st-color-surface);
+   --st-wizard-footer-height: 64px;
+   --st-wizard-border-color: var(--st-color-border);
+   --st-wizard-content-padding: var(--st-space-24) var(--st-space-32);
+   --st-wizard-content-padding-compact: var(--st-space-16) var(--st-space-18);
+}

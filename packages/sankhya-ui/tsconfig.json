@@ -1,26 +1,10 @@
 {
+  "extends": "@sankhyatronics/typescript-config/react",
   "compilerOptions": {
-    "target": "ES2022",
-    "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "types": ["node", "vite/client"],
-    "strict": true,
+    "types": ["node"],
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    /* The "typeRoots" configuration specifies the locations where 
-       TypeScript looks for type definitions (.d.ts files) to 
-       include in the compilation process.*/
-    "typeRoots": ["./dist/index.d.ts", "node_modules/@types"]
+    "noUnusedParameters": true
   },
-  /* include /index.ts*/
-  "include": ["src"],
+  "include": ["src"]
 }

@@ -17,6 +17,8 @@
       "import": "./dist/index.js"
     },
     "./cms-theme.css": "./dist/cms-theme.css",
+    "./theme.css": "./dist/theme.css",
+    "./themes.css": "./dist/themes.css",
     "./bento-grid": {
       "types": "./dist/bento-grid/index.d.ts",
       "import": "./dist/bento-grid/index.js"

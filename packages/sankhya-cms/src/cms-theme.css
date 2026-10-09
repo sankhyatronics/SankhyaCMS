@@ -1,7 +1,7 @@
 /**
  * Marketing-scale tokens for the CMS section components (hero, features, stats, ...).
- * suite-components' theme.css is tuned for dense app chrome (its largest text step is 20px), so
- * the display sizes a content page needs live here. Import after suite-components' theme.css;
+ * theme.css is tuned for dense app chrome (its largest text step is 20px), so
+ * the display sizes a content page needs live here. Import after theme.css (shipped in this package);
  * override any of these at :root to rescale the CMS components.
  */
 :root {
