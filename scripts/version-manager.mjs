@@ -1,15 +1,22 @@
-// Stamps the root package.json version into every publishable package.
-import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+// Stamps the root package.json version into every package in the repo, so they all share one version.
+// A new package must be added to the list below.
+import { readFileSync, writeFileSync } from 'node:fs';
 
-const root = JSON.parse(readFileSync('package.json', 'utf8'));
-for (const dir of ['packages', 'tooling']) {
-  for (const name of readdirSync(dir)) {
-    const file = join(dir, name, 'package.json');
-    if (!existsSync(file)) continue;
-    const pkg = JSON.parse(readFileSync(file, 'utf8'));
-    pkg.version = root.version;
-    writeFileSync(file, `${JSON.stringify(pkg, null, 2)}\n`);
-    console.warn(`${pkg.name} -> ${root.version}`);
-  }
+const packages = [
+  { name: 'sankhya-cms', path: './packages/sankhya-cms/package.json' },
+  { name: 'sankhya-cms-react', path: './packages/sankhya-cms-react/package.json' },
+  { name: 'sankhya-rich-editor', path: './packages/sankhya-rich-editor/package.json' },
+  { name: 'oxlint-config', path: './tooling/oxlint-config/package.json' },
+  { name: 'typescript-config', path: './tooling/typescript-config/package.json' },
+  { name: 'storybook', path: './storybook/package.json' },
+  { name: 'docs', path: './docs/package.json' }
+];
+
+const newVersion = JSON.parse(readFileSync('./package.json', 'utf8')).version;
+
+for (const pkg of packages) {
+  const pkgJson = JSON.parse(readFileSync(pkg.path, 'utf8'));
+  pkgJson.version = newVersion;
+  writeFileSync(pkg.path, `${JSON.stringify(pkgJson, null, 2)}\n`);
+  console.log(`✓ Updated ${pkg.name} to v${newVersion}`);
 }

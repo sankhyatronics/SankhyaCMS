@@ -1,8 +1,9 @@
 name: Publish packages to npm
 
-# Publishes @sankhyatronics/sankhya-cms, @sankhyatronics/sankhya-cms-react and @sankhyatronics/sankhya-rich-editor (in dependency order)
-# at the version in the root package.json. Run it from a GitHub release, or by hand — a manual run
-# defaults to a dry run so nothing is published by accident.
+# Publishes @sankhyatronics/sankhya-cms, @sankhyatronics/sankhya-rich-editor and
+# @sankhyatronics/sankhya-cms-react (in dependency order) at the version in the root package.json,
+# using npm trusted publishing (OIDC) — no npm token. Run it from a GitHub release, or by hand: a
+# manual run defaults to a dry run so nothing is published by accident.
 
 on:
   release:
@@ -14,34 +15,44 @@ on:
         type: boolean
         default: true
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write # npm provenance
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:
-          node-version: 26
-          cache: pnpm
-          registry-url: https://registry.npmjs.org
+          node-version: '26'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false # never use caching in release builds
 
       - run: pnpm install --frozen-lockfile
-      - run: pnpm update-version
       - run: pnpm lint
+      # build also stamps the root version into every package (update-version)
       - run: pnpm build
         env:
           NODE_OPTIONS: --max-old-space-size=8192
       - run: pnpm typecheck
       - run: pnpm test
 
+      # pnpm pack rewrites `workspace:` dependencies to real versions; npm publishes the tarballs
+      # (npm >= 11.5.1 is needed for OIDC; Node 26 ships a newer one).
       - name: Publish (or dry run)
-        run: >
-          pnpm --filter @sankhyatronics/sankhya-cms --filter @sankhyatronics/sankhya-cms-react --filter @sankhyatronics/sankhya-rich-editor publish
-          --recursive --tag latest --access public --provenance --no-git-checks
-          ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && '--dry-run' || '' }}
+        shell: bash
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && '--dry-run' || '' }}
+        run: |
+          set -euo pipefail
+          version=$(node -p "require('./package.json').version")
+          mkdir -p "$RUNNER_TEMP/tarballs"
+          for pkg in sankhya-cms sankhya-rich-editor sankhya-cms-react; do
+            pnpm --filter "@sankhyatronics/$pkg" pack --pack-destination "$RUNNER_TEMP/tarballs"
+          done
+          for pkg in sankhya-cms sankhya-rich-editor sankhya-cms-react; do
+            npm publish "$RUNNER_TEMP/tarballs/sankhyatronics-$pkg-$version.tgz" --access public --tag latest $DRY_RUN
+          done
