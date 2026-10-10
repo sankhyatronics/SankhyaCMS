@@ -36,7 +36,7 @@ import {
   FORMAT_OPTIONS,
 } from "../core/constants";
 import { getEditorRoot } from "../dom/root";
-import { isInTableCell } from "../core/structure";
+import { DEFAULT_FONT, currentBackground, isInTableCell } from "../core/structure";
 import { makeColorInput } from "./color";
 import { setupOverflow } from "./overflow";
 import {
@@ -154,6 +154,23 @@ export function injectToolbar(
   grpInsert.appendChild(makeButton("+ Table", "Add a table", "insertTable"));
   grpInsert.appendChild(makeButton("+ Image", "Add an image", "insertImage"));
   toolbar.appendChild(grpInsert);
+  toolbar.appendChild(makeSep());
+
+  // Fill: background of the element being edited (cell, paragraph, heading, ...); empty value clears it
+  const grpFill = makeGroup();
+  grpFill.appendChild(
+    makeColorInput(doc, options, "Fill", "blockBackground", currentBackground(doc) ?? undefined),
+  );
+  grpFill.appendChild(
+    makeSelect(
+      "Page font (whole document)",
+      "pageFont",
+      [{ label: "Template's own font", value: DEFAULT_FONT }, ...FONT_OPTIONS],
+      null,
+    ),
+  );
+  grpFill.appendChild(makeButton("No fill", "Remove the background of this block", "blockBackground", ""));
+  toolbar.appendChild(grpFill);
   toolbar.appendChild(makeSep());
 
   // Table tools: active while the caret is in a table cell

@@ -7,6 +7,7 @@ import {
   CLASS_ACTIVE,
 } from "./constants";
 import { sanitizeHtml } from "../utils/sanitize";
+import { pageFontComment } from "./pageFont";
 
 let _doc: Document | null = null;
 let _undoStack: string[] = [];
@@ -100,6 +101,8 @@ export function pushStandaloneSnapshot(clearRedo = true) {
       .filter((c) => c.startsWith("st-re-"))
       .forEach((c) => el.classList.remove(c));
   });
+  const fontComment = pageFontComment(_doc);
+  if (fontComment) clone.querySelector("body")?.prepend(fontComment);
   // Remove editor-specific attributes/classes so snapshots don't persist
   // transient editing state (contenteditable, toolbar classes, tabindex).
   try {

@@ -31,6 +31,8 @@ Events: `rich-editor-ready`, `rich-editor-change` (`detail.html`), `rich-editor-
 
 - Hover a section to get a bar with a drag handle, move up/down and delete. Drag the handle to reorder.
 - The toolbar's **+ Section**, **+ Table** and **+ Image** add a block after the section being edited (or at the end). **Row/Col +/−** edit the table the caret is in.
+- **Fill** (toolbar) sets the background of the element being edited — a table cell, paragraph, heading — and **No fill** removes it. The colour swatch on a section's hover bar fills the whole section, and ∅ clears it. Fills keep printing (`print-color-adjust: exact`).
+- **Page font** (toolbar) sets one font for the whole document, overriding the template's own font rules; choose *Template's own font* to go back. It is stored as a `<style data-page-font>` in the saved HTML and is part of undo/redo.
 - A "section" is a direct child of the body, or of the single wrapper element a template puts around its content.
 
 ## Notes

@@ -7,6 +7,7 @@ import {
 } from "./state";
 
 import { restoreStructure } from "./structure";
+import { restorePageFont } from "./pageFont";
 import { sanitizeHtml } from "../utils/sanitize";
 import { injectStyles } from "../dom/styles";
 
@@ -37,6 +38,7 @@ export function handleUndo() {
       const parser = new DOMParser();
       const parsed = parser.parseFromString(safe, "text/html");
       if (parsed && parsed.body && doc.body) {
+        restorePageFont(doc, prev);
         // Prefer selective restoration: if the snapshot contains elements
         // marked with `data-st-re-id`, restore only those elements so we do
         // not clobber page-level UI (headers, tabs, carousel scripts).
@@ -211,6 +213,7 @@ export function handleRedo() {
       const parser = new DOMParser();
       const parsed = parser.parseFromString(safeNext, "text/html");
       if (parsed && parsed.body && doc.body) {
+        restorePageFont(doc, next);
         const parsedEls = parsed.body.querySelectorAll("[data-st-re-id]");
         if (restoreStructure(doc, parsed.body)) {
           /* sections/rows changed: page content replaced from the snapshot */

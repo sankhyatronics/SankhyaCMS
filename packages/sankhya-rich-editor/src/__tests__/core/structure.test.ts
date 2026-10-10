@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { initRichEditor, getCleanHTML } from "../../core/editor";
 import { handleUndo, handleRedo } from "../../core/history";
 import { handleToolbarCommand } from "../../core/formatActions";
@@ -141,5 +141,94 @@ describe("table editing", () => {
     host.append(t2);
     deleteColumn((t2 as HTMLTableElement).rows[0].cells[0]);
     expect(t2.isConnected).toBe(false);
+  });
+});
+
+import { backgroundTarget, setBackground, toHex } from "../../core/structure";
+
+describe("background", () => {
+  it("fills the block being edited and keeps it when printing", () => {
+    const doc = setup("<div><p>A</p></div><table><tr><td><span>C</span></td></tr></table>");
+    _setCurrentEditable(doc.querySelector("td span"));
+    expect(backgroundTarget(doc)!.tagName).toBe("TD");
+    handleToolbarCommand("blockBackground", "#ffeeaa");
+    const td = doc.querySelector("td")!;
+    expect(td.style.backgroundColor).not.toBe("");
+    expect(td.style.getPropertyValue("print-color-adjust")).toBe("exact");
+    expect(getCleanHTML()).toContain("background-color");
+  });
+
+  it("clears the fill and leaves no empty style attribute", () => {
+    const doc = setup("<p>A</p>");
+    const p = doc.querySelector("p") as HTMLElement;
+    _setCurrentEditable(p);
+    handleToolbarCommand("blockBackground", "#112233");
+    handleToolbarCommand("blockBackground", "");
+    expect(p.hasAttribute("style")).toBe(false);
+  });
+
+  it("falls back to the section when nothing is being edited", () => {
+    const doc = setup("<div><p>A</p></div><div><p>B</p></div>");
+    _setCurrentEditable(null);
+    doc.getSelection()?.removeAllRanges();
+    expect(backgroundTarget(doc)).toBeNull();
+    setBackground(doc.querySelector("div") as HTMLElement, "#fff000");
+    expect(toHex((doc.querySelector("div") as HTMLElement).style.backgroundColor)).toBe("#fff000");
+  });
+
+  it("undo reverts a fill", () => {
+    const doc = setup("<p>A</p><p>B</p>");
+    const p = doc.querySelector("p") as HTMLElement;
+    _setCurrentEditable(p);
+    handleToolbarCommand("blockBackground", "#123456");
+    handleUndo();
+    expect((doc.querySelector("p") as HTMLElement).style.backgroundColor).toBe("");
+  });
+
+  it("toHex reads rgb() and hex", () => {
+    expect(toHex("rgb(255, 238, 170)")).toBe("#ffeeaa");
+    expect(toHex("#ABCDEF")).toBe("#abcdef");
+    expect(toHex("red")).toBeNull();
+  });
+});
+
+import { getPageFont } from "../../core/pageFont";
+
+describe("page font", () => {
+  const fontOf = (doc: Document) => getPageFont(doc);
+
+  it("sets one font for the page, saved with the HTML, and resets to the template's own", () => {
+    const doc = setup("<p>A</p><table><tr><td>B</td></tr></table>");
+    handleToolbarCommand("pageFont", "Georgia, serif");
+    expect(fontOf(doc)).toBe("Georgia, serif");
+    const style = doc.head.querySelector("style[data-page-font]")!;
+    expect(style.textContent).toContain("font-family: Georgia, serif !important");
+    expect(style.textContent).toContain(":not([data-st-re-root])"); // never the editor's own UI
+    expect(getCleanHTML()).toContain("data-page-font");
+    handleToolbarCommand("pageFont", "__default__");
+    expect(fontOf(doc)).toBeNull();
+    expect(doc.head.querySelector("style[data-page-font]")).toBeNull();
+  });
+
+  it("replaces rather than stacks, and ignores unsafe values", () => {
+    const doc = setup("<p>A</p>");
+    handleToolbarCommand("pageFont", "Arial");
+    handleToolbarCommand("pageFont", "Verdana, sans-serif");
+    expect(doc.head.querySelectorAll("style[data-page-font]")).toHaveLength(1);
+    handleToolbarCommand("pageFont", "x; } body { display:none");
+    expect(fontOf(doc)).toBeNull();
+  });
+
+  it("undo and redo restore the font", () => {
+    const doc = setup("<p>A</p>");
+    handleToolbarCommand("pageFont", "Georgia, serif");
+    handleToolbarCommand("pageFont", "Verdana, sans-serif");
+    handleUndo();
+    expect(fontOf(doc)).toBe("Georgia, serif");
+    handleUndo();
+    expect(fontOf(doc)).toBeNull();
+    handleRedo();
+    expect(fontOf(doc)).toBe("Georgia, serif");
+    expect(doc.body.innerHTML).not.toContain("st-re-font"); // the snapshot comment never reaches the page
   });
 });

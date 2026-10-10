@@ -1,6 +1,6 @@
 {
   "name": "@sankhyatronics/sankhya-cms",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/sankhyatronics/SankhyaCMS.git",
@@ -159,5 +159,8 @@
     "cms"
   ],
   "license": "MIT",
-  "customElements": "custom-elements.json"
+  "customElements": "custom-elements.json",
+  "publishConfig": {
+    "access": "public"
+  }
 }

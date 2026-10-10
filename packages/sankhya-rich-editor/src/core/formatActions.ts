@@ -4,7 +4,7 @@ import { sanitizeURL } from "./sanitizeURL";
 
 export function handleToolbarCommand(command: string, value?: string) {
   try {
-    if (handleStructureCommand(command)) return;
+    if (handleStructureCommand(command, value)) return;
     const doc = _getDoc();
     if (!doc) {
       console.warn(

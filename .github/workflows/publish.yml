@@ -54,5 +54,10 @@ jobs:
             pnpm --filter "@sankhyatronics/$pkg" pack --pack-destination "$RUNNER_TEMP/tarballs"
           done
           for pkg in sankhya-cms sankhya-rich-editor sankhya-cms-react; do
+            # skip versions already on npm, so a partly failed run can simply be re-run
+            if npm view "@sankhyatronics/$pkg@$version" version >/dev/null 2>&1; then
+              echo "@sankhyatronics/$pkg@$version is already published, skipping"
+              continue
+            fi
             npm publish "$RUNNER_TEMP/tarballs/sankhyatronics-$pkg-$version.tgz" --access public --tag latest $DRY_RUN
           done

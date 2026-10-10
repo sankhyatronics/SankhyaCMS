@@ -5,6 +5,10 @@ import {
   pushStandaloneSnapshot,
 } from "./state";
 import { openImageEditor } from "../dom/imageEditor";
+import { setPageFont } from "./pageFont";
+
+/** The toolbar select's value for "use the template's own fonts". */
+export const DEFAULT_FONT = "__default__";
 
 /**
  * Document structure: sections (the blocks a user reorders), inserting new blocks, and table
@@ -218,6 +222,43 @@ export function deleteColumn(cell: HTMLTableCellElement): void {
   else Array.from(table.rows).forEach((row) => row.cells[index]?.remove());
 }
 
+/* ---- background ---- */
+
+const BLOCK_SELECTOR =
+  "td,th,li,p,h1,h2,h3,h4,h5,h6,blockquote,pre,div,section,article,header,footer,aside,nav,table";
+
+/** The block that "fill" applies to: the nearest block around the element being edited, else its section. */
+export function backgroundTarget(doc: Document): HTMLElement | null {
+  const start = _getCurrentEditable() ?? currentSection(doc);
+  return (start?.closest(BLOCK_SELECTOR) as HTMLElement | null) ?? currentSection(doc);
+}
+
+/** Sets (or, with null/empty, removes) an element's background. Print keeps it (`print-color-adjust`). */
+export function setBackground(el: HTMLElement, color: string | null): void {
+  const props = ["print-color-adjust", "-webkit-print-color-adjust"];
+  if (color) {
+    el.style.backgroundColor = color;
+    props.forEach((p) => el.style.setProperty(p, "exact"));
+    return;
+  }
+  el.style.removeProperty("background-color");
+  props.forEach((p) => el.style.removeProperty(p));
+  if (!el.getAttribute("style")?.trim()) el.removeAttribute("style");
+}
+
+/** `#rrggbb` for an inline `rgb()`/hex colour, else null. */
+export function toHex(color: string | null | undefined): string | null {
+  const v = (color ?? "").trim();
+  if (/^#[0-9a-f]{6}$/i.test(v)) return v.toLowerCase();
+  const m = v.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i);
+  return m ? "#" + [m[1], m[2], m[3]].map((n) => Number(n).toString(16).padStart(2, "0")).join("") : null;
+}
+
+/** The inline background of the fill target, for the toolbar's colour input. */
+export function currentBackground(doc: Document): string | null {
+  return toHex(backgroundTarget(doc)?.style.backgroundColor);
+}
+
 /* ---- commands ---- */
 
 export const STRUCTURE_COMMANDS = [
@@ -228,10 +269,12 @@ export const STRUCTURE_COMMANDS = [
   "tableAddColumn",
   "tableDeleteRow",
   "tableDeleteColumn",
+  "blockBackground",
+  "pageFont",
 ] as const;
 
 /** Runs a structure command; returns false when `command` is not one. */
-export function handleStructureCommand(command: string): boolean {
+export function handleStructureCommand(command: string, value?: string): boolean {
   if (!(STRUCTURE_COMMANDS as readonly string[]).includes(command)) return false;
   const doc = _getDoc();
   if (!doc) return true;
@@ -239,7 +282,12 @@ export function handleStructureCommand(command: string): boolean {
     insertImage(doc);
     return true;
   }
-  if (command === "insertSection") insertSectionNode(doc, createTextSection(doc));
+  if (command === "pageFont") setPageFont(doc, value && value !== DEFAULT_FONT ? value : null);
+  else if (command === "blockBackground") {
+    const target = backgroundTarget(doc);
+    if (!target) return true;
+    setBackground(target, value || null);
+  } else if (command === "insertSection") insertSectionNode(doc, createTextSection(doc));
   else if (command === "insertTable") insertSectionNode(doc, createTable(doc));
   else {
     const cell = currentCell(doc);
