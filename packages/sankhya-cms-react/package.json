@@ -65,5 +65,8 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
