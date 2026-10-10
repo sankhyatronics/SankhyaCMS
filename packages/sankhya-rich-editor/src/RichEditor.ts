@@ -56,6 +56,7 @@ export class RichEditor extends LitElement {
   @query('iframe') private frame?: HTMLIFrameElement;
 
   private unsubscribe?: () => void;
+  private ready = false;
 
   /** Returns the edited document as clean HTML (toolbar, editor classes and markers removed). */
   getHTML(): string {
@@ -65,6 +66,7 @@ export class RichEditor extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.unsubscribe = editorEventEmitter.on('contentChanged', () => {
+      if (!this.ready) return; // the editor's own first snapshot is not a user edit
       this.dispatchEvent(
         new CustomEvent<RichEditorChangeEventDetail>('rich-editor-change', {
           detail: { html: this.getHTML() },
@@ -84,8 +86,10 @@ export class RichEditor extends LitElement {
   private handleLoad() {
     const frame = this.frame;
     if (!frame) return;
+    this.ready = false;
     try {
       initRichEditor(frame, this.maxStackSize ? { maxStackSize: this.maxStackSize } : undefined);
+      this.ready = true;
       this.dispatchEvent(new CustomEvent('rich-editor-ready', { bubbles: true, composed: true }));
     } catch (error) {
       this.dispatchEvent(

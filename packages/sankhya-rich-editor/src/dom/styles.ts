@@ -79,6 +79,7 @@ export function injectStyles(doc: Document): void {
 #st-re-editor-root .st-re-section-bar button:hover,
 #st-re-editor-root .st-re-drag-handle:hover{background:#e0e7ff}
 #st-re-editor-root .st-re-section-bar button:last-child:hover{background:#fee2e2;color:#b91c1c}
+#st-re-editor-root .st-re-bar-color{width:26px;height:26px;padding:2px;border:0;background:none;cursor:pointer}
 #st-re-editor-root .st-re-drop-line{position:absolute;z-index:9998;height:3px;background:#2563eb;border-radius:2px;pointer-events:none}
 .${CLASS_EDITABLE}{outline:2px dashed ${HOVER_OUTLINE};cursor:text}
 .${CLASS_ACTIVE}{outline:2px solid ${ACTIVE_OUTLINE};cursor:text}

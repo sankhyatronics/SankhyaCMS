@@ -6,6 +6,8 @@ import {
   moveSection,
   placeSection,
   sectionOf,
+  setBackground,
+  toHex,
 } from "../core/structure";
 import { getEditorRoot } from "./root";
 
@@ -50,8 +52,23 @@ export function attachSectionControls(doc: Document) {
   handle.title = "Drag to move this section";
   handle.draggable = true;
 
+  const fill = doc.createElement("input");
+  fill.type = "color";
+  fill.className = "st-re-bar-color";
+  fill.title = "Section background";
+  fill.setAttribute("aria-label", "Section background");
+  fill.addEventListener("input", () => active && setBackground(active, fill.value));
+  fill.addEventListener("change", () => pushStandaloneSnapshot());
+
   bar.append(
     handle,
+    fill,
+    button("∅", "Remove section background", () => {
+      if (!active) return;
+      setBackground(active, null);
+      fill.value = "#ffffff";
+      pushStandaloneSnapshot();
+    }),
     button("▲", "Move section up", () => active && moveSection(active, -1) && commit()),
     button("▼", "Move section down", () => active && moveSection(active, 1) && commit()),
     button("✕", "Delete section", () => {
@@ -75,6 +92,7 @@ export function attachSectionControls(doc: Document) {
     bar.hidden = false;
     bar.style.top = `${rect.top + win.scrollY + 4}px`;
     bar.style.left = `${Math.max(4, rect.right + win.scrollX - bar.offsetWidth - 4)}px`;
+    fill.value = toHex(section.style.backgroundColor) ?? "#ffffff";
     section.classList.add("st-re-section-hover");
   }
 
