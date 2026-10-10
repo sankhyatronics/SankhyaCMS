@@ -1,6 +1,6 @@
 name: Publish packages to npm
 
-# Publishes @sankhyatronics/sankhya-cms and @sankhyatronics/sankhya-cms-react (in dependency order)
+# Publishes @sankhyatronics/sankhya-cms, @sankhyatronics/sankhya-cms-react and @sankhyatronics/sankhya-rich-editor (in dependency order)
 # at the version in the root package.json. Run it from a GitHub release, or by hand — a manual run
 # defaults to a dry run so nothing is published by accident.
 
@@ -40,7 +40,7 @@ jobs:
 
       - name: Publish (or dry run)
         run: >
-          pnpm --filter @sankhyatronics/sankhya-cms --filter @sankhyatronics/sankhya-cms-react publish
+          pnpm --filter @sankhyatronics/sankhya-cms --filter @sankhyatronics/sankhya-cms-react --filter @sankhyatronics/sankhya-rich-editor publish
           --recursive --tag latest --access public --provenance --no-git-checks
           ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && '--dry-run' || '' }}
         env:

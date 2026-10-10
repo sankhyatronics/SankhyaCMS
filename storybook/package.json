@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@sankhyatronics/sankhya-cms": "workspace:*",
+    "@sankhyatronics/sankhya-rich-editor": "workspace:*",
     "lit": "catalog:"
   },
   "devDependencies": {

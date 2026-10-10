@@ -22,6 +22,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./rich-editor": {
+      "types": "./dist/rich-editor.d.ts",
+      "import": "./dist/rich-editor.js"
     }
   },
   "files": [
@@ -29,7 +33,7 @@
   ],
   "type": "module",
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts --sourcemap --clean",
+    "build": "tsup src/index.ts src/rich-editor.tsx --format esm --dts --sourcemap --clean",
     "dev": "tsup src/index.ts --watch --format esm --dts",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint",
@@ -44,6 +48,7 @@
   "dependencies": {
     "@lit/react": "^1.0.8",
     "@sankhyatronics/sankhya-cms": "workspace:^",
+    "@sankhyatronics/sankhya-rich-editor": "workspace:^",
     "lit": "^3.3.3"
   },
   "devDependencies": {

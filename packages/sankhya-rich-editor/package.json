@@ -1,0 +1,61 @@
+{
+  "name": "@sankhyatronics/sankhya-rich-editor",
+  "version": "0.0.9",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sankhyatronics/SankhyaCMS.git",
+    "directory": "packages/sankhya-rich-editor"
+  },
+  "description": "Lit web component (st-rich-editor) for safe, template-driven HTML editing inside an iframe",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "custom-elements.json"
+  ],
+  "sideEffects": true,
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --sourcemap --clean && cem analyze",
+    "dev": "tsup src/index.ts --watch --format esm --dts",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint",
+    "clean": "rimraf dist",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "dompurify": "^3.4.16",
+    "lit": "^3.3.3"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "catalog:",
+    "@sankhyatronics/oxlint-config": "workspace:*",
+    "@sankhyatronics/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/user-event": "^14.6.1",
+    "axe-core": "^4.10.0",
+    "jsdom": "catalog:",
+    "oxlint": "catalog:",
+    "rimraf": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "keywords": [
+    "web-components",
+    "lit",
+    "rich-editor",
+    "html-editor",
+    "cms"
+  ],
+  "license": "MIT",
+  "customElements": "custom-elements.json"
+}
