@@ -52,6 +52,13 @@ jobs:
           for pkg in sankhya-cms sankhya-cms-react; do
             pnpm --filter "@sankhyatronics/$pkg" pack --pack-destination "$RUNNER_TEMP/tarballs"
           done
+          # a `workspace:` range left in a tarball makes the package uninstallable outside this repo
+          for tgz in "$RUNNER_TEMP"/tarballs/*.tgz; do
+            if tar -xzOf "$tgz" package/package.json | grep -q '"workspace:'; then
+              echo "::error::$(basename "$tgz") still has a workspace: dependency"
+              exit 1
+            fi
+          done
           for pkg in sankhya-cms sankhya-cms-react; do
             # skip versions already on npm, so a partly failed run can simply be re-run
             if npm view "@sankhyatronics/$pkg@$version" version >/dev/null 2>&1; then
