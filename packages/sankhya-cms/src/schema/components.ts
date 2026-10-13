@@ -22,6 +22,7 @@ export const componentTags = {
     MenuGridItem: 'st-menu-grid-item',
     MenuItem: 'st-menu-item',
     PromoBanner: 'st-promo-banner',
+    Section: 'st-section',
     Select: 'st-select',
     Stats: 'st-stats',
     Testimonials: 'st-testimonials'

@@ -73,6 +73,68 @@ export class Header extends LitElement {
       border-bottom-color: transparent;
     }
 
+    :host([sticky]),
+    :host([transparent]),
+    :host([hide-on-scroll]) {
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    /* Once the page has scrolled, a sticky/fixed header lifts off the content. */
+    :host([scrolled][sticky]),
+    :host([scrolled][transparent]),
+    :host([scrolled][hide-on-scroll]) {
+      box-shadow: 0 4px 16px var(--st-shadow-color-md);
+      border-bottom-color: transparent !important;
+    }
+
+    /* transparent: fixed over the top of the page (e.g. a dark hero), see-through until scrolled. */
+    :host([transparent]) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
+    :host([transparent]:not([scrolled]):not([mobile-open])) {
+      background: transparent;
+      border-bottom-color: transparent !important;
+      color: var(--st-header-transparent-color, var(--st-color-on-solid));
+      /* Read by st-menu-item / st-dropdown triggers in the bar (their panels reset them). */
+      --st-nav-color: var(--st-header-transparent-color, var(--st-color-on-solid));
+      --st-nav-hover-bg: color-mix(in oklch, currentColor 14%, transparent);
+    }
+
+    :host([transparent]:not([scrolled]):not([mobile-open])) .utility-row {
+      border-left-color: color-mix(in oklch, currentColor 35%, transparent);
+    }
+
+    :host([transparent]:not([scrolled]):not([mobile-open])) .lang-trigger {
+      color: inherit;
+    }
+
+    :host([transparent]:not([scrolled]):not([mobile-open])) .lang-trigger:hover,
+    :host([transparent]:not([scrolled]):not([mobile-open])) .toggle:hover {
+      background: color-mix(in oklch, currentColor 14%, transparent);
+    }
+
+    /* hide-on-scroll: slides away while scrolling down, back as soon as the user scrolls up. */
+    :host([hide-on-scroll]:not([sticky]):not([transparent])) {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    :host([scroll-hidden]:not([mobile-open])) {
+      transform: translateY(-100%);
+      box-shadow: none;
+    }
+
     .brand {
       display: flex;
       align-items: center;
@@ -171,7 +233,7 @@ export class Header extends LitElement {
       border: 0;
       border-radius: var(--st-radius-sm);
       background: transparent;
-      color: var(--st-color-text-strong);
+      color: inherit;
       cursor: pointer;
     }
 
@@ -322,8 +384,10 @@ export class Header extends LitElement {
     }
 
     @media (prefers-reduced-motion: reduce) {
+      :host,
       .mobile-panel {
         animation: none !important;
+        transition: none !important;
       }
     }
   `;
@@ -358,6 +422,51 @@ export class Header extends LitElement {
 
   @property({ type: Boolean, reflect: true })
   sticky = false;
+
+  /**
+   * Fixes the header over the top of the page and makes it see-through, with light text
+   * (`--st-header-transparent-color`), until the page scrolls past `scroll-threshold` — for a
+   * header laid over a dark hero. It then takes its normal background and a shadow. The page
+   * content starts under it, so the first section should leave room for the 64px bar.
+   */
+  @property({ type: Boolean, reflect: true })
+  transparent = false;
+
+  /** Slides the header out of view while the page scrolls down and back in when it scrolls up. */
+  @property({ type: Boolean, reflect: true, attribute: 'hide-on-scroll' })
+  hideOnScroll = false;
+
+  /** Scroll distance in px after which the header counts as `scrolled`. */
+  @property({ type: Number, attribute: 'scroll-threshold' })
+  scrollThreshold = 8;
+
+  /** True once the page has scrolled past `scroll-threshold`; reflected so pages can style `st-header[scrolled]`. Set by the header, never from outside. */
+  @property({ type: Boolean, reflect: true })
+  scrolled = false;
+
+  /** True while `hide-on-scroll` has slid the header away. Set by the header, never from outside. */
+  @property({ type: Boolean, reflect: true, attribute: 'scroll-hidden' })
+  scrollHidden = false;
+
+  private lastScrollY = 0;
+  private scrollFrame = 0;
+
+  private onScroll = (): void => {
+    if (this.scrollFrame) return;
+    this.scrollFrame = requestAnimationFrame(() => {
+      this.scrollFrame = 0;
+      const y = Math.max(0, window.scrollY);
+      this.scrolled = y > this.scrollThreshold;
+      if (this.hideOnScroll) {
+        const delta = y - this.lastScrollY;
+        // Ignore tiny jitters; never hide while still at the top of the page or with the menu open.
+        if (Math.abs(delta) > 4) this.scrollHidden = delta > 0 && y > this.offsetHeight && !this.mobileOpen;
+      } else {
+        this.scrollHidden = false;
+      }
+      this.lastScrollY = y;
+    });
+  };
 
   /**
    * Language switcher options, e.g. `[{ code: 'en', label: 'English' }, ...]` — hidden entirely
@@ -484,6 +593,8 @@ export class Header extends LitElement {
     super.connectedCallback();
     window.addEventListener('keydown', this.closeOnEscape);
     window.addEventListener('click', this.closeLanguageMenuOnOutsideClick);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onScroll();
     this.narrowQuery = window.matchMedia(`(max-width: ${BREAKPOINT_TABLET}px)`);
     this.narrowQuery.addEventListener('change', this.syncInlineDropdowns);
     // Menus often render their dropdowns after the header (e.g. once the user's role loads),
@@ -500,6 +611,9 @@ export class Header extends LitElement {
     this.resizeObserver?.disconnect();
     window.removeEventListener('keydown', this.closeOnEscape);
     window.removeEventListener('click', this.closeLanguageMenuOnOutsideClick);
+    window.removeEventListener('scroll', this.onScroll);
+    if (this.scrollFrame) cancelAnimationFrame(this.scrollFrame);
+    this.scrollFrame = 0;
     super.disconnectedCallback();
   }
 

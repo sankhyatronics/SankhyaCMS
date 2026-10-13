@@ -1,1 +1,0 @@
-export { injectToolbar } from "./render";

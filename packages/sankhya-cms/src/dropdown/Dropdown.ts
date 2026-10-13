@@ -49,7 +49,8 @@ export class Dropdown extends LitElement {
       text-align: center;
       width: fit-content;
       border-radius: var(--st-radius-sm);
-      color: var(--st-color-text);
+      /* --st-nav-*: set by a host bar (st-header's transparent state) to recolour its nav items. */
+      color: var(--st-nav-color, var(--st-color-text));
       font-size: 0.875rem;
       text-decoration: none;
       white-space: nowrap;
@@ -58,8 +59,8 @@ export class Dropdown extends LitElement {
 
     .menu-title:hover,
     .menu-title[aria-expanded='true'] {
-      background: var(--st-color-hover);
-      color: var(--st-color-text-strong);
+      background: var(--st-nav-hover-bg, var(--st-color-hover));
+      color: var(--st-nav-color, var(--st-color-text-strong));
     }
 
     :host([active]) .menu-title {
@@ -103,6 +104,9 @@ export class Dropdown extends LitElement {
       padding: 16px;
       background: var(--st-color-surface);
       color: var(--st-color-text);
+      /* The panel has its own surface: items in it never take the bar's nav colours. */
+      --st-nav-color: initial;
+      --st-nav-hover-bg: initial;
       border: 1px solid var(--st-color-border);
       border-radius: var(--st-radius-sm);
       box-shadow: 0 4px 16px var(--st-shadow-color-sm);

@@ -5,7 +5,6 @@ import { readFileSync, writeFileSync } from 'node:fs';
 const packages = [
   { name: 'sankhya-cms', path: './packages/sankhya-cms/package.json' },
   { name: 'sankhya-cms-react', path: './packages/sankhya-cms-react/package.json' },
-  { name: 'sankhya-rich-editor', path: './packages/sankhya-rich-editor/package.json' },
   { name: 'oxlint-config', path: './tooling/oxlint-config/package.json' },
   { name: 'typescript-config', path: './tooling/typescript-config/package.json' },
   { name: 'storybook', path: './storybook/package.json' },

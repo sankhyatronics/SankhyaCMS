@@ -16,6 +16,7 @@ export * from './menu-grid';
 export * from './menu-grid-item';
 export * from './menu-item';
 export * from './promo-banner';
+export * from './section';
 export * from './select';
 export * from './stats';
 export * from './testimonials';

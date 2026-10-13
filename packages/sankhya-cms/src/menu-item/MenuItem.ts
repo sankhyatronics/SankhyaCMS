@@ -57,7 +57,8 @@ export class MenuItem extends LitElement {
       padding: 12px 16px;
       font-size: 0.875rem;
       text-decoration: none;
-      color: var(--st-color-text);
+      /* --st-nav-*: set by a host bar (st-header's transparent state) to recolour its nav items. */
+      color: var(--st-nav-color, var(--st-color-text));
       border-radius: 6px;
       /* The source's 'all 0.15s', minus visibility: animating the visibility this link inherits
          from a dropdown panel kept it unfocusable for a frame after the panel opened. */
@@ -72,8 +73,8 @@ export class MenuItem extends LitElement {
        Keyboard focus gets the same treatment as hover. */
     .menu-item:hover,
     .menu-item:focus-visible {
-      background: var(--st-color-hover);
-      color: var(--st-color-text-strong);
+      background: var(--st-nav-hover-bg, var(--st-color-hover));
+      color: var(--st-nav-color, var(--st-color-text-strong));
       padding-left: 20px;
       transition-duration: 0.1s;
     }

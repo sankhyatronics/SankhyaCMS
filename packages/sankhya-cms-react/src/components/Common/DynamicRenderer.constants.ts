@@ -19,6 +19,7 @@ import {
     MenuGridItem,
     MenuItem,
     PromoBanner,
+    Section,
     Select,
     Stats,
     Testimonials
@@ -45,7 +46,8 @@ export const baseComponents = {
     Carousel,
     CookieConsent,
     Card,
-    ItemsAccordion
+    ItemsAccordion,
+    Section
 } as const;
 
 /**

@@ -39,10 +39,12 @@ import type { MenuGridItemSelectEventDetail } from '@sankhyatronics/sankhya-cms/
 import { MenuItem as MenuItemElement } from '@sankhyatronics/sankhya-cms/menu-item';
 import type { MenuItemSelectEventDetail } from '@sankhyatronics/sankhya-cms/menu-item';
 import { PromoBanner as PromoBannerElement } from '@sankhyatronics/sankhya-cms/promo-banner';
+import { Section as SectionElement } from '@sankhyatronics/sankhya-cms/section';
 import { Select as SelectElement } from '@sankhyatronics/sankhya-cms/select';
 import type { SelectChangedEventDetail } from '@sankhyatronics/sankhya-cms/select';
 import { Stats as StatsElement } from '@sankhyatronics/sankhya-cms/stats';
 import { Testimonials as TestimonialsElement } from '@sankhyatronics/sankhya-cms/testimonials';
+import type { TestimonialsLinkEventDetail } from '@sankhyatronics/sankhya-cms/testimonials';
 
 type Detail<T> = EventName<CustomEvent<T>>;
 
@@ -55,7 +57,7 @@ export const FeaturesSection = createComponent({ react: React, tagName: 'st-feat
 export const ItemsAccordion = createComponent({ react: React, tagName: 'st-items-accordion', elementClass: ItemsAccordionElement });
 export const MenuGrid = createComponent({ react: React, tagName: 'st-menu-grid', elementClass: MenuGridElement });
 export const Stats = createComponent({ react: React, tagName: 'st-stats', elementClass: StatsElement });
-export const Testimonials = createComponent({ react: React, tagName: 'st-testimonials', elementClass: TestimonialsElement });
+export const Section = createComponent({ react: React, tagName: 'st-section', elementClass: SectionElement });
 export const Carousel = createComponent({ react: React, tagName: 'st-carousel', elementClass: CarouselElement });
 
 /* ---- SPA navigation ---- */
@@ -138,6 +140,14 @@ const StFooter = createComponent({
   events: { onLinkSelect: 'footer-link' as Detail<FooterLinkEventDetail> }
 });
 export const Footer = navigable<React.ComponentProps<typeof StFooter>>(StFooter, 'onLinkSelect');
+
+const StTestimonials = createComponent({
+  react: React,
+  tagName: 'st-testimonials',
+  elementClass: TestimonialsElement,
+  events: { onLinkSelect: 'testimonials-link' as Detail<TestimonialsLinkEventDetail> }
+});
+export const Testimonials = navigable<React.ComponentProps<typeof StTestimonials>>(StTestimonials, 'onLinkSelect');
 
 const StMenuItem = createComponent({
   react: React,
