@@ -238,9 +238,12 @@ export class MenuItem extends LitElement {
       white-space: nowrap;
     }
 
+    /* Hover fills like a mega trigger opening on hover. */
     .menu-item.bar:hover,
     .menu-item.bar:focus-visible {
       padding-left: 12px;
+      background: var(--st-color-accent);
+      color: var(--st-color-on-solid);
     }
 
     .menu-item.bar.active {

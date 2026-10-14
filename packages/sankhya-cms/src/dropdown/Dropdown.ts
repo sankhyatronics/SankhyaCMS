@@ -198,12 +198,15 @@ export class Dropdown extends LitElement {
       box-shadow: 0 24px 48px var(--st-shadow-color-md);
     }
 
-    /* The open section's trigger becomes an accent pill. */
-    :host([mega]:not([inline])) .menu-title {
+    /* The open section's trigger becomes an accent pill — also for a plain dropdown marked \`bar\`,
+       so it matches the mega triggers (and st-menu-item variant="bar") beside it. */
+    :host([mega]:not([inline])) .menu-title,
+    :host([bar]:not([inline])) .menu-title {
       border-radius: 9999px;
     }
 
-    :host([mega]:not([inline])) .menu-title[aria-expanded='true'] {
+    :host([mega]:not([inline])) .menu-title[aria-expanded='true'],
+    :host([bar]:not([inline])) .menu-title[aria-expanded='true'] {
       background: var(--st-color-accent);
       color: var(--st-color-on-solid);
     }
@@ -356,6 +359,11 @@ export class Dropdown extends LitElement {
    */
   @property({ type: Boolean, reflect: true })
   mega = false;
+
+  /** Styles a non-`mega` trigger like a mega one — a pill that turns solid accent while open — so
+   * a plain dropdown (e.g. "+ New") lines up with mega triggers in the same header bar. */
+  @property({ type: Boolean, reflect: true })
+  bar = false;
 
   /** Opens the panel while a mouse hovers the trigger or panel (touch and keyboard still click). Off while `inline`. */
   @property({ type: Boolean, attribute: 'open-on-hover' })
