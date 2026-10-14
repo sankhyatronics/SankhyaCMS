@@ -226,6 +226,36 @@ export class MenuItem extends LitElement {
       font-size: 0.8125rem;
     }
 
+    /* bar: a top-level item in a header bar next to mega st-dropdowns (e.g. "Dashboard" beside
+       "Masters ▼") — the same pill, size and active look as their triggers, so the row reads as
+       one set. Wins over compact (declared after it). */
+    .menu-item.bar {
+      align-items: center;
+      min-height: 40px;
+      padding: 12px;
+      gap: 8px;
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
+
+    .menu-item.bar:hover,
+    .menu-item.bar:focus-visible {
+      padding-left: 12px;
+    }
+
+    .menu-item.bar.active {
+      border-left: 0;
+    }
+
+    .menu-item.bar .menu-item-icon {
+      margin-top: 0;
+    }
+
+    .menu-item.bar .menu-item-title {
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+
     .external {
       display: inline-flex;
       margin-left: 3px;
@@ -286,10 +316,11 @@ export class MenuItem extends LitElement {
   @property({ type: String })
   target = '_self';
 
-  /** `default` (a row with a hover box) or `link` (a plain text link, as in `st-mega-menu-column`;
-   * marked with an arrow when it opens a new tab). */
+  /** `default` (a row with a hover box), `link` (a plain text link, as in `st-mega-menu-column`;
+   * marked with an arrow when it opens a new tab) or `bar` (a top-level item in a header bar,
+   * shaped like a mega `st-dropdown`'s trigger pill so it lines up with the dropdowns beside it). */
   @property({ type: String, reflect: true })
-  variant: 'default' | 'link' = 'default';
+  variant: 'default' | 'link' | 'bar' = 'default';
 
   /** Whether `slot="icon"` has content, so an omitted icon leaves no empty box. */
   @state() private hasIcon = false;
@@ -315,6 +346,7 @@ export class MenuItem extends LitElement {
     const classes = [
       'menu-item',
       link ? 'link' : '',
+      this.variant === 'bar' ? 'bar' : '',
       this.active ? 'active' : '',
       this.compact ? 'compact' : '',
       showDescription ? '' : 'no-description'

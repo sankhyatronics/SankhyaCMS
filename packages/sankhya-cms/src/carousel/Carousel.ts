@@ -9,8 +9,9 @@ import type { CarouselChangeEventDetail } from './CarouselEvents';
  * Cycles through its slotted children, one visible at a time, with optional autoplay, arrows and
  * dot indicators. The incoming slide slides in from the travel direction (CSS keyframes in place
  * of the source's framer-motion spring), or fades in with `transition="fade"`. Autoplay pauses
- * while hovered or focused and stops when the element is disconnected; a paused slide keeps the
- * time it had left.
+ * while hovered (unless `pause-on-hover` is turned off, e.g. for a full-screen hero the pointer
+ * nearly always rests on) or focused, and stops when the element is disconnected; a paused slide
+ * keeps the time it had left.
  *
  * `indicator-style="tabs"` replaces the dots with a row of labelled tabs along the bottom, each
  * with a progress bar that fills while its slide is showing, plus a pause button — the tabbed hero
@@ -316,6 +317,11 @@ export class Carousel extends LitElement {
   @property({ type: Number })
   interval = 5000;
 
+  /** Pause autoplay while the pointer is over the carousel. Turn off for a hero that fills the
+   * screen; the tabs' pause button and keyboard focus still pause it. */
+  @property({ type: Boolean, attribute: 'pause-on-hover' })
+  pauseOnHover = true;
+
   @property({ type: Boolean, attribute: 'show-arrows' })
   showArrows = true;
 
@@ -348,7 +354,7 @@ export class Carousel extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('mouseenter', this.pause);
+    this.addEventListener('mouseenter', this.pauseOnEnter);
     this.addEventListener('mouseleave', this.resume);
     this.addEventListener('focusin', this.pause);
     this.addEventListener('focusout', this.resume);
@@ -356,7 +362,7 @@ export class Carousel extends LitElement {
 
   disconnectedCallback() {
     this.stopTimer();
-    this.removeEventListener('mouseenter', this.pause);
+    this.removeEventListener('mouseenter', this.pauseOnEnter);
     this.removeEventListener('mouseleave', this.resume);
     this.removeEventListener('focusin', this.pause);
     this.removeEventListener('focusout', this.resume);
@@ -392,6 +398,10 @@ export class Carousel extends LitElement {
   }
 
   private pause = () => this.hold(() => (this.paused = true));
+
+  private pauseOnEnter = () => {
+    if (this.pauseOnHover) this.pause();
+  };
 
   private resume = () => this.hold(() => (this.paused = false));
 

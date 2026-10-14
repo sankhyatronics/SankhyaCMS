@@ -29,3 +29,11 @@ export const Active: Story = { args: {
 export const Compact: Story = { args: {
     "compact": true
   } };
+
+export const Bar: Story = { args: {
+    "variant": "bar",
+    "title": "Dashboard",
+    "badge": "",
+    "showDescription": false,
+    "active": true
+  } };
