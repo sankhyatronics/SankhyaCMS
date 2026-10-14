@@ -1,6 +1,6 @@
 {
   "name": "@sankhyatronics/sankhya-cms",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/sankhyatronics/SankhyaCMS.git",
@@ -142,7 +142,9 @@
     "clean": "rimraf dist",
     "test": "vitest run",
     "migrate-json": "node scripts/migrate-json.mjs",
-    "analyze": "cem analyze"
+    "analyze": "cem analyze",
+    "prepack": "node ../../scripts/resolve-workspace-deps.mjs",
+    "postpack": "node ../../scripts/resolve-workspace-deps.mjs --restore"
   },
   "dependencies": {
     "dompurify": "^3.4.16",

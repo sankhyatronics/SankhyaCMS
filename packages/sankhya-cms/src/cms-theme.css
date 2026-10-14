@@ -12,4 +12,15 @@
   --st-cms-text-lg: 1.125rem;
   --st-cms-section-padding: 4rem;
   --st-cms-container-max: 1200px;
+
+  /* A dark band (st-section background="dark", st-stats inverted) and the text on it. Kept apart
+     from --st-color-text-strong / --st-color-on-solid, which swap in the dark theme, so the band
+     stays dark there too. */
+  --st-cms-band-dark-bg: var(--st-color-text-strong);
+  --st-cms-band-dark-color: var(--st-color-on-solid);
+}
+
+:root.dark {
+  --st-cms-band-dark-bg: var(--st-neutral-100);
+  --st-cms-band-dark-color: var(--st-neutral-950);
 }

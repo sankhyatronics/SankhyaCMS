@@ -18,6 +18,8 @@ export interface FeatureItemData {
  * `items` property, from slotted `st-feature-item` elements (the source's `children`), or both
  * (slotted first). `columns` sets the grid width (default 2; one column below 768px). `inverted`
  * is passed on to the `items` tiles; slotted tiles need their own `inverted` attribute.
+ *
+ * @cssprop --st-features-section-padding - Overrides the section's padding.
  */
 @customElement('st-features-section')
 export class FeaturesSection extends LitElement {
@@ -27,7 +29,9 @@ export class FeaturesSection extends LitElement {
     :host {
       display: block;
       ${fontFamilyStyles}
-      padding: var(--st-cms-section-padding) var(--st-space-24);
+      /* !important: a page-level reset (e.g. Tailwind Preflight) otherwise zeroes a shadow host's
+         padding; override with --st-features-section-padding instead. */
+      padding: var(--st-features-section-padding, var(--st-cms-section-padding) var(--st-space-24)) !important;
       background: var(--st-color-surface);
     }
 
@@ -67,7 +71,7 @@ export class FeaturesSection extends LitElement {
 
     @media (max-width: 768px) {
       :host {
-        padding: var(--st-space-48) var(--st-space-16);
+        padding: var(--st-features-section-padding, var(--st-space-48) var(--st-space-16)) !important;
       }
 
       .grid {

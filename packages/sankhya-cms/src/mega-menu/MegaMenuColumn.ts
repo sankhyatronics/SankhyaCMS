@@ -24,6 +24,7 @@ import type { MegaMenuSelectEventDetail } from './MegaMenuEvents';
  * @csspart description - The line under the heading.
  * @csspart items - The box holding the links.
  * @csspart cta - The pill button.
+ * @cssprop --st-mega-menu-column-padding - Overrides the padding of a `card`/`accent` column.
  */
 @customElement('st-mega-menu-column')
 export class MegaMenuColumn extends LitElement {
@@ -40,7 +41,9 @@ export class MegaMenuColumn extends LitElement {
 
     :host([variant='card']),
     :host([variant='accent']) {
-      padding: 2rem 1.75rem 1.75rem;
+      /* !important: a page-level reset (e.g. Tailwind Preflight) otherwise zeroes a shadow host's
+         padding; override with --st-mega-menu-column-padding instead. */
+      padding: var(--st-mega-menu-column-padding, 2rem 1.75rem 1.75rem) !important;
       border-radius: 20px;
       background: color-mix(in oklch, var(--st-color-text-strong) 5%, var(--st-color-surface));
     }
@@ -98,9 +101,9 @@ export class MegaMenuColumn extends LitElement {
       gap: 2px;
     }
 
-    /* Nested groups stack with room between them. */
+    /* Nested groups stack with room between them (!important for the same page-reset reason). */
     ::slotted(st-mega-menu-column:not(:first-child)) {
-      margin-top: 2rem;
+      margin-top: 2rem !important;
     }
 
     .cta {

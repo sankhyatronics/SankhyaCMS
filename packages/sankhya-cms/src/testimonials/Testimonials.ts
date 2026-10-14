@@ -48,6 +48,7 @@ export interface TestimonialItem {
  * (e.g. "Explore customer stories").
  *
  * @fires testimonials-link - Cancelable, before following a story or section link. Detail `{ href }`.
+ * @cssprop --st-testimonials-padding - Overrides the section's padding.
  */
 @customElement('st-testimonials')
 export class Testimonials extends LitElement {
@@ -57,7 +58,9 @@ export class Testimonials extends LitElement {
     :host {
       display: block;
       box-sizing: border-box;
-      padding: var(--st-space-48) var(--st-space-24);
+      /* !important: a page-level reset (e.g. Tailwind Preflight) otherwise zeroes a shadow host's
+         padding; override with --st-testimonials-padding instead. */
+      padding: var(--st-testimonials-padding, var(--st-space-48) var(--st-space-24)) !important;
       background-color: var(--st-color-subtle);
       ${rootFontFamilyStyles}
     }
@@ -356,7 +359,7 @@ export class Testimonials extends LitElement {
 
     @media (max-width: 768px) {
       :host {
-        padding: var(--st-space-40) var(--st-space-20);
+        padding: var(--st-testimonials-padding, var(--st-space-40) var(--st-space-20)) !important;
       }
       .grid {
         grid-template-columns: 1fr;

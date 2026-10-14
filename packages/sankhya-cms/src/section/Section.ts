@@ -12,6 +12,7 @@ import { sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-sty
  *
  * @slot - The section's content.
  * @cssprop --st-section-bg - Overrides the background colour picked by `background`.
+ * @cssprop --st-section-padding-inline - Overrides the left/right padding (not with `width="full"`).
  * @csspart inner - The width-limited content box.
  * @csspart header - The heading block.
  */
@@ -31,7 +32,9 @@ export class Section extends LitElement {
       display: block;
       box-sizing: border-box;
       width: 100%;
-      padding: var(--st-section-space-m) var(--st-space-24);
+      /* !important on every padding rule: a page-level reset (e.g. Tailwind Preflight) otherwise
+         zeroes a shadow host's padding. Rescale it with the --st-section-space-* tokens. */
+      padding: var(--st-section-space-m) var(--st-section-padding-inline, var(--st-space-24)) !important;
       background: var(--st-section-bg, var(--st-color-surface));
       color: var(--st-color-text-strong);
       ${rootFontFamilyStyles}
@@ -42,8 +45,8 @@ export class Section extends LitElement {
     }
 
     :host([background='dark']) {
-      background: var(--st-section-bg, var(--st-color-text-strong));
-      color: var(--st-color-on-solid);
+      background: var(--st-section-bg, var(--st-cms-band-dark-bg));
+      color: var(--st-cms-band-dark-color);
     }
 
     :host([background='accent']) {
@@ -55,21 +58,21 @@ export class Section extends LitElement {
       background: var(--st-section-bg, transparent);
     }
 
-    :host([spacing-above='none']) { padding-top: var(--st-section-space-none); }
-    :host([spacing-above='s']) { padding-top: var(--st-section-space-s); }
-    :host([spacing-above='l']) { padding-top: var(--st-section-space-l); }
-    :host([spacing-above='xl']) { padding-top: var(--st-section-space-xl); }
-    :host([spacing-above='xxl']) { padding-top: var(--st-section-space-xxl); }
+    :host([spacing-above='none']) { padding-top: var(--st-section-space-none) !important; }
+    :host([spacing-above='s']) { padding-top: var(--st-section-space-s) !important; }
+    :host([spacing-above='l']) { padding-top: var(--st-section-space-l) !important; }
+    :host([spacing-above='xl']) { padding-top: var(--st-section-space-xl) !important; }
+    :host([spacing-above='xxl']) { padding-top: var(--st-section-space-xxl) !important; }
 
-    :host([spacing-below='none']) { padding-bottom: var(--st-section-space-none); }
-    :host([spacing-below='s']) { padding-bottom: var(--st-section-space-s); }
-    :host([spacing-below='l']) { padding-bottom: var(--st-section-space-l); }
-    :host([spacing-below='xl']) { padding-bottom: var(--st-section-space-xl); }
-    :host([spacing-below='xxl']) { padding-bottom: var(--st-section-space-xxl); }
+    :host([spacing-below='none']) { padding-bottom: var(--st-section-space-none) !important; }
+    :host([spacing-below='s']) { padding-bottom: var(--st-section-space-s) !important; }
+    :host([spacing-below='l']) { padding-bottom: var(--st-section-space-l) !important; }
+    :host([spacing-below='xl']) { padding-bottom: var(--st-section-space-xl) !important; }
+    :host([spacing-below='xxl']) { padding-bottom: var(--st-section-space-xxl) !important; }
 
     :host([width='full']) {
-      padding-left: 0;
-      padding-right: 0;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
     }
 
     .inner {
@@ -131,7 +134,10 @@ export class Section extends LitElement {
     }
 
     :host([background='dark']) .eyebrow,
-    :host([background='dark']) .subtitle,
+    :host([background='dark']) .subtitle {
+      color: color-mix(in oklch, var(--st-cms-band-dark-color) 80%, transparent);
+    }
+
     :host([background='accent']) .eyebrow,
     :host([background='accent']) .subtitle {
       color: color-mix(in oklch, var(--st-color-on-solid) 80%, transparent);
@@ -142,8 +148,7 @@ export class Section extends LitElement {
         --st-section-space-l: 3.5rem;
         --st-section-space-xl: 4.5rem;
         --st-section-space-xxl: 5.5rem;
-        padding-left: var(--st-space-20);
-        padding-right: var(--st-space-20);
+        --st-section-padding-inline: var(--st-space-20);
       }
     }
   `;

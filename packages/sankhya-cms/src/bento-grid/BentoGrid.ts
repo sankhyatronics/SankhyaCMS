@@ -24,7 +24,11 @@ export interface BentoGridItem {
   href?: string;
 }
 
-/** A responsive 4-column bento grid of icon/image cards. Items are set via the `items` property. */
+/**
+ * A responsive 4-column bento grid of icon/image cards. Items are set via the `items` property.
+ *
+ * @cssprop --st-bento-grid-padding - Overrides the block's padding.
+ */
 @customElement('st-bento-grid')
 export class BentoGrid extends LitElement {
   static styles = css`
@@ -32,7 +36,9 @@ export class BentoGrid extends LitElement {
 
     :host {
       display: block;
-      padding: var(--st-cms-section-padding) var(--st-space-24);
+      /* !important: a page-level reset (e.g. Tailwind Preflight) otherwise zeroes a shadow host's
+         padding; override with --st-bento-grid-padding instead. */
+      padding: var(--st-bento-grid-padding, var(--st-cms-section-padding) var(--st-space-24)) !important;
       background: var(--st-color-page);
       ${fontFamilyStyles}
     }
