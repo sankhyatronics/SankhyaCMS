@@ -1,6 +1,6 @@
 {
   "name": "sankhya-cms-docs",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "scripts": {
     "gen": "node scripts/gen-components.mjs",

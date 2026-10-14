@@ -12,6 +12,7 @@ export * from './hero';
 export * from './icon-button';
 export * from './items-accordion';
 export * from './markdown';
+export * from './mega-menu';
 export * from './menu-grid';
 export * from './menu-grid-item';
 export * from './menu-item';

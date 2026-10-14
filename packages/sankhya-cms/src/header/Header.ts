@@ -41,6 +41,8 @@ export class Header extends LitElement {
     :host {
       display: flex;
       align-items: center;
+      /* The containing block of an st-dropdown[mega] panel, which spans the bar. */
+      position: relative;
       /* Spacing between brand, menu and utility controls is the rows' own margins (SankhyaUI's
          layout), not a flex gap. */
       gap: 0;
@@ -507,13 +509,13 @@ export class Header extends LitElement {
 
   /** The dropdowns this header switched to `inline` — only these are switched back, so a caller's
    * own `inline` setting is left alone. */
-  private inlinedDropdowns = new Set<HTMLElement & { inline: boolean }>();
+  private inlinedDropdowns = new Set<HTMLElement & { inline: boolean; open: boolean }>();
 
   /** While the hamburger layout is on, the dropdowns in the header open in the flow of the
    * full-screen panel instead of floating over it (SankhyaUI's touch-device layout). */
   private syncInlineDropdowns = (): void => {
     const collapsed = this.compact || !!this.narrowQuery?.matches;
-    const dropdowns = Array.from(this.querySelectorAll('st-dropdown')) as (HTMLElement & { inline: boolean })[];
+    const dropdowns = Array.from(this.querySelectorAll('st-dropdown')) as (HTMLElement & { inline: boolean; open: boolean })[];
     if (collapsed) {
       for (const dropdown of dropdowns) {
         if (dropdown.inline) continue;
@@ -538,6 +540,10 @@ export class Header extends LitElement {
 
   protected updated(changed: Map<string, unknown>): void {
     if (changed.has('compact')) this.syncInlineDropdowns();
+    // A mega dropdown's drill-down panel would otherwise still cover the menu next time it opens.
+    if (changed.has('mobileOpen') && !this.mobileOpen) {
+      for (const dropdown of this.inlinedDropdowns) dropdown.open = false;
+    }
   }
 
   /** The bar width at which the menu last overflowed — the bar only expands again once it is

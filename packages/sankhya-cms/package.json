@@ -1,6 +1,6 @@
 {
   "name": "@sankhyatronics/sankhya-cms",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/sankhyatronics/SankhyaCMS.git",
@@ -75,6 +75,10 @@
       "types": "./dist/markdown/index.d.ts",
       "import": "./dist/markdown/index.js"
     },
+    "./mega-menu": {
+      "types": "./dist/mega-menu/index.d.ts",
+      "import": "./dist/mega-menu/index.js"
+    },
     "./menu-grid": {
       "types": "./dist/menu-grid/index.d.ts",
       "import": "./dist/menu-grid/index.js"
@@ -131,7 +135,7 @@
   ],
   "sideEffects": true,
   "scripts": {
-    "build": "tsup src/index.ts src/schema/index.ts src/theming/index.ts src/shared/styles.ts src/shared/icons.ts src/bento-grid/index.ts src/card/index.ts src/carousel/index.ts src/content-block/index.ts src/cookie-consent/index.ts src/dropdown/index.ts src/feature-split/index.ts src/features-section/index.ts src/footer/index.ts src/header/index.ts src/hero/index.ts src/icon-button/index.ts src/items-accordion/index.ts src/markdown/index.ts src/menu-grid/index.ts src/menu-grid-item/index.ts src/menu-item/index.ts src/promo-banner/index.ts src/section/index.ts src/select/index.ts src/stats/index.ts src/testimonials/index.ts --format esm --dts --sourcemap --clean && node scripts/copy-theme.mjs && cem analyze",
+    "build": "tsup src/index.ts src/schema/index.ts src/theming/index.ts src/shared/styles.ts src/shared/icons.ts src/bento-grid/index.ts src/card/index.ts src/carousel/index.ts src/content-block/index.ts src/cookie-consent/index.ts src/dropdown/index.ts src/feature-split/index.ts src/features-section/index.ts src/footer/index.ts src/header/index.ts src/hero/index.ts src/icon-button/index.ts src/items-accordion/index.ts src/markdown/index.ts src/mega-menu/index.ts src/menu-grid/index.ts src/menu-grid-item/index.ts src/menu-item/index.ts src/promo-banner/index.ts src/section/index.ts src/select/index.ts src/stats/index.ts src/testimonials/index.ts --format esm --dts --sourcemap --clean && node scripts/copy-theme.mjs && cem analyze",
     "dev": "tsup src/index.ts --watch --format esm --dts",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint",

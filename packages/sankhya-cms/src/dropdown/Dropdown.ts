@@ -1,6 +1,7 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
+import { chevronIcon } from '../shared/icons';
 import { buttonResetStyles, controlBaseStyles, fontFamilyStyles } from '../shared/styles';
 import type { DropdownToggleEventDetail } from './DropdownEvents';
 
@@ -21,7 +22,13 @@ import type { DropdownToggleEventDetail } from './DropdownEvents';
  * because they break existing suite uses (`st-source-bar`'s site/library menus): the 100vw panel
  * at <=768px (overflows the screen from wherever the trigger sits; the header uses `inline`
  * instead) and `overflow: hidden` on slotted children (clips their focus rings). Suite additions
- * kept on top: `align`, `active`, `disabled`, `inline`, and the `dropdown-toggle` event.
+ * kept on top: `align`, `active`, `disabled`, `inline`, and the `dropdown-toggle` event — plus
+ * `mega` and `open-on-hover` for an okta.com-style mega menu (see `st-mega-menu`).
+ *
+ * @cssprop --st-mega-menu-max-width - Maximum width of a `mega` panel (default `1400px`).
+ * @cssprop --st-mega-menu-inset - Minimum space between a `mega` panel and the header's sides (default `1rem`).
+ * @cssprop --st-mega-menu-gap - Space between the header and a `mega` panel (default `12px`).
+ * @cssprop --st-mega-menu-radius - Corner radius of a `mega` panel (default `24px`).
  */
 @customElement('st-dropdown')
 export class Dropdown extends LitElement {
@@ -170,9 +177,114 @@ export class Dropdown extends LitElement {
       pointer-events: auto;
     }
 
+    /* Mega (okta.com): the panel is a large rounded card floating under the whole bar, centred on
+       the nearest positioned ancestor (st-header) instead of hanging off the trigger — the host
+       stops being the panel's containing block. */
+    :host([mega]:not([inline])) {
+      position: static;
+    }
+
+    :host([mega]:not([inline])) .menu-dropdown {
+      top: calc(100% + var(--st-mega-menu-gap, 12px));
+      left: var(--st-mega-menu-inset, 1rem);
+      right: var(--st-mega-menu-inset, 1rem);
+      max-width: var(--st-mega-menu-max-width, 1400px);
+      margin: 0 auto;
+      padding: 0;
+      max-height: calc(100dvh - var(--st-mega-menu-offset, 96px));
+      overflow-y: auto;
+      border: 0;
+      border-radius: var(--st-mega-menu-radius, 24px);
+      box-shadow: 0 24px 48px var(--st-shadow-color-md);
+    }
+
+    /* The open section's trigger becomes an accent pill. */
+    :host([mega]:not([inline])) .menu-title {
+      border-radius: 9999px;
+    }
+
+    :host([mega]:not([inline])) .menu-title[aria-expanded='true'] {
+      background: var(--st-color-accent);
+      color: var(--st-color-on-solid);
+    }
+
+    .mega-back-bar,
+    .mega-heading {
+      display: none;
+    }
+
+    /* Mega in st-header's hamburger panel: rather than an accordion, the panel slides in over the
+       whole screen with a Back button (okta.com's phone menu). Fixed to the viewport, stacked
+       inside the header's own full-screen layer, so the header's close toggle stays on top. */
+    :host([mega][inline]) .menu-dropdown {
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      padding: 0 1.5rem 2rem;
+      overflow-y: auto;
+      border: 0;
+      border-radius: 0;
+      visibility: hidden;
+      transform: translateX(100%);
+      transition:
+        transform 0.3s ease,
+        visibility 0s linear 0.3s;
+    }
+
+    :host([mega][inline]) .menu-dropdown.show {
+      visibility: visible;
+      transform: none;
+      transition-delay: 0s;
+    }
+
+    :host([mega][inline]) .mega-back-bar {
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      height: 64px;
+      margin: 0 -1.5rem;
+      padding: 0 1rem;
+      background: inherit;
+      border-bottom: 1px solid var(--st-color-border);
+    }
+
+    .mega-back {
+      ${buttonResetStyles}
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 40px;
+      padding: 0 12px 0 6px;
+      border-radius: var(--st-radius-sm);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--st-color-text-strong);
+    }
+
+    .mega-back:hover {
+      background: var(--st-color-hover);
+    }
+
+    :host([mega][inline]) .mega-heading {
+      display: block;
+      margin: 1.25rem 0 0.75rem;
+      font-size: 1.375rem;
+      font-weight: 600;
+      color: var(--st-color-text-strong);
+    }
+
+    /* The drill-down replaces the trigger's open state, so the caret points the way it goes. */
+    :host([mega][inline]) .arrow {
+      transform: rotate(-90deg);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .menu-dropdown,
-      .arrow {
+      .arrow,
+      :host([mega][inline]) .menu-dropdown {
         transition: none;
       }
     }
@@ -235,6 +347,29 @@ export class Dropdown extends LitElement {
   @property({ type: Boolean, reflect: true })
   open = false;
 
+  /**
+   * Mega-menu panel (okta.com style), typically holding an `st-mega-menu`: the panel spans the
+   * full width of the nearest positioned ancestor — `st-header` — right under it, instead of
+   * hanging off the trigger. In `st-header`'s hamburger layout (`inline`) it slides in over the
+   * screen with a Back button rather than opening as an accordion. A click inside the panel only
+   * closes it when it lands on a link.
+   */
+  @property({ type: Boolean, reflect: true })
+  mega = false;
+
+  /** Opens the panel while a mouse hovers the trigger or panel (touch and keyboard still click). Off while `inline`. */
+  @property({ type: Boolean, attribute: 'open-on-hover' })
+  openOnHover = false;
+
+  /** Text of the Back button in the `mega` + `inline` drill-down panel. */
+  @property({ type: String, attribute: 'back-label' })
+  backLabel = 'Back';
+
+  private hoverTimer = 0;
+
+  /** When hover last opened the panel — a click right after that keeps it open instead of toggling it shut. */
+  private hoverOpenedAt = 0;
+
   /** Whether the default slot has content — the source's `children` check. */
   @state() private hasContent = false;
 
@@ -245,11 +380,16 @@ export class Dropdown extends LitElement {
     super.connectedCallback();
     document.addEventListener('mousedown', this.closeOnOutsideMouseDown);
     window.addEventListener('keydown', this.closeOnEscape);
+    this.addEventListener('pointerenter', this.onPointerEnter);
+    this.addEventListener('pointerleave', this.onPointerLeave);
   }
 
   disconnectedCallback(): void {
     document.removeEventListener('mousedown', this.closeOnOutsideMouseDown);
     window.removeEventListener('keydown', this.closeOnEscape);
+    this.removeEventListener('pointerenter', this.onPointerEnter);
+    this.removeEventListener('pointerleave', this.onPointerLeave);
+    clearTimeout(this.hoverTimer);
     if (Dropdown.openDropdown === this) Dropdown.openDropdown = null;
     super.disconnectedCallback();
   }
@@ -270,6 +410,32 @@ export class Dropdown extends LitElement {
     this.open = open;
     this.dispatchEvent(new CustomEvent<DropdownToggleEventDetail>('dropdown-toggle', { detail: { open }, bubbles: true, composed: true }));
   }
+
+  private hovers(event: PointerEvent): boolean {
+    return this.openOnHover && !this.inline && !this.disabled && this.hasContent && event.pointerType === 'mouse';
+  }
+
+  /** Short delays so a pointer crossing the gap between trigger and panel doesn't close it. */
+  private onPointerEnter = (event: PointerEvent): void => {
+    if (!this.hovers(event)) return;
+    clearTimeout(this.hoverTimer);
+    this.hoverTimer = window.setTimeout(() => {
+      if (!this.open) this.hoverOpenedAt = Date.now();
+      this.setOpen(true);
+    }, 80);
+  };
+
+  private onPointerLeave = (event: PointerEvent): void => {
+    if (!this.hovers(event)) return;
+    clearTimeout(this.hoverTimer);
+    this.hoverTimer = window.setTimeout(() => this.setOpen(false), 200);
+  };
+
+  private onBackClick = (event: Event): void => {
+    event.stopPropagation();
+    this.setOpen(false);
+    this.trigger()?.focus();
+  };
 
   private closeOnOutsideMouseDown = (event: Event): void => {
     if (this.open && !event.composedPath().includes(this)) this.setOpen(false);
@@ -292,7 +458,7 @@ export class Dropdown extends LitElement {
     const slot = this.renderRoot.querySelector<HTMLSlotElement>('.menu-dropdown slot');
     if (!slot) return [];
     const selector =
-      'st-menu-item, st-menu-grid-item, a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      'st-menu-item, st-menu-grid-item, st-mega-menu-feature, a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
     const items: HTMLElement[] = [];
     for (const el of slot.assignedElements({ flatten: true })) {
       if (el.matches(selector)) items.push(el as HTMLElement);
@@ -352,11 +518,19 @@ export class Dropdown extends LitElement {
     event.stopPropagation();
     if (!this.hasContent) return;
     event.preventDefault();
+    clearTimeout(this.hoverTimer);
+    if (this.open && Date.now() - this.hoverOpenedAt < 400) return;
     this.setOpen(!this.open);
   };
 
-  /** A click anywhere inside the panel closes it, as in the source. */
-  private onPanelClick = (): void => {
+  /** A click anywhere inside the panel closes it, as in the source — for `mega`, only a click on a
+   * link: a big panel has headings and gaps, and a click there shouldn't also close st-header's
+   * hamburger layer. */
+  private onPanelClick = (event: Event): void => {
+    if (this.mega && !event.composedPath().some((node) => node instanceof HTMLAnchorElement)) {
+      event.stopPropagation();
+      return;
+    }
     this.setOpen(false);
   };
 
@@ -423,6 +597,16 @@ export class Dropdown extends LitElement {
           @click=${this.onPanelClick}
           @keydown=${this.onPanelKeyDown}
         >
+          ${this.mega
+            ? html`
+                <div class="mega-back-bar" part="back-bar">
+                  <button type="button" class="mega-back" part="back" @click=${this.onBackClick}>
+                    ${chevronIcon('left', 16)} ${this.backLabel}
+                  </button>
+                </div>
+                ${this.label ? html`<p class="mega-heading" part="mobile-heading">${this.label}</p>` : nothing}
+              `
+            : nothing}
           <slot @slotchange=${this.onContentSlotChange}></slot>
         </div>
       </div>

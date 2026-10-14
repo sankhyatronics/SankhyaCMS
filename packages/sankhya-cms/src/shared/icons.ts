@@ -100,6 +100,15 @@ export function chevronIcon(direction: 'left' | 'right' | 'down', size = 14): Te
   `;
 }
 
+/** Up-right arrow glyph (marks a link that leaves the site — mega-menu links and buttons). */
+export function arrowUpRightIcon(size = 12): TemplateResult {
+  return html`
+    <svg width=${size} height=${size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M7 17L17 7M8 7h9v9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  `;
+}
+
 /** Plus glyph ("New folder" action button). */
 export function plusIcon(size = 13): TemplateResult {
   return html`

@@ -33,6 +33,12 @@ import { Hero as HeroElement } from '@sankhyatronics/sankhya-cms/hero';
 import type { HeroActionEventDetail } from '@sankhyatronics/sankhya-cms/hero';
 import { IconButton as IconButtonElement } from '@sankhyatronics/sankhya-cms/icon-button';
 import { ItemsAccordion as ItemsAccordionElement } from '@sankhyatronics/sankhya-cms/items-accordion';
+import {
+  MegaMenu as MegaMenuElement,
+  MegaMenuColumn as MegaMenuColumnElement,
+  MegaMenuFeature as MegaMenuFeatureElement
+} from '@sankhyatronics/sankhya-cms/mega-menu';
+import type { MegaMenuSelectEventDetail } from '@sankhyatronics/sankhya-cms/mega-menu';
 import { MenuGrid as MenuGridElement } from '@sankhyatronics/sankhya-cms/menu-grid';
 import { MenuGridItem as MenuGridItemElement } from '@sankhyatronics/sankhya-cms/menu-grid-item';
 import type { MenuGridItemSelectEventDetail } from '@sankhyatronics/sankhya-cms/menu-grid-item';
@@ -189,6 +195,48 @@ export const MenuGridItem: React.FC<MenuGridItemProps> = ({ icon, children, ...r
     {children}
   </RoutedMenuGridItem>
 );
+
+const StMegaMenu = createComponent({ react: React, tagName: 'st-mega-menu', elementClass: MegaMenuElement });
+
+const contentsStyle: React.CSSProperties = { display: 'contents' };
+
+export interface MegaMenuProps extends React.ComponentProps<typeof StMegaMenu> {
+  /** Nodes for the intro slot (`slot: "intro"` children) — quick links under the intro text. */
+  intro?: React.ReactNode;
+  /** Nodes for the featured slot (`slot: "featured"` children) — `MegaMenuFeature` cards. */
+  featured?: React.ReactNode;
+}
+export const MegaMenu: React.FC<MegaMenuProps> = ({ intro, featured, children, ...rest }) => (
+  <StMegaMenu {...rest}>
+    {children}
+    {intro ? (
+      <div slot="intro" style={contentsStyle}>
+        {intro}
+      </div>
+    ) : null}
+    {featured ? (
+      <div slot="featured" style={contentsStyle}>
+        {featured}
+      </div>
+    ) : null}
+  </StMegaMenu>
+);
+
+const StMegaMenuColumn = createComponent({
+  react: React,
+  tagName: 'st-mega-menu-column',
+  elementClass: MegaMenuColumnElement,
+  events: { onSelect: 'mega-menu-select' as Detail<MegaMenuSelectEventDetail> }
+});
+export const MegaMenuColumn = navigable<React.ComponentProps<typeof StMegaMenuColumn>>(StMegaMenuColumn, 'onSelect');
+
+const StMegaMenuFeature = createComponent({
+  react: React,
+  tagName: 'st-mega-menu-feature',
+  elementClass: MegaMenuFeatureElement,
+  events: { onSelect: 'mega-menu-select' as Detail<MegaMenuSelectEventDetail> }
+});
+export const MegaMenuFeature = navigable<React.ComponentProps<typeof StMegaMenuFeature>>(StMegaMenuFeature, 'onSelect');
 
 const StDropdown = createComponent({ react: React, tagName: 'st-dropdown', elementClass: DropdownElement });
 

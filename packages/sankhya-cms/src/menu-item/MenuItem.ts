@@ -1,6 +1,7 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
+import { arrowUpRightIcon } from '../shared/icons';
 import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
 import type { MenuItemSelectEventDetail } from './MenuItemEvents';
 
@@ -179,6 +180,58 @@ export class MenuItem extends LitElement {
       font-size: 0.75rem;
     }
 
+    /* link: a plain text link (okta.com mega-menu columns) — no box, no nudge, the badge right
+       after the title, long titles wrap. */
+    .menu-item.link {
+      padding: 7px 0;
+      gap: 10px;
+      font-size: 0.9375rem;
+      color: var(--st-nav-color, var(--st-color-text));
+    }
+
+    .menu-item.link:hover,
+    .menu-item.link:focus-visible {
+      padding-left: 0;
+      background: transparent;
+      color: var(--st-nav-color, var(--st-color-text-strong));
+    }
+
+    .menu-item.link:hover .menu-item-title,
+    .menu-item.link:focus-visible .menu-item-title {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .menu-item.link:active {
+      transform: none;
+    }
+
+    .menu-item.link.active {
+      border-left: 0;
+      background: transparent;
+      font-weight: 600;
+    }
+
+    .menu-item.link .menu-item-header {
+      justify-content: flex-start;
+    }
+
+    .menu-item.link .menu-item-title {
+      white-space: normal;
+      font-weight: 400;
+    }
+
+    .menu-item.link .menu-item-description {
+      margin-top: 2px;
+      font-size: 0.8125rem;
+    }
+
+    .external {
+      display: inline-flex;
+      margin-left: 3px;
+      vertical-align: 0.05em;
+    }
+
     .menu-item.no-description {
       align-items: center;
     }
@@ -233,6 +286,11 @@ export class MenuItem extends LitElement {
   @property({ type: String })
   target = '_self';
 
+  /** `default` (a row with a hover box) or `link` (a plain text link, as in `st-mega-menu-column`;
+   * marked with an arrow when it opens a new tab). */
+  @property({ type: String, reflect: true })
+  variant: 'default' | 'link' = 'default';
+
   /** Whether `slot="icon"` has content, so an omitted icon leaves no empty box. */
   @state() private hasIcon = false;
 
@@ -253,15 +311,32 @@ export class MenuItem extends LitElement {
 
   render() {
     const showDescription = !!this.description && this.showDescription;
-    const classes = ['menu-item', this.active ? 'active' : '', this.compact ? 'compact' : '', showDescription ? '' : 'no-description']
+    const link = this.variant === 'link';
+    const classes = [
+      'menu-item',
+      link ? 'link' : '',
+      this.active ? 'active' : '',
+      this.compact ? 'compact' : '',
+      showDescription ? '' : 'no-description'
+    ]
       .filter(Boolean)
       .join(' ');
+    const external = link && this.target === '_blank';
     return html`
-      <a part="item" class=${classes} href=${this.href} target=${this.target} @click=${this.onClick}>
+      <a
+        part="item"
+        class=${classes}
+        href=${this.href}
+        target=${this.target}
+        rel=${this.target === '_blank' ? 'noopener noreferrer' : nothing}
+        @click=${this.onClick}
+      >
         <span class="menu-item-icon" part="icon" ?hidden=${!this.hasIcon}><slot name="icon" @slotchange=${this.onIconSlotChange}></slot></span>
         <span class="menu-item-content" part="content">
           <span class="menu-item-header" part="header">
-            <span part="title" class="menu-item-title">${this.title}</span>
+            <span part="title" class="menu-item-title"
+              >${this.title}${external ? html`<span class="external">${arrowUpRightIcon(11)}</span>` : nothing}</span
+            >
             ${this.badge ? html`<span part="badge" class="menu-item-badge">${this.badge}</span>` : nothing}
           </span>
           ${showDescription ? html`<p part="description" class="menu-item-description">${this.description}</p>` : nothing}
