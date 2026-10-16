@@ -26,6 +26,9 @@ import type { LanguageChangedEventDetail } from './HeaderEvents';
  * `BREAKPOINT_TABLET`), rather than the slots being duplicated in the template, since a shadow
  * root can only ever assign a given light-DOM child to the *first* slot of a given name.
  *
+ * An optional `slot="brand-extra"` sits right after the brand (e.g. an edition badge such as
+ * "🇮🇳 India Edition"); unlike `menu`/`utility` it stays in the bar at every width.
+ *
  * Also carries an optional built-in language switcher (`languages`/`currentLanguageCode`, fires
  * `language-change`) — ported from `st-app-header`'s own implementation verbatim rather than
  * rebuilt, since the source `Header`'s reference story shows an equivalent flag/language `Select`
@@ -159,6 +162,21 @@ export class Header extends LitElement {
       font-weight: var(--st-font-weight-bold);
       letter-spacing: var(--st-tracking-tight);
       white-space: nowrap;
+    }
+
+    /* Optional slot="brand-extra" (e.g. an edition badge) right after the brand. Outside the
+       mobile panel, so it stays beside the logo at every width; no box at all when empty. */
+    .brand-extra {
+      display: flex;
+      align-items: center;
+      gap: var(--st-space-8);
+      flex: none;
+      margin-left: var(--st-space-10);
+      white-space: nowrap;
+    }
+
+    .brand-extra.empty {
+      display: none;
     }
 
     /* Desktop: a transparent pass-through so .menu-row/.utility-row lay out directly as :host's
@@ -502,6 +520,9 @@ export class Header extends LitElement {
   /** Whether `slot="utility"` has content — an empty utility row (and its divider) is hidden. */
   @state() private hasUtility = false;
 
+  /** Whether `slot="brand-extra"` has content — an empty one takes no room beside the brand. */
+  @state() private hasBrandExtra = false;
+
   private resizeObserver?: ResizeObserver;
 
   /** Matches below BREAKPOINT_TABLET, where the hamburger layout is always on. */
@@ -526,6 +547,11 @@ export class Header extends LitElement {
       for (const dropdown of this.inlinedDropdowns) dropdown.inline = false;
       this.inlinedDropdowns.clear();
     }
+  };
+
+  private onBrandExtraSlotChange = (event: Event): void => {
+    this.hasBrandExtra = (event.target as HTMLSlotElement).assignedElements({ flatten: true }).length > 0;
+    this.evaluateFit();
   };
 
   private onUtilitySlotChange = (event: Event): void => {
@@ -693,6 +719,7 @@ export class Header extends LitElement {
   render() {
     return html`
       ${this.renderBrand()}
+      <div class="brand-extra ${this.hasBrandExtra ? '' : 'empty'}" part="brand-extra"><slot name="brand-extra" @slotchange=${this.onBrandExtraSlotChange}></slot></div>
 
       <div class="mobile-panel" part="mobile-panel" @click=${() => (this.mobileOpen = false)}>
         <div class="menu-row" part="menu-row"><slot name="menu" @slotchange=${this.onMenuSlotChange}></slot></div>
