@@ -38,6 +38,7 @@ jobs:
         run: |
           pnpm --filter @sankhyatronics/sankhya-cms pack --pack-destination "$RUNNER_TEMP/core"
           npm --version
+          if [ -n "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ]; then echo "OIDC token endpoint: available"; else echo "OIDC token endpoint: MISSING"; fi
           npm publish "$RUNNER_TEMP"/core/*.tgz --access public --loglevel verbose $DRY_RUN
         env:
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && '--dry-run' || '' }}
