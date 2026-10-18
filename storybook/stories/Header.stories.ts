@@ -82,3 +82,15 @@ export const HideOnScroll: Story = {
   parameters: { layout: 'fullscreen' },
   render: args => withPage(args, false)
 };
+
+const menuIcon =
+  '<svg slot="menu-icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="3" rx="1.5" fill="#3f59b7"/><rect x="3" y="10.5" width="12" height="3" rx="1.5" fill="#f0b429"/><rect x="3" y="16" width="18" height="3" rx="1.5" fill="#3f59b7"/></svg>';
+const closeIcon =
+  '<svg slot="close-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#fde2e2"/><path d="m8 8 8 8M16 8l-8 8" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round"/></svg>';
+
+/** Narrow the canvas below 900px: the toggle shows the host's own `menu-icon` / `close-icon` instead of the built-in glyphs. */
+export const CustomToggleIcons: Story = {
+  args: { languages: [] },
+  parameters: { viewport: { defaultViewport: 'mobile1' } },
+  render: renderElement('st-header', `${menu}${menuIcon}${closeIcon}`)
+};
