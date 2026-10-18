@@ -37,13 +37,14 @@ jobs:
       - name: Publish @sankhyatronics/sankhya-cms
         run: |
           pnpm --filter @sankhyatronics/sankhya-cms pack --pack-destination "$RUNNER_TEMP/core"
-          npm publish "$RUNNER_TEMP"/core/*.tgz --access public $DRY_RUN
+          npm --version
+          npm publish "$RUNNER_TEMP"/core/*.tgz --access public --loglevel verbose $DRY_RUN
         env:
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && '--dry-run' || '' }}
 
       - name: Publish @sankhyatronics/sankhya-cms-react
         run: |
           pnpm --filter @sankhyatronics/sankhya-cms-react pack --pack-destination "$RUNNER_TEMP/react"
-          npm publish "$RUNNER_TEMP"/react/*.tgz --access public $DRY_RUN
+          npm publish "$RUNNER_TEMP"/react/*.tgz --access public --loglevel verbose $DRY_RUN
         env:
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && '--dry-run' || '' }}
