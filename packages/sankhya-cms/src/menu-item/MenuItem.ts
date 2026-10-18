@@ -16,6 +16,9 @@ import type { MenuItemSelectEventDetail } from './MenuItemEvents';
  * Renders a real `<a href>` but fires a *cancelable* `menu-item-select` event (detail: `{ href }`)
  * before navigating — a host doing client-side routing calls `event.preventDefault()` on it (the
  * source used react-router's `Link` here; the suite apps have no router).
+ *
+ * @slot icon - The row's icon, sized to `icon-size` (16px, or 14px when `compact`).
+ * @cssprop --st-menu-item-icon-size - Width and height of the slotted icon; `icon-size` sets it.
  */
 @customElement('st-menu-item')
 export class MenuItem extends LitElement {
@@ -112,8 +115,8 @@ export class MenuItem extends LitElement {
     }
 
     .menu-item-icon ::slotted(*) {
-      width: 16px;
-      height: 16px;
+      width: var(--st-menu-item-icon-size, 16px);
+      height: var(--st-menu-item-icon-size, 16px);
     }
 
     .menu-item-content {
@@ -168,8 +171,8 @@ export class MenuItem extends LitElement {
     }
 
     .menu-item.compact .menu-item-icon ::slotted(*) {
-      width: 14px;
-      height: 14px;
+      width: var(--st-menu-item-icon-size, 14px);
+      height: var(--st-menu-item-icon-size, 14px);
     }
 
     .menu-item.compact .menu-item-title {
@@ -325,6 +328,10 @@ export class MenuItem extends LitElement {
   @property({ type: String, reflect: true })
   variant: 'default' | 'link' | 'bar' = 'default';
 
+  /** Size of the slotted icon, any CSS length (e.g. `36px`); empty keeps 16px (14px when `compact`). */
+  @property({ type: String, attribute: 'icon-size' })
+  iconSize = '';
+
   /** Whether `slot="icon"` has content, so an omitted icon leaves no empty box. */
   @state() private hasIcon = false;
 
@@ -366,7 +373,13 @@ export class MenuItem extends LitElement {
         rel=${this.target === '_blank' ? 'noopener noreferrer' : nothing}
         @click=${this.onClick}
       >
-        <span class="menu-item-icon" part="icon" ?hidden=${!this.hasIcon}><slot name="icon" @slotchange=${this.onIconSlotChange}></slot></span>
+        <span
+          class="menu-item-icon"
+          part="icon"
+          ?hidden=${!this.hasIcon}
+          style=${this.iconSize ? `--st-menu-item-icon-size: ${this.iconSize}` : nothing}
+          ><slot name="icon" @slotchange=${this.onIconSlotChange}></slot
+        ></span>
         <span class="menu-item-content" part="content">
           <span class="menu-item-header" part="header">
             <span part="title" class="menu-item-title"

@@ -35,6 +35,13 @@ import type { LanguageChangedEventDetail } from './HeaderEvents';
  * as a first-class header utility. Hidden entirely when `languages` has fewer than two entries.
  * This component has no translation logic itself; the consuming app owns what a language `code`
  * means and which content it re-renders in response.
+ *
+ * @slot menu - Primary navigation.
+ * @slot utility - Account, app-switcher and theme controls, after the divider.
+ * @slot brand-extra - Shown right after the brand at every width (e.g. an edition badge).
+ * @slot menu-icon - Replaces the hamburger on the narrow-screen toggle (the built-in glyph when empty).
+ * @slot close-icon - Replaces the close (X) on the toggle while the menu is open (the built-in glyph when empty).
+ * @cssprop --st-header-toggle-icon-size - Width and height of a slotted toggle icon (default 20px, the built-in glyph's size).
  */
 @customElement('st-header')
 export class Header extends LitElement {
@@ -70,6 +77,21 @@ export class Header extends LitElement {
       position: sticky;
       top: 0;
       z-index: 100;
+    }
+
+    /* Toggle icons: a host's slotted icon, else the built-in glyph; only the current state's shows. */
+    .toggle slot {
+      display: contents;
+    }
+
+    .toggle slot[hidden] {
+      display: none;
+    }
+
+    .toggle ::slotted(*) {
+      flex: none;
+      width: var(--st-header-toggle-icon-size, 20px);
+      height: var(--st-header-toggle-icon-size, 20px);
     }
 
     :host([inverted]) {
@@ -736,7 +758,8 @@ export class Header extends LitElement {
         aria-expanded=${this.mobileOpen}
         @click=${() => (this.mobileOpen = !this.mobileOpen)}
       >
-        ${this.mobileOpen ? closeIcon() : menuIcon()}
+        <slot name="menu-icon" ?hidden=${this.mobileOpen}>${menuIcon()}</slot>
+        <slot name="close-icon" ?hidden=${!this.mobileOpen}>${closeIcon()}</slot>
       </button>
     `;
   }
