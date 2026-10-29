@@ -29,3 +29,11 @@ pnpm update-version   # stamps the root version into every package
 ```
 
 Publishing runs from `.github/workflows/publish.yml` (npmjs, needs the `NPM_TOKEN` secret).
+
+## Publishing from local
+
+```
+pnpm build
+pnpm publish --filter @sankhyatronics/sankhya-cms pack --no-git-checks
+pnpm publish --filter @sankhyatronics/sankhya-cms-react --no-git-checks
+```

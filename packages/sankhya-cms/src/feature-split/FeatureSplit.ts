@@ -22,7 +22,11 @@ export interface FeatureSplitItem {
 
 export type FeatureSplitImagePosition = 'left' | 'right' | 'top';
 
-/** A title/markdown-subtitle/feature-list block beside (or under) an image. */
+/**
+ * A title/markdown-subtitle/feature-list block beside (or under) an image.
+ *
+ * @cssprop --st-feature-split-padding - Overrides the block's padding.
+ */
 @customElement('st-feature-split')
 export class FeatureSplit extends LitElement {
   static styles = css`
@@ -30,7 +34,9 @@ export class FeatureSplit extends LitElement {
 
     :host {
       display: block;
-      padding: var(--st-space-24);
+      /* !important: a page-level reset (e.g. Tailwind Preflight) otherwise zeroes a shadow host's
+         padding; override with --st-feature-split-padding instead. */
+      padding: var(--st-feature-split-padding, var(--st-space-24)) !important;
       background: var(--st-color-page);
       ${fontFamilyStyles}
     }
@@ -169,7 +175,7 @@ export class FeatureSplit extends LitElement {
 
     @media (max-width: 768px) {
       :host {
-        padding: var(--st-space-48) var(--st-space-24);
+        padding: var(--st-feature-split-padding, var(--st-space-48) var(--st-space-24)) !important;
       }
 
       .container {

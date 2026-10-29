@@ -15,10 +15,14 @@ import {
     Hero,
     IconButton,
     ItemsAccordion,
+    MegaMenu,
+    MegaMenuColumn,
+    MegaMenuFeature,
     MenuGrid,
     MenuGridItem,
     MenuItem,
     PromoBanner,
+    Section,
     Select,
     Stats,
     Testimonials
@@ -30,6 +34,9 @@ export const baseComponents = {
     MenuGrid,
     MenuGridItem,
     Dropdown,
+    MegaMenu,
+    MegaMenuColumn,
+    MegaMenuFeature,
     Hero,
     IconButton,
     FeatureSplit,
@@ -45,7 +52,8 @@ export const baseComponents = {
     Carousel,
     CookieConsent,
     Card,
-    ItemsAccordion
+    ItemsAccordion,
+    Section
 } as const;
 
 /**
@@ -56,7 +64,8 @@ export type SlotMap = Record<string, string>;
 
 const componentRegistry: Record<string, ComponentType<any>> = { ...baseComponents };
 const slotRegistry: Record<string, SlotMap> = {
-    Header: { default: 'menuBar', utility: 'utilityButtons' }
+    Header: { default: 'menuBar', utility: 'utilityButtons' },
+    MegaMenu: { default: 'children', intro: 'intro', featured: 'featured' }
 };
 
 export function registerComponent(

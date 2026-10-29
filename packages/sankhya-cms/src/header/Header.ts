@@ -26,12 +26,22 @@ import type { LanguageChangedEventDetail } from './HeaderEvents';
  * `BREAKPOINT_TABLET`), rather than the slots being duplicated in the template, since a shadow
  * root can only ever assign a given light-DOM child to the *first* slot of a given name.
  *
+ * An optional `slot="brand-extra"` sits right after the brand (e.g. an edition badge such as
+ * "🇮🇳 India Edition"); unlike `menu`/`utility` it stays in the bar at every width.
+ *
  * Also carries an optional built-in language switcher (`languages`/`currentLanguageCode`, fires
  * `language-change`) — ported from `st-app-header`'s own implementation verbatim rather than
  * rebuilt, since the source `Header`'s reference story shows an equivalent flag/language `Select`
  * as a first-class header utility. Hidden entirely when `languages` has fewer than two entries.
  * This component has no translation logic itself; the consuming app owns what a language `code`
  * means and which content it re-renders in response.
+ *
+ * @slot menu - Primary navigation.
+ * @slot utility - Account, app-switcher and theme controls, after the divider.
+ * @slot brand-extra - Shown right after the brand at every width (e.g. an edition badge).
+ * @slot menu-icon - Replaces the hamburger on the narrow-screen toggle (the built-in glyph when empty).
+ * @slot close-icon - Replaces the close (X) on the toggle while the menu is open (the built-in glyph when empty).
+ * @cssprop --st-header-toggle-icon-size - Width and height of a slotted toggle icon (default 20px, the built-in glyph's size).
  */
 @customElement('st-header')
 export class Header extends LitElement {
@@ -41,6 +51,8 @@ export class Header extends LitElement {
     :host {
       display: flex;
       align-items: center;
+      /* The containing block of an st-dropdown[mega] panel, which spans the bar. */
+      position: relative;
       /* Spacing between brand, menu and utility controls is the rows' own margins (SankhyaUI's
          layout), not a flex gap. */
       gap: 0;
@@ -67,10 +79,87 @@ export class Header extends LitElement {
       z-index: 100;
     }
 
+    /* Toggle icons: a host's slotted icon, else the built-in glyph; only the current state's shows. */
+    .toggle slot {
+      display: contents;
+    }
+
+    .toggle slot[hidden] {
+      display: none;
+    }
+
+    .toggle ::slotted(*) {
+      flex: none;
+      width: var(--st-header-toggle-icon-size, 20px);
+      height: var(--st-header-toggle-icon-size, 20px);
+    }
+
     :host([inverted]) {
       background: var(--st-color-text-strong);
       color: var(--st-color-on-solid);
       border-bottom-color: transparent;
+    }
+
+    :host([sticky]),
+    :host([transparent]),
+    :host([hide-on-scroll]) {
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    /* Once the page has scrolled, a sticky/fixed header lifts off the content. */
+    :host([scrolled][sticky]),
+    :host([scrolled][transparent]),
+    :host([scrolled][hide-on-scroll]) {
+      box-shadow: 0 4px 16px var(--st-shadow-color-md);
+      border-bottom-color: transparent !important;
+    }
+
+    /* transparent: fixed over the top of the page (e.g. a dark hero), see-through until scrolled. */
+    :host([transparent]) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
+    :host([transparent]:not([scrolled]):not([mobile-open])) {
+      background: transparent;
+      border-bottom-color: transparent !important;
+      color: var(--st-header-transparent-color, var(--st-color-on-solid));
+      /* Read by st-menu-item / st-dropdown triggers in the bar (their panels reset them). */
+      --st-nav-color: var(--st-header-transparent-color, var(--st-color-on-solid));
+      --st-nav-hover-bg: color-mix(in oklch, currentColor 14%, transparent);
+    }
+
+    :host([transparent]:not([scrolled]):not([mobile-open])) .utility-row {
+      border-left-color: color-mix(in oklch, currentColor 35%, transparent);
+    }
+
+    :host([transparent]:not([scrolled]):not([mobile-open])) .lang-trigger {
+      color: inherit;
+    }
+
+    :host([transparent]:not([scrolled]):not([mobile-open])) .lang-trigger:hover,
+    :host([transparent]:not([scrolled]):not([mobile-open])) .toggle:hover {
+      background: color-mix(in oklch, currentColor 14%, transparent);
+    }
+
+    /* hide-on-scroll: slides away while scrolling down, back as soon as the user scrolls up. */
+    :host([hide-on-scroll]:not([sticky]):not([transparent])) {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    :host([scroll-hidden]:not([mobile-open])) {
+      transform: translateY(-100%);
+      box-shadow: none;
     }
 
     .brand {
@@ -95,6 +184,21 @@ export class Header extends LitElement {
       font-weight: var(--st-font-weight-bold);
       letter-spacing: var(--st-tracking-tight);
       white-space: nowrap;
+    }
+
+    /* Optional slot="brand-extra" (e.g. an edition badge) right after the brand. Outside the
+       mobile panel, so it stays beside the logo at every width; no box at all when empty. */
+    .brand-extra {
+      display: flex;
+      align-items: center;
+      gap: var(--st-space-8);
+      flex: none;
+      margin-left: var(--st-space-10);
+      white-space: nowrap;
+    }
+
+    .brand-extra.empty {
+      display: none;
     }
 
     /* Desktop: a transparent pass-through so .menu-row/.utility-row lay out directly as :host's
@@ -171,7 +275,7 @@ export class Header extends LitElement {
       border: 0;
       border-radius: var(--st-radius-sm);
       background: transparent;
-      color: var(--st-color-text-strong);
+      color: inherit;
       cursor: pointer;
     }
 
@@ -322,8 +426,10 @@ export class Header extends LitElement {
     }
 
     @media (prefers-reduced-motion: reduce) {
+      :host,
       .mobile-panel {
         animation: none !important;
+        transition: none !important;
       }
     }
   `;
@@ -360,6 +466,51 @@ export class Header extends LitElement {
   sticky = false;
 
   /**
+   * Fixes the header over the top of the page and makes it see-through, with light text
+   * (`--st-header-transparent-color`), until the page scrolls past `scroll-threshold` — for a
+   * header laid over a dark hero. It then takes its normal background and a shadow. The page
+   * content starts under it, so the first section should leave room for the 64px bar.
+   */
+  @property({ type: Boolean, reflect: true })
+  transparent = false;
+
+  /** Slides the header out of view while the page scrolls down and back in when it scrolls up. */
+  @property({ type: Boolean, reflect: true, attribute: 'hide-on-scroll' })
+  hideOnScroll = false;
+
+  /** Scroll distance in px after which the header counts as `scrolled`. */
+  @property({ type: Number, attribute: 'scroll-threshold' })
+  scrollThreshold = 8;
+
+  /** True once the page has scrolled past `scroll-threshold`; reflected so pages can style `st-header[scrolled]`. Set by the header, never from outside. */
+  @property({ type: Boolean, reflect: true })
+  scrolled = false;
+
+  /** True while `hide-on-scroll` has slid the header away. Set by the header, never from outside. */
+  @property({ type: Boolean, reflect: true, attribute: 'scroll-hidden' })
+  scrollHidden = false;
+
+  private lastScrollY = 0;
+  private scrollFrame = 0;
+
+  private onScroll = (): void => {
+    if (this.scrollFrame) return;
+    this.scrollFrame = requestAnimationFrame(() => {
+      this.scrollFrame = 0;
+      const y = Math.max(0, window.scrollY);
+      this.scrolled = y > this.scrollThreshold;
+      if (this.hideOnScroll) {
+        const delta = y - this.lastScrollY;
+        // Ignore tiny jitters; never hide while still at the top of the page or with the menu open.
+        if (Math.abs(delta) > 4) this.scrollHidden = delta > 0 && y > this.offsetHeight && !this.mobileOpen;
+      } else {
+        this.scrollHidden = false;
+      }
+      this.lastScrollY = y;
+    });
+  };
+
+  /**
    * Language switcher options, e.g. `[{ code: 'en', label: 'English' }, ...]` — hidden entirely
    * when empty or when only one language is offered (same convention as `st-app-header`'s
    * `languages`, which this reuses verbatim). This component has no translation logic itself —
@@ -391,6 +542,9 @@ export class Header extends LitElement {
   /** Whether `slot="utility"` has content — an empty utility row (and its divider) is hidden. */
   @state() private hasUtility = false;
 
+  /** Whether `slot="brand-extra"` has content — an empty one takes no room beside the brand. */
+  @state() private hasBrandExtra = false;
+
   private resizeObserver?: ResizeObserver;
 
   /** Matches below BREAKPOINT_TABLET, where the hamburger layout is always on. */
@@ -398,13 +552,13 @@ export class Header extends LitElement {
 
   /** The dropdowns this header switched to `inline` — only these are switched back, so a caller's
    * own `inline` setting is left alone. */
-  private inlinedDropdowns = new Set<HTMLElement & { inline: boolean }>();
+  private inlinedDropdowns = new Set<HTMLElement & { inline: boolean; open: boolean }>();
 
   /** While the hamburger layout is on, the dropdowns in the header open in the flow of the
    * full-screen panel instead of floating over it (SankhyaUI's touch-device layout). */
   private syncInlineDropdowns = (): void => {
     const collapsed = this.compact || !!this.narrowQuery?.matches;
-    const dropdowns = Array.from(this.querySelectorAll('st-dropdown')) as (HTMLElement & { inline: boolean })[];
+    const dropdowns = Array.from(this.querySelectorAll('st-dropdown')) as (HTMLElement & { inline: boolean; open: boolean })[];
     if (collapsed) {
       for (const dropdown of dropdowns) {
         if (dropdown.inline) continue;
@@ -415,6 +569,11 @@ export class Header extends LitElement {
       for (const dropdown of this.inlinedDropdowns) dropdown.inline = false;
       this.inlinedDropdowns.clear();
     }
+  };
+
+  private onBrandExtraSlotChange = (event: Event): void => {
+    this.hasBrandExtra = (event.target as HTMLSlotElement).assignedElements({ flatten: true }).length > 0;
+    this.evaluateFit();
   };
 
   private onUtilitySlotChange = (event: Event): void => {
@@ -429,6 +588,10 @@ export class Header extends LitElement {
 
   protected updated(changed: Map<string, unknown>): void {
     if (changed.has('compact')) this.syncInlineDropdowns();
+    // A mega dropdown's drill-down panel would otherwise still cover the menu next time it opens.
+    if (changed.has('mobileOpen') && !this.mobileOpen) {
+      for (const dropdown of this.inlinedDropdowns) dropdown.open = false;
+    }
   }
 
   /** The bar width at which the menu last overflowed — the bar only expands again once it is
@@ -484,6 +647,8 @@ export class Header extends LitElement {
     super.connectedCallback();
     window.addEventListener('keydown', this.closeOnEscape);
     window.addEventListener('click', this.closeLanguageMenuOnOutsideClick);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onScroll();
     this.narrowQuery = window.matchMedia(`(max-width: ${BREAKPOINT_TABLET}px)`);
     this.narrowQuery.addEventListener('change', this.syncInlineDropdowns);
     // Menus often render their dropdowns after the header (e.g. once the user's role loads),
@@ -500,6 +665,9 @@ export class Header extends LitElement {
     this.resizeObserver?.disconnect();
     window.removeEventListener('keydown', this.closeOnEscape);
     window.removeEventListener('click', this.closeLanguageMenuOnOutsideClick);
+    window.removeEventListener('scroll', this.onScroll);
+    if (this.scrollFrame) cancelAnimationFrame(this.scrollFrame);
+    this.scrollFrame = 0;
     super.disconnectedCallback();
   }
 
@@ -573,6 +741,7 @@ export class Header extends LitElement {
   render() {
     return html`
       ${this.renderBrand()}
+      <div class="brand-extra ${this.hasBrandExtra ? '' : 'empty'}" part="brand-extra"><slot name="brand-extra" @slotchange=${this.onBrandExtraSlotChange}></slot></div>
 
       <div class="mobile-panel" part="mobile-panel" @click=${() => (this.mobileOpen = false)}>
         <div class="menu-row" part="menu-row"><slot name="menu" @slotchange=${this.onMenuSlotChange}></slot></div>
@@ -589,7 +758,8 @@ export class Header extends LitElement {
         aria-expanded=${this.mobileOpen}
         @click=${() => (this.mobileOpen = !this.mobileOpen)}
       >
-        ${this.mobileOpen ? closeIcon() : menuIcon()}
+        <slot name="menu-icon" ?hidden=${this.mobileOpen}>${menuIcon()}</slot>
+        <slot name="close-icon" ?hidden=${!this.mobileOpen}>${closeIcon()}</slot>
       </button>
     `;
   }

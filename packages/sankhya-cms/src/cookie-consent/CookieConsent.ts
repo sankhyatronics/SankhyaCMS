@@ -12,6 +12,8 @@ const DEFAULT_STORAGE_KEY = 'sankhya_ui_cookie_consent';
  * `sankhya_ui_cookie_consent`; storage errors are ignored) and renders nothing once a choice
  * exists. Fires `cookie-consent-accept` / `cookie-consent-refuse` (detail `{ status }`). The
  * default slot replaces the message text.
+ *
+ * @cssprop --st-cookie-consent-padding - Overrides the bar's padding.
  */
 @customElement('st-cookie-consent')
 export class CookieConsent extends LitElement {
@@ -37,7 +39,9 @@ export class CookieConsent extends LitElement {
       display: flex;
       flex-direction: column;
       gap: var(--st-space-16);
-      padding: var(--st-space-24);
+      /* !important: a page-level reset (e.g. Tailwind Preflight) otherwise zeroes a shadow host's
+         padding; override with --st-cookie-consent-padding instead. */
+      padding: var(--st-cookie-consent-padding, var(--st-space-24)) !important;
       background: var(--st-color-surface);
       color: var(--st-color-text);
       border-top: 1px solid var(--st-color-border);
@@ -108,7 +112,7 @@ export class CookieConsent extends LitElement {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: var(--st-space-16) var(--st-space-32);
+        padding: var(--st-cookie-consent-padding, var(--st-space-16) var(--st-space-32)) !important;
       }
     }
 

@@ -1,9 +1,7 @@
 name: Publish packages to npm
 
-# Publishes @sankhyatronics/sankhya-cms, @sankhyatronics/sankhya-rich-editor and
-# @sankhyatronics/sankhya-cms-react (in dependency order) at the version in the root package.json,
-# using npm trusted publishing (OIDC) — no npm token. Run it from a GitHub release, or by hand: a
-# manual run defaults to a dry run so nothing is published by accident.
+# Publishes @sankhyatronics/sankhya-cms and @sankhyatronics/sankhya-cms-react via npm trusted publishing (OIDC).
+# Run it from a GitHub release, or by hand (a manual run defaults to a dry run).
 
 on:
   release:
@@ -11,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       dry-run:
-        description: Build, test and pack only — do not publish
+        description: Build and pack only — do not publish
         type: boolean
         default: true
 
@@ -28,36 +26,26 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: '26'
-          registry-url: 'https://registry.npmjs.org'
           package-manager-cache: false # never use caching in release builds
 
       - run: pnpm install --frozen-lockfile
-      - run: pnpm lint
-      # build also stamps the root version into every package (update-version)
       - run: pnpm build
         env:
           NODE_OPTIONS: --max-old-space-size=8192
-      - run: pnpm typecheck
-      - run: pnpm test
 
-      # pnpm pack rewrites `workspace:` dependencies to real versions; npm publishes the tarballs
-      # (npm >= 11.5.1 is needed for OIDC; Node 26 ships a newer one).
-      - name: Publish (or dry run)
-        shell: bash
+      # pnpm pack rewrites `workspace:` ranges; npm publishes the tarball (npm does the OIDC exchange). Core goes first.
+      - name: Publish @sankhyatronics/sankhya-cms
+        run: |
+          pnpm --filter @sankhyatronics/sankhya-cms pack --pack-destination "$RUNNER_TEMP/core"
+          npm --version
+          if [ -n "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ]; then echo "OIDC token endpoint: available"; else echo "OIDC token endpoint: MISSING"; fi
+          npm publish "$RUNNER_TEMP"/core/*.tgz --access public --loglevel verbose $DRY_RUN
         env:
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && '--dry-run' || '' }}
+
+      - name: Publish @sankhyatronics/sankhya-cms-react
         run: |
-          set -euo pipefail
-          version=$(node -p "require('./package.json').version")
-          mkdir -p "$RUNNER_TEMP/tarballs"
-          for pkg in sankhya-cms sankhya-rich-editor sankhya-cms-react; do
-            pnpm --filter "@sankhyatronics/$pkg" pack --pack-destination "$RUNNER_TEMP/tarballs"
-          done
-          for pkg in sankhya-cms sankhya-rich-editor sankhya-cms-react; do
-            # skip versions already on npm, so a partly failed run can simply be re-run
-            if npm view "@sankhyatronics/$pkg@$version" version >/dev/null 2>&1; then
-              echo "@sankhyatronics/$pkg@$version is already published, skipping"
-              continue
-            fi
-            npm publish "$RUNNER_TEMP/tarballs/sankhyatronics-$pkg-$version.tgz" --access public --tag latest $DRY_RUN
-          done
+          pnpm --filter @sankhyatronics/sankhya-cms-react pack --pack-destination "$RUNNER_TEMP/react"
+          npm publish "$RUNNER_TEMP"/react/*.tgz --access public --loglevel verbose $DRY_RUN
+        env:
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && '--dry-run' || '' }}

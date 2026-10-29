@@ -29,43 +29,71 @@
                 "type": "Dropdown",
                 "id": "menu-dropdown-services",
                 "title": "Services",
-                "className": "bg-(--st-color-surface) hover:bg-(--st-color-hover) text-(color:--st-color-text-strong) rounded-sm px-4 py-2",
-                "itemGroupClassName": "bg-(--st-color-surface) text-(color:--st-color-text-strong) p-4",
-                "icon": "mdi:apps",
-                "iconPosition": "left",
-                "iconSize": "1.2rem",
-                "iconColor": "currentColor",
+                "mega": true,
+                "openOnHover": true,
                 "children": [
                     {
-                        "type": "MenuGrid",
-                        "id": "menugrid-services",
-                        "columns": 2,
-                        "className": "rounded-sm shadow-md shadow-(color:--st-shadow-color-md)",
-                        "gridClassName": "gap-6 bg-(--st-color-surface) text-(color:--st-color-text-strong) rounded-sm px-4 py-2 shadow-md shadow-(color:--st-shadow-color-md) w-148",
+                        "type": "MegaMenu",
+                        "id": "megamenu-services",
+                        "heading": "Services",
+                        "description": "From strategy to day-to-day operations — we plan, build and run the technology your business depends on.",
+                        "featuredHeading": "Why Sankhyatronics",
                         "children": [
                             {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-consultancy-service",
-                                "title": "Consultancy Service",
-                                "description": "Efficiently outsource your IT needs and focus on your core business with our comprehensive Managed IT Services.",
-                                "href": "consultancy-services",
-                                "icon": "mdi:briefcase-outline"
+                                "type": "MenuItem",
+                                "id": "services-intro-contact",
+                                "slot": "intro",
+                                "variant": "link",
+                                "title": "Talk to an expert",
+                                "href": "contact-us",
+                                "icon": "mdi:message-outline"
                             },
                             {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-product-team-as-a-service",
-                                "title": "Product Team as a Service",
-                                "description": "How can teaming up with the right partner change your success in digital development?",
-                                "href": "product-team-as-a-service",
-                                "icon": "mdi:account-group-outline"
+                                "type": "MenuItem",
+                                "id": "services-intro-values",
+                                "slot": "intro",
+                                "variant": "link",
+                                "title": "Our values",
+                                "href": "values",
+                                "icon": "mdi:star-outline"
                             },
                             {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-managed-services",
+                                "type": "MegaMenuColumn",
+                                "id": "services-column-engagement",
+                                "heading": "Engagement models",
+                                "children": [
+                                    {
+                                        "type": "MenuItem",
+                                        "id": "menugrid-item-consultancy-service",
+                                        "variant": "link",
+                                        "title": "Consultancy Service",
+                                        "href": "consultancy-services"
+                                    },
+                                    {
+                                        "type": "MenuItem",
+                                        "id": "menugrid-item-product-team-as-a-service",
+                                        "variant": "link",
+                                        "title": "Product Team as a Service",
+                                        "href": "product-team-as-a-service",
+                                        "badge": "New"
+                                    },
+                                    {
+                                        "type": "MenuItem",
+                                        "id": "menugrid-item-managed-services",
+                                        "variant": "link",
+                                        "title": "Managed Services",
+                                        "href": "managed-services"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "MegaMenuFeature",
+                                "id": "services-feature-managed",
+                                "slot": "featured",
+                                "variant": "overlay",
                                 "title": "Managed Services",
-                                "description": "Unlock Your Business's Full Potential with Our Managed Services!",
-                                "href": "managed-services",
-                                "icon": "mdi:cogs"
+                                "description": "Outsource your IT needs and focus on your core business.",
+                                "href": "managed-services"
                             }
                         ]
                     }
@@ -75,75 +103,57 @@
                 "type": "Dropdown",
                 "id": "menu-dropdown-help",
                 "title": "Expertise",
-                "className": "bg-(--st-color-surface) hover:bg-(--st-color-hover) text-(color:--st-color-text-strong) rounded-sm px-4 py-2",
-                "itemGroupClassName": "bg-(--st-color-surface) text-(color:--st-color-text-strong) p-4",
-                "icon": "mdi:apps",
-                "iconPosition": "left",
-                "iconSize": "1.2rem",
-                "iconColor": "currentColor",
+                "mega": true,
+                "openOnHover": true,
                 "children": [
                     {
-                        "type": "MenuGrid",
-                        "id": "menugrid-services",
-                        "columns": 2,
-                        "className": "rounded-sm shadow-md shadow-(color:--st-shadow-color-md)",
-                        "gridClassName": "gap-6 bg-(--st-color-surface) text-(color:--st-color-text-strong) rounded-sm px-4 py-2 shadow-md shadow-(color:--st-shadow-color-md) w-148",
+                        "type": "MegaMenu",
+                        "id": "megamenu-expertise",
+                        "heading": "Expertise",
+                        "description": "Deep, hands-on experience across cloud, applications, AI and security.",
+                        "featuredHeading": "Latest",
                         "children": [
                             {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-cloud-services",
-                                "title": "Cloud Services",
-                                "description": "Scalable and secure cloud solutions for your enterprise.",
-                                "href": "cloud-services",
-                                "icon": "mdi:cloud-outline"
+                                "type": "MegaMenuColumn",
+                                "id": "expertise-column-platforms",
+                                "children": [
+                                    {
+                                        "type": "MegaMenuColumn",
+                                        "id": "expertise-group-cloud",
+                                        "heading": "Cloud & Operations",
+                                        "children": [
+                                            { "type": "MenuItem", "id": "menugrid-item-cloud-services", "variant": "link", "title": "Cloud Services", "href": "cloud-services" },
+                                            { "type": "MenuItem", "id": "menugrid-item-business-operations", "variant": "link", "title": "Business Operations", "href": "business-operations" },
+                                            { "type": "MenuItem", "id": "menugrid-item-modern-workspace", "variant": "link", "title": "Modern Workspace", "href": "modern-workspace" }
+                                        ]
+                                    },
+                                    {
+                                        "type": "MegaMenuColumn",
+                                        "id": "expertise-group-security",
+                                        "heading": "Security",
+                                        "children": [
+                                            { "type": "MenuItem", "id": "menugrid-item-cyber-security", "variant": "link", "title": "Cyber Security", "href": "cyber-security" }
+                                        ]
+                                    }
+                                ]
                             },
                             {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-business-operations",
-                                "title": "Business Operations",
-                                "description": "Streamline your operations with our business solutions.",
-                                "href": "business-operations",
-                                "icon": "mdi:chart-line"
+                                "type": "MegaMenuColumn",
+                                "id": "expertise-column-build",
+                                "heading": "Build",
+                                "children": [
+                                    { "type": "MenuItem", "id": "menugrid-item-application-development", "variant": "link", "title": "Application Development", "href": "application-development" },
+                                    { "type": "MenuItem", "id": "menugrid-item-user-experience", "variant": "link", "title": "User Experience", "href": "user-experience" },
+                                    { "type": "MenuItem", "id": "menugrid-item-agentics-ai", "variant": "link", "title": "Agentic AI Development", "href": "agentics-ai-development", "badge": "New" }
+                                ]
                             },
                             {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-user-experience",
-                                "title": "User Experience",
-                                "description": "Create intuitive and engaging user experiences.",
-                                "href": "user-experience",
-                                "icon": "mdi:palette-swatch-outline"
-                            },
-                            {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-modern-workspace",
-                                "title": "Modern Workspace",
-                                "description": "Empower your workforce with modern digital tools.",
-                                "href": "modern-workspace",
-                                "icon": "mdi:monitor-dashboard"
-                            },
-                            {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-application-development",
-                                "title": "Application Development",
-                                "description": "Custom application development to meet your business needs.",
-                                "href": "application-development",
-                                "icon": "mdi:code-tags"
-                            },
-                            {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-agentics-ai",
-                                "title": "Agentics AI Development",
+                                "type": "MegaMenuFeature",
+                                "id": "expertise-feature-ai",
+                                "slot": "featured",
                                 "description": "Leverage the power of AI with our agentic development services.",
-                                "href": "agentics-ai-development",
-                                "icon": "mdi:robot-excited-outline"
-                            },
-                            {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-cyber-security",
-                                "title": "Cyber Security",
-                                "description": "Protect your digital landscape with advanced security solutions.",
-                                "href": "cyber-security",
-                                "icon": "mdi:shield-lock-outline"
+                                "ctaLabel": "Explore agentic AI",
+                                "href": "agentics-ai-development"
                             }
                         ]
                     }
@@ -153,37 +163,36 @@
                 "type": "Dropdown",
                 "id": "dropdown-products",
                 "title": "Products",
-                "className": "bg-(--st-color-surface) hover:bg-(--st-color-hover) text-(color:--st-color-text-strong) rounded-sm px-4 py-2",
-                "itemGroupClassName": "bg-(--st-color-surface) text-(color:--st-color-text-strong) p-4",
-                "icon": "mdi:apps",
-                "iconPosition": "left",
-                "iconSize": "1.2rem",
-                "iconColor": "currentColor",
+                "mega": true,
+                "openOnHover": true,
                 "children": [
                     {
-                        "type": "MenuGrid",
-                        "id": "menugrid-products",
-                        "columns": 1,
-                        "className": "rounded-sm shadow-md shadow-(color:--st-shadow-color-md)",
-                        "gridClassName": "gap-6 bg-(--st-color-surface) text-(color:--st-color-text-strong) rounded-sm px-4 py-2 shadow-md shadow-(color:--st-shadow-color-md) w-148",
+                        "type": "MegaMenu",
+                        "id": "megamenu-products",
                         "children": [
                             {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-sankhya-ui",
-                                "title": "Sankhya UI",
-                                "description": "Sankhya UI is an open-source React component library for Headless CMS.",
-                                "href": "https://sankhyaui.sankhyatronics.com",
-                                "icon": "cib:webcomponents-org",
-                                "target": "_blank"
+                                "type": "MegaMenuColumn",
+                                "id": "products-column-sankhya-ui",
+                                "variant": "accent",
+                                "heading": "Sankhya UI",
+                                "description": "An open-source component library for headless CMS.",
+                                "ctaLabel": "Visit Sankhya UI",
+                                "ctaHref": "https://sankhyaui.sankhyatronics.com",
+                                "children": [
+                                    { "type": "MenuItem", "id": "products-sankhya-ui-docs", "variant": "link", "title": "Documentation", "href": "https://sankhyaui.sankhyatronics.com", "target": "_blank" }
+                                ]
                             },
                             {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-sankhya-book365",
-                                "title": "SankhyaBook 365",
-                                "description": "SankhyaBook 365 is an open-source SharePoint solution that enables multi-hierarchical knowledge management",
-                                "href": "https://sankhyabook365.sankhyatronics.com",
-                                "icon": "mdi:book",
-                                "target": "_blank"
+                                "type": "MegaMenuColumn",
+                                "id": "products-column-sankhyabook",
+                                "variant": "card",
+                                "heading": "SankhyaBook 365",
+                                "description": "An open-source SharePoint solution for multi-hierarchical knowledge management.",
+                                "ctaLabel": "Visit SankhyaBook 365",
+                                "ctaHref": "https://sankhyabook365.sankhyatronics.com",
+                                "children": [
+                                    { "type": "MenuItem", "id": "products-sankhyabook-overview", "variant": "link", "title": "Overview", "href": "https://sankhyabook365.sankhyatronics.com", "target": "_blank" }
+                                ]
                             }
                         ]
                     }
@@ -193,43 +202,31 @@
                 "type": "Dropdown",
                 "id": "dropdown-aboutus",
                 "title": "About Us",
-                "className": "bg-(--st-color-surface) hover:bg-(--st-color-hover) text-(color:--st-color-text-strong) rounded-sm px-4 py-2",
-                "itemGroupClassName": "bg-(--st-color-surface) text-(color:--st-color-text-strong) p-4",
-                "icon": "mdi:information-outline",
-                "iconPosition": "left",
-                "iconSize": "1.2rem",
-                "iconColor": "currentColor",
+                "mega": true,
+                "openOnHover": true,
                 "children": [
                     {
-                        "type": "MenuGrid",
-                        "id": "menugrid-aboutus",
-                        "columns": 1,
-                        "className": "rounded-sm shadow-md shadow-(color:--st-shadow-color-md)",
-                        "gridClassName": "gap-6 bg-(--st-color-surface) text-(color:--st-color-text-strong) rounded-sm px-4 py-2 shadow-md shadow-(color:--st-shadow-color-md) w-148",
+                        "type": "MegaMenu",
+                        "id": "megamenu-aboutus",
+                        "heading": "About Us",
+                        "description": "Who we are, what we stand for and how to reach us.",
                         "children": [
                             {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-values",
-                                "title": "Our Values",
-                                "description": "Our core values",
-                                "href": "values",
-                                "icon": "mdi:web"
+                                "type": "MegaMenuColumn",
+                                "id": "aboutus-column-company",
+                                "heading": "Company",
+                                "children": [
+                                    { "type": "MenuItem", "id": "menugrid-item-values", "variant": "link", "title": "Our Values", "href": "values" },
+                                    { "type": "MenuItem", "id": "menugrid-item-promises", "variant": "link", "title": "Our Promises", "href": "promises" }
+                                ]
                             },
                             {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-promises",
-                                "title": "Our Promises",
-                                "description": "Our core promises",
-                                "href": "promises",
-                                "icon": "mdi:web"
-                            },
-                            {
-                                "type": "MenuGridItem",
-                                "id": "menugrid-item-contactus",
-                                "title": "Contact Us",
-                                "description": "Contact us for any queries.",
-                                "href": "contact-us",
-                                "icon": "mdi:web"
+                                "type": "MegaMenuColumn",
+                                "id": "aboutus-column-contact",
+                                "heading": "Get in touch",
+                                "children": [
+                                    { "type": "MenuItem", "id": "menugrid-item-contactus", "variant": "link", "title": "Contact Us", "href": "contact-us" }
+                                ]
                             }
                         ]
                     }

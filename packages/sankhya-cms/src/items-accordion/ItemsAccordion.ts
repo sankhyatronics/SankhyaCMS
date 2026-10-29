@@ -17,7 +17,11 @@ export interface AccordionItem {
   content: string;
 }
 
-/** A vertical list of collapsible title/content rows; one open at a time unless `allow-multiple`. */
+/**
+ * A vertical list of collapsible title/content rows; one open at a time unless `allow-multiple`.
+ *
+ * @cssprop --st-items-accordion-padding - Overrides the block's padding.
+ */
 @customElement('st-items-accordion')
 export class ItemsAccordion extends LitElement {
   static styles = css`
@@ -25,7 +29,9 @@ export class ItemsAccordion extends LitElement {
 
     :host {
       display: block;
-      padding: var(--st-cms-section-padding) var(--st-space-24);
+      /* !important: a page-level reset (e.g. Tailwind Preflight) otherwise zeroes a shadow host's
+         padding; override with --st-items-accordion-padding instead. */
+      padding: var(--st-items-accordion-padding, var(--st-cms-section-padding) var(--st-space-24)) !important;
       background: var(--st-color-page);
       ${fontFamilyStyles}
     }
@@ -124,7 +130,7 @@ export class ItemsAccordion extends LitElement {
 
     @media (max-width: 768px) {
       :host {
-        padding: var(--st-space-48) var(--st-space-20);
+        padding: var(--st-items-accordion-padding, var(--st-space-48) var(--st-space-20)) !important;
       }
 
       .title {

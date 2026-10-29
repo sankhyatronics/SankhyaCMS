@@ -9,7 +9,12 @@ export interface StatItem {
   description?: string;
 }
 
-/** Responsive grid of headline numbers with a label and optional description. Port of React `Stats`. */
+/**
+ * Responsive grid of headline numbers with a label and optional description. Port of React `Stats`.
+ * `inverted` puts it on the dark band (`--st-cms-band-dark-bg`), which stays dark in the dark theme.
+ *
+ * @cssprop --st-stats-padding - Overrides the block's padding.
+ */
 @customElement('st-stats')
 export class Stats extends LitElement {
   static styles = css`
@@ -18,7 +23,9 @@ export class Stats extends LitElement {
     :host {
       display: block;
       box-sizing: border-box;
-      padding: var(--st-space-48) var(--st-space-24);
+      /* !important: a page-level reset (e.g. Tailwind Preflight) otherwise zeroes a shadow host's
+         padding; override with --st-stats-padding instead. */
+      padding: var(--st-stats-padding, var(--st-space-48) var(--st-space-24)) !important;
       background-color: var(--st-color-surface);
       border-top: 1px solid var(--st-color-divider);
       border-bottom: 1px solid var(--st-color-divider);
@@ -26,7 +33,7 @@ export class Stats extends LitElement {
     }
 
     :host([inverted]) {
-      background-color: var(--st-color-text-strong);
+      background-color: var(--st-cms-band-dark-bg);
       border-color: transparent;
     }
 
@@ -69,17 +76,17 @@ export class Stats extends LitElement {
     }
 
     :host([inverted]) .value {
-      color: var(--st-color-on-solid);
+      color: var(--st-cms-band-dark-color);
     }
 
     :host([inverted]) .label,
     :host([inverted]) .description {
-      color: var(--st-color-border);
+      color: color-mix(in oklch, var(--st-cms-band-dark-color) 75%, transparent);
     }
 
     @media (max-width: 768px) {
       :host {
-        padding: var(--st-space-40) var(--st-space-24);
+        padding: var(--st-stats-padding, var(--st-space-40) var(--st-space-24)) !important;
       }
       .grid {
         grid-template-columns: repeat(2, 1fr);

@@ -10,6 +10,8 @@ import '../markdown';
  * then Markdown body text. Ports `SankhyaUI`'s React `ContentBlock`. The body comes from
  * `content-src` (a Markdown URL, as in the source) or an inline `content` string (added so the
  * block works without a fetch); `content-src` wins when both are set.
+ *
+ * @cssprop --st-content-block-padding - Overrides the block's padding.
  */
 @customElement('st-content-block')
 export class ContentBlock extends LitElement {
@@ -19,7 +21,9 @@ export class ContentBlock extends LitElement {
     :host {
       display: block;
       ${fontFamilyStyles}
-      padding: var(--st-space-24);
+      /* !important: a page-level reset (e.g. Tailwind Preflight) otherwise zeroes a shadow host's
+         padding; override with --st-content-block-padding instead. */
+      padding: var(--st-content-block-padding, var(--st-space-24)) !important;
       background: var(--st-color-surface);
       color: var(--st-color-text-strong);
     }
@@ -83,7 +87,7 @@ export class ContentBlock extends LitElement {
 
     @media (max-width: 768px) {
       :host {
-        padding: var(--st-space-48) var(--st-space-24);
+        padding: var(--st-content-block-padding, var(--st-space-48) var(--st-space-24)) !important;
       }
 
       .container {

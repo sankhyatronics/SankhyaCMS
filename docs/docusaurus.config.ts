@@ -7,7 +7,22 @@ const config: Config = {
   title: 'Sankhya CMS',
   tagline: 'Lit components and React bindings for JSON-driven portals',
   favicon: 'img/favicon.ico',
-  future: { v4: true },
+  future: {
+    v4: true,
+    faster: {
+      swcJsLoader: true,
+      swcJsMinimizer: true,
+      // @swc/html's native loader refuses to load on Windows machines whose C:\ grants write access to
+      // all signed-in users (ERR_SWC_NATIVE_CACHE); fall back to the JS HTML minifier there.
+      swcHtmlMinimizer: process.platform !== 'win32',
+      lightningCssMinimizer: true,
+      mdxCrossCompilerCache: true,
+      rspackBundler: true,
+      rspackPersistentCache: true,
+      ssgWorkerThreads: true,
+      gitEagerVcs: true
+    }
+  },
 
   url: process.env.DOCS_URL ?? 'https://sankhyaui.sankhyatronics.com',
   baseUrl: '/',

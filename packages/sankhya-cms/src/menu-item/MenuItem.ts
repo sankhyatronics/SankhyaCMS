@@ -1,6 +1,7 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
+import { arrowUpRightIcon } from '../shared/icons';
 import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
 import type { MenuItemSelectEventDetail } from './MenuItemEvents';
 
@@ -15,6 +16,9 @@ import type { MenuItemSelectEventDetail } from './MenuItemEvents';
  * Renders a real `<a href>` but fires a *cancelable* `menu-item-select` event (detail: `{ href }`)
  * before navigating — a host doing client-side routing calls `event.preventDefault()` on it (the
  * source used react-router's `Link` here; the suite apps have no router).
+ *
+ * @slot icon - The row's icon, sized to `icon-size` (16px, or 14px when `compact`).
+ * @cssprop --st-menu-item-icon-size - Width and height of the slotted icon; `icon-size` sets it.
  */
 @customElement('st-menu-item')
 export class MenuItem extends LitElement {
@@ -57,7 +61,8 @@ export class MenuItem extends LitElement {
       padding: 12px 16px;
       font-size: 0.875rem;
       text-decoration: none;
-      color: var(--st-color-text);
+      /* --st-nav-*: set by a host bar (st-header's transparent state) to recolour its nav items. */
+      color: var(--st-nav-color, var(--st-color-text));
       border-radius: 6px;
       /* The source's 'all 0.15s', minus visibility: animating the visibility this link inherits
          from a dropdown panel kept it unfocusable for a frame after the panel opened. */
@@ -72,8 +77,8 @@ export class MenuItem extends LitElement {
        Keyboard focus gets the same treatment as hover. */
     .menu-item:hover,
     .menu-item:focus-visible {
-      background: var(--st-color-hover);
-      color: var(--st-color-text-strong);
+      background: var(--st-nav-hover-bg, var(--st-color-hover));
+      color: var(--st-nav-color, var(--st-color-text-strong));
       padding-left: 20px;
       transition-duration: 0.1s;
     }
@@ -110,8 +115,8 @@ export class MenuItem extends LitElement {
     }
 
     .menu-item-icon ::slotted(*) {
-      width: 16px;
-      height: 16px;
+      width: var(--st-menu-item-icon-size, 16px);
+      height: var(--st-menu-item-icon-size, 16px);
     }
 
     .menu-item-content {
@@ -166,8 +171,8 @@ export class MenuItem extends LitElement {
     }
 
     .menu-item.compact .menu-item-icon ::slotted(*) {
-      width: 14px;
-      height: 14px;
+      width: var(--st-menu-item-icon-size, 14px);
+      height: var(--st-menu-item-icon-size, 14px);
     }
 
     .menu-item.compact .menu-item-title {
@@ -176,6 +181,91 @@ export class MenuItem extends LitElement {
 
     .menu-item.compact .menu-item-description {
       font-size: 0.75rem;
+    }
+
+    /* link: a plain text link (okta.com mega-menu columns) — no box, no nudge, the badge right
+       after the title, long titles wrap. */
+    .menu-item.link {
+      padding: 7px 0;
+      gap: 10px;
+      font-size: 0.9375rem;
+      color: var(--st-nav-color, var(--st-color-text));
+    }
+
+    .menu-item.link:hover,
+    .menu-item.link:focus-visible {
+      padding-left: 0;
+      background: transparent;
+      color: var(--st-nav-color, var(--st-color-text-strong));
+    }
+
+    .menu-item.link:hover .menu-item-title,
+    .menu-item.link:focus-visible .menu-item-title {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .menu-item.link:active {
+      transform: none;
+    }
+
+    .menu-item.link.active {
+      border-left: 0;
+      background: transparent;
+      font-weight: 600;
+    }
+
+    .menu-item.link .menu-item-header {
+      justify-content: flex-start;
+    }
+
+    .menu-item.link .menu-item-title {
+      white-space: normal;
+      font-weight: 400;
+    }
+
+    .menu-item.link .menu-item-description {
+      margin-top: 2px;
+      font-size: 0.8125rem;
+    }
+
+    /* bar: a top-level item in a header bar next to mega st-dropdowns (e.g. "Dashboard" beside
+       "Masters ▼") — the same pill, size and active look as their triggers, so the row reads as
+       one set. Wins over compact (declared after it). */
+    .menu-item.bar {
+      align-items: center;
+      min-height: 40px;
+      padding: 12px;
+      gap: 8px;
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
+
+    /* Hover fills like a mega trigger opening on hover. */
+    .menu-item.bar:hover,
+    .menu-item.bar:focus-visible {
+      padding-left: 12px;
+      background: var(--st-color-accent);
+      color: var(--st-color-on-solid);
+    }
+
+    .menu-item.bar.active {
+      border-left: 0;
+    }
+
+    .menu-item.bar .menu-item-icon {
+      margin-top: 0;
+    }
+
+    .menu-item.bar .menu-item-title {
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+
+    .external {
+      display: inline-flex;
+      margin-left: 3px;
+      vertical-align: 0.05em;
     }
 
     .menu-item.no-description {
@@ -232,6 +322,16 @@ export class MenuItem extends LitElement {
   @property({ type: String })
   target = '_self';
 
+  /** `default` (a row with a hover box), `link` (a plain text link, as in `st-mega-menu-column`;
+   * marked with an arrow when it opens a new tab) or `bar` (a top-level item in a header bar,
+   * shaped like a mega `st-dropdown`'s trigger pill so it lines up with the dropdowns beside it). */
+  @property({ type: String, reflect: true })
+  variant: 'default' | 'link' | 'bar' = 'default';
+
+  /** Size of the slotted icon, any CSS length (e.g. `36px`); empty keeps 16px (14px when `compact`). */
+  @property({ type: String, attribute: 'icon-size' })
+  iconSize = '';
+
   /** Whether `slot="icon"` has content, so an omitted icon leaves no empty box. */
   @state() private hasIcon = false;
 
@@ -252,15 +352,39 @@ export class MenuItem extends LitElement {
 
   render() {
     const showDescription = !!this.description && this.showDescription;
-    const classes = ['menu-item', this.active ? 'active' : '', this.compact ? 'compact' : '', showDescription ? '' : 'no-description']
+    const link = this.variant === 'link';
+    const classes = [
+      'menu-item',
+      link ? 'link' : '',
+      this.variant === 'bar' ? 'bar' : '',
+      this.active ? 'active' : '',
+      this.compact ? 'compact' : '',
+      showDescription ? '' : 'no-description'
+    ]
       .filter(Boolean)
       .join(' ');
+    const external = link && this.target === '_blank';
     return html`
-      <a part="item" class=${classes} href=${this.href} target=${this.target} @click=${this.onClick}>
-        <span class="menu-item-icon" part="icon" ?hidden=${!this.hasIcon}><slot name="icon" @slotchange=${this.onIconSlotChange}></slot></span>
+      <a
+        part="item"
+        class=${classes}
+        href=${this.href}
+        target=${this.target}
+        rel=${this.target === '_blank' ? 'noopener noreferrer' : nothing}
+        @click=${this.onClick}
+      >
+        <span
+          class="menu-item-icon"
+          part="icon"
+          ?hidden=${!this.hasIcon}
+          style=${this.iconSize ? `--st-menu-item-icon-size: ${this.iconSize}` : nothing}
+          ><slot name="icon" @slotchange=${this.onIconSlotChange}></slot
+        ></span>
         <span class="menu-item-content" part="content">
           <span class="menu-item-header" part="header">
-            <span part="title" class="menu-item-title">${this.title}</span>
+            <span part="title" class="menu-item-title"
+              >${this.title}${external ? html`<span class="external">${arrowUpRightIcon(11)}</span>` : nothing}</span
+            >
             ${this.badge ? html`<span part="badge" class="menu-item-badge">${this.badge}</span>` : nothing}
           </span>
           ${showDescription ? html`<p part="description" class="menu-item-description">${this.description}</p>` : nothing}

@@ -9,6 +9,9 @@ import type { HeroActionEventDetail } from '../hero/HeroEvents';
  * Rounded call-to-action banner (title, subtitle, one outlined button) on a dark panel or a
  * background image. Port of `SankhyaUI`'s React `PromoBanner`; the button fires an `action` event
  * (detail `{ href }`, empty unless set) in place of `onAction`.
+ *
+ * @cssprop --st-promo-banner-margin - Overrides the banner's margin.
+ * @cssprop --st-promo-banner-padding - Overrides the banner's padding.
  */
 @customElement('st-promo-banner')
 export class PromoBanner extends LitElement {
@@ -20,8 +23,10 @@ export class PromoBanner extends LitElement {
       box-sizing: border-box;
       width: calc(100% - 48px);
       max-width: var(--st-cms-container-max);
-      margin: var(--st-space-40) auto;
-      padding: 100px var(--st-space-24);
+      /* !important: a page-level reset (e.g. Tailwind Preflight) otherwise zeroes a shadow host's
+         margin/padding; override with --st-promo-banner-margin/-padding instead. */
+      margin: var(--st-promo-banner-margin, var(--st-space-40) auto) !important;
+      padding: var(--st-promo-banner-padding, 100px var(--st-space-24)) !important;
       border-radius: var(--st-space-24);
       background-color: var(--st-color-text-strong);
       background-size: cover;
@@ -77,8 +82,8 @@ export class PromoBanner extends LitElement {
     @media (max-width: 768px) {
       :host {
         width: auto;
-        margin: var(--st-space-24);
-        padding: 60px var(--st-space-24);
+        margin: var(--st-promo-banner-margin, var(--st-space-24)) !important;
+        padding: var(--st-promo-banner-padding, 60px var(--st-space-24)) !important;
         border-radius: var(--st-radius-lg);
       }
       .actions,
