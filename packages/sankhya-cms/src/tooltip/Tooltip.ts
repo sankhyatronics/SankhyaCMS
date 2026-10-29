@@ -41,9 +41,15 @@ export class Tooltip extends LitElement {
       transition: opacity 0.12s ease;
     }
 
-    :host(:hover) .bubble,
+    /* Hover waits a moment, so a passing pointer doesn't flash a label; keyboard focus shows it at once. */
+    :host(:hover) .bubble {
+      opacity: 1;
+      transition-delay: var(--st-tooltip-delay, 300ms);
+    }
+
     :host(:focus-within) .bubble {
       opacity: 1;
+      transition-delay: 0s;
     }
 
     @media (prefers-reduced-motion: reduce) {
