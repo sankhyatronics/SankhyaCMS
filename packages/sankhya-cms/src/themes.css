@@ -2,6 +2,26 @@
    --st-primary-color: oklch(97.913% 0.00011 271.152);
    --st-primary-background: oklch(11.862% 0.03663 260.411 / 0.808);
    --st-font-family: "Open Sans";
+
+   /* The light-theme literals in theme.css, re-set for dark. Not part of the
+     light design spec: these keep every surface, line and status readable. */
+   --st-primary-canvas: #1B1F2B;
+   --st-primary-accent: var(--st-brand-color, #6F8BFF);
+   --st-primary-line: #2A3142;
+   --st-primary-divider: #232937;
+   --st-primary-text-secondary: #B9C0CE;
+   --st-primary-text-muted: #9AA2B5;
+   --st-primary-brand-soft: #1E2A4F;
+   --st-primary-brand-ink: #AFC3FF;
+   --st-primary-success: #2FB97F;
+   --st-primary-warning: #E0893A;
+   --st-primary-danger: #E0576B;
+   --st-primary-success-soft: #123329;
+   --st-primary-warning-soft: #3A2A12;
+   --st-primary-danger-soft: #3B1A22;
+   --st-primary-success-text: #6EDCA9;
+   --st-primary-warning-text: #F5C27A;
+   --st-primary-danger-text: #FF9AA8;
 }
 
 :root.red {

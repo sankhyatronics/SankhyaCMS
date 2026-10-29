@@ -8,10 +8,13 @@ sidebar_position: 5
 Load the base tokens once, then the theme classes and the CMS display sizes:
 
 ```ts
+import '@sankhyatronics/sankhya-cms/fonts.css';
 import '@sankhyatronics/sankhya-cms/theme.css';
 import '@sankhyatronics/sankhya-cms/themes.css';
 import '@sankhyatronics/sankhya-cms/cms-theme.css';
 ```
+
+`fonts.css` loads Inter (400, 500, 600, 700, Latin subset) from the package itself, not from a CDN. `--st-font-family` uses it by default; the named themes in `themes.css` set their own font.
 
 Every component styles itself with `var(--st-…)` custom properties, which inherit through shadow DOM. Override them at `:root` (or any ancestor) to re-skin or re-scale the whole tree.
 
