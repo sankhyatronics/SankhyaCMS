@@ -27,3 +27,4 @@ export * from './segmented-control';
 export * from './select';
 export * from './stats';
 export * from './testimonials';
+export * from './tooltip';
