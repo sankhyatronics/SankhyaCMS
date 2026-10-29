@@ -139,6 +139,32 @@ export class MegaMenuFeature extends LitElement {
       color: inherit;
     }
 
+    /* tip: a light-blue card with dark text, like a tip panel on a page. */
+    :host([variant='tip']) .card {
+      gap: 0.5rem;
+      padding: 1.25rem;
+      border-radius: var(--st-radius-md);
+      border: 1px solid var(--st-color-accent-border);
+      background: var(--st-color-accent-subtle);
+      color: var(--st-color-text);
+      transition: border-color 0.2s ease;
+    }
+
+    :host([variant='tip']) .card:hover {
+      border-color: var(--st-color-accent-muted);
+    }
+
+    :host([variant='tip']) .title {
+      font-size: var(--st-text-lg);
+      font-weight: var(--st-font-weight-semibold);
+      color: var(--st-color-text-strong);
+    }
+
+    :host([variant='tip']) .eyebrow,
+    :host([variant='tip']) .cta {
+      color: var(--st-color-accent-text);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .image,
       :host([variant='overlay']) .card {
@@ -147,9 +173,9 @@ export class MegaMenuFeature extends LitElement {
     }
   `;
 
-  /** `story` (default) or `overlay` — see the element description. */
+  /** `story` (default), `overlay` (dark, over an image or gradient) or `tip` (light blue, for a hint). */
   @property({ type: String, reflect: true })
-  variant: 'story' | 'overlay' = 'story';
+  variant: 'story' | 'overlay' | 'tip' = 'story';
 
   @property({ type: String })
   title = '';
