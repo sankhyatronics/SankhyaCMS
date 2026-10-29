@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 import { fontFamilyStyles } from '../shared/styles';
@@ -99,9 +99,18 @@ export class AttentionPanel extends LitElement {
   @property({ type: String })
   heading = '';
 
+  /** Set when an element is slotted into `icon`, so the icon tile only renders with an icon. */
+  @property({ type: Boolean, reflect: true, attribute: 'has-icon' })
+  hasIcon = false;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.hasIcon = this.querySelector('[slot="icon"]') !== null;
+  }
+
   render() {
     return html`
-      <span class="icon" part="icon"><slot name="icon"></slot></span>
+      ${this.hasIcon ? html`<span class="icon" part="icon"><slot name="icon"></slot></span>` : nothing}
       <div class="body">
         <p class="title" part="title">${this.heading}</p>
         <div class="detail" part="detail"><slot></slot></div>

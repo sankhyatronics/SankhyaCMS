@@ -111,6 +111,11 @@ export class KpiCard extends LitElement {
       color: var(--st-color-text-muted);
     }
 
+    :host([hero]) ::slotted(st-chip) {
+      background: color-mix(in oklch, var(--st-color-on-solid) 18%, transparent);
+      color: var(--st-color-on-solid);
+    }
+
     :host([hero]) .sub {
       color: var(--st-color-on-solid);
       opacity: 0.85;

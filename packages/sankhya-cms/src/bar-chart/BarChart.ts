@@ -118,6 +118,7 @@ export class BarChart extends LitElement {
 
     .bar {
       width: 100%;
+      height: 100%;
       border-radius: 4px 4px 0 0;
       background: var(--st-color-accent);
       min-height: 2px;
