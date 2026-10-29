@@ -63,6 +63,13 @@ export class Chip extends LitElement {
       color: var(--st-color-danger-text);
     }
 
+    /* A see-through pill for a chip on a coloured card (the blue hero): white at a low opacity, with white
+       text, like the License Server's hero chips. */
+    :host([translucent]) .pill {
+      background: rgb(255 255 255 / 0.18);
+      color: var(--st-color-on-solid);
+    }
+
     .dot {
       width: 6px;
       height: 6px;
@@ -83,6 +90,10 @@ export class Chip extends LitElement {
   /** `sm` for dense lists and table cells. */
   @property({ type: String, reflect: true })
   size: 'md' | 'sm' = 'md';
+
+  /** A see-through white pill with white text, for a chip on a coloured card. */
+  @property({ type: Boolean, reflect: true })
+  translucent = false;
 
   /** Shows a leading dot in the chip's text colour. */
   @property({ type: Boolean, reflect: true })
