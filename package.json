@@ -1,10 +1,10 @@
 {
   "name": "sankhya-cms",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "private": true,
   "description": "Lit web components (st-*) and thin React wrappers for JSON-driven CMS portals",
   "license": "ISC",
-  "packageManager": "pnpm@12.10.1",
+  "packageManager": "pnpm@12.16.1",
   "engines": {
     "node": ">=26.0"
   },

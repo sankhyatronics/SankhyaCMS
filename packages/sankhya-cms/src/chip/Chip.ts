@@ -1,0 +1,85 @@
+import { LitElement, css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+
+import { fontFamilyStyles } from '../shared/styles';
+
+/**
+ * A small rounded status pill: text in the default slot, with an optional leading dot. Tones map
+ * to the theme's status tokens (soft background, text colour on that background), so a chip reads
+ * the same in every theme. Use `neutral` for plain labels, `accent` for the brand tint, and the
+ * status tones for meaning only (success = done, warning = due soon, danger = overdue).
+ */
+@customElement('st-chip')
+export class Chip extends LitElement {
+  static styles = css`
+    ${fontFamilyStyles}
+
+    :host {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--st-space-6);
+      padding: var(--st-space-2) var(--st-space-10);
+      border-radius: var(--st-radius-full);
+      font-size: var(--st-text-sm);
+      font-weight: var(--st-font-weight-medium);
+      line-height: 1.4;
+      white-space: nowrap;
+      background: var(--st-color-subtle);
+      color: var(--st-color-text-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    :host([size='sm']) {
+      padding: 0 var(--st-space-8);
+      font-size: var(--st-text-xs);
+    }
+
+    :host([tone='accent']) {
+      background: var(--st-color-accent-subtle);
+      color: var(--st-color-accent-text);
+    }
+
+    :host([tone='success']) {
+      background: var(--st-color-success-subtle);
+      color: var(--st-color-success-text);
+    }
+
+    :host([tone='warning']) {
+      background: var(--st-color-warning-subtle);
+      color: var(--st-color-warning-text);
+    }
+
+    :host([tone='danger']) {
+      background: var(--st-color-danger-subtle);
+      color: var(--st-color-danger-text);
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: var(--st-radius-circle);
+      background: currentColor;
+      flex: none;
+    }
+
+    :host(:not([dot])) .dot {
+      display: none;
+    }
+  `;
+
+  /** Colour treatment: a soft tint of the matching theme token. */
+  @property({ type: String, reflect: true })
+  tone: 'neutral' | 'accent' | 'success' | 'warning' | 'danger' = 'neutral';
+
+  /** `sm` for dense lists and table cells. */
+  @property({ type: String, reflect: true })
+  size: 'md' | 'sm' = 'md';
+
+  /** Shows a leading dot in the chip's text colour. */
+  @property({ type: Boolean, reflect: true })
+  dot = false;
+
+  render() {
+    return html`<span class="dot" part="dot" aria-hidden="true"></span><slot></slot>`;
+  }
+}

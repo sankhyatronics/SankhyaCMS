@@ -1,6 +1,6 @@
 {
   "name": "@sankhyatronics/sankhya-cms",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "repository": {
     "type": "git",
     "url": "https://github.com/sankhyatronics/SankhyaCMS.git",
@@ -27,6 +27,30 @@
     "./card": {
       "types": "./dist/card/index.d.ts",
       "import": "./dist/card/index.js"
+    },
+    "./attention-panel": {
+      "types": "./dist/attention-panel/index.d.ts",
+      "import": "./dist/attention-panel/index.js"
+    },
+    "./bar-chart": {
+      "types": "./dist/bar-chart/index.d.ts",
+      "import": "./dist/bar-chart/index.js"
+    },
+    "./chip": {
+      "types": "./dist/chip/index.d.ts",
+      "import": "./dist/chip/index.js"
+    },
+    "./date-tile": {
+      "types": "./dist/date-tile/index.d.ts",
+      "import": "./dist/date-tile/index.js"
+    },
+    "./kpi-card": {
+      "types": "./dist/kpi-card/index.d.ts",
+      "import": "./dist/kpi-card/index.js"
+    },
+    "./segmented-control": {
+      "types": "./dist/segmented-control/index.d.ts",
+      "import": "./dist/segmented-control/index.js"
     },
     "./carousel": {
       "types": "./dist/carousel/index.d.ts",
@@ -136,7 +160,7 @@
   ],
   "sideEffects": true,
   "scripts": {
-    "build": "tsup src/index.ts src/schema/index.ts src/theming/index.ts src/shared/styles.ts src/shared/icons.ts src/bento-grid/index.ts src/card/index.ts src/carousel/index.ts src/content-block/index.ts src/cookie-consent/index.ts src/dropdown/index.ts src/feature-split/index.ts src/features-section/index.ts src/footer/index.ts src/header/index.ts src/hero/index.ts src/icon-button/index.ts src/items-accordion/index.ts src/markdown/index.ts src/mega-menu/index.ts src/menu-grid/index.ts src/menu-grid-item/index.ts src/menu-item/index.ts src/promo-banner/index.ts src/section/index.ts src/select/index.ts src/stats/index.ts src/testimonials/index.ts --format esm --dts --sourcemap --clean && node scripts/copy-theme.mjs && node scripts/copy-fonts.mjs && cem analyze",
+    "build": "tsup src/index.ts src/schema/index.ts src/theming/index.ts src/shared/styles.ts src/shared/icons.ts src/attention-panel/index.ts src/bar-chart/index.ts src/chip/index.ts src/date-tile/index.ts src/kpi-card/index.ts src/segmented-control/index.ts src/bento-grid/index.ts src/card/index.ts src/carousel/index.ts src/content-block/index.ts src/cookie-consent/index.ts src/dropdown/index.ts src/feature-split/index.ts src/features-section/index.ts src/footer/index.ts src/header/index.ts src/hero/index.ts src/icon-button/index.ts src/items-accordion/index.ts src/markdown/index.ts src/mega-menu/index.ts src/menu-grid/index.ts src/menu-grid-item/index.ts src/menu-item/index.ts src/promo-banner/index.ts src/section/index.ts src/select/index.ts src/stats/index.ts src/testimonials/index.ts --format esm --dts --sourcemap --clean && node scripts/copy-theme.mjs && node scripts/copy-fonts.mjs && cem analyze",
     "dev": "tsup src/index.ts --watch --format esm --dts",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint",

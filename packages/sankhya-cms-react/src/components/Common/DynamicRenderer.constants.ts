@@ -1,11 +1,15 @@
 import type { ComponentType } from 'react';
 import type { ComponentList } from './schema';
 import {
+    AttentionPanel,
+    BarChart,
     BentoGrid,
     Card,
     Carousel,
+    Chip,
     ContentBlock,
     CookieConsent,
+    DateTile,
     Dropdown,
     FeatureItem,
     FeatureSplit,
@@ -15,6 +19,7 @@ import {
     Hero,
     IconButton,
     ItemsAccordion,
+    KpiCard,
     MegaMenu,
     MegaMenuColumn,
     MegaMenuFeature,
@@ -22,6 +27,7 @@ import {
     MenuGridItem,
     MenuItem,
     PromoBanner,
+    SegmentedControl,
     Section,
     Select,
     Stats,
@@ -53,7 +59,13 @@ export const baseComponents = {
     CookieConsent,
     Card,
     ItemsAccordion,
-    Section
+    Section,
+    Chip,
+    KpiCard,
+    DateTile,
+    AttentionPanel,
+    BarChart,
+    SegmentedControl
 } as const;
 
 /**

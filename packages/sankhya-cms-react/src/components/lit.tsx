@@ -15,12 +15,16 @@ import { createComponent } from '@lit/react';
 import type { EventName } from '@lit/react';
 import { useInRouterContext, useNavigate } from 'react-router';
 
+import { AttentionPanel as AttentionPanelElement } from '@sankhyatronics/sankhya-cms/attention-panel';
+import { BarChart as BarChartElement } from '@sankhyatronics/sankhya-cms/bar-chart';
 import { BentoGrid as BentoGridElement } from '@sankhyatronics/sankhya-cms/bento-grid';
 import { Card as CardElement } from '@sankhyatronics/sankhya-cms/card';
 import { Carousel as CarouselElement } from '@sankhyatronics/sankhya-cms/carousel';
+import { Chip as ChipElement } from '@sankhyatronics/sankhya-cms/chip';
 import { ContentBlock as ContentBlockElement } from '@sankhyatronics/sankhya-cms/content-block';
 import { CookieConsent as CookieConsentElement } from '@sankhyatronics/sankhya-cms/cookie-consent';
 import type { CookieConsentEventDetail } from '@sankhyatronics/sankhya-cms/cookie-consent';
+import { DateTile as DateTileElement } from '@sankhyatronics/sankhya-cms/date-tile';
 import { Dropdown as DropdownElement } from '@sankhyatronics/sankhya-cms/dropdown';
 import { FeatureSplit as FeatureSplitElement } from '@sankhyatronics/sankhya-cms/feature-split';
 import type { FeatureSplitActionEventDetail } from '@sankhyatronics/sankhya-cms/feature-split';
@@ -33,6 +37,7 @@ import { Hero as HeroElement } from '@sankhyatronics/sankhya-cms/hero';
 import type { HeroActionEventDetail } from '@sankhyatronics/sankhya-cms/hero';
 import { IconButton as IconButtonElement } from '@sankhyatronics/sankhya-cms/icon-button';
 import { ItemsAccordion as ItemsAccordionElement } from '@sankhyatronics/sankhya-cms/items-accordion';
+import { KpiCard as KpiCardElement } from '@sankhyatronics/sankhya-cms/kpi-card';
 import {
   MegaMenu as MegaMenuElement,
   MegaMenuColumn as MegaMenuColumnElement,
@@ -45,6 +50,8 @@ import type { MenuGridItemSelectEventDetail } from '@sankhyatronics/sankhya-cms/
 import { MenuItem as MenuItemElement } from '@sankhyatronics/sankhya-cms/menu-item';
 import type { MenuItemSelectEventDetail } from '@sankhyatronics/sankhya-cms/menu-item';
 import { PromoBanner as PromoBannerElement } from '@sankhyatronics/sankhya-cms/promo-banner';
+import { SegmentedControl as SegmentedControlElement } from '@sankhyatronics/sankhya-cms/segmented-control';
+import type { SegmentChangeEventDetail } from '@sankhyatronics/sankhya-cms/segmented-control';
 import { Section as SectionElement } from '@sankhyatronics/sankhya-cms/section';
 import { Select as SelectElement } from '@sankhyatronics/sankhya-cms/select';
 import type { SelectChangedEventDetail } from '@sankhyatronics/sankhya-cms/select';
@@ -63,6 +70,19 @@ export const FeaturesSection = createComponent({ react: React, tagName: 'st-feat
 export const ItemsAccordion = createComponent({ react: React, tagName: 'st-items-accordion', elementClass: ItemsAccordionElement });
 export const MenuGrid = createComponent({ react: React, tagName: 'st-menu-grid', elementClass: MenuGridElement });
 export const Stats = createComponent({ react: React, tagName: 'st-stats', elementClass: StatsElement });
+export const Chip = createComponent({ react: React, tagName: 'st-chip', elementClass: ChipElement });
+export const KpiCard = createComponent({ react: React, tagName: 'st-kpi-card', elementClass: KpiCardElement });
+export const DateTile = createComponent({ react: React, tagName: 'st-date-tile', elementClass: DateTileElement });
+export const AttentionPanel = createComponent({ react: React, tagName: 'st-attention-panel', elementClass: AttentionPanelElement });
+export const BarChart = createComponent({ react: React, tagName: 'st-bar-chart', elementClass: BarChartElement });
+
+const StSegmentedControl = createComponent({
+  react: React,
+  tagName: 'st-segmented-control',
+  elementClass: SegmentedControlElement,
+  events: { onSegmentChange: 'segment-change' as Detail<SegmentChangeEventDetail> }
+});
+export const SegmentedControl = StSegmentedControl;
 export const Section = createComponent({ react: React, tagName: 'st-section', elementClass: SectionElement });
 export const Carousel = createComponent({ react: React, tagName: 'st-carousel', elementClass: CarouselElement });
 
