@@ -9,6 +9,8 @@ import { fontFamilyStyles } from '../shared/styles';
  * `danger` (red) for overdue or failing items, `accent` (blue) for set-up tips.
  *
  * Slots: `icon` (a glyph beside the title), default (the detail text), `action` (a link or button).
+ * The panel's box sits on an inner element, not on `:host`, so an outer page's CSS reset can't
+ * remove its padding.
  */
 @customElement('st-attention-panel')
 export class AttentionPanel extends LitElement {
@@ -16,20 +18,24 @@ export class AttentionPanel extends LitElement {
     ${fontFamilyStyles}
 
     :host {
+      display: block;
+      color: var(--st-color-text);
+    }
+
+    .panel {
       display: flex;
       align-items: flex-start;
       gap: var(--st-space-12);
       padding: var(--st-space-16);
       border-radius: var(--st-radius-md);
       background: var(--st-color-accent-subtle);
-      color: var(--st-color-text);
     }
 
-    :host([tone='warning']) {
+    :host([tone='warning']) .panel {
       background: var(--st-color-warning-subtle);
     }
 
-    :host([tone='danger']) {
+    :host([tone='danger']) .panel {
       background: var(--st-color-danger-subtle);
     }
 
@@ -41,6 +47,10 @@ export class AttentionPanel extends LitElement {
       border-radius: var(--st-radius-sm);
       background: var(--st-color-surface);
       flex: none;
+    }
+
+    :host(:not([has-icon])) .icon {
+      display: none;
     }
 
     .body {
@@ -85,10 +95,6 @@ export class AttentionPanel extends LitElement {
     .action:empty {
       display: none;
     }
-
-    .icon:empty {
-      display: none;
-    }
   `;
 
   /** Colour of the panel: `accent` for tips, `warning` for due soon, `danger` for overdue. */
@@ -110,11 +116,13 @@ export class AttentionPanel extends LitElement {
 
   render() {
     return html`
-      ${this.hasIcon ? html`<span class="icon" part="icon"><slot name="icon"></slot></span>` : nothing}
-      <div class="body">
-        <p class="title" part="title">${this.heading}</p>
-        <div class="detail" part="detail"><slot></slot></div>
-        <div class="action" part="action"><slot name="action"></slot></div>
+      <div class="panel" part="panel">
+        <span class="icon" part="icon"><slot name="icon"></slot></span>
+        <div class="body">
+          ${this.heading ? html`<p class="title" part="title">${this.heading}</p>` : nothing}
+          <div class="detail" part="detail"><slot></slot></div>
+          <div class="action" part="action"><slot name="action"></slot></div>
+        </div>
       </div>
     `;
   }

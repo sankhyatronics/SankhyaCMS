@@ -8,6 +8,10 @@ import { fontFamilyStyles } from '../shared/styles';
  * to the theme's status tokens (soft background, text colour on that background), so a chip reads
  * the same in every theme. Use `neutral` for plain labels, `accent` for the brand tint, and the
  * status tones for meaning only (success = done, warning = due soon, danger = overdue).
+ *
+ * The pill's box (padding, background) sits on an inner element, not on `:host`: an outer page's
+ * CSS reset (Tailwind's preflight zeroes padding on every element) beats a component's `:host`
+ * rules, which would leave the pill without its padding.
  */
 @customElement('st-chip')
 export class Chip extends LitElement {
@@ -15,6 +19,11 @@ export class Chip extends LitElement {
     ${fontFamilyStyles}
 
     :host {
+      display: inline-flex;
+      max-width: 100%;
+    }
+
+    .pill {
       display: inline-flex;
       align-items: center;
       gap: var(--st-space-6);
@@ -29,27 +38,27 @@ export class Chip extends LitElement {
       font-variant-numeric: tabular-nums;
     }
 
-    :host([size='sm']) {
+    :host([size='sm']) .pill {
       padding: 0 var(--st-space-8);
       font-size: var(--st-text-xs);
     }
 
-    :host([tone='accent']) {
+    :host([tone='accent']) .pill {
       background: var(--st-color-accent-subtle);
       color: var(--st-color-accent-text);
     }
 
-    :host([tone='success']) {
+    :host([tone='success']) .pill {
       background: var(--st-color-success-subtle);
       color: var(--st-color-success-text);
     }
 
-    :host([tone='warning']) {
+    :host([tone='warning']) .pill {
       background: var(--st-color-warning-subtle);
       color: var(--st-color-warning-text);
     }
 
-    :host([tone='danger']) {
+    :host([tone='danger']) .pill {
       background: var(--st-color-danger-subtle);
       color: var(--st-color-danger-text);
     }
@@ -80,6 +89,6 @@ export class Chip extends LitElement {
   dot = false;
 
   render() {
-    return html`<span class="dot" part="dot" aria-hidden="true"></span><slot></slot>`;
+    return html`<span class="pill" part="pill"><span class="dot" part="dot" aria-hidden="true"></span><slot></slot></span>`;
   }
 }

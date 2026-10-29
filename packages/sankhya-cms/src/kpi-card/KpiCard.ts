@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 import { cardShellStyles, fontFamilyStyles } from '../shared/styles';
@@ -10,6 +10,9 @@ import { cardShellStyles, fontFamilyStyles } from '../shared/styles';
  * passed in: format numbers (Indian grouping, currency symbols) before setting it.
  *
  * Slots: `icon` (optional glyph), `chips` (a row of `st-chip`), `footer` (anything below the chips).
+ *
+ * The card's box sits on an inner element, not on `:host`: an outer page's CSS reset (Tailwind's
+ * preflight zeroes padding and borders on every element) beats a component's `:host` rules.
  */
 @customElement('st-kpi-card')
 export class KpiCard extends LitElement {
@@ -17,24 +20,29 @@ export class KpiCard extends LitElement {
     ${fontFamilyStyles}
 
     :host {
-      display: flex;
-      flex-direction: column;
+      display: block;
       min-width: 0;
-      box-sizing: border-box;
-      padding: var(--st-space-20);
-      ${cardShellStyles}
       color: var(--st-color-text);
     }
 
-    :host([hero]) {
+    .card {
       position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
+      padding: var(--st-space-20);
       overflow: hidden;
+      ${cardShellStyles}
+    }
+
+    :host([hero]) .card {
       border: 0;
       background: linear-gradient(135deg, var(--st-color-accent) 0%, color-mix(in oklch, var(--st-color-accent) 70%, #3aa8e8) 100%);
       color: var(--st-color-on-solid);
     }
 
-    :host([hero])::after {
+    :host([hero]) .card::after {
       content: '';
       position: absolute;
       top: -40%;
@@ -111,11 +119,6 @@ export class KpiCard extends LitElement {
       color: var(--st-color-text-muted);
     }
 
-    :host([hero]) ::slotted(st-chip) {
-      background: color-mix(in oklch, var(--st-color-on-solid) 18%, transparent);
-      color: var(--st-color-on-solid);
-    }
-
     :host([hero]) .sub {
       color: var(--st-color-on-solid);
       opacity: 0.85;
@@ -128,12 +131,14 @@ export class KpiCard extends LitElement {
       margin-top: var(--st-space-14);
     }
 
-    .chips:empty {
+    .chips:empty,
+    .footer:empty {
       display: none;
     }
 
-    .footer:empty {
-      display: none;
+    :host([hero]) ::slotted(st-chip) {
+      background: color-mix(in oklch, var(--st-color-on-solid) 18%, transparent);
+      color: var(--st-color-on-solid);
     }
   `;
 
@@ -168,17 +173,19 @@ export class KpiCard extends LitElement {
 
   render() {
     return html`
-      <div class="head" part="head">
-        <span class="icon" part="icon"><slot name="icon"></slot></span>
-        <span part="label">${this.label}</span>
+      <div class="card" part="card">
+        <div class="head" part="head">
+          <span class="icon" part="icon"><slot name="icon"></slot></span>
+          <span part="label">${this.label}</span>
+        </div>
+        <div class="value" part="value">
+          <span>${this.value}</span>
+          ${this.unit ? html`<span class="unit" part="unit">${this.unit}</span>` : nothing}
+        </div>
+        ${this.sub ? html`<div class="sub" part="sub">${this.sub}</div>` : nothing}
+        <div class="chips" part="chips"><slot name="chips"></slot></div>
+        <div class="footer" part="footer"><slot name="footer"></slot></div>
       </div>
-      <div class="value" part="value">
-        <span>${this.value}</span>
-        ${this.unit ? html`<span class="unit" part="unit">${this.unit}</span>` : ''}
-      </div>
-      ${this.sub ? html`<div class="sub" part="sub">${this.sub}</div>` : ''}
-      <div class="chips" part="chips"><slot name="chips"></slot></div>
-      <div class="footer" part="footer"><slot name="footer"></slot></div>
     `;
   }
 }

@@ -6,7 +6,8 @@ import { fontFamilyStyles } from '../shared/styles';
 /**
  * A calendar date tile: a month band over a large day number, as used for due dates. `tone`
  * colours the month band: `default` for a neutral date, `warning` for due soon, `danger` for
- * overdue.
+ * overdue. The tile's box sits on an inner element, so an outer page's CSS reset can't remove
+ * its border.
  */
 @customElement('st-date-tile')
 export class DateTile extends LitElement {
@@ -15,6 +16,11 @@ export class DateTile extends LitElement {
 
     :host {
       display: inline-flex;
+      flex: none;
+    }
+
+    .tile {
+      display: flex;
       flex-direction: column;
       align-items: stretch;
       width: 52px;
@@ -23,7 +29,6 @@ export class DateTile extends LitElement {
       background: var(--st-color-surface);
       overflow: hidden;
       text-align: center;
-      flex: none;
     }
 
     .month {
@@ -69,6 +74,6 @@ export class DateTile extends LitElement {
   tone: 'default' | 'warning' | 'danger' = 'default';
 
   render() {
-    return html`<span class="month" part="month">${this.month}</span><span class="day" part="day">${this.day}</span>`;
+    return html`<div class="tile" part="tile"><span class="month" part="month">${this.month}</span><span class="day" part="day">${this.day}</span></div>`;
   }
 }
