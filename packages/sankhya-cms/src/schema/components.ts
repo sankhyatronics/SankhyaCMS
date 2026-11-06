@@ -17,6 +17,7 @@ export const componentTags = {
     FeatureItem: 'st-feature-item',
     FeatureSplit: 'st-feature-split',
     FeaturesSection: 'st-features-section',
+    Flow: 'st-flow',
     Footer: 'st-footer',
     Header: 'st-header',
     Hero: 'st-hero',
@@ -34,6 +35,8 @@ export const componentTags = {
     Section: 'st-section',
     Select: 'st-select',
     Stats: 'st-stats',
+    Steps: 'st-steps',
+    TagStrip: 'st-tag-strip',
     Testimonials: 'st-testimonials'
 } as const;
 

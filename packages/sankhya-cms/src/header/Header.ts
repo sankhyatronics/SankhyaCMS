@@ -8,18 +8,13 @@ import type { LanguageChangedEventDetail } from './HeaderEvents';
 /**
  * The app-shell header bar — brand (image + title, or title alone) on the left, a `slot="menu"`
  * for primary nav (e.g. `st-dropdown`/`st-menu-grid` mega-menus, or plain links) taking the
- * middle, and a `slot="utility"` for account/app-switcher/theme controls on the right. Ported
- * from `SankhyaUI`'s React `Header` (a separate, unrelated marketing-site project) to this
- * package's Lit conventions and this workspace's actual needs — that source component takes an
- * `imageSrc` logo with no text fallback, but none of this suite's apps has a logo image today, so
- * `title` is the primary brand prop here and `brand-image-url` is optional, mirroring
- * `st-app-header`'s own brand/title split (this component's slotted-menu/utility shape is a
- * deliberately different, more generic surface than `st-app-header`'s fixed nav-links/user-menu
- * props — pick whichever fits a given app's header).
+ * middle, and a `slot="utility"` for account/app-switcher/theme controls on the right. `title` is
+ * the primary brand prop; `brand-image-url` is optional. For a fixed nav-links/user-menu header,
+ * use `st-app-header` instead.
  *
- * Layout follows the source's `Header.css`: the menu starts 4rem after the brand, the utility
- * controls sit after a vertical divider, and below `BREAKPOINT_TABLET` (900px here; 768px in the
- * source) `menu`/`utility` collapse behind a hamburger toggle into a full-screen layer under the
+ * Layout: the menu starts 4rem after the brand, the utility
+ * controls sit after a vertical divider, and below `BREAKPOINT_TABLET` (900px) `menu`/`utility`
+ * collapse behind a hamburger toggle into a full-screen layer under the
  * toggle (closes on Escape or a click inside it), where the menu's `st-dropdown`s are switched to
  * `inline` so they open in the flow — the same two slotted elements just get repositioned by CSS
  * (`.mobile-panel`'s `display: contents` at desktop width vs. a real fixed-position box below
@@ -30,9 +25,7 @@ import type { LanguageChangedEventDetail } from './HeaderEvents';
  * "🇮🇳 India Edition"); unlike `menu`/`utility` it stays in the bar at every width.
  *
  * Also carries an optional built-in language switcher (`languages`/`currentLanguageCode`, fires
- * `language-change`) — ported from `st-app-header`'s own implementation verbatim rather than
- * rebuilt, since the source `Header`'s reference story shows an equivalent flag/language `Select`
- * as a first-class header utility. Hidden entirely when `languages` has fewer than two entries.
+ * `language-change`). Hidden entirely when `languages` has fewer than two entries.
  * This component has no translation logic itself; the consuming app owns what a language `code`
  * means and which content it re-renders in response.
  *
@@ -53,8 +46,8 @@ export class Header extends LitElement {
       align-items: center;
       /* The containing block of an st-dropdown[mega] panel, which spans the bar. */
       position: relative;
-      /* Spacing between brand, menu and utility controls is the rows' own margins (SankhyaUI's
-         layout), not a flex gap. */
+      /* Spacing between brand, menu and utility controls is the rows' own margins, not a
+         flex gap. */
       gap: 0;
       /* !important on the box-model properties only: a shadow host's own :host rule always loses
        * to ANY rule the consuming page has for the same property on that element, regardless of
@@ -207,7 +200,7 @@ export class Header extends LitElement {
       display: contents;
     }
 
-    /* Desktop layout from SankhyaUI's Header: the menu starts 4rem after the brand and takes the
+    /* Desktop layout: the menu starts 4rem after the brand and takes the
        free width; the utility controls sit after a vertical divider. Between 901px and 1200px the
        gaps tighten so the menu still fits down to the 900px hamburger breakpoint. */
     .menu-row {
@@ -330,7 +323,7 @@ export class Header extends LitElement {
       color: var(--st-color-accent-text);
     }
 
-    /* Hamburger layout from SankhyaUI's Header: a full-screen layer under the toggle, menu above
+    /* Hamburger layout: a full-screen layer under the toggle, menu above
        the utility controls, the menu's dropdowns opening in the flow (see syncInlineDropdowns). */
     @media (max-width: ${BREAKPOINT_TABLET}px) {
       :host {
@@ -555,7 +548,7 @@ export class Header extends LitElement {
   private inlinedDropdowns = new Set<HTMLElement & { inline: boolean; open: boolean }>();
 
   /** While the hamburger layout is on, the dropdowns in the header open in the flow of the
-   * full-screen panel instead of floating over it (SankhyaUI's touch-device layout). */
+   * full-screen panel instead of floating over it (the touch-device layout). */
   private syncInlineDropdowns = (): void => {
     const collapsed = this.compact || !!this.narrowQuery?.matches;
     const dropdowns = Array.from(this.querySelectorAll('st-dropdown')) as (HTMLElement & { inline: boolean; open: boolean })[];

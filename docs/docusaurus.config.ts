@@ -24,8 +24,9 @@ const config: Config = {
     }
   },
 
-  url: process.env.DOCS_URL ?? 'https://sankhyaui.sankhyatronics.com',
-  baseUrl: '/',
+  // Served from the Sankhyatronics docs hub, under /sankhya-cms/ (the hub's root lists every product's docs).
+  url: process.env.DOCS_URL ?? 'https://docs.sankhyatronics.com',
+  baseUrl: process.env.DOCS_BASE_URL ?? '/sankhya-cms/',
   organizationName: 'sankhyatronics',
   projectName: 'SankhyaCMS',
   onBrokenLinks: 'throw',
@@ -49,11 +50,22 @@ const config: Config = {
       logo: { alt: 'Sankhya CMS', src: 'img/logo.svg' },
       items: [
         { type: 'docSidebar', sidebarId: 'docsSidebar', position: 'left', label: 'Docs' },
+        { href: 'https://docs.sankhyatronics.com/', label: 'All docs', position: 'left', target: '_self' },
+        { href: 'https://docs.sankhyatronics.com/sankhya-cms/storybook/', label: 'Storybook', position: 'left', target: '_self' },
         { label: `v${pkg.version}`, position: 'right', href: 'https://www.npmjs.com/package/@sankhyatronics/sankhya-cms' },
         { href: 'https://github.com/sankhyatronics/SankhyaCMS', label: 'GitHub', position: 'right' }
       ]
     },
     footer: {
+      links: [
+        {
+          title: 'Sankhya CMS',
+          items: [
+            { label: 'Sankhyatronics docs', href: 'https://docs.sankhyatronics.com/' },
+            { label: 'Product page', href: 'https://sankhyatronics.com/sankhya-cms' }
+          ]
+        }
+      ],
       copyright: `Copyright © ${new Date().getFullYear()} Sankhyatronics Solutions Private Limited.`
     },
     prism: {

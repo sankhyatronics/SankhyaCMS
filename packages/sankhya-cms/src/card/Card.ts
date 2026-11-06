@@ -4,10 +4,9 @@ import { customElement, property } from 'lit/decorators.js';
 import { controlBaseStyles, cardShellStyles, fontFamilyStyles } from '../shared/styles';
 
 /**
- * A surfaced container — content goes in the default slot. Ports `SankhyaUI`'s React `Card`
- * (`variant`, `padding`, `elevation`, `hoverable`, `inverted`); `onClick` is just a native `click`
- * listener on the element. `padding` takes `none | small | medium | large` (the source's
- * `sm|md|lg`, spelled like `paddingScaleStyles`); `elevation` takes `none | sm | md | lg`.
+ * A surfaced container — content goes in the default slot. Attributes: `variant`, `padding`,
+ * `elevation`, `hoverable`, `inverted`; a click handler is just a native `click` listener on the
+ * element. `padding` takes `none | small | medium | large`; `elevation` takes `none | sm | md | lg`.
  */
 @customElement('st-card')
 export class Card extends LitElement {

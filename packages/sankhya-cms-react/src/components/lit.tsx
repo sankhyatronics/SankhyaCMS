@@ -56,6 +56,9 @@ import { Section as SectionElement } from '@sankhyatronics/sankhya-cms/section';
 import { Select as SelectElement } from '@sankhyatronics/sankhya-cms/select';
 import type { SelectChangedEventDetail } from '@sankhyatronics/sankhya-cms/select';
 import { Stats as StatsElement } from '@sankhyatronics/sankhya-cms/stats';
+import { Steps as StepsElement } from '@sankhyatronics/sankhya-cms/steps';
+import { TagStrip as TagStripElement } from '@sankhyatronics/sankhya-cms/tag-strip';
+import { Flow as FlowElement } from '@sankhyatronics/sankhya-cms/flow';
 import { Testimonials as TestimonialsElement } from '@sankhyatronics/sankhya-cms/testimonials';
 import type { TestimonialsLinkEventDetail } from '@sankhyatronics/sankhya-cms/testimonials';
 
@@ -70,6 +73,9 @@ export const FeaturesSection = createComponent({ react: React, tagName: 'st-feat
 export const ItemsAccordion = createComponent({ react: React, tagName: 'st-items-accordion', elementClass: ItemsAccordionElement });
 export const MenuGrid = createComponent({ react: React, tagName: 'st-menu-grid', elementClass: MenuGridElement });
 export const Stats = createComponent({ react: React, tagName: 'st-stats', elementClass: StatsElement });
+export const Steps = createComponent({ react: React, tagName: 'st-steps', elementClass: StepsElement });
+export const TagStrip = createComponent({ react: React, tagName: 'st-tag-strip', elementClass: TagStripElement });
+export const Flow = createComponent({ react: React, tagName: 'st-flow', elementClass: FlowElement });
 export const Chip = createComponent({ react: React, tagName: 'st-chip', elementClass: ChipElement });
 export const KpiCard = createComponent({ react: React, tagName: 'st-kpi-card', elementClass: KpiCardElement });
 export const DateTile = createComponent({ react: React, tagName: 'st-date-tile', elementClass: DateTileElement });

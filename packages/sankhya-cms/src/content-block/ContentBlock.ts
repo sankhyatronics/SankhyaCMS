@@ -7,9 +7,8 @@ import '../markdown';
 
 /**
  * A long-form article section: centered title/subtitle, an optional featured image with caption,
- * then Markdown body text. Ports `SankhyaUI`'s React `ContentBlock`. The body comes from
- * `content-src` (a Markdown URL, as in the source) or an inline `content` string (added so the
- * block works without a fetch); `content-src` wins when both are set.
+ * then Markdown body text. The body comes from `content-src` (a Markdown URL) or an inline
+ * `content` string (so the block works without a fetch); `content-src` wins when both are set.
  *
  * @cssprop --st-content-block-padding - Overrides the block's padding.
  */

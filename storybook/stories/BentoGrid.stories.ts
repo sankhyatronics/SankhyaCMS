@@ -45,3 +45,16 @@ export default meta;
 type Story = StoryObj;
 
 export const Default: Story = {};
+
+/** Brand-colour, navy and default cards; the primary card has a button inside it. */
+export const Variants: Story = {
+  args: {
+    title: 'Variants',
+    subtitle: '',
+    items: [
+      { title: 'Primary', description: 'Brand fill with **Markdown** text.', variant: 'primary', colSpan: 2, actionLabel: 'Learn more', href: '#' },
+      { title: 'Dark', description: 'A navy card for emphasis.', variant: 'dark', icon: 'mdi:star' },
+      { title: 'Default', description: 'The standard surface.', icon: 'mdi:palette' }
+    ]
+  }
+};

@@ -6,12 +6,16 @@ import { ctaLinkStyles, sectionSubtitleStyles, sectionTitleStyles } from '../sha
 import type { HeroActionEventDetail } from '../hero/HeroEvents';
 
 /**
- * Rounded call-to-action banner (title, subtitle, one outlined button) on a dark panel or a
- * background image. Port of `SankhyaUI`'s React `PromoBanner`; the button fires an `action` event
- * (detail `{ href }`, empty unless set) in place of `onAction`.
+ * Rounded call-to-action banner (title, subtitle, one or two outlined buttons) on a dark panel or a
+ * background image. The buttons fire an `action` event
+ * (detail `{ href }`, empty unless set; the secondary button adds `kind: 'secondary'`).
+ * `onAction`. `variant="accent"` fills the banner with the brand colour.
  *
+ * @fires action - Detail `{ href, kind? }`. `kind` is `secondary` for the second button only.
  * @cssprop --st-promo-banner-margin - Overrides the banner's margin.
  * @cssprop --st-promo-banner-padding - Overrides the banner's padding.
+ * @csspart action - The primary button.
+ * @csspart secondary-action - The second button.
  */
 @customElement('st-promo-banner')
 export class PromoBanner extends LitElement {
@@ -34,6 +38,17 @@ export class PromoBanner extends LitElement {
       color: var(--st-color-on-solid);
       text-align: center;
       ${rootFontFamilyStyles}
+    }
+
+    :host([variant='accent']) {
+      background-color: var(--st-color-accent);
+      color: var(--st-cms-on-dark);
+    }
+
+    :host([variant='accent']) .cta:not(.secondary) {
+      background: var(--st-cms-on-dark);
+      border-color: transparent;
+      color: var(--st-cms-navy);
     }
 
     :host([inverted]) {
@@ -65,6 +80,10 @@ export class PromoBanner extends LitElement {
     }
 
     .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--st-space-12);
       margin-top: var(--st-space-16);
     }
 
@@ -79,6 +98,11 @@ export class PromoBanner extends LitElement {
       transform: scale(1.05);
     }
 
+    .cta:focus-visible {
+      outline: var(--st-focus-ring);
+      outline-offset: 2px;
+    }
+
     @media (max-width: 768px) {
       :host {
         width: auto;
@@ -86,7 +110,10 @@ export class PromoBanner extends LitElement {
         padding: var(--st-promo-banner-padding, 60px var(--st-space-24)) !important;
         border-radius: var(--st-radius-lg);
       }
-      .actions,
+      .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
       .cta {
         width: 100%;
       }
@@ -114,6 +141,18 @@ export class PromoBanner extends LitElement {
   @property({ type: String, attribute: 'image-src' })
   imageSrc = '';
 
+  /** Label of a second, outlined button next to the first. */
+  @property({ type: String, attribute: 'secondary-action-label' })
+  secondaryActionLabel = '';
+
+  /** Target of the second button, sent in the `action` event detail. */
+  @property({ type: String, attribute: 'secondary-href' })
+  secondaryHref = '';
+
+  /** `default` is the dark panel; `accent` fills the banner with the brand colour and makes the first button white. */
+  @property({ type: String, reflect: true })
+  variant: 'default' | 'accent' = 'default';
+
   @property({ type: Boolean, reflect: true })
   inverted = false;
 
@@ -127,15 +166,30 @@ export class PromoBanner extends LitElement {
     );
   };
 
+  private onSecondaryAction = (): void => {
+    this.dispatchEvent(
+      new CustomEvent<HeroActionEventDetail>('action', {
+        detail: { href: this.secondaryHref, kind: 'secondary' },
+        bubbles: true,
+        composed: true
+      })
+    );
+  };
+
   render() {
     return html`
       <div class="container" part="container">
         <h2 class="title" part="title">${this.title}</h2>
         ${this.subtitle ? html`<p class="subtitle" part="subtitle">${this.subtitle}</p>` : nothing}
         <slot></slot>
-        ${this.actionLabel
+        ${this.actionLabel || this.secondaryActionLabel
           ? html`<div class="actions" part="actions">
-              <button class="cta" part="action" type="button" @click=${this.onAction}>${this.actionLabel}</button>
+              ${this.actionLabel
+                ? html`<button class="cta" part="action" type="button" @click=${this.onAction}>${this.actionLabel}</button>`
+                : nothing}
+              ${this.secondaryActionLabel
+                ? html`<button class="cta secondary" part="secondary-action" type="button" @click=${this.onSecondaryAction}>${this.secondaryActionLabel}</button>`
+                : nothing}
             </div>`
           : nothing}
       </div>

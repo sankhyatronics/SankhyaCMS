@@ -88,7 +88,7 @@ for (const { declaration: d } of elements) {
     lines.push('');
   }
 
-  lines.push('See the live examples in [Storybook](https://sankhyaui-stories.sankhyatronics.com).', '');
+  lines.push('See the live examples in [Storybook](https://docs.sankhyatronics.com/sankhya-cms/storybook).', '');
   fs.writeFileSync(path.join(outDir, `${slug}.md`), lines.join('\n'));
   rows.push({ tag, slug, jsonType, summary: (d.description ?? '').split(/\n\s*\n/)[0] });
 }

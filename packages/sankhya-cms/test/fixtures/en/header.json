@@ -172,14 +172,14 @@
                         "children": [
                             {
                                 "type": "MegaMenuColumn",
-                                "id": "products-column-sankhya-ui",
+                                "id": "products-column-sankhya-cms",
                                 "variant": "accent",
-                                "heading": "Sankhya UI",
-                                "description": "An open-source component library for headless CMS.",
-                                "ctaLabel": "Visit Sankhya UI",
-                                "ctaHref": "https://sankhyaui.sankhyatronics.com",
+                                "heading": "Sankhya CMS",
+                                "description": "Open-source web components for JSON-driven portals.",
+                                "ctaLabel": "Explore Sankhya CMS",
+                                "ctaHref": "https://docs.sankhyatronics.com/sankhya-cms",
                                 "children": [
-                                    { "type": "MenuItem", "id": "products-sankhya-ui-docs", "variant": "link", "title": "Documentation", "href": "https://sankhyaui.sankhyatronics.com", "target": "_blank" }
+                                    { "type": "MenuItem", "id": "products-sankhya-cms-docs", "variant": "link", "title": "Documentation", "href": "https://docs.sankhyatronics.com/sankhya-cms", "target": "_blank" }
                                 ]
                             },
                             {

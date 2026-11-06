@@ -15,6 +15,7 @@ import { sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-sty
  * @cssprop --st-section-padding-inline - Overrides the left/right padding (not with `width="full"`).
  * @csspart inner - The width-limited content box.
  * @csspart header - The heading block.
+ * @csspart content - The wrapper around the slot (the grid when `columns` is 2).
  */
 @customElement('st-section')
 export class Section extends LitElement {
@@ -88,6 +89,18 @@ export class Section extends LitElement {
       max-width: none;
     }
 
+    /* columns="2": the slotted children sit in two equal columns; they stack below 720px. */
+    .content {
+      display: block;
+    }
+
+    :host([columns='2']) .content {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--st-space-48);
+      align-items: start;
+    }
+
     .header {
       margin-bottom: var(--st-space-48);
     }
@@ -143,6 +156,13 @@ export class Section extends LitElement {
       color: color-mix(in oklch, var(--st-color-on-solid) 80%, transparent);
     }
 
+    @media (max-width: 720px) {
+      :host([columns='2']) .content {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--st-space-24);
+      }
+    }
+
     @media (max-width: 768px) {
       :host {
         --st-section-space-l: 3.5rem;
@@ -178,6 +198,10 @@ export class Section extends LitElement {
   @property({ type: String, reflect: true })
   width: 'contained' | 'narrow' | 'full' = 'contained';
 
+  /** Columns for the slotted children: `1` (default, stacked) or `2` (two equal columns, stacked again below 720px). */
+  @property({ type: Number, reflect: true })
+  columns: 1 | 2 = 1;
+
   /** Alignment of the heading. */
   @property({ type: String, reflect: true, attribute: 'text-alignment' })
   textAlignment: 'left' | 'center' = 'left';
@@ -193,7 +217,9 @@ export class Section extends LitElement {
               ${this.subtitle ? html`<p class="subtitle" part="subtitle">${this.subtitle}</p>` : nothing}
             </div>`
           : nothing}
-        <slot></slot>
+        <div class="content" part="content">
+          <slot></slot>
+        </div>
       </div>
     `;
   }

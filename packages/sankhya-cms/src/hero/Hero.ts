@@ -1,24 +1,33 @@
-import { LitElement, css, html, nothing } from 'lit';
+import { LitElement, css, html, nothing, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 import { controlBaseStyles, rootFontFamilyStyles } from '../shared/styles';
 import { ctaLinkStyles, paddingScaleStyles } from '../shared/section-styles';
 import type { HeroActionEventDetail } from './HeroEvents';
 
+const HIGHLIGHT_ICON = svg`<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>`;
+
 /**
  * Full-width hero banner: background image with a darkening overlay, optional eyebrow, title,
- * optional subtitle and up to two call-to-action links. Port of `SankhyaUI`'s React `Hero`; the
- * framer-motion entrance is redone as CSS keyframes (skipped under `prefers-reduced-motion`).
+ * optional subtitle and up to two call-to-action links. The entrance animation is CSS keyframes
+ * (skipped under `prefers-reduced-motion`).
  *
  * `size`, `content-position` and `overlay="gradient"` give the large editorial layout (copy on the
  * lower left over a gradient that darkens towards it) used by enterprise marketing heroes; the
  * defaults keep the original centered banner. Put several heroes in an `st-carousel` with
  * `indicator-style="tabs"` for a tabbed hero carousel.
  *
+ * `badge` is a pill above the title; `highlights` is a row of check-marked points under the buttons.
+ * `layout="split"` swaps the background for a two-column layout: copy on one side, `image-src` as an
+ * `<img>` (alt from `image-alt`) on the other, on normal page colours with no overlay.
+ *
  * @fires action - Cancelable, before navigating. Detail `{ href, kind }`, `kind` being `primary` or `secondary`.
  * @cssprop --st-hero-text-color - Text colour over the image.
  * @cssprop --st-hero-min-height - Minimum height when `size` is `large` (default `640px`).
  * @csspart eyebrow - The small label above the title.
+ * @csspart badge - The pill above the title.
+ * @csspart highlights - The row of check-marked points.
+ * @csspart image - The image in `layout="split"`.
  * @csspart secondary-action - The outlined second button.
  */
 @customElement('st-hero')
@@ -230,6 +239,117 @@ export class Hero extends LitElement {
       display: none;
     }
 
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--st-space-8);
+      margin: 0;
+      padding: 6px 14px;
+      border: 1px solid var(--st-color-border);
+      border-radius: var(--st-radius-full);
+      background: var(--st-color-surface);
+      color: var(--st-color-text-strong);
+      font-size: var(--st-text-sm);
+      font-weight: var(--st-font-weight-bold);
+      letter-spacing: var(--st-tracking-wider);
+      line-height: 1.2;
+      text-transform: uppercase;
+      animation: st-hero-fade 0.8s 0.2s ease-out backwards;
+    }
+
+    .badge::before {
+      content: '';
+      flex: none;
+      width: 8px;
+      height: 8px;
+      border-radius: var(--st-radius-circle);
+      background: var(--st-cms-highlight);
+    }
+
+    .highlights {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--st-space-12) var(--st-space-24);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      animation: st-hero-fade 0.8s 0.9s ease-out backwards;
+    }
+
+    .highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--st-space-8);
+      font-size: var(--st-text-md);
+      font-weight: var(--st-font-weight-semibold);
+      color: inherit;
+    }
+
+    .highlight svg {
+      flex: none;
+      width: 18px;
+      height: 18px;
+      color: var(--st-cms-highlight);
+    }
+
+    :host([text-alignment='left']) .highlights {
+      justify-content: flex-start;
+    }
+
+    :host([text-alignment='right']) .highlights {
+      justify-content: flex-end;
+    }
+
+    /* layout="split": a two-column block on the page surface; the image replaces the background. */
+    :host([layout='split']) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+      align-items: center;
+      gap: var(--st-space-48);
+      overflow: visible;
+      padding: var(--st-cms-section-padding) var(--st-space-24);
+      background-color: var(--st-color-surface);
+      background-image: none;
+      color: var(--st-color-text-strong);
+      animation: none;
+    }
+
+    :host([layout='split']) .overlay {
+      display: none;
+    }
+
+    :host([layout='split']) .content {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      max-width: 560px;
+      color: var(--st-hero-text-color, var(--st-color-text-strong));
+    }
+
+    :host([layout='split'][text-alignment='left']) .actions {
+      justify-content: flex-start;
+    }
+
+    :host([layout='split']) .highlight svg {
+      color: var(--st-color-accent);
+    }
+
+    .media {
+      margin: 0;
+      min-width: 0;
+    }
+
+    .image {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: var(--st-radius-lg);
+      box-shadow: 0 24px 48px -16px var(--st-shadow-color-lg);
+    }
+
     @media (min-width: 768px) {
       .content { padding: var(--st-space-32); }
     }
@@ -282,6 +402,22 @@ export class Hero extends LitElement {
   @property({ type: String, attribute: 'secondary-href' })
   secondaryHref = '';
 
+  /** Small pill above the title (e.g. "New", "Now available"). */
+  @property({ type: String })
+  badge = '';
+
+  /** Check-marked points shown in a row under the buttons. */
+  @property({ attribute: false })
+  highlights: string[] = [];
+
+  /** `background` (default) puts `image-src` behind the copy; `split` puts copy and image side by side. */
+  @property({ type: String, reflect: true })
+  layout: 'background' | 'split' = 'background';
+
+  /** Alt text of the image in `layout="split"`. Empty marks it as decorative. */
+  @property({ type: String, attribute: 'image-alt' })
+  imageAlt = '';
+
   /** `auto` sizes to the content; `large` is a tall editorial hero (`--st-hero-min-height`); `full` fills the viewport. */
   @property({ type: String, reflect: true })
   size: 'auto' | 'large' | 'full' = 'auto';
@@ -303,7 +439,8 @@ export class Hero extends LitElement {
   } as const;
 
   protected willUpdate(): void {
-    this.style.backgroundImage = this.imageSrc ? `url(${JSON.stringify(this.imageSrc)})` : '';
+    const asBackground = this.layout !== 'split';
+    this.style.backgroundImage = asBackground && this.imageSrc ? `url(${JSON.stringify(this.imageSrc)})` : '';
     this.style.setProperty('--st-hero-position', Hero.positions[this.focalPoint] ?? Hero.positions.center);
   }
 
@@ -327,6 +464,7 @@ export class Hero extends LitElement {
       <div class="overlay" part="overlay"></div>
       <div class="content" part="content">
         ${this.eyebrow ? html`<p class="eyebrow" part="eyebrow">${this.eyebrow}</p>` : nothing}
+        ${this.badge ? html`<p class="badge" part="badge">${this.badge}</p>` : nothing}
         <h1 class="title" part="title">${this.title}</h1>
         ${this.subtitle ? html`<p class="subtitle" part="subtitle">${this.subtitle}</p>` : nothing}
         ${this.actionLabel || this.secondaryActionLabel
@@ -341,8 +479,20 @@ export class Hero extends LitElement {
                 : nothing}
             </div>`
           : nothing}
+        ${this.highlights.length
+          ? html`<ul class="highlights" part="highlights">
+              ${this.highlights.map(
+                (text) => html`<li class="highlight" part="highlight">${HIGHLIGHT_ICON}<span>${text}</span></li>`
+              )}
+            </ul>`
+          : nothing}
         <slot></slot>
       </div>
+      ${this.layout === 'split' && this.imageSrc
+        ? html`<figure class="media" part="media">
+            <img class="image" part="image" src=${this.imageSrc} alt=${this.imageAlt} />
+          </figure>`
+        : nothing}
     `;
   }
 }

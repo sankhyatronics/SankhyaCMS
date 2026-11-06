@@ -31,6 +31,9 @@ import {
     Section,
     Select,
     Stats,
+    Steps,
+    TagStrip,
+    Flow,
     Testimonials
 } from '../lit';
 
@@ -52,6 +55,9 @@ export const baseComponents = {
     BentoGrid,
     Footer,
     Stats,
+    Steps,
+    TagStrip,
+    Flow,
     PromoBanner,
     Testimonials,
     Select,

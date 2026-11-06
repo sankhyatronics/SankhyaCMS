@@ -1,16 +1,14 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import DOMPurify from 'dompurify';
-import { marked } from 'marked';
 
 import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
+import { renderMarkdown } from '../shared/markdown';
 import type { MarkdownErrorEventDetail } from './MarkdownEvents';
 
 /**
  * Renders Markdown (GFM, single newlines become `<br>`) from either an inline `content` string or
- * a `src` URL it fetches. Ports `SankhyaUI`'s `useMarkdown` hook + `react-markdown` (remark-gfm,
- * remark-breaks); output is sanitized with DOMPurify. `src` wins over `content` when both are set.
+ * a `src` URL it fetches. Output is sanitized with DOMPurify. `src` wins over `content` when both are set.
  * While a fetch is pending it shows "Loading content..."; on failure "Error loading content." and
  * a `markdown-error` event (detail: `{ error }`).
  *
@@ -179,7 +177,6 @@ export class Markdown extends LitElement {
     if (this.error) return html`<div part="error">Error loading content.</div>`;
     const source = this.src ? this.fetched : this.content;
     if (!source) return nothing;
-    const rendered = DOMPurify.sanitize(marked.parse(source, { gfm: true, breaks: true, async: false }));
-    return html`<div part="body">${unsafeHTML(rendered)}</div>`;
+    return html`<div part="body">${unsafeHTML(renderMarkdown(source))}</div>`;
   }
 }

@@ -1,8 +1,10 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import 'iconify-icon';
 
 import { buttonResetStyles, controlBaseStyles, fontFamilyStyles } from '../shared/styles';
+import { renderMarkdown } from '../shared/markdown';
 import {
   reducedMotionStyles,
   sectionHeaderStyles,
@@ -14,11 +16,13 @@ import type { AccordionToggleEventDetail } from './ItemsAccordionEvents';
 export interface AccordionItem {
   id: string;
   title: string;
+  /** Markdown (plain text works too). */
   content: string;
 }
 
 /**
  * A vertical list of collapsible title/content rows; one open at a time unless `allow-multiple`.
+ * Each row's `content` is Markdown, sanitized. `open-first` starts with the first row open.
  *
  * @cssprop --st-items-accordion-padding - Overrides the block's padding.
  */
@@ -128,6 +132,24 @@ export class ItemsAccordion extends LitElement {
       line-height: 1.6;
     }
 
+    .content-inner > :first-child {
+      margin-top: 0;
+    }
+
+    .content-inner > :last-child {
+      margin-bottom: 0;
+    }
+
+    .content-inner p {
+      margin: 0 0 var(--st-space-12);
+    }
+
+    .content-inner a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
     @media (max-width: 768px) {
       :host {
         padding: var(--st-items-accordion-padding, var(--st-space-48) var(--st-space-20)) !important;
@@ -153,7 +175,17 @@ export class ItemsAccordion extends LitElement {
   @property({ type: Boolean, attribute: 'allow-multiple' })
   allowMultiple = false;
 
+  /** Starts with the first row open. Applies when `items` or this flag changes while nothing is open. */
+  @property({ type: Boolean, attribute: 'open-first' })
+  openFirst = false;
+
   @state() private openIds = new Set<string>();
+
+  protected willUpdate(changed: Map<string, unknown>): void {
+    if (this.openFirst && (changed.has('items') || changed.has('openFirst')) && this.openIds.size === 0 && this.items.length) {
+      this.openIds = new Set([this.items[0].id]);
+    }
+  }
 
   private toggle(id: string) {
     const wasOpen = this.openIds.has(id);
@@ -197,7 +229,7 @@ export class ItemsAccordion extends LitElement {
                 </button>
                 <div class="content" id="content-${item.id}" part="content" role="region" ?inert=${!open}>
                   <div class="content-clip">
-                    <div class="content-inner">${item.content}</div>
+                    <div class="content-inner">${unsafeHTML(renderMarkdown(item.content))}</div>
                   </div>
                 </div>
               </div>

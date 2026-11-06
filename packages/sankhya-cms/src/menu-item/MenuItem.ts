@@ -7,15 +7,13 @@ import type { MenuItemSelectEventDetail } from './MenuItemEvents';
 
 /**
  * A single flat nav row — icon (`slot="icon"`) + title + badge on one line, an optional
- * description below — as opposed to `st-menu-grid-item`'s card for a multi-column grid. A 1:1
- * port of `SankhyaUI`'s React `MenuItem` (`SankhyaCMS/SankhyaUI/src/components/Menu`): same
- * markup and CSS, with its `motion` effects redone in CSS — nudges right and scales to 1.01 on
- * hover / 0.99 while pressed, the icon tilts on hover, the badge pops in, the description fades
- * in. Colors come from the suite theme rather than per-item utility classes.
+ * description below — as opposed to `st-menu-grid-item`'s card for a multi-column grid. Effects
+ * are CSS: nudges right and scales to 1.01 on hover / 0.99 while pressed, the icon tilts on hover,
+ * the badge pops in, the description fades in. Colors come from the suite theme rather than
+ * per-item utility classes.
  *
  * Renders a real `<a href>` but fires a *cancelable* `menu-item-select` event (detail: `{ href }`)
- * before navigating — a host doing client-side routing calls `event.preventDefault()` on it (the
- * source used react-router's `Link` here; the suite apps have no router).
+ * before navigating — a host doing client-side routing calls `event.preventDefault()` on it.
  *
  * @slot icon - The row's icon, sized to `icon-size` (16px, or 14px when `compact`).
  * @cssprop --st-menu-item-icon-size - Width and height of the slotted icon; `icon-size` sets it.

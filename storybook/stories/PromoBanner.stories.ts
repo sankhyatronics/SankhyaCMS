@@ -23,3 +23,14 @@ export const Default: Story = {};
 export const Inverted: Story = { args: {
     "inverted": true
   } };
+
+/** Brand-colour banner with a white primary button. */
+export const Accent: Story = { args: {
+    "variant": "accent"
+  } };
+
+/** Two outlined buttons. */
+export const TwoActions: Story = { args: {
+    "secondaryActionLabel": "See pricing",
+    "secondaryHref": "#pricing"
+  } };

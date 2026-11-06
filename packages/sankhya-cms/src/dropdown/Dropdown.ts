@@ -7,23 +7,20 @@ import type { DropdownToggleEventDetail } from './DropdownEvents';
 
 /**
  * A labeled trigger + slotted dropdown panel — nav menus (typically holding an `st-menu-grid`),
- * action menus, anything "click a trigger, show content under it". A 1:1 port of `SankhyaUI`'s
- * React `Dropdown` (`SankhyaCMS/SankhyaUI/src/components/Dropdown`): same markup
+ * action menus, anything "click a trigger, show content under it". Markup
  * (`.menu` > `.menu-title` + `.menu-dropdown`), sizes, 0.3s slide/fade, and behavior —
  *
- * - only one dropdown is open at a time (the source's `DropdownProvider`, built in here, so no
- *   provider element is needed);
+ * - only one dropdown is open at a time (a shared provider is built in, so no provider element
+ *   is needed);
  * - a mousedown outside, Escape, or a click inside the panel closes it;
  * - an `href` trigger toggles the panel when it has content, and is a plain link when it doesn't;
  * - `inline` opens the panel in the flow, the source's `.touch-device` layout.
  *
- * Colors and the panel's surface come from the suite theme (the source left those to the
- * consumer's `className`/`itemGroupClassName` utility classes). Two source rules are left out
- * because they break existing suite uses (`st-source-bar`'s site/library menus): the 100vw panel
- * at <=768px (overflows the screen from wherever the trigger sits; the header uses `inline`
- * instead) and `overflow: hidden` on slotted children (clips their focus rings). Suite additions
- * kept on top: `align`, `active`, `disabled`, `inline`, and the `dropdown-toggle` event — plus
- * `mega` and `open-on-hover` for an okta.com-style mega menu (see `st-mega-menu`).
+ * Colors and the panel's surface come from the suite theme. The panel is never 100vw wide at
+ * <=768px (it would overflow the screen from wherever the trigger sits; use `inline` in headers
+ * instead), and slotted children are not clipped with `overflow: hidden` (that would cut off their
+ * focus rings). Other attributes: `align`, `active`, `disabled`, `inline`, the `dropdown-toggle`
+ * event, and `mega` plus `open-on-hover` for a mega menu (see `st-mega-menu`).
  *
  * @cssprop --st-mega-menu-max-width - Maximum width of a `mega` panel (default `1400px`).
  * @cssprop --st-mega-menu-inset - Minimum space between a `mega` panel and the header's sides (default `1rem`).

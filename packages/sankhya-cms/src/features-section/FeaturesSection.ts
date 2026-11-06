@@ -14,10 +14,10 @@ export interface FeatureItemData {
 }
 
 /**
- * A titled grid of feature tiles. Ports `SankhyaUI`'s React `FeaturesSection`: tiles come from the
- * `items` property, from slotted `st-feature-item` elements (the source's `children`), or both
- * (slotted first). `columns` sets the grid width (default 2; one column below 768px). `inverted`
- * is passed on to the `items` tiles; slotted tiles need their own `inverted` attribute.
+ * A titled grid of feature tiles. Tiles come from the `items` property, from slotted
+ * `st-feature-item` elements, or both (slotted first). `columns` sets the grid width (default 2;
+ * one column below 768px). `inverted` is passed on to the `items` tiles; slotted tiles need their
+ * own `inverted` attribute.
  *
  * @cssprop --st-features-section-padding - Overrides the section's padding.
  */

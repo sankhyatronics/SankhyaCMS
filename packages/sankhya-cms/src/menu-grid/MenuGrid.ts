@@ -6,9 +6,8 @@ import { controlBaseStyles } from '../shared/styles';
 /**
  * A responsive grid of `st-menu-grid-item`s — the "rich" nav-menu layout (icon + title +
  * description per entry, arranged in columns), typically slotted into `st-dropdown`'s default
- * slot. A 1:1 port of `SankhyaUI`'s React `MenuGrid` (`SankhyaCMS/SankhyaUI/src/components/Menu`):
- * same markup (`.menu-grid-container` > `.menu-grid.columns-N`), gap and breakpoints (768px: 2–4
- * columns → 2; 480px: everything → 1; a 1-column grid stays 1).
+ * slot. Markup is `.menu-grid-container` > `.menu-grid.columns-N`; breakpoints: at 768px, 2–4
+ * columns become 2; at 480px, everything becomes 1 (a 1-column grid stays 1).
  */
 @customElement('st-menu-grid')
 export class MenuGrid extends LitElement {

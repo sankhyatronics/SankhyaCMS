@@ -4,10 +4,8 @@ import { customElement, property } from 'lit/decorators.js';
 import { buttonResetStyles, controlBaseStyles, rootFontFamilyStyles } from '../shared/styles';
 
 /**
- * A small, icon-only action button — ported from `SankhyaUI`'s React `IconButton` (a separate,
- * unrelated marketing-site project; that source takes an iconify string `icon` prop, this package
- * has no iconify dependency, so the icon is default-slotted content instead, same convention as
- * `st-dropdown`/`st-menu-grid-item`'s `slot="icon"`).
+ * A small, icon-only action button. The icon is default-slotted content (the package has no icon
+ * library dependency), the same convention as `st-dropdown`/`st-menu-grid-item`'s `slot="icon"`.
  *
  * Fires a plain native `click` — no custom event, since a caller just wants an ordinary button.
  */

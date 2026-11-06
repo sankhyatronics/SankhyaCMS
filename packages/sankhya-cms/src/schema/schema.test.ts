@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { componentTags } from './components';
 import { validateNode, validatePage } from './validate';
 
 const fixtures = path.join(import.meta.dirname, '../../test/fixtures');
@@ -31,4 +32,18 @@ describe('validator', () => {
     it('walks children', () =>
         expect(validateNode({ type: 'Header', children: [{ type: 'Nope' }] })).toEqual(['node.children[0]: unknown type "Nope"']));
     it('accepts custom types through a predicate', () => expect(validateNode({ type: 'Mine' }, 'node', t => t === 'Mine')).toEqual([]));
+});
+
+describe('components added in 0.2', () => {
+    it.each([
+        ['Steps', 'st-steps'],
+        ['TagStrip', 'st-tag-strip'],
+        ['Flow', 'st-flow']
+    ])('maps %s to %s', (type, tag) => expect(componentTags[type as keyof typeof componentTags]).toBe(tag));
+
+    it('validates the new types with their props', () => {
+        expect(validateNode({ type: 'Steps', items: [{ title: 'Plan', description: 'First' }], highlightLast: true })).toEqual([]);
+        expect(validateNode({ type: 'TagStrip', label: 'Works with', items: ['AWS'], inverted: true })).toEqual([]);
+        expect(validateNode({ type: 'Flow', nodes: [{ label: 'A', variant: 'accent' }, { label: 'B' }] })).toEqual([]);
+    });
 });

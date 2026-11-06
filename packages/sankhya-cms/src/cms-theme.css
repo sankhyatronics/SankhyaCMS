@@ -18,6 +18,13 @@
      stays dark there too. */
   --st-cms-band-dark-bg: var(--st-color-text-strong);
   --st-cms-band-dark-color: var(--st-color-on-solid);
+
+  /* Fixed brand colours for highlight surfaces (steps' last card, flow's accent node, bento "dark"
+     cards). They do not swap in the dark theme: navy and cyan read well on both page surfaces.
+     --st-cms-on-dark is the light text placed on them. */
+  --st-cms-navy: #011d41;
+  --st-cms-highlight: #49cce0;
+  --st-cms-on-dark: #ffffff;
 }
 
 :root.dark {
