@@ -27,7 +27,10 @@ export interface FlowNode {
 export class Flow extends LitElement {
   static styles = css`
     ${controlBaseStyles}
-    ${fontFamilyStyles}
+    /* fontFamilyStyles is a bare declaration: it must sit inside a rule, or it swallows the next one. */
+    :host {
+      ${fontFamilyStyles}
+    }
 
     :host {
       display: block;

@@ -1,8 +1,12 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
+import { MODAL_OPEN_ATTRIBUTE } from '../shared/modal-state';
 import { buttonResetStyles, controlBaseStyles, rootFontFamilyStyles } from '../shared/styles';
 import type { CookieConsentEventDetail, CookieConsentStatus } from './CookieConsentEvents';
+
+/** Host attribute set while a modal is open: the bar is hidden and inert until it closes. */
+const MODAL_HIDDEN_ATTRIBUTE = 'data-st-modal-hidden';
 
 const DEFAULT_STORAGE_KEY = 'sankhya_ui_cookie_consent';
 
@@ -12,6 +16,9 @@ const DEFAULT_STORAGE_KEY = 'sankhya_ui_cookie_consent';
  * `sankhya_ui_cookie_consent`; storage errors are ignored) and renders nothing once a choice
  * exists. Fires `cookie-consent-accept` / `cookie-consent-refuse` (detail `{ status }`). The
  * default slot replaces the message text.
+ *
+ * While a modal is open (`<html data-st-modal-open>`, set by st-quote-dialog) the bar is hidden
+ * (`visibility: hidden`) and inert, and it reappears unchanged when the modal closes.
  *
  * @cssprop --st-cookie-consent-padding - Overrides the bar's padding.
  */
@@ -48,6 +55,10 @@ export class CookieConsent extends LitElement {
       box-shadow: 0 -4px 10px var(--st-shadow-color-sm);
       animation: st-cookie-slide-up 0.3s ease-out;
       ${rootFontFamilyStyles}
+    }
+
+    :host([data-st-modal-hidden]) {
+      visibility: hidden;
     }
 
     .content {
@@ -147,9 +158,27 @@ export class CookieConsent extends LitElement {
   /** The stored choice, or `null` while undecided (the bar is only shown then). */
   @state() private consent: CookieConsentStatus | null = null;
 
+  private modalObserver?: MutationObserver;
+
   connectedCallback(): void {
     super.connectedCallback();
     this.consent = this.readStored();
+    this.modalObserver = new MutationObserver(() => this.syncModalState());
+    this.modalObserver.observe(document.documentElement, { attributes: true, attributeFilter: [MODAL_OPEN_ATTRIBUTE] });
+    this.syncModalState();
+  }
+
+  disconnectedCallback(): void {
+    this.modalObserver?.disconnect();
+    this.modalObserver = undefined;
+    super.disconnectedCallback();
+  }
+
+  /** Hides and disables the bar while a modal is open; the stored choice is untouched. */
+  private syncModalState(): void {
+    const blocked = document.documentElement.hasAttribute(MODAL_OPEN_ATTRIBUTE);
+    this.toggleAttribute(MODAL_HIDDEN_ATTRIBUTE, blocked);
+    this.toggleAttribute('inert', blocked);
   }
 
   private readStored(): CookieConsentStatus | null {

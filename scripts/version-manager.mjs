@@ -7,8 +7,7 @@ const packages = [
   { name: 'sankhya-cms-react', path: './packages/sankhya-cms-react/package.json' },
   { name: 'oxlint-config', path: './tooling/oxlint-config/package.json' },
   { name: 'typescript-config', path: './tooling/typescript-config/package.json' },
-  { name: 'storybook', path: './storybook/package.json' },
-  { name: 'docs', path: './docs/package.json' }
+  { name: 'storybook', path: './storybook/package.json' }
 ];
 
 const newVersion = JSON.parse(readFileSync('./package.json', 'utf8')).version;

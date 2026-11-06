@@ -165,10 +165,19 @@ export class Footer extends LitElement {
       gap: 4px;
     }
 
+    .copyright-line {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 16px;
+      row-gap: 4px;
+    }
+
+    /* No opacity here: it blended the text into the background and fell below WCAG AA (about 3.6:1
+       on a light footer). The link takes the footer's colour, text-muted (5.1:1 on white) or
+       on-solid on an inverted footer. */
     .bottom-text .powered-by {
       font-size: 0.85em;
       font-weight: inherit;
-      opacity: 0.8;
     }
 
     @media (max-width: 1024px) {
@@ -213,6 +222,10 @@ export class Footer extends LitElement {
   /** Overrides the default computed copyright line entirely. */
   @property({ type: String })
   copyright = '';
+
+  /** Legal line (e.g. a trademark notice) shown beside the copyright. Empty hides it. */
+  @property({ type: String, attribute: 'legal-note' })
+  legalNote = '';
 
   @property({ type: String, attribute: 'powered-by' })
   poweredBy = '';
@@ -313,7 +326,7 @@ export class Footer extends LitElement {
         </div>
         <div class="bottom" part="bottom">
           <div class="bottom-text">
-            <span part="copyright">${this.resolvedCopyright}</span>
+            ${this.renderCopyright()}
             ${this.version ? html`<span part="version">v${this.version}</span>` : nothing} ${this.renderPoweredBy()}
           </div>
         </div>
@@ -321,10 +334,17 @@ export class Footer extends LitElement {
     `;
   }
 
+  private renderCopyright() {
+    return html`<div class="copyright-line">
+      <span part="copyright">${this.resolvedCopyright}</span>
+      ${this.legalNote ? html`<span part="legal">${this.legalNote}</span>` : nothing}
+    </div>`;
+  }
+
   render() {
     if (this.isSite) return this.renderSite();
     return html`
-      <span part="copyright">${this.resolvedCopyright}</span>
+      ${this.renderCopyright()}
       ${this.version ? html`<span part="version">v${this.version}</span>` : nothing} ${this.renderPoweredBy()}
     `;
   }

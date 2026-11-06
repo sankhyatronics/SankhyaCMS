@@ -1,29 +1,40 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
-import { sectionHeaderStyles, sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-styles';
+import { renderMarkdown } from '../shared/markdown';
+import { sectionEyebrowStyles, sectionHeaderStyles, sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-styles';
 
 export interface StepItem {
   title: string;
+  /** Plain text, or Markdown when the block has `markdown` set (for inline `code`). */
   description?: string;
+  /** Small pill beside the title (e.g. "Included"). On the highlighted last card it turns cyan. */
+  badge?: string;
 }
 
 /**
  * A numbered process: a responsive grid of cards, each with an automatic "01", "02", ... number, a
  * title and a description. `highlightLast` makes the final card a dark navy call-out, the way
  * enterprise pages close a how-it-works sequence. `inverted` puts the whole block on the dark band.
+ * `variant="band"` sets the block on a white full-width band with hairline top and bottom borders;
+ * the cards sit on a light blue surface and the numbers are large azure.
  *
  * @cssprop --st-steps-padding - Overrides the block's padding.
  * @csspart header - The eyebrow/title/subtitle block.
  * @csspart card - Each step card (an `li`).
  * @csspart number - The step number.
+ * @csspart badge - The pill beside a step's title.
  */
 @customElement('st-steps')
 export class Steps extends LitElement {
   static styles = css`
     ${controlBaseStyles}
-    ${fontFamilyStyles}
+    /* fontFamilyStyles is a bare declaration: it must sit inside a rule, or it swallows the next one. */
+    :host {
+      ${fontFamilyStyles}
+    }
 
     :host {
       display: block;
@@ -48,12 +59,7 @@ export class Steps extends LitElement {
     }
 
     .eyebrow {
-      margin: 0 0 var(--st-space-12);
-      font-size: var(--st-text-sm);
-      font-weight: var(--st-font-weight-bold);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--st-color-text-muted);
+      ${sectionEyebrowStyles}
     }
 
     .title {
@@ -154,6 +160,145 @@ export class Steps extends LitElement {
       color: color-mix(in oklch, var(--st-cms-on-dark) 80%, transparent);
     }
 
+    /* variant="band": a white full-width band with hairline borders; light blue cards, azure numbers.
+       The heading block is left-aligned in a 720px column (label, 36px title, 18px lead). */
+    :host([variant='band']) {
+      padding: 0 !important;
+      background: var(--st-color-surface, #ffffff);
+      border-top: 1px solid var(--st-cms-primary-100);
+      border-bottom: 1px solid var(--st-cms-primary-100);
+    }
+
+    /* The band's section rhythm and gutters sit on the container (inside the shadow root, so a page
+       reset cannot zero them), which is a 1200px box centred on the page. */
+    :host([variant='band']) .container {
+      box-sizing: border-box;
+      /* The side gutter sits inside the box, so the content itself still gets the full container width. */
+      max-width: calc(var(--st-cms-container-max) + 2 * var(--st-space-24));
+      padding: var(--st-cms-section-padding, 5rem) var(--st-space-24);
+    }
+
+    .description p {
+      margin: 0;
+    }
+
+    .description code {
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 13px;
+    }
+
+    :host([variant='band']) .header {
+      max-width: 720px;
+      margin-bottom: var(--st-space-48);
+      text-align: left;
+    }
+
+    :host([variant='band']) .eyebrow {
+      margin-bottom: var(--st-space-12);
+      font-size: 12px;
+      font-weight: var(--st-font-weight-semibold);
+      letter-spacing: 0.05em;
+      color: var(--st-cms-eyebrow, #0c64c5);
+    }
+
+    :host([variant='band']) .title {
+      font-size: 36px;
+      line-height: 1.2;
+      font-weight: var(--st-font-weight-bold);
+    }
+
+    :host([variant='band']) .subtitle {
+      max-width: none;
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--st-cms-text, var(--st-cms-navy-2, #03346b));
+    }
+
+    :host([variant='band']) .card {
+      gap: var(--st-space-12);
+      padding: var(--st-space-24);
+      border: 1px solid var(--st-cms-primary-100);
+      border-radius: 12px;
+      background: var(--st-cms-surface-soft);
+      color: var(--st-cms-text, var(--st-cms-navy-2, #03346b));
+    }
+
+    :host([variant='band']) .number {
+      font-size: 32px;
+      font-weight: var(--st-font-weight-bold);
+      color: var(--st-cms-brand-azure);
+    }
+
+    :host([variant='band']) .card-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: var(--st-font-weight-semibold);
+      line-height: 1.3;
+    }
+
+    :host([variant='band']) .description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--st-cms-text, var(--st-cms-navy-2, #03346b));
+    }
+
+    .title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--st-space-8) var(--st-space-12);
+      margin-top: var(--st-space-8);
+    }
+
+    .title-row .card-title {
+      margin: 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: var(--st-radius-full);
+      background: var(--st-cms-primary-100);
+      color: var(--st-cms-navy);
+      font-size: var(--st-text-xs);
+      font-weight: var(--st-font-weight-bold);
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .card.highlight .badge {
+      background: var(--st-cms-highlight);
+      color: var(--st-cms-navy);
+    }
+
+    /* band: the highlighted card stays a dark call-out (the band's light card rules would hide its
+       white title). Declared last, with the .card.highlight selector, so it wins over the band rules. */
+    :host([variant='band']) .card.highlight {
+      background: var(--st-cms-navy);
+      border-color: var(--st-cms-primary-200);
+      color: var(--st-cms-primary-100);
+    }
+
+    :host([variant='band']) .card.highlight .number {
+      color: var(--st-cms-highlight);
+    }
+
+    :host([variant='band']) .card.highlight .card-title {
+      color: var(--st-cms-on-dark);
+    }
+
+    :host([variant='band']) .card.highlight .description {
+      color: var(--st-cms-primary-100);
+    }
+
+    :host([variant='band']) .badge {
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: var(--st-font-weight-semibold);
+    }
+
     @media (max-width: 600px) {
       :host {
         padding: var(--st-steps-padding, var(--st-space-40) var(--st-space-20)) !important;
@@ -186,6 +331,30 @@ export class Steps extends LitElement {
   @property({ type: Boolean, reflect: true })
   inverted = false;
 
+  /** `default` is the bordered card grid; `band` is a white full-width band with light blue cards. */
+  @property({ type: String, reflect: true })
+  variant: 'default' | 'band' = 'default';
+
+  /** Renders each step's description as Markdown (inline `code`, links). Off by default: descriptions are plain text. */
+  @property({ type: Boolean, reflect: true })
+  markdown = false;
+
+  private renderDescription(step: StepItem) {
+    if (!step.description) return nothing;
+    return this.markdown
+      ? html`<div class="description" part="description">${unsafeHTML(renderMarkdown(step.description))}</div>`
+      : html`<p class="description" part="description">${step.description}</p>`;
+  }
+
+  private renderTitle(step: StepItem) {
+    const title = html`<h3 class="card-title" part="card-title">${step.title}</h3>`;
+    if (!step.badge) return title;
+    return html`<div class="title-row">
+      ${title}
+      <span class="badge" part="badge">${step.badge}</span>
+    </div>`;
+  }
+
   render() {
     const heading = this.eyebrow || this.title || this.subtitle;
     const last = this.items.length - 1;
@@ -203,8 +372,8 @@ export class Steps extends LitElement {
             (step, index) => html`
               <li class="card ${this.highlightLast && index === last ? 'highlight' : ''}" part="card">
                 <span class="number" part="number" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
-                <h3 class="card-title" part="card-title">${step.title}</h3>
-                ${step.description ? html`<p class="description" part="description">${step.description}</p>` : nothing}
+                ${this.renderTitle(step)}
+                ${this.renderDescription(step)}
               </li>
             `
           )}

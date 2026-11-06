@@ -34,3 +34,10 @@ export const TwoActions: Story = { args: {
     "secondaryActionLabel": "See pricing",
     "secondaryHref": "#pricing"
   } };
+
+/** Accent banner with two buttons: the primary is white, the outlined secondary white on the brand fill. */
+export const AccentTwoActions: Story = { args: {
+    "variant": "accent",
+    "secondaryActionLabel": "See pricing",
+    "secondaryHref": "/pricing"
+  } };

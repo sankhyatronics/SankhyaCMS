@@ -10,7 +10,9 @@ Open-source building blocks for JSON-driven portals.
 | Workspace | What it is |
 |---|---|
 | `storybook/` | Storybook for every Lit component; prop/slot/event tables come from `custom-elements.json` |
-| `docs/` | Docusaurus site; component pages are generated from `custom-elements.json` |
+
+
+Documentation lives in the [SankhyaPortals](https://github.com/sankhyatronics/SankhyaPortals) repo (`sankhya-docs/sankhya-cms`) and is published at https://docs.sankhyatronics.com/sankhya-cms/. Its component pages are generated from the `custom-elements.json` shipped in the `@sankhyatronics/sankhya-cms` package.
 
 ## Rules
 

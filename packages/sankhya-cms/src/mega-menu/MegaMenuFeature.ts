@@ -2,6 +2,7 @@ import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
+import { isCurrentPath } from '../shared/nav-path';
 import type { MegaMenuSelectEventDetail } from './MegaMenuEvents';
 
 /**
@@ -212,6 +213,10 @@ export class MegaMenuFeature extends LitElement {
   @property({ type: String, attribute: 'cta-label' })
   ctaLabel = '';
 
+  /** Page path the header is showing; set by `st-header`. A card whose `href` matches gets `aria-current="page"`. */
+  @property({ attribute: false })
+  currentPath = '';
+
   private get isExternal(): boolean {
     return this.href.startsWith('http');
   }
@@ -240,6 +245,7 @@ export class MegaMenuFeature extends LitElement {
         href=${this.href || nothing}
         target=${target}
         rel=${target === '_blank' ? 'noopener noreferrer' : nothing}
+        aria-current=${isCurrentPath(this.href, this.currentPath) ? 'page' : nothing}
         @click=${this.onClick}
       >
         ${overlay && this.logoUrl ? html`<img part="logo" class="logo" src=${this.logoUrl} alt=${this.logoAlt} />` : nothing}

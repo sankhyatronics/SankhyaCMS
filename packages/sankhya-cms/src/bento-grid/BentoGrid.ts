@@ -30,6 +30,19 @@ export interface BentoGridItem {
   variant?: 'default' | 'primary' | 'dark';
   /** With `href`, renders a button-style link inside the card instead of linking the whole card. */
   actionLabel?: string;
+  /**
+   * Small rounded labels. On a full-width card (`colSpan: 4`) they sit in a 3-column grid to the
+   * right of the text; otherwise below it.
+   */
+  chips?: BentoGridChip[];
+  /** `stack` (default) puts the action under the text; `row` puts the text left and the action right. */
+  layout?: 'stack' | 'row';
+}
+
+export interface BentoGridChip {
+  label: string;
+  /** `solid` navy with white text, `soft` light blue, `plain` the surface tint. Default `plain`. */
+  tone?: 'solid' | 'soft' | 'plain';
 }
 
 /**
@@ -37,7 +50,18 @@ export interface BentoGridItem {
  * Descriptions are Markdown. A card links as a whole when it has `href` alone; with `actionLabel`
  * the link becomes a button inside the card.
  *
+ * A card that uses `chips` or `layout` takes the design-system look: a 32px padding, a 40px icon
+ * tile on a light blue (cyan on `primary` and `dark` cards), and on a `primary` card the action is a
+ * white navy-text pill. Cards without those options keep the original look.
+ *
  * @cssprop --st-bento-grid-padding - Overrides the block's padding.
+ * @cssprop --st-bento-card-border - Overrides the colour of the cards' hairline border (default `--st-color-border`).
+ * @cssprop --st-bento-description-color - Colour of a design-system card's description (default `--st-cms-text`).
+ * @cssprop --st-bento-chip-soft-bg - Background of `soft` chips (default `--st-cms-primary-100`).
+ * @cssprop --st-bento-chip-plain-bg - Background of `plain` chips (default `--st-cms-surface-soft`).
+ * @cssprop --st-bento-chip-text - Text colour of non-solid chips (default `--st-cms-text-strong`).
+ * @csspart chips - The list of chips.
+ * @csspart chip - One chip.
  */
 @customElement('st-bento-grid')
 export class BentoGrid extends LitElement {
@@ -89,7 +113,7 @@ export class BentoGrid extends LitElement {
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      border: 1px solid var(--st-color-border);
+      border: 1px solid var(--st-bento-card-border, var(--st-color-border));
       border-radius: var(--st-space-24);
       background: var(--st-color-surface);
       color: inherit;
@@ -148,6 +172,8 @@ export class BentoGrid extends LitElement {
       width: var(--st-size-40);
       height: var(--st-size-40);
       font-size: 24px;
+      background: var(--st-bento-icon-bg, var(--st-color-subtle));
+      color: var(--st-bento-icon-color, var(--st-color-text-muted));
     }
 
     .text {
@@ -272,6 +298,158 @@ export class BentoGrid extends LitElement {
       color: var(--st-cms-navy);
     }
 
+    /* Design-system look, only on cards that use chips or layout (.v2). */
+    .card.v2 .content {
+      padding: var(--st-space-32);
+    }
+
+    .card.v2 .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--st-cms-primary-100);
+      color: var(--st-cms-accent-text, var(--st-cms-brand-navy));
+    }
+
+    :host .card.v2.primary .icon,
+    :host .card.v2.dark .icon {
+      background: var(--st-cms-highlight);
+      color: var(--st-cms-navy);
+    }
+
+    :host .card.v2.primary .icon {
+      background: var(--st-cms-highlight);
+    }
+
+    .card.row .content {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card.row .text {
+      flex: 1 1 360px;
+      padding: 0;
+    }
+
+    .card.row .action {
+      margin-top: 0;
+      align-self: center;
+    }
+
+    .split {
+      width: 100%;
+    }
+
+    .card.v2 .text {
+      display: flex;
+      flex-direction: column;
+      gap: var(--st-space-12);
+    }
+
+    .card.v2 .card-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: var(--st-font-weight-semibold);
+    }
+
+    .card.v2 .card-description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--st-bento-description-color, var(--st-cms-text, var(--st-cms-navy-2, #03346b)));
+    }
+
+    .card.v2 .chip {
+      padding: 12px 6px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    /* The suite card: navy fill, light description, cyan icon tile (set above), white pill. */
+    :host .card.v2.primary {
+      background: var(--st-cms-brand-navy, #2144aa);
+      border-color: var(--st-cms-brand-navy, #2144aa);
+    }
+
+    :host .card.v2.primary .card-description {
+      color: var(--st-cms-primary-100, #e4ebff);
+    }
+
+    :host .card.v2.primary.row .action {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      font-size: 15px;
+      border-radius: var(--st-radius-full);
+      background: var(--st-cms-on-dark);
+      color: var(--st-cms-navy);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
+      gap: var(--st-space-24);
+      align-items: center;
+    }
+
+    .split .text {
+      padding: 0;
+    }
+
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--st-space-8);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      padding: var(--st-space-8) var(--st-space-12);
+      border-radius: var(--st-radius-sm);
+      background: var(--st-bento-chip-plain-bg, var(--st-cms-surface-soft));
+      color: var(--st-bento-chip-text, var(--st-cms-text-strong, var(--st-cms-navy)));
+      font-size: var(--st-text-sm);
+      font-weight: var(--st-font-weight-semibold);
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .chip.solid {
+      background: var(--st-cms-brand-navy);
+      color: var(--st-cms-on-dark);
+    }
+
+    .chip.soft {
+      background: var(--st-bento-chip-soft-bg, var(--st-cms-primary-100));
+      color: var(--st-bento-chip-text, var(--st-cms-text-strong, var(--st-cms-navy)));
+    }
+
+    :host .card.dark .chip.plain {
+      background: var(--st-cms-navy-2);
+      color: var(--st-cms-on-dark);
+    }
+
+    @media (max-width: 1024px) {
+      .split {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .chips {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     .col-1 { grid-column: span 1; }
     .col-2 { grid-column: span 2; }
     .col-3 { grid-column: span 3; }
@@ -318,7 +496,41 @@ export class BentoGrid extends LitElement {
 
   private renderCard(item: BentoGridItem) {
     const variant = item.variant ?? 'default';
-    const classes = `card col-${item.colSpan ?? 1} row-${item.rowSpan ?? 1} ${item.imageSrc ? 'has-image' : ''} ${variant === 'default' ? '' : variant}`;
+    const colSpan = item.colSpan ?? 1;
+    const hasChips = !!item.chips?.length;
+    const styled = hasChips || !!item.layout;
+    const classes = [
+      'card',
+      `col-${colSpan}`,
+      `row-${item.rowSpan ?? 1}`,
+      item.imageSrc ? 'has-image' : '',
+      variant === 'default' ? '' : variant,
+      styled ? 'v2' : '',
+      item.layout === 'row' ? 'row' : ''
+    ]
+      .filter(Boolean)
+      .join(' ');
+    // A full-width card with chips puts them beside the text; elsewhere they follow the text.
+    const beside = hasChips && colSpan === 4;
+    // Row and beside layouts put the icon inside the text column, above the title; other cards keep it on top.
+    const iconInText = beside || item.layout === 'row';
+    const icon = item.icon
+      ? html`<div class="icon" part="icon"><iconify-icon icon=${item.icon}></iconify-icon></div>`
+      : nothing;
+    const text = html`<div class="text" part="text">
+      ${iconInText ? icon : nothing}
+      <h3 class="card-title" part="card-title">${item.title}</h3>
+      ${item.description
+        ? html`<div class="card-description" part="card-description">${unsafeHTML(renderMarkdown(item.description))}</div>`
+        : nothing}
+    </div>`;
+    const chips = hasChips
+      ? html`<ul class="chips" part="chips">
+          ${item.chips?.map(
+            chip => html`<li class="chip ${chip.tone ?? 'plain'}" part="chip">${chip.label}</li>`
+          )}
+        </ul>`
+      : nothing;
     const body = html`
       ${item.imageSrc
         ? html`<div class="image-wrapper" part="image-wrapper">
@@ -326,13 +538,10 @@ export class BentoGrid extends LitElement {
           </div>`
         : nothing}
       <div class="content" part="content">
-        ${item.icon ? html`<div class="icon" part="icon"><iconify-icon icon=${item.icon}></iconify-icon></div>` : nothing}
-        <div class="text">
-          <h3 class="card-title" part="card-title">${item.title}</h3>
-          ${item.description
-            ? html`<div class="card-description" part="card-description">${unsafeHTML(renderMarkdown(item.description))}</div>`
-            : nothing}
-        </div>
+        ${iconInText ? nothing : icon}
+        ${beside
+          ? html`<div class="split">${text}${chips}</div>`
+          : html`${text}${chips}`}
         ${item.href && item.actionLabel
           ? html`<a class="action" part="action" href=${item.href}>${item.actionLabel}</a>`
           : nothing}

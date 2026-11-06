@@ -2,7 +2,7 @@ import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 import { controlBaseStyles, rootFontFamilyStyles } from '../shared/styles';
-import { sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-styles';
+import { sectionEyebrowStyles, sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-styles';
 
 /**
  * A page band that holds other content: sets the background, the spacing above and below, and
@@ -121,12 +121,7 @@ export class Section extends LitElement {
     }
 
     .eyebrow {
-      margin: 0 0 var(--st-space-12);
-      font-size: var(--st-text-sm);
-      font-weight: var(--st-font-weight-bold);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--st-color-text-muted);
+      ${sectionEyebrowStyles}
     }
 
     .title {
@@ -146,7 +141,10 @@ export class Section extends LitElement {
       margin-bottom: 0;
     }
 
-    :host([background='dark']) .eyebrow,
+    :host([background='dark']) .eyebrow {
+      color: var(--st-cms-highlight);
+    }
+
     :host([background='dark']) .subtitle {
       color: color-mix(in oklch, var(--st-cms-band-dark-color) 80%, transparent);
     }

@@ -13,7 +13,7 @@
 import * as React from 'react';
 import { createComponent } from '@lit/react';
 import type { EventName } from '@lit/react';
-import { useInRouterContext, useNavigate } from 'react-router';
+import { useInRouterContext, useLocation, useNavigate } from 'react-router';
 
 import { AttentionPanel as AttentionPanelElement } from '@sankhyatronics/sankhya-cms/attention-panel';
 import { BarChart as BarChartElement } from '@sankhyatronics/sankhya-cms/bar-chart';
@@ -58,6 +58,10 @@ import type { SelectChangedEventDetail } from '@sankhyatronics/sankhya-cms/selec
 import { Stats as StatsElement } from '@sankhyatronics/sankhya-cms/stats';
 import { Steps as StepsElement } from '@sankhyatronics/sankhya-cms/steps';
 import { TagStrip as TagStripElement } from '@sankhyatronics/sankhya-cms/tag-strip';
+import { ProductNav as ProductNavElement } from '@sankhyatronics/sankhya-cms/product-nav';
+import { PlanCards as PlanCardsElement } from '@sankhyatronics/sankhya-cms/plan-cards';
+import { QuoteDialog as QuoteDialogElement } from '@sankhyatronics/sankhya-cms/quote-dialog';
+import type { QuoteSubmitEventDetail } from '@sankhyatronics/sankhya-cms/quote-dialog';
 import { Flow as FlowElement } from '@sankhyatronics/sankhya-cms/flow';
 import { Testimonials as TestimonialsElement } from '@sankhyatronics/sankhya-cms/testimonials';
 import type { TestimonialsLinkEventDetail } from '@sankhyatronics/sankhya-cms/testimonials';
@@ -66,16 +70,24 @@ type Detail<T> = EventName<CustomEvent<T>>;
 
 /* ---- plain wrappers: element properties/attributes map 1:1 ---- */
 
-export const BentoGrid = createComponent({ react: React, tagName: 'st-bento-grid', elementClass: BentoGridElement });
+const StBentoGrid = createComponent({ react: React, tagName: 'st-bento-grid', elementClass: BentoGridElement });
 export const ContentBlock = createComponent({ react: React, tagName: 'st-content-block', elementClass: ContentBlockElement });
-export const FeatureItem = createComponent({ react: React, tagName: 'st-feature-item', elementClass: FeatureItemElement });
-export const FeaturesSection = createComponent({ react: React, tagName: 'st-features-section', elementClass: FeaturesSectionElement });
+const StFeatureItem = createComponent({ react: React, tagName: 'st-feature-item', elementClass: FeatureItemElement });
+const StFeaturesSection = createComponent({ react: React, tagName: 'st-features-section', elementClass: FeaturesSectionElement });
 export const ItemsAccordion = createComponent({ react: React, tagName: 'st-items-accordion', elementClass: ItemsAccordionElement });
 export const MenuGrid = createComponent({ react: React, tagName: 'st-menu-grid', elementClass: MenuGridElement });
 export const Stats = createComponent({ react: React, tagName: 'st-stats', elementClass: StatsElement });
 export const Steps = createComponent({ react: React, tagName: 'st-steps', elementClass: StepsElement });
 export const TagStrip = createComponent({ react: React, tagName: 'st-tag-strip', elementClass: TagStripElement });
 export const Flow = createComponent({ react: React, tagName: 'st-flow', elementClass: FlowElement });
+export const PlanCards = createComponent({ react: React, tagName: 'st-plan-cards', elementClass: PlanCardsElement });
+export const QuoteDialog = createComponent({
+  react: React,
+  tagName: 'st-quote-dialog',
+  elementClass: QuoteDialogElement,
+  events: { onQuoteSubmit: 'quote-submit' as Detail<QuoteSubmitEventDetail> }
+});
+const StProductNav = createComponent({ react: React, tagName: 'st-product-nav', elementClass: ProductNavElement });
 export const Chip = createComponent({ react: React, tagName: 'st-chip', elementClass: ChipElement });
 export const KpiCard = createComponent({ react: React, tagName: 'st-kpi-card', elementClass: KpiCardElement });
 export const DateTile = createComponent({ react: React, tagName: 'st-date-tile', elementClass: DateTileElement });
@@ -101,6 +113,23 @@ export function isInternalHref(href: string | undefined): href is string {
   return !!href && !/^([a-z][a-z0-9+.-]*:|\/\/|#)/i.test(href);
 }
 
+/**
+ * Routes a cancelable select event: an internal `href` goes through `navigate` (no full reload),
+ * unless a listener already cancelled the event. The `preventDefault()` call stops the element's
+ * own click from following the link, so the element never reloads the page for an internal link.
+ * External URLs and `#anchors` are left alone and the browser follows them.
+ */
+export function routeSelect(
+  event: { readonly defaultPrevented: boolean; readonly detail: { href: string }; preventDefault(): void },
+  navigate: (to: string) => void
+): void {
+  const href = event.detail.href;
+  if (!event.defaultPrevented && isInternalHref(href)) {
+    event.preventDefault();
+    navigate(href);
+  }
+}
+
 interface NavProps {
   user?: (event: NavEvent) => void;
   children: (handler: (event: NavEvent) => void) => React.ReactNode;
@@ -110,11 +139,7 @@ function RoutedNav({ user, children }: NavProps) {
   const navigate = useNavigate();
   return children((event: NavEvent) => {
     user?.(event);
-    const href = event.detail.href;
-    if (!event.defaultPrevented && isInternalHref(href)) {
-      event.preventDefault();
-      navigate(href);
-    }
+    routeSelect(event, navigate);
   });
 }
 
@@ -133,6 +158,50 @@ function navigable<P>(Wrapped: React.ElementType, eventProp: string): React.FC<P
     return <Nav user={user}>{handler => <Wrapped {...props} {...{ [eventProp]: handler }} />}</Nav>;
   };
 }
+
+/**
+ * Routes clicks on the plain `<a href>` links inside an element through react-router. Those links
+ * (card and feature-tile links) emit no event of their own, so the click is caught on the element
+ * itself; the composed path still reaches the link inside the element's shadow root.
+ */
+function useRoutedClicks(ref: React.RefObject<HTMLElement | null>): void {
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    const onClick = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const anchor = event.composedPath().find((node): node is HTMLAnchorElement => node instanceof HTMLAnchorElement);
+      if (!anchor || (anchor.target && anchor.target !== '_self')) return;
+      const href = anchor.getAttribute('href') ?? undefined;
+      if (!isInternalHref(href)) return;
+      event.preventDefault();
+      navigate(href);
+    };
+    element.addEventListener('click', onClick);
+    return () => element.removeEventListener('click', onClick);
+  }, [navigate, ref]);
+}
+
+/** Wraps a Lit element whose plain links should route internal hrefs, inside a router. Outside one it renders as is. */
+function routedClicks<P extends object>(Wrapped: React.ElementType): React.FC<P> {
+  function Routed(props: P) {
+    const ref = React.useRef<HTMLElement>(null);
+    useRoutedClicks(ref);
+    return <Wrapped {...props} ref={ref} />;
+  }
+  function Plain(props: P) {
+    return <Wrapped {...props} />;
+  }
+  return function RoutedClicks(props: P) {
+    return useInRouterContext() ? <Routed {...props} /> : <Plain {...props} />;
+  };
+}
+
+export const BentoGrid = routedClicks<React.ComponentProps<typeof StBentoGrid>>(StBentoGrid);
+export const FeatureItem = routedClicks<React.ComponentProps<typeof StFeatureItem>>(StFeatureItem);
+export const FeaturesSection = routedClicks<React.ComponentProps<typeof StFeaturesSection>>(StFeaturesSection);
+export const ProductNav = routedClicks<React.ComponentProps<typeof StProductNav>>(StProductNav);
 
 /* ---- adapters ---- */
 
@@ -332,22 +401,48 @@ export interface HeaderProps extends Omit<React.ComponentProps<typeof StHeader>,
   menuBar?: React.ReactNode;
   /** Nodes for the utility slot (`slot: "utility"` children). */
   utilityButtons?: React.ReactNode;
+  /**
+   * Nodes for the context slot (`slot: "context"` children): the product sub-nav shown in the bar
+   * once the page scrolls past its trigger (the element's `context-trigger`). Empty = no context mode.
+   */
+  contextNav?: React.ReactNode;
+  /**
+   * Path of the page being shown (the element's `currentPath`, attribute `current-path`). Inside a
+   * react-router `<Router>` it defaults to the current location, so the nav link for the page is
+   * marked current on every navigation.
+   */
+  currentPath?: string;
 }
-export const Header: React.FC<HeaderProps> = ({ imageSrc, menuBar, utilityButtons, children, ...rest }) => (
-  <StHeader {...rest} brandImageUrl={imageSrc}>
-    {menuBar ? (
-      <div slot="menu" style={rowStyle}>
-        {menuBar}
-      </div>
-    ) : null}
-    {utilityButtons ? (
-      <div slot="utility" style={rowStyle}>
-        {utilityButtons}
-      </div>
-    ) : null}
-    {children}
-  </StHeader>
-);
+
+function HeaderBase({ imageSrc, menuBar, utilityButtons, contextNav, children, ...rest }: HeaderProps) {
+  return (
+    <StHeader {...rest} brandImageUrl={imageSrc}>
+      {menuBar ? (
+        <div slot="menu" style={rowStyle}>
+          {menuBar}
+        </div>
+      ) : null}
+      {utilityButtons ? (
+        <div slot="utility" style={rowStyle}>
+          {utilityButtons}
+        </div>
+      ) : null}
+      {contextNav ? (
+        <div slot="context" style={{ display: 'contents' }}>
+          {contextNav}
+        </div>
+      ) : null}
+      {children}
+    </StHeader>
+  );
+}
+
+function RouterHeader(props: HeaderProps) {
+  const { pathname } = useLocation();
+  return <HeaderBase {...props} currentPath={props.currentPath || pathname} />;
+}
+
+export const Header: React.FC<HeaderProps> = props => (useInRouterContext() ? <RouterHeader {...props} /> : <HeaderBase {...props} />);
 
 const StSelect = createComponent({
   react: React,
