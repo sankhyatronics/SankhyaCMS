@@ -5,6 +5,7 @@ import { chevronIcon } from '../shared/icons';
 import { buttonResetStyles, controlBaseStyles, fontFamilyStyles } from '../shared/styles';
 import { hasCurrentLink, isCurrentPath } from '../shared/nav-path';
 import type { DropdownToggleEventDetail } from './DropdownEvents';
+import { MEGA_MENU_LAYOUT_EVENT, type MegaMenuLayoutEventDetail } from '../mega-menu/MegaMenuEvents';
 
 /** The nav links a dropdown's panel can hold that can be the current page. */
 const PANEL_NAV_SELECTOR = 'st-menu-item, st-mega-menu-column, st-mega-menu-feature';
@@ -79,10 +80,11 @@ export class Dropdown extends LitElement {
       color: var(--st-nav-color, var(--st-color-text-strong));
     }
 
+    /* The current section: an accent underline, the header's one indicator, rather than a filled pill. */
     :host([active]) .menu-title,
     :host([current]) .menu-title {
-      background: var(--st-color-accent-subtle);
-      color: var(--st-color-accent-text);
+      color: var(--st-nav-color, var(--st-color-accent-text));
+      box-shadow: inset 0 -2px 0 var(--st-nav-active-line, var(--st-color-accent));
     }
 
     :host([disabled]) .menu-title {
@@ -131,11 +133,11 @@ export class Dropdown extends LitElement {
       visibility: hidden;
       transform: translateY(-10px);
       /* visibility flips at once on open (so keyboard focus can move into the panel on the same
-         frame) and only after the 0.3s fade on close. */
+         frame) and only after the 0.15s fade on close. */
       transition:
-        opacity 0.3s ease,
-        transform 0.3s ease,
-        visibility 0s linear 0.3s;
+        opacity 0.15s ease,
+        transform 0.15s ease,
+        visibility 0s linear 0.15s;
       pointer-events: none;
     }
 
@@ -204,7 +206,15 @@ export class Dropdown extends LitElement {
       top: calc(100% + var(--st-mega-menu-gap, 12px));
       left: var(--st-mega-menu-inset, 1rem);
       right: var(--st-mega-menu-inset, 1rem);
-      max-width: var(--st-mega-menu-max-width, 1400px);
+      /* A panel with few columns is not stretched to the full width: each grid track (intro, link column, featured)
+         gets up to --st-mega-menu-track-width (default 420px), plus the gaps and padding of st-mega-menu. */
+      max-width: min(
+        var(--st-mega-menu-max-width, 1400px),
+        calc(
+          var(--st-mega-menu-tracks, 99) * var(--st-mega-menu-track-width, 420px) + (var(--st-mega-menu-tracks, 99) - 1) * 3rem +
+            7rem
+        )
+      );
       margin: 0 auto;
       padding: 0;
       max-height: calc(100dvh - var(--st-mega-menu-offset, 96px));
@@ -212,6 +222,16 @@ export class Dropdown extends LitElement {
       border: 0;
       border-radius: var(--st-mega-menu-radius, 24px);
       box-shadow: 0 24px 48px var(--st-shadow-color-md);
+      /* No opacity fade here: the surface is opaque from the first frame, so the page behind (e.g. a hero's text)
+         never shows through the panel while it opens. It slides in over 0.15s instead. */
+      opacity: 1;
+      transition:
+        transform 0.15s ease,
+        visibility 0s linear 0.15s;
+    }
+
+    :host([mega]:not([inline])) .menu-dropdown.show {
+      transition-delay: 0s;
     }
 
     /* The open section's trigger becomes an accent pill — also for a plain dropdown marked \`bar\`,
@@ -256,13 +276,11 @@ export class Dropdown extends LitElement {
       color: var(--st-nav-color, var(--st-color-text-strong));
     }
 
-    /* The current page: exactly st-menu-item.active — accent-subtle fill and a 4px accent bar added
-       on the left (padding unchanged, as on the Home item). */
+    /* The current page: the same accent underline as st-menu-item.active (no fill, no side bar). */
     :host([trigger-style='item'][active]:not([inline])) .menu-title,
     :host([trigger-style='item'][current]:not([inline])) .menu-title {
-      background: var(--st-color-accent-subtle);
-      color: var(--st-color-accent-text);
-      border-left: 4px solid var(--st-color-accent);
+      color: var(--st-nav-color, var(--st-color-accent-text));
+      box-shadow: inset 0 -2px 0 var(--st-nav-active-line, var(--st-color-accent));
     }
 
     .mega-back-bar,
@@ -453,6 +471,12 @@ export class Dropdown extends LitElement {
 
   /** Whether the default slot has content — the source's `children` check. */
   @state() private hasContent = false;
+  /** Grid tracks of the `st-mega-menu` inside the panel, as it reports them; 0 until it does. */
+  @state() private megaTracks = 0;
+
+  private onMegaLayout = (event: Event): void => {
+    this.megaTracks = (event as CustomEvent<MegaMenuLayoutEventDetail>).detail.tracks;
+  };
 
   /** Whether `slot="icon"` has content. */
   @state() private hasIcon = false;
@@ -461,6 +485,7 @@ export class Dropdown extends LitElement {
     super.connectedCallback();
     document.addEventListener('mousedown', this.closeOnOutsideMouseDown);
     window.addEventListener('keydown', this.closeOnEscape);
+    this.addEventListener(MEGA_MENU_LAYOUT_EVENT, this.onMegaLayout);
     this.addEventListener('pointerenter', this.onPointerEnter);
     this.addEventListener('pointerleave', this.onPointerLeave);
   }
@@ -468,6 +493,7 @@ export class Dropdown extends LitElement {
   disconnectedCallback(): void {
     document.removeEventListener('mousedown', this.closeOnOutsideMouseDown);
     window.removeEventListener('keydown', this.closeOnEscape);
+    this.removeEventListener(MEGA_MENU_LAYOUT_EVENT, this.onMegaLayout);
     this.removeEventListener('pointerenter', this.onPointerEnter);
     this.removeEventListener('pointerleave', this.onPointerLeave);
     clearTimeout(this.hoverTimer);
@@ -681,6 +707,7 @@ export class Dropdown extends LitElement {
           part="panel"
           class="menu-dropdown align-${this.align} ${this.itemGroupClassName} ${this.open ? 'show' : ''}"
           role="menu"
+          style=${this.mega && this.megaTracks > 0 ? `--st-mega-menu-tracks:${this.megaTracks}` : nothing}
           @click=${this.onPanelClick}
           @keydown=${this.onPanelKeyDown}
         >

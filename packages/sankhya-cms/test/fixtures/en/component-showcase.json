@@ -87,6 +87,23 @@
         "secondaryHref": "/pricing"
     },
     {
+        "type": "ContactForm",
+        "endpoint": "https://api.example.com/contact",
+        "topics": [
+            { "value": "sales", "label": "Sales", "group": "Products" },
+            { "value": "pilot", "label": "Pilot programme", "group": "Products" },
+            { "value": "support", "label": "Support" }
+        ],
+        "defaultTopic": "support",
+        "privacyNote": "We use your details only to reply to your enquiry.",
+        "privacyHref": "/privacy-policy"
+    },
+    {
+        "type": "Booking",
+        "endpoint": "https://api.example.com",
+        "weekStart": 1
+    },
+    {
         "type": "ItemsAccordion",
         "title": "Questions",
         "openFirst": true,

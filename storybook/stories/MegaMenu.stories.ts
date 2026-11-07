@@ -81,5 +81,17 @@ export const ProductsOpen: Story = { render: header('products') };
 /** Equal card columns with pill buttons — no intro or featured area. */
 export const SupportOpen: Story = { render: header('support') };
 
+/** `visible` is `false`: the Products panel is open but its mega menu content is hidden. Set it back to `true` (property) to show it. */
+export const Hidden: Story = {
+  render: () => {
+    const root = document.createElement('div');
+    root.innerHTML = header('products')();
+    root.querySelectorAll<HTMLElement & { visible: boolean }>('st-mega-menu').forEach((menu) => {
+      menu.visible = false;
+    });
+    return root;
+  }
+};
+
 /** The phone layout: hamburger panel open, drilled into Products (view below 900px wide). */
 export const MobileDrillDown: Story = { render: header('products', 'mobile-open') };

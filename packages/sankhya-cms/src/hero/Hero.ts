@@ -5,6 +5,8 @@ import 'iconify-icon';
 import { buttonResetStyles, controlBaseStyles, ctaPillStyles, rootFontFamilyStyles } from '../shared/styles';
 import { ctaLinkStyles, paddingScaleStyles } from '../shared/section-styles';
 import { splitTitleHighlight } from '../shared/title-highlight';
+import { ctaAriaLabel, ctaLabelStyles, renderCtaLabel } from '../shared/cta-label';
+import { externalLinkAttrs, externalLinkExtras, isExternalHref } from '../shared/external-link';
 import type { HeroActionEventDetail } from './HeroEvents';
 
 const HIGHLIGHT_ICON = svg`<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>`;
@@ -18,6 +20,14 @@ export interface HeroMediaBadge {
   text?: string;
   /** Iconify icon name, e.g. `mdi:shield-check`. */
   icon?: string;
+}
+
+/** A small screenshot card on the bottom-right corner of the split-layout image. */
+export interface HeroMediaInset {
+  src: string;
+  alt: string;
+  /** Optional bar above the screenshot inside the card. */
+  label?: string;
 }
 
 /**
@@ -39,6 +49,10 @@ export interface HeroMediaBadge {
  * layout the copy sits in the page's container (`--st-cms-container-max`) with the same side gutter
  * as the other sections.
  *
+ * In the split layout, `image-label` adds a window-style bar with that text above the image, and
+ * `media-inset` (`{ src, alt, label? }`) puts a small screenshot card on the image's bottom-right corner.
+ * `media-inset` replaces `media-badge` when both are set, so only one card shows.
+ *
  * A CTA with an `href` is a real link (`<a href>`), so external URLs, `#anchors` and `/path?x=y`
  * work without JavaScript. Its `action` event is cancelable: call `preventDefault()` on it to stop
  * the browser following the link (a router does this to navigate client-side). A CTA without an
@@ -58,11 +72,14 @@ export interface HeroMediaBadge {
  * @csspart secondary-action - The outlined second call-to-action.
  * @csspart title-highlight - The part of the title picked by `title-highlight`.
  * @csspart media-badge - The dark card on the corner of the split-layout image.
+ * @csspart image-bar - The window-style bar above the split-layout image (`image-label`).
+ * @csspart media-inset - The screenshot card on the image's bottom-right corner (`media-inset`).
  * @cssprop --st-cms-brand-azure - Colour of the title highlight.
  */
 @customElement('st-hero')
 export class Hero extends LitElement {
   static styles = css`
+    ${ctaLabelStyles}
     ${controlBaseStyles}
     ${paddingScaleStyles}
 
@@ -464,6 +481,73 @@ export class Hero extends LitElement {
       color: inherit;
     }
 
+    /* imageLabel: a window-style bar above the split-layout image. It sits outside the image box, so
+       the image keeps its 4:3 frame; the image's top corners are squared to meet the bar. */
+    .image-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--st-cms-primary-100, #e4ebff);
+      border-radius: var(--st-radius-lg) var(--st-radius-lg) 0 0;
+      background: var(--st-hero-image-bar-bg, #fafbff);
+    }
+
+    .image-bar-dot {
+      flex: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 9999px;
+      background: var(--st-cms-primary-200, #c9d7fe);
+    }
+
+    .image-bar-label {
+      margin-left: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--st-cms-text, #03346b);
+    }
+
+    .image.has-bar {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    /* mediaInset: the media column reserves 36px below the image so the card hangs off the corner.
+       The card is a sibling of the image, not inside it, so nothing clips it. */
+    .media.has-inset {
+      padding-bottom: 36px;
+    }
+
+    .media-inset {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      box-sizing: border-box;
+      width: 46%;
+      overflow: hidden;
+      border: 1px solid var(--st-cms-primary-200, #c9d7fe);
+      border-radius: 12px;
+      background: var(--st-color-surface, #fff);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+    }
+
+    .media-inset-label {
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--st-cms-text, #03346b);
+      background: var(--st-cms-surface-soft, #f0f3ff);
+      border-bottom: 1px solid var(--st-cms-primary-100, #e4ebff);
+    }
+
+    .media-inset img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
     /* buttonStyle="pill": 52px pills. The primary is brand navy with a soft shadow; the secondary is
        white with a light primary-200 border, navy text and a trailing arrow. */
     :host([button-style='pill']) .cta {
@@ -555,8 +639,21 @@ export class Hero extends LitElement {
       :host([content-position='bottom']) .content { padding: var(--st-space-48) var(--st-space-32) 6rem; }
     }
 
+    /* A carousel's first slide is on screen at first paint, so its entrance stays off (st-carousel sets
+       data-st-still until the slides first change). Later slides animate in when they turn. */
+    :host([data-st-still]),
+    :host([data-st-still]) .eyebrow,
+    :host([data-st-still]) .badge,
+    :host([data-st-still]) .title,
+    :host([data-st-still]) .subtitle,
+    :host([data-st-still]) .cta,
+    :host([data-st-still]) .cta-note,
+    :host([data-st-still]) .highlights {
+      animation: none;
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      :host, .eyebrow, .title, .subtitle, .cta, .cta-note { animation: none; }
+      :host, .eyebrow, .badge, .title, .subtitle, .cta, .cta-note, .highlights { animation: none; }
       .cta { transition: none; }
     }
   `;
@@ -572,6 +669,11 @@ export class Hero extends LitElement {
 
   @property({ type: String, attribute: 'action-label' })
   actionLabel = '';
+
+  /** Shorter `action-label` for phones (< 480px), so the button fits on one line. The full label
+   * stays the link's accessible name. */
+  @property({ type: String, attribute: 'action-label-short' })
+  actionLabelShort = '';
 
   @property({ type: String })
   href = '';
@@ -595,6 +697,10 @@ export class Hero extends LitElement {
   /** Label of an outlined second button next to the primary one. */
   @property({ type: String, attribute: 'secondary-action-label' })
   secondaryActionLabel = '';
+
+  /** Shorter `secondary-action-label` for phones (< 480px). */
+  @property({ type: String, attribute: 'secondary-action-label-short' })
+  secondaryActionLabelShort = '';
 
   @property({ type: String, attribute: 'secondary-href' })
   secondaryHref = '';
@@ -643,9 +749,22 @@ export class Hero extends LitElement {
   @property({ attribute: false })
   mediaBadge?: HeroMediaBadge;
 
+  /** Label of a window-style bar (three dots, then the text) above the split-layout image. Shown with `layout="split"` and an `image-src`. */
+  @property({ type: String, attribute: 'image-label' })
+  imageLabel = '';
+
+  /** A small screenshot card on the bottom-right corner of the split-layout image. Replaces `mediaBadge` when both are set. */
+  @property({ attribute: false })
+  mediaInset?: HeroMediaInset;
+
   /** `default` keeps the plain buttons. `pill` gives the buttons the 52px pill style (the secondary one with an arrow). */
   @property({ type: String, reflect: true, attribute: 'button-style' })
   buttonStyle: 'default' | 'pill' = 'default';
+
+  /** Level of the title heading: `1` (default) for a page's main hero, `2` for a hero that is not the
+   * page heading (e.g. the slides of a hero carousel, where the page has its own `<h1>`). */
+  @property({ type: Number, attribute: 'heading-level' })
+  headingLevel: 1 | 2 = 1;
 
   private static positions = {
     top: 'center top',
@@ -654,6 +773,17 @@ export class Hero extends LitElement {
     bottom: 'center bottom',
     center: 'center center'
   } as const;
+
+  /**
+   * A hero that is already inside the first screen when it connects is on screen at first paint, so its
+   * entrance animation (rise, fades, image zoom) would only delay the copy: it renders still. A hero
+   * further down the page keeps its entrance. A carousel slide is handled by `st-carousel` instead.
+   */
+  connectedCallback(): void {
+    super.connectedCallback();
+    if (this.closest('st-carousel')) return;
+    if (this.getBoundingClientRect().top < window.innerHeight) this.setAttribute('data-st-still', '');
+  }
 
   protected willUpdate(): void {
     const asBackground = this.layout !== 'split';
@@ -678,9 +808,16 @@ export class Hero extends LitElement {
     const part = secondary ? 'secondary-action' : 'action';
     const onClick = (event: MouseEvent) => this.emitAction(event, href, kind);
     const arrow = secondary && this.buttonStyle === 'pill' ? ARROW_ICON : nothing;
+    const { target, rel } = externalLinkAttrs(href);
+    const external = isExternalHref(href);
+    const short = secondary ? this.secondaryActionLabelShort : this.actionLabelShort;
+    const text = renderCtaLabel(label, short);
+    const ariaLabel = ctaAriaLabel(label, short, external ? ' (opens in new tab)' : '');
     return href
-      ? html`<a class=${className} part=${part} href=${href} @click=${onClick}>${label}${arrow}</a>`
-      : html`<button class=${className} part=${part} type="button" @click=${onClick}>${label}${arrow}</button>`;
+      ? html`<a class=${className} part=${part} href=${href} target=${target} rel=${rel} aria-label=${ariaLabel} @click=${onClick}
+          >${text}${external ? externalLinkExtras(href) : arrow}</a
+        >`
+      : html`<button class=${className} part=${part} type="button" aria-label=${ariaLabel} @click=${onClick}>${text}${arrow}</button>`;
   }
 
   /** The title with the `title-highlight` text wrapped in its own span; plain text otherwise. */
@@ -702,13 +839,33 @@ export class Hero extends LitElement {
     </div>`;
   }
 
+  private renderImageBar() {
+    if (!this.imageLabel) return nothing;
+    return html`<div class="image-bar" part="image-bar">
+      <span class="image-bar-dot" aria-hidden="true"></span>
+      <span class="image-bar-dot" aria-hidden="true"></span>
+      <span class="image-bar-dot" aria-hidden="true"></span>
+      <span class="image-bar-label">${this.imageLabel}</span>
+    </div>`;
+  }
+
+  private renderMediaInset(inset: HeroMediaInset) {
+    return html`<div class="media-inset" part="media-inset">
+      ${inset.label ? html`<div class="media-inset-label">${inset.label}</div>` : nothing}
+      <img src=${inset.src} alt=${inset.alt} />
+    </div>`;
+  }
+
   render() {
+    const inset = this.mediaInset?.src ? this.mediaInset : undefined;
     return html`
       <div class="overlay" part="overlay"></div>
       <div class="content" part="content">
         ${this.eyebrow ? html`<p class="eyebrow" part="eyebrow">${this.eyebrow}</p>` : nothing}
         ${this.badge ? html`<p class="badge" part="badge">${this.badge}</p>` : nothing}
-        <h1 class="title" part="title">${this.renderTitle()}</h1>
+        ${this.headingLevel === 2
+          ? html`<h2 class="title" part="title">${this.renderTitle()}</h2>`
+          : html`<h1 class="title" part="title">${this.renderTitle()}</h1>`}
         ${this.subtitle ? html`<p class="subtitle" part="subtitle">${this.subtitle}</p>` : nothing}
         ${this.actionLabel || this.secondaryActionLabel || this.ctaNote
           ? html`<div class="cta-group">
@@ -735,9 +892,10 @@ export class Hero extends LitElement {
         <slot></slot>
       </div>
       ${this.layout === 'split' && this.imageSrc
-        ? html`<figure class="media" part="media">
-            <img class="image" part="image" src=${this.imageSrc} alt=${this.imageAlt} />
-            ${this.renderMediaBadge()}
+        ? html`<figure class=${inset ? 'media has-inset' : 'media'} part="media">
+            ${this.renderImageBar()}
+            <img class=${this.imageLabel ? 'image has-bar' : 'image'} part="image" src=${this.imageSrc} alt=${this.imageAlt} />
+            ${inset ? this.renderMediaInset(inset) : this.renderMediaBadge()}
           </figure>`
         : nothing}
     `;

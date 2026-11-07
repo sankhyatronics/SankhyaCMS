@@ -16,20 +16,44 @@ const CONTEXT_BAR_HEIGHT = 64;
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-/** The focusable elements at and below `roots` that are rendered (not display: none), in document order, looking into open shadow roots. */
+/** Whether an element is laid out and not hidden by `visibility` (on itself or an ancestor). */
+function isRendered(el: Element): boolean {
+  if (el.getClientRects().length === 0) return false;
+  const check = (el as Element & { checkVisibility?: (options?: { visibilityProperty?: boolean }) => boolean }).checkVisibility;
+  return check ? check.call(el, { visibilityProperty: true }) : true;
+}
+
+/**
+ * The focusable elements at and below `roots` that are rendered, in document order. Looks into open
+ * shadow roots and follows each `<slot>` to the elements it shows, so slotted content counts where it lands.
+ */
 function renderedFocusables(roots: Element[]): HTMLElement[] {
-  const found: HTMLElement[] = [];
+  const found = new Set<HTMLElement>();
   const visit = (el: Element): void => {
-    if (el.matches(FOCUSABLE_SELECTOR) && el.getClientRects().length > 0) found.push(el as HTMLElement);
-    for (const child of Array.from(el.shadowRoot?.children ?? [])) visit(child);
-    for (const child of Array.from(el.children)) visit(child);
+    if (el instanceof HTMLSlotElement) {
+      for (const assigned of el.assignedElements({ flatten: true })) visit(assigned);
+      return;
+    }
+    if (el.matches(FOCUSABLE_SELECTOR) && isRendered(el)) found.add(el as HTMLElement);
+    const children = el.shadowRoot ? el.shadowRoot.children : el.children;
+    for (const child of Array.from(children)) visit(child);
   };
   roots.forEach(visit);
-  return found;
+  return [...found];
+}
+
+/** The focused element, looking through open shadow roots (`document.activeElement` stops at the host). */
+function deepActiveElement(): Element | null {
+  let el: Element | null = document.activeElement;
+  while (el?.shadowRoot?.activeElement) el = el.shadowRoot.activeElement;
+  return el;
 }
 
 /** How long the header keeps looking for a `context-trigger` element the page has not rendered yet. */
 const CONTEXT_TRIGGER_TIMEOUT_MS = 5000;
+
+/** Set on `<html>` while the header's drawer (the mobile menu or a site-menu request) is open. The cookie banner steps aside for it. */
+const DRAWER_OPEN_ATTRIBUTE = 'data-st-drawer-open';
 
 /**
  * The app-shell header bar — brand (image + title, or title alone) on the left, a `slot="menu"`
@@ -78,6 +102,11 @@ const CONTEXT_TRIGGER_TIMEOUT_MS = 5000;
  * are shown on top. `st-cookie-consent` steps aside while the drawer is open (see `setModalOpen`). Esc,
  * the close button, a click outside the bar, or activating a link in the drawer closes it and returns
  * focus to that button.
+ *
+ * On a narrow screen the open drawer covers the whole viewport and locks page scroll. It sets
+ * `data-st-drawer-open` on `<html>`, holds keyboard focus (Tab wraps, Esc closes, focus returns to the
+ * toggle), and shows the brand and, with `cta-label` + `cta-href`, a primary call to action above the
+ * menu, which sits before the theme toggle on desktop.
  *
  * @slot menu - Primary navigation.
  * @slot context - Product sub-nav shown in place of the menu in context mode (see above). Its children get `inert` while the context row is hidden or a site-menu drawer is open.
@@ -181,6 +210,8 @@ export class Header extends LitElement {
       /* Read by st-menu-item / st-dropdown triggers in the bar (their panels reset them). */
       --st-nav-color: var(--st-header-transparent-color, var(--st-color-on-solid));
       --st-nav-hover-bg: color-mix(in oklch, currentColor 14%, transparent);
+      /* The current-page underline follows the bar's text colour here, since the accent may not read on a hero. */
+      --st-nav-active-line: currentColor;
     }
 
     :host([transparent]:not([scrolled]):not([mobile-open])) .utility-row {
@@ -298,15 +329,6 @@ export class Header extends LitElement {
       }
     }
 
-    @keyframes st-header-fade-in {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
     .toggle {
       display: none;
       align-items: center;
@@ -314,8 +336,9 @@ export class Header extends LitElement {
       flex: none;
       position: relative;
       z-index: 1002;
-      width: var(--st-size-32);
-      height: var(--st-size-32);
+      /* A 44px touch target; the glyph inside keeps its 20px size. */
+      width: 44px;
+      height: 44px;
       margin-left: auto;
       padding: 0.5rem;
       border: 0;
@@ -376,6 +399,28 @@ export class Header extends LitElement {
       color: var(--st-color-accent-text);
     }
 
+    /* Primary call to action in the utility row, before the theme toggle. Solid accent, so it reads on both themes. */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      box-sizing: border-box;
+      min-height: 44px;
+      padding: 0 1.25rem;
+      border-radius: 9999px;
+      background: var(--st-color-accent);
+      color: var(--st-color-on-solid);
+      font-size: var(--st-text-base);
+      font-weight: var(--st-font-weight-semibold);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .cta:hover {
+      background: color-mix(in oklch, var(--st-color-accent) 88%, var(--st-color-text-strong));
+    }
+
     /* Hamburger layout: a full-screen layer under the toggle, menu above
        the utility controls, the menu's dropdowns opening in the flow (see syncInlineDropdowns). */
     @media (max-width: ${BREAKPOINT_TABLET}px) {
@@ -398,10 +443,10 @@ export class Header extends LitElement {
         position: fixed;
         inset: 0;
         background: var(--st-color-surface);
-        padding: 5rem 1.5rem 2rem;
+        padding: 0 1.5rem 2rem;
         overflow-y: auto;
+        overscroll-behavior: contain;
         z-index: 1001;
-        animation: st-header-fade-in 0.3s ease;
       }
 
       :host([mobile-open]) .menu-row,
@@ -445,10 +490,10 @@ export class Header extends LitElement {
       position: fixed;
       inset: 0;
       background: var(--st-color-surface);
-      padding: 5rem 1.5rem 2rem;
+      padding: 0 1.5rem 2rem;
       overflow-y: auto;
+      overscroll-behavior: contain;
       z-index: 1001;
-      animation: st-header-fade-in 0.3s ease;
     }
 
     :host([compact][mobile-open]) .menu-row,
@@ -569,12 +614,14 @@ export class Header extends LitElement {
       display: none;
     }
 
-    :host([site-menu-request]) .drawer-head {
+    /* The drawer's own top row: the brand, on the bar's row. Pulled back to the bar's 1rem edge, where the toggle sits. */
+    :host([mobile-open]) .drawer-head {
       display: flex;
       align-items: center;
       flex: none;
       height: 64px;
       min-width: 0;
+      margin: 0 -0.5rem;
     }
 
     :host([site-menu-request][compact][mobile-open]) .mobile-panel {
@@ -690,6 +737,9 @@ export class Header extends LitElement {
   private lastScrollY = 0;
   private scrollFrame = 0;
 
+  /** The `<html>` overflow and padding to restore when the drawer closes; null while the page is not locked. */
+  private drawerScrollLock: { overflow: string; paddingRight: string } | null = null;
+
   private onScroll = (): void => {
     if (this.scrollFrame) return;
     this.scrollFrame = requestAnimationFrame(() => {
@@ -733,6 +783,14 @@ export class Header extends LitElement {
    * hamburger layout it uses on a narrow screen. Set by `evaluateFit`, never from outside. */
   @property({ type: Boolean, reflect: true })
   compact = false;
+
+  /** Label of an optional primary call to action in the utility row, before the theme toggle. Hidden when empty (also needs `cta-href`). */
+  @property({ type: String, attribute: 'cta-label' })
+  ctaLabel = '';
+
+  /** Target of the call to action. Hidden when empty (also needs `cta-label`). */
+  @property({ type: String, attribute: 'cta-href' })
+  ctaHref = '';
 
   @state() private languageMenuOpen = false;
 
@@ -843,12 +901,78 @@ export class Header extends LitElement {
     this.syncSiteMenuOpen();
     if (changed.has('currentPath')) this.syncCurrentPath();
     if (changed.has('compact')) this.syncInlineDropdowns();
+    if (changed.has('mobileOpen')) this.syncDrawerOpen();
     if (changed.has('mobileOpen') && !this.mobileOpen) {
       // A mega dropdown's drill-down panel would otherwise still cover the menu next time it opens.
       for (const dropdown of this.inlinedDropdowns) dropdown.open = false;
       // Esc, the toggle, a click outside the bar or a link in the drawer all close it; a site-menu request ends here too.
       this.endSiteMenu(true);
     }
+  }
+
+  /**
+   * Keeps the page in step with the drawer: `<html data-st-drawer-open>` (which the cookie banner reads) and
+   * a scroll lock. The lock gives back the scrollbar's width, so the page does not shift sideways. Opening
+   * moves focus to the first item in the drawer; a site-menu request focuses its close button instead.
+   */
+  private syncDrawerOpen(): void {
+    const root = document.documentElement;
+    root.toggleAttribute(DRAWER_OPEN_ATTRIBUTE, this.mobileOpen);
+    if (!this.mobileOpen) {
+      this.unlockScroll();
+      return;
+    }
+    if (!this.drawerScrollLock) {
+      const scrollbarWidth = window.innerWidth - root.clientWidth;
+      this.drawerScrollLock = { overflow: root.style.overflow, paddingRight: root.style.paddingRight };
+      root.style.overflow = 'hidden';
+      if (scrollbarWidth > 0) root.style.paddingRight = `${scrollbarWidth}px`;
+    }
+    if (!this.siteMenuRequested) void this.updateComplete.then(() => this.drawerFocusables()[0]?.focus({ preventScroll: true }));
+  }
+
+  private unlockScroll(): void {
+    if (!this.drawerScrollLock) return;
+    const root = document.documentElement;
+    root.style.overflow = this.drawerScrollLock.overflow;
+    root.style.paddingRight = this.drawerScrollLock.paddingRight;
+    this.drawerScrollLock = null;
+  }
+
+  /** What a keyboard user can reach in the open drawer, in order: its own items, then the toggle that closes it. */
+  private drawerFocusables(): HTMLElement[] {
+    const panel = this.renderRoot.querySelector<HTMLElement>('.mobile-panel');
+    const toggle = this.renderRoot.querySelector<HTMLElement>('.toggle');
+    return renderedFocusables([panel, toggle].filter((el): el is HTMLElement => el !== null));
+  }
+
+  /** Keeps Tab and Shift+Tab inside the open drawer, wrapping at either end (and pulling in focus that has left it). */
+  private trapDrawerFocus(event: KeyboardEvent): void {
+    const items = this.drawerFocusables();
+    if (items.length === 0) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    const active = deepActiveElement();
+    const inside = active !== null && items.includes(active as HTMLElement);
+    if (event.shiftKey) {
+      if (!inside || active === first) {
+        event.preventDefault();
+        last.focus({ preventScroll: true });
+      }
+    } else if (!inside || active === last) {
+      event.preventDefault();
+      first.focus({ preventScroll: true });
+    }
+  }
+
+  /**
+   * Closes the drawer and returns focus to its toggle. A site-menu request returns focus to the product
+   * nav's button instead (see endSiteMenu).
+   */
+  private closeDrawer(): void {
+    if (!this.mobileOpen) return;
+    this.mobileOpen = false;
+    if (!this.siteMenuRequested) this.renderRoot.querySelector<HTMLElement>('.toggle')?.focus({ preventScroll: true });
   }
 
   /** The bar width at which the menu last overflowed — the bar only expands again once it is
@@ -905,7 +1029,7 @@ export class Header extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-    window.addEventListener('keydown', this.closeOnEscape);
+    window.addEventListener('keydown', this.onKeyDown);
     window.addEventListener('click', this.closeLanguageMenuOnOutsideClick);
     window.addEventListener('click', this.closeSiteMenuOnOutsideClick);
     this.addEventListener('product-nav-site-menu', this.onSiteMenuRequest);
@@ -927,9 +1051,11 @@ export class Header extends LitElement {
     this.lightDomObserver?.disconnect();
     this.stopContextTrigger();
     setModalOpen(this, false);
+    document.documentElement.removeAttribute(DRAWER_OPEN_ATTRIBUTE);
+    this.unlockScroll();
     this.narrowQuery?.removeEventListener('change', this.syncInlineDropdowns);
     this.resizeObserver?.disconnect();
-    window.removeEventListener('keydown', this.closeOnEscape);
+    window.removeEventListener('keydown', this.onKeyDown);
     window.removeEventListener('click', this.closeLanguageMenuOnOutsideClick);
     window.removeEventListener('click', this.closeSiteMenuOnOutsideClick);
     this.removeEventListener('product-nav-site-menu', this.onSiteMenuRequest);
@@ -940,8 +1066,12 @@ export class Header extends LitElement {
     super.disconnectedCallback();
   }
 
-  private closeOnEscape = (event: KeyboardEvent): void => {
-    if (this.mobileOpen && event.key === 'Escape') this.mobileOpen = false;
+  /** Esc closes the open drawer; Tab is held inside it while it is open. */
+  private onKeyDown = (event: KeyboardEvent): void => {
+    if (this.mobileOpen) {
+      if (event.key === 'Escape') this.closeDrawer();
+      else if (event.key === 'Tab') this.trapDrawerFocus(event);
+    }
     if (this.languageMenuOpen && event.key === 'Escape') this.languageMenuOpen = false;
   };
 
@@ -1140,6 +1270,12 @@ export class Header extends LitElement {
     this.updateContextActive();
   };
 
+  /** The primary call to action (`cta-label` + `cta-href`), before the theme toggle. */
+  private renderCta() {
+    if (!this.ctaLabel || !this.ctaHref) return nothing;
+    return html`<a part="cta" class="cta" href=${this.ctaHref}>${this.ctaLabel}</a>`;
+  }
+
   private renderLanguageMenu() {
     if (this.languages.length < 2) return nothing;
     const current = this.languages.find((lang) => lang.code === this.currentLanguageCode);
@@ -1209,19 +1345,27 @@ export class Header extends LitElement {
     return html`
       <div class="layers ${this.stacked ? 'stacked' : ''}">
         <div class="layer layer-a ${showContext ? '' : 'is-on'} ${drawerOnly ? 'drawer-only' : ''}" ?inert=${showContext && !drawerOnly}>
-          ${this.renderBrand(this.siteMenuRequested)}
+          ${this.renderBrand(this.mobileOpen)}
           <div class="brand-extra ${this.hasBrandExtra ? '' : 'empty'}" part="brand-extra"><slot name="brand-extra" @slotchange=${this.onBrandExtraSlotChange}></slot></div>
 
-          <div class="mobile-panel" part="mobile-panel" @click=${() => (this.mobileOpen = false)}>
-            ${this.siteMenuRequested ? html`<div class="drawer-head" part="drawer-head">${this.renderBrand()}</div>` : nothing}
+          <div
+            id="drawer"
+            class="mobile-panel"
+            part="mobile-panel"
+            role=${this.mobileOpen ? 'dialog' : nothing}
+            aria-modal=${this.mobileOpen ? 'true' : nothing}
+            aria-label=${this.mobileOpen ? 'Site menu' : nothing}
+            @click=${() => this.closeDrawer()}
+          >
+            ${this.brandImageUrl || this.title ? html`<div class="drawer-head" part="drawer-head">${this.renderBrand()}</div>` : nothing}
             <nav class="menu-row" part="menu-row" aria-label="Main"><slot name="menu" @slotchange=${this.onMenuSlotChange}></slot></nav>
-            <div class="utility-row ${this.hasUtility || this.languages.length >= 2 ? '' : 'empty'}" part="utility-row">
-              ${this.renderLanguageMenu()}<slot name="utility" @slotchange=${this.onUtilitySlotChange}></slot>
+            <div class="utility-row ${this.hasUtility || this.languages.length >= 2 || this.ctaLabel ? '' : 'empty'}" part="utility-row">
+              ${this.renderLanguageMenu()}${this.renderCta()}<slot name="utility" @slotchange=${this.onUtilitySlotChange}></slot>
             </div>
           </div>
 
           ${this.siteMenuRequested
-            ? html`<div class="site-menu-backdrop" part="site-menu-backdrop" @click=${() => (this.mobileOpen = false)}></div>`
+            ? html`<div class="site-menu-backdrop" part="site-menu-backdrop" @click=${() => this.closeDrawer()}></div>`
             : nothing}
 
           <button
@@ -1230,7 +1374,8 @@ export class Header extends LitElement {
             class="toggle"
             aria-label=${this.mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded=${this.mobileOpen}
-            @click=${() => (this.mobileOpen = !this.mobileOpen)}
+            aria-controls="drawer"
+            @click=${() => (this.mobileOpen ? this.closeDrawer() : (this.mobileOpen = true))}
           >
             <slot name="menu-icon" ?hidden=${this.mobileOpen}>${menuIcon()}</slot>
             <slot name="close-icon" ?hidden=${!this.mobileOpen}>${closeIcon()}</slot>

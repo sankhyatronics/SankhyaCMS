@@ -45,7 +45,8 @@ export interface TestimonialItem {
  * (default) lays the cards out in a grid; `layout="carousel"` puts them on one horizontally
  * scrolling, snapping row with previous/next buttons next to the heading — the customer-story
  * carousel of enterprise marketing pages. `action-label`/`action-href` add a section-level link
- * (e.g. "Explore customer stories").
+ * (e.g. "Explore customer stories"). Any item set can use the carousel: `region-label` names it for
+ * assistive technology (e.g. "Services") and `role-description` changes its `aria-roledescription`.
  *
  * @fires testimonials-link - Cancelable, before following a story or section link. Detail `{ href }`.
  * @cssprop --st-testimonials-padding - Overrides the section's padding.
@@ -235,6 +236,7 @@ export class Testimonials extends LitElement {
     }
 
     .link {
+      position: relative;
       display: inline-flex;
       align-items: center;
       gap: var(--st-space-8);
@@ -242,6 +244,17 @@ export class Testimonials extends LitElement {
       font-weight: var(--st-font-weight-semibold);
       color: var(--st-color-text-strong);
       text-decoration: none;
+    }
+
+    /* Touch target: the link keeps its size; a 44px hit area (WCAG 2.5.5) sits over it. */
+    .link::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 44px);
+      height: 44px;
+      transform: translate(-50%, -50%);
     }
 
     .author + .link {
@@ -405,6 +418,17 @@ export class Testimonials extends LitElement {
   @property({ type: String, attribute: 'link-label' })
   linkLabel = 'See full story';
 
+  /**
+   * Accessible name of the carousel's scrolling region. Default: the `title`, or "Stories". Set it to
+   * what the items are (e.g. "Services" for a row of service cards).
+   */
+  @property({ type: String, attribute: 'region-label' })
+  regionLabel = '';
+
+  /** `aria-roledescription` of the carousel's scrolling region. Default: "carousel". */
+  @property({ type: String, attribute: 'role-description' })
+  roleDescription = '';
+
   /** Section-level link text, e.g. "Explore customer stories". */
   @property({ type: String, attribute: 'action-label' })
   actionLabel = '';
@@ -533,7 +557,15 @@ export class Testimonials extends LitElement {
             : nothing}
         </div>
         ${carousel
-          ? html`<div class="track" part="track" role="region" aria-label=${this.title || 'Stories'} tabindex="0" @scroll=${this.syncArrows}>
+          ? html`<div
+              class="track"
+              part="track"
+              role="region"
+              aria-roledescription=${this.roleDescription || 'carousel'}
+              aria-label=${this.regionLabel || this.title || 'Stories'}
+              tabindex="0"
+              @scroll=${this.syncArrows}
+            >
               ${this.items.map(item => this.renderItem(item))}
             </div>`
           : html`<div class="grid" part="grid">${this.items.map(item => this.renderItem(item))}</div>`}

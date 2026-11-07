@@ -2,10 +2,11 @@ import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
+import { externalLinkAttrs, externalLinkExtras } from '../shared/external-link';
 
 export interface ProductNavLink {
   label: string;
-  /** An in-page anchor, e.g. `#features`. */
+  /** An in-page anchor, e.g. `#features`. A link to another site (e.g. the docs) opens in a new tab, with the ↗ icon. */
   href: string;
 }
 
@@ -190,6 +191,9 @@ export class ProductNav extends LitElement {
     }
 
     .links a {
+      /* Positioned, so the visually hidden "(opens in new tab)" of an external link stays inside the link
+         instead of widening the page past the sideways-scrolling row. */
+      position: relative;
       display: inline-flex;
       align-items: center;
       box-sizing: border-box;
@@ -666,8 +670,10 @@ export class ProductNav extends LitElement {
                     <a
                       part="link"
                       href=${link.href}
+                      target=${externalLinkAttrs(link.href).target}
+                      rel=${externalLinkAttrs(link.href).rel}
                       aria-current=${this.activeId && link.href === `#${this.activeId}` ? (this.scrollSpy ? 'location' : 'true') : nothing}
-                    >${link.label}</a>
+                    >${link.label}${externalLinkExtras(link.href)}</a>
                   </li>`
                 )}
               </ul>`

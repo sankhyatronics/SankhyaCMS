@@ -30,6 +30,9 @@ import {
     ProductNav,
     PromoBanner,
     QuoteDialog,
+    ContactForm,
+    Booking,
+    ScreenshotTour,
     SegmentedControl,
     Section,
     Select,
@@ -65,6 +68,8 @@ export const baseComponents = {
     ProductNav,
     PlanCards,
     QuoteDialog,
+    ContactForm,
+    Booking,
     Testimonials,
     Select,
     Carousel,
@@ -77,7 +82,8 @@ export const baseComponents = {
     DateTile,
     AttentionPanel,
     BarChart,
-    SegmentedControl
+    SegmentedControl,
+    ScreenshotTour
 } as const;
 
 /**

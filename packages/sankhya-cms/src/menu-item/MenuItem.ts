@@ -96,10 +96,11 @@ export class MenuItem extends LitElement {
       transition-duration: 0.1s;
     }
 
+    /* The current page: an underline, the one indicator the header uses. No fill and no side bar. The
+       header sets --st-nav-active-line to follow its own text colour on a hero. */
     .menu-item.active {
-      background-color: var(--st-color-accent-subtle);
-      color: var(--st-color-accent-text);
-      border-left: 4px solid var(--st-color-accent);
+      color: var(--st-nav-color, var(--st-color-accent-text));
+      box-shadow: inset 0 -2px 0 var(--st-nav-active-line, var(--st-color-accent));
     }
 
     .menu-item-icon {

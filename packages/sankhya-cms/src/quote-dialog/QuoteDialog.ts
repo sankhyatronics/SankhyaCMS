@@ -4,12 +4,14 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { setModalOpen } from '../shared/modal-state';
 import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
 import { QUOTE_OPEN_EVENT, type QuoteOpenEventDetail, type QuoteSubmitEventDetail } from './QuoteDialogEvents';
-import { buildQuoteMailto } from './quote-mailto';
+import { buildQuoteMailto, fillTemplate } from './quote-mailto';
 
 export interface QuoteOption {
   id: string;
   label: string;
   hint?: string;
+  /** Short name for the e-mail subject's `{option}` (e.g. "Cloud" for "Cloud (SaaS)"). Defaults to `label`. */
+  subjectLabel?: string;
 }
 
 type FieldName = 'name' | 'email' | 'company' | 'consent';
@@ -30,7 +32,10 @@ const SUCCESS_ICON = svg`<svg viewBox="0 0 24 24" aria-hidden="true" focusable="
  * Submitting checks the fields, opens a `mailto:` message to `mailto` with
  * every answer in the body, dispatches `quote-submit` and shows `success-title` / `success-text`
  * (`{option}` in the text becomes the chosen option's label). Without `mailto` nothing is opened and
- * the success state still shows.
+ * the success state still shows. `subject` may use `{option}` (the option's `subjectLabel`, else its
+ * label), `{company}` and `{name}`. `mailto-note` is shown under the success text (`{email}` becomes
+ * the `mailto` address, as a link) with a button that copies the address, for visitors whose mail
+ * app did not open. An empty `consent-label` leaves out the consent box.
  *
  * The element's `id` is the dialog name: set it on the JSON node (`"id": "quote"`), and point
  * `quoteDialog` on a `st-plan-cards` at the same value.
@@ -360,7 +365,34 @@ export class QuoteDialog extends LitElement {
       color: var(--st-cms-text, var(--st-cms-navy-2));
     }
 
-    .done {
+    .mailto-note {
+      max-width: 400px;
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--st-cms-text, var(--st-cms-navy-2));
+    }
+
+    .mailto-note a {
+      color: var(--st-cms-accent-text, var(--st-cms-brand-navy));
+      font-weight: var(--st-font-weight-semibold);
+    }
+
+    .success-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .done:focus-visible,
+    .copy:focus-visible {
+      outline: 2px solid var(--st-cms-brand-azure);
+      outline-offset: 2px;
+    }
+
+    .done,
+    .copy {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -447,10 +479,22 @@ export class QuoteDialog extends LitElement {
   @property({ type: String })
   mailto = '';
 
+  /** Subject of the request e-mail. `{option}`, `{company}` and `{name}` are filled in. */
   @property({ type: String })
   subject = 'Quote request';
 
+  /** Shown under the success text when `mailto` is set. `{email}` becomes the address as a link. Empty hides it. */
+  @property({ type: String, attribute: 'mailto-note' })
+  mailtoNote = '';
+
+  @property({ type: String, attribute: 'copy-label' })
+  copyLabel = 'Copy address';
+
+  @property({ type: String, attribute: 'copied-label' })
+  copiedLabel = 'Address copied';
+
   @state() private selected = '';
+  @state() private copied = false;
   @state() private submitted = false;
   @state() private errors: Partial<Record<FieldName, string>> = {};
   @state() private submittedOption = '';
@@ -479,6 +523,7 @@ export class QuoteDialog extends LitElement {
     const known = this.options.some(option => option.id === detail.option);
     this.selected = known ? (detail.option as string) : (this.options[0]?.id ?? '');
     this.submitted = false;
+    this.copied = false;
     this.errors = {};
     void this.open();
   };
@@ -528,7 +573,7 @@ export class QuoteDialog extends LitElement {
     check('name', this.nameLabel);
     check('email', this.emailLabel, true);
     check('company', this.companyLabel);
-    check('consent', this.consentLabel);
+    if (this.consentLabel) check('consent', this.consentLabel);
     return errors;
   }
 
@@ -557,7 +602,11 @@ export class QuoteDialog extends LitElement {
     if (this.mailto) {
       window.location.href = buildQuoteMailto({
         to: this.mailto,
-        subject: this.subject,
+        subject: fillTemplate(this.subject, {
+          option: option?.subjectLabel || optionLabel,
+          company: values.company,
+          name: values.name
+        }),
         optionLabel,
         fields: [
           { label: this.nameLabel, value: values.name },
@@ -651,7 +700,13 @@ export class QuoteDialog extends LitElement {
         <label class="label" for="quote-message">${this.messageLabel} <span class="optional">(optional)</span></label>
         <textarea class="input" id="quote-message" name="message" rows="3" placeholder=${this.messagePlaceholder || nothing}></textarea>
       </div>
-      <div class="field">
+      ${this.consentLabel ? this.renderConsent(consentError) : nothing}
+      <button class="submit" part="submit" type="submit">${this.submitLabel}</button>
+    </form>`;
+  }
+
+  private renderConsent(consentError: string | undefined) {
+    return html`<div class="field">
         <label class="consent">
           <input
             type="checkbox"
@@ -664,17 +719,43 @@ export class QuoteDialog extends LitElement {
           <span>${this.consentLabel}<span aria-hidden="true"> *</span></span>
         </label>
         ${consentError ? html`<p class="error" id="quote-consent-error">${consentError}</p>` : nothing}
-      </div>
-      <button class="submit" part="submit" type="submit">${this.submitLabel}</button>
-    </form>`;
+      </div>`;
+  }
+
+  private async copyAddress(): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(this.mailto);
+      this.copied = true;
+    } catch {
+      // Clipboard blocked: the address is still shown as a link to select by hand.
+    }
+  }
+
+  /** The mailto note with `{email}` as a link to the address. */
+  private renderMailtoNote() {
+    if (!this.mailto || !this.mailtoNote) return nothing;
+    const [before, ...rest] = this.mailtoNote.split('{email}');
+    const link = html`<a href="mailto:${this.mailto}">${this.mailto}</a>`;
+    return html`<p class="mailto-note" part="mailto-note">
+      ${before}${rest.length ? html`${link}${rest.join(this.mailto)}` : nothing}
+    </p>`;
   }
 
   private renderSuccess() {
+    const showCopy = Boolean(this.mailto && this.mailtoNote);
     return html`<div class="success" role="status">
       <span class="success-icon" aria-hidden="true">${SUCCESS_ICON}</span>
       <h3 class="success-title">${this.successTitle}</h3>
       <p class="success-text">${this.successText.replaceAll('{option}', this.submittedOption)}</p>
-      <button class="done" part="close" type="button" @click=${this.close}>${this.closeLabel}</button>
+      ${this.renderMailtoNote()}
+      <div class="success-actions">
+        ${showCopy
+          ? html`<button class="copy" part="copy" type="button" @click=${this.copyAddress}>
+              ${this.copied ? this.copiedLabel : this.copyLabel}
+            </button>`
+          : nothing}
+        <button class="done" part="close" type="button" @click=${this.close}>${this.closeLabel}</button>
+      </div>
     </div>`;
   }
 

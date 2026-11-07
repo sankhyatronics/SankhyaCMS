@@ -52,6 +52,7 @@ import type { MenuItemSelectEventDetail } from '@sankhyatronics/sankhya-cms/menu
 import { PromoBanner as PromoBannerElement } from '@sankhyatronics/sankhya-cms/promo-banner';
 import { SegmentedControl as SegmentedControlElement } from '@sankhyatronics/sankhya-cms/segmented-control';
 import type { SegmentChangeEventDetail } from '@sankhyatronics/sankhya-cms/segmented-control';
+import { ScreenshotTour as ScreenshotTourElement } from '@sankhyatronics/sankhya-cms/screenshot-tour';
 import { Section as SectionElement } from '@sankhyatronics/sankhya-cms/section';
 import { Select as SelectElement } from '@sankhyatronics/sankhya-cms/select';
 import type { SelectChangedEventDetail } from '@sankhyatronics/sankhya-cms/select';
@@ -62,6 +63,15 @@ import { ProductNav as ProductNavElement } from '@sankhyatronics/sankhya-cms/pro
 import { PlanCards as PlanCardsElement } from '@sankhyatronics/sankhya-cms/plan-cards';
 import { QuoteDialog as QuoteDialogElement } from '@sankhyatronics/sankhya-cms/quote-dialog';
 import type { QuoteSubmitEventDetail } from '@sankhyatronics/sankhya-cms/quote-dialog';
+import { ContactForm as ContactFormElement } from '@sankhyatronics/sankhya-cms/contact-form';
+import type { ContactFormErrorEventDetail, ContactFormSentEventDetail, ContactFormSubmitEventDetail } from '@sankhyatronics/sankhya-cms/contact-form';
+import { Booking as BookingElement } from '@sankhyatronics/sankhya-cms/booking';
+import type {
+  BookingCancelledEventDetail,
+  BookingCreatedEventDetail,
+  BookingErrorEventDetail,
+  BookingRescheduledEventDetail
+} from '@sankhyatronics/sankhya-cms/booking';
 import { Flow as FlowElement } from '@sankhyatronics/sankhya-cms/flow';
 import { Testimonials as TestimonialsElement } from '@sankhyatronics/sankhya-cms/testimonials';
 import type { TestimonialsLinkEventDetail } from '@sankhyatronics/sankhya-cms/testimonials';
@@ -87,7 +97,28 @@ export const QuoteDialog = createComponent({
   elementClass: QuoteDialogElement,
   events: { onQuoteSubmit: 'quote-submit' as Detail<QuoteSubmitEventDetail> }
 });
-const StProductNav = createComponent({ react: React, tagName: 'st-product-nav', elementClass: ProductNavElement });
+export const ContactForm = createComponent({
+  react: React,
+  tagName: 'st-contact-form',
+  elementClass: ContactFormElement,
+  events: {
+    onSubmitted: 'st-contact-form-submit' as Detail<ContactFormSubmitEventDetail>,
+    onSent: 'st-contact-form-sent' as Detail<ContactFormSentEventDetail>,
+    onError: 'st-contact-form-error' as Detail<ContactFormErrorEventDetail>
+  }
+});
+export const Booking = createComponent({
+  react: React,
+  tagName: 'st-booking',
+  elementClass: BookingElement,
+  events: {
+    onCreated: 'st-booking-created' as Detail<BookingCreatedEventDetail>,
+    onRescheduled: 'st-booking-rescheduled' as Detail<BookingRescheduledEventDetail>,
+    onCancelled: 'st-booking-cancelled' as Detail<BookingCancelledEventDetail>,
+    onError: 'st-booking-error' as Detail<BookingErrorEventDetail>
+  }
+});
+const StProductNav =createComponent({ react: React, tagName: 'st-product-nav', elementClass: ProductNavElement });
 export const Chip = createComponent({ react: React, tagName: 'st-chip', elementClass: ChipElement });
 export const KpiCard = createComponent({ react: React, tagName: 'st-kpi-card', elementClass: KpiCardElement });
 export const DateTile = createComponent({ react: React, tagName: 'st-date-tile', elementClass: DateTileElement });
@@ -103,6 +134,7 @@ const StSegmentedControl = createComponent({
 export const SegmentedControl = StSegmentedControl;
 export const Section = createComponent({ react: React, tagName: 'st-section', elementClass: SectionElement });
 export const Carousel = createComponent({ react: React, tagName: 'st-carousel', elementClass: CarouselElement });
+export const ScreenshotTour = createComponent({ react: React, tagName: 'st-screenshot-tour', elementClass: ScreenshotTourElement });
 
 /* ---- SPA navigation ---- */
 
@@ -380,7 +412,8 @@ const StCookieConsent = createComponent({
   elementClass: CookieConsentElement,
   events: {
     onAccept: 'cookie-consent-accept' as Detail<CookieConsentEventDetail>,
-    onRefuse: 'cookie-consent-refuse' as Detail<CookieConsentEventDetail>
+    onRefuse: 'cookie-consent-refuse' as Detail<CookieConsentEventDetail>,
+    onSave: 'cookie-consent-save' as Detail<CookieConsentEventDetail>
   }
 });
 export const CookieConsent = StCookieConsent;

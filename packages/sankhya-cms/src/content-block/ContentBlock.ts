@@ -3,6 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 
 import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
 import { ctaLinkStyles, sectionEyebrowStyles, sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-styles';
+import { ctaAriaLabel, ctaLabelStyles, renderCtaLabel } from '../shared/cta-label';
+import { externalLinkAttrs, externalLinkExtras, isExternalHref } from '../shared/external-link';
 import '../markdown';
 
 /**
@@ -31,6 +33,7 @@ import '../markdown';
 @customElement('st-content-block')
 export class ContentBlock extends LitElement {
   static styles = css`
+    ${ctaLabelStyles}
     ${controlBaseStyles}
 
     :host {
@@ -39,7 +42,9 @@ export class ContentBlock extends LitElement {
       /* !important: a page-level reset (e.g. Tailwind Preflight) otherwise zeroes a shadow host's
          padding; override with --st-content-block-padding instead. */
       padding: var(--st-content-block-padding, var(--st-space-24)) !important;
-      background: var(--st-color-surface);
+      /* Transparent: the block sits on whatever band or page surrounds it. A fill here made a box that
+         did not match the section (lighter navy in the dark theme) and had no padding around its text. */
+      background: transparent;
       color: var(--st-color-text-strong);
     }
 
@@ -234,6 +239,10 @@ export class ContentBlock extends LitElement {
   @property({ type: String, attribute: 'action-label' })
   actionLabel = '';
 
+  /** Shorter `action-label` for phones (< 480px); the full label stays the accessible name. */
+  @property({ type: String, attribute: 'action-label-short' })
+  actionLabelShort = '';
+
   /** Target of the pill link under the body. */
   @property({ type: String })
   href = '';
@@ -248,7 +257,11 @@ export class ContentBlock extends LitElement {
 
   private renderAction() {
     if (!this.actionLabel || !this.href) return nothing;
-    return html`<a class="action ${this.actionVariant}" part="action" href=${this.href}>${this.actionLabel}</a>`;
+    const { target, rel } = externalLinkAttrs(this.href);
+    const ariaLabel = ctaAriaLabel(this.actionLabel, this.actionLabelShort, isExternalHref(this.href) ? ' (opens in new tab)' : '');
+    return html`<a class="action ${this.actionVariant}" part="action" href=${this.href} target=${target} rel=${rel} aria-label=${ariaLabel}
+      >${renderCtaLabel(this.actionLabel, this.actionLabelShort)}${externalLinkExtras(this.href)}</a
+    >`;
   }
 
   private renderTitle() {
@@ -259,13 +272,16 @@ export class ContentBlock extends LitElement {
   }
 
   render() {
+    const hasHeader = Boolean(this.eyebrow || this.title || this.subtitle);
     return html`
       <section class="container" part="container">
-        <div class="header" part="header">
-          ${this.eyebrow ? html`<p class="eyebrow" part="eyebrow">${this.eyebrow}</p>` : nothing}
-          ${this.renderTitle()}
-          ${this.subtitle ? html`<div class="subtitle" part="subtitle">${this.subtitle}</div>` : nothing}
-        </div>
+        ${hasHeader
+          ? html`<div class="header" part="header">
+              ${this.eyebrow ? html`<p class="eyebrow" part="eyebrow">${this.eyebrow}</p>` : nothing}
+              ${this.renderTitle()}
+              ${this.subtitle ? html`<div class="subtitle" part="subtitle">${this.subtitle}</div>` : nothing}
+            </div>`
+          : nothing}
         ${this.imageSrc
           ? html`
               <figure class="featured-image" part="image">

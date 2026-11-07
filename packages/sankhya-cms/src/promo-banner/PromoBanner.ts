@@ -4,6 +4,8 @@ import 'iconify-icon';
 
 import { buttonResetStyles, controlBaseStyles, ctaPillStyles, rootFontFamilyStyles } from '../shared/styles';
 import { ctaLinkStyles, sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-styles';
+import { ctaAriaLabel, ctaLabelStyles, renderCtaLabel } from '../shared/cta-label';
+import { externalLinkAttrs, externalLinkExtras, isExternalHref } from '../shared/external-link';
 import type { HeroActionEventDetail } from '../hero/HeroEvents';
 
 /* Same small padlock as st-hero's cta-note, so the note never reads as a list tick. */
@@ -36,6 +38,7 @@ const CTA_NOTE_ICON = svg`<svg viewBox="0 0 24 24" width="14" height="14" fill="
 @customElement('st-promo-banner')
 export class PromoBanner extends LitElement {
   static styles = css`
+    ${ctaLabelStyles}
     ${controlBaseStyles}
 
     :host {
@@ -281,6 +284,14 @@ export class PromoBanner extends LitElement {
   @property({ type: String, attribute: 'action-label' })
   actionLabel = '';
 
+  /** Shorter `action-label` for phones (< 480px); the full label stays the accessible name. */
+  @property({ type: String, attribute: 'action-label-short' })
+  actionLabelShort = '';
+
+  /** Shorter `secondary-action-label` for phones (< 480px). */
+  @property({ type: String, attribute: 'secondary-action-label-short' })
+  secondaryActionLabelShort = '';
+
   /** Target of the first button. With a value the button is a link; the `action` event can cancel the navigation. */
   @property({ type: String })
   href = '';
@@ -335,9 +346,15 @@ export class PromoBanner extends LitElement {
     const part = secondary ? 'secondary-action' : 'action';
     const detail: HeroActionEventDetail = secondary ? { href, kind: 'secondary' } : { href };
     const onClick = (event: MouseEvent) => this.emitAction(event, detail);
+    const { target, rel } = externalLinkAttrs(href);
+    const short = secondary ? this.secondaryActionLabelShort : this.actionLabelShort;
+    const text = renderCtaLabel(label, short);
+    const ariaLabel = ctaAriaLabel(label, short, isExternalHref(href) ? ' (opens in new tab)' : '');
     return href
-      ? html`<a class=${className} part=${part} href=${href} @click=${onClick}>${label}</a>`
-      : html`<button class=${className} part=${part} type="button" @click=${onClick}>${label}</button>`;
+      ? html`<a class=${className} part=${part} href=${href} target=${target} rel=${rel} aria-label=${ariaLabel} @click=${onClick}
+          >${text}${externalLinkExtras(href)}</a
+        >`
+      : html`<button class=${className} part=${part} type="button" aria-label=${ariaLabel} @click=${onClick}>${text}</button>`;
   }
 
   private renderCopy() {

@@ -30,6 +30,8 @@ export interface BentoGridItem {
   variant?: 'default' | 'primary' | 'dark';
   /** With `href`, renders a button-style link inside the card instead of linking the whole card. */
   actionLabel?: string;
+  /** Accessible name of the action when its visible label repeats across cards (e.g. "See how: Controlled Outsourcing"). */
+  actionAriaLabel?: string;
   /**
    * Small rounded labels. On a full-width card (`colSpan: 4`) they sit in a 3-column grid to the
    * right of the text; otherwise below it.
@@ -263,14 +265,27 @@ export class BentoGrid extends LitElement {
     }
 
     .card-description a {
+      position: relative;
       color: inherit;
       text-decoration: underline;
       text-underline-offset: 3px;
     }
 
+    /* Touch target: the link keeps its text size; a 44px hit area (WCAG 2.5.5) sits over it. */
+    .card-description a::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 44px);
+      height: 44px;
+      transform: translate(-50%, -50%);
+    }
+
     .action {
       ${ctaLinkStyles}
       align-self: flex-start;
+      min-height: 44px;
       margin-top: var(--st-space-8);
       background: var(--st-button-primary-bg);
       color: var(--st-button-primary-color);
@@ -543,7 +558,7 @@ export class BentoGrid extends LitElement {
           ? html`<div class="split">${text}${chips}</div>`
           : html`${text}${chips}`}
         ${item.href && item.actionLabel
-          ? html`<a class="action" part="action" href=${item.href}>${item.actionLabel}</a>`
+          ? html`<a class="action" part="action" href=${item.href} aria-label=${item.actionAriaLabel || nothing}>${item.actionLabel}</a>`
           : nothing}
       </div>
     `;
