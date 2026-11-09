@@ -126,6 +126,8 @@ export class Footer extends LitElement {
       margin: 0;
       max-width: 300px;
       line-height: 1.6;
+      /* A line break in the text (for example name / address / email) stays a line break. */
+      white-space: pre-line;
     }
 
     .social {
