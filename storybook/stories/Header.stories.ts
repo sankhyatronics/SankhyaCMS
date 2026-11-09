@@ -94,3 +94,12 @@ export const CustomToggleIcons: Story = {
   parameters: { viewport: { defaultViewport: 'mobile1' } },
   render: renderElement('st-header', `${menu}${menuIcon}${closeIcon}`)
 };
+
+/** `current-path` marks the nav link for the page being shown: "T-Pilot" is current on `/t-pilot`, and Home is not (only `/` is Home). */
+export const CurrentPath: Story = {
+  args: { currentPath: '/t-pilot' },
+  render: renderElement(
+    'st-header',
+    '<div slot="menu" style="display:flex;gap:.5rem"><st-menu-item title="Home" href="/"></st-menu-item><st-menu-item title="T-Pilot" href="/t-pilot"></st-menu-item><st-menu-item title="Pricing" href="/pricing"></st-menu-item></div>'
+  )
+};

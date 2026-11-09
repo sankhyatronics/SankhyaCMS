@@ -1,0 +1,115 @@
+[
+    {
+        "type": "Hero",
+        "title": "Ship portals from JSON",
+        "subtitle": "Lit components with React bindings.",
+        "badge": "New in 0.2",
+        "imageSrc": "/images/business-meeting-over-coffee.jpg",
+        "imageAlt": "A team reviewing a plan",
+        "layout": "split",
+        "highlights": ["Themeable", "Accessible", "Responsive"],
+        "actionLabel": "Get started",
+        "href": "/contact-us",
+        "secondaryActionLabel": "Read the docs",
+        "secondaryHref": "/docs"
+    },
+    {
+        "type": "TagStrip",
+        "label": "Works with",
+        "items": ["AWS", "Azure", "Google Cloud", "React"]
+    },
+    {
+        "type": "Steps",
+        "eyebrow": "How it works",
+        "title": "Three steps to a live page",
+        "subtitle": "From a brief to a published page.",
+        "highlightLast": true,
+        "items": [
+            { "title": "Describe", "description": "Write the page as JSON, one flat node per component." },
+            { "title": "Validate", "description": "The schema checks every node before it renders." },
+            { "title": "Publish", "description": "Ship it with the rest of the site." }
+        ]
+    },
+    {
+        "type": "Flow",
+        "label": "Request flow",
+        "nodes": [
+            { "label": "Browser", "caption": "Renders the page", "variant": "outline" },
+            { "label": "Portal", "caption": "Reads the JSON", "variant": "solid" },
+            { "label": "CMS", "variant": "accent" }
+        ]
+    },
+    {
+        "type": "Section",
+        "title": "Two columns",
+        "columns": 2,
+        "children": [
+            {
+                "type": "Stats",
+                "items": [
+                    { "value": "99.9%", "label": "Uptime" },
+                    { "value": "24/7", "label": "Support" }
+                ]
+            },
+            {
+                "type": "TagStrip",
+                "items": ["Inverted", "Responsive"],
+                "inverted": true
+            }
+        ]
+    },
+    {
+        "type": "BentoGrid",
+        "title": "Cards",
+        "items": [
+            {
+                "title": "Primary",
+                "description": "Supports **Markdown** in the description.",
+                "variant": "primary",
+                "actionLabel": "Learn more",
+                "href": "/features"
+            },
+            {
+                "title": "Dark",
+                "description": "A navy card.",
+                "variant": "dark"
+            }
+        ]
+    },
+    {
+        "type": "PromoBanner",
+        "title": "Start your project",
+        "subtitle": "Talk to the team.",
+        "variant": "accent",
+        "actionLabel": "Contact us",
+        "href": "/contact-us",
+        "secondaryActionLabel": "See pricing",
+        "secondaryHref": "/pricing"
+    },
+    {
+        "type": "ContactForm",
+        "endpoint": "https://api.example.com/contact",
+        "topics": [
+            { "value": "sales", "label": "Sales", "group": "Products" },
+            { "value": "pilot", "label": "Pilot programme", "group": "Products" },
+            { "value": "support", "label": "Support" }
+        ],
+        "defaultTopic": "support",
+        "privacyNote": "We use your details only to reply to your enquiry.",
+        "privacyHref": "/privacy-policy"
+    },
+    {
+        "type": "Booking",
+        "endpoint": "https://api.example.com",
+        "weekStart": 1
+    },
+    {
+        "type": "ItemsAccordion",
+        "title": "Questions",
+        "openFirst": true,
+        "items": [
+            { "id": "q1", "title": "Is it markdown?", "content": "Yes, **bold** and [links](/docs) work." },
+            { "id": "q2", "title": "Plain text?", "content": "Plain text still works." }
+        ]
+    }
+]

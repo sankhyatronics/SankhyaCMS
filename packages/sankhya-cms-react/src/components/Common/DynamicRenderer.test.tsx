@@ -44,6 +44,28 @@ describe('DynamicRenderer', () => {
         expect(render({ type: 'TestProbeKeys', id: 'x', label: 'editor note', slot: 'utility', title: 't' })).toBe('<i>id,title</i>');
     });
 
+    it('leaves out a node with "visible": false, with its children, and does not pass visible on', () => {
+        const Probe: React.FC<Record<string, unknown>> = props => <i>{Object.keys(props).sort().join(',')}</i>;
+        registerComponent('TestProbeVisible', Probe);
+        expect(render({ type: 'TestBox', id: 'off', visible: false, children: [{ type: 'TestBox', id: 'kid' }] })).toBe('');
+        expect(render({ type: 'TestProbeVisible', id: 'on', visible: true })).toBe('<i>id</i>');
+        expect(render({ type: 'TestProbeVisible', id: 'unset' })).toBe('<i>id</i>');
+    });
+
+    it('drops a hidden child from its parent and keeps the others in order', () => {
+        const html = render({
+            type: 'TestBox',
+            id: 'menu',
+            children: [
+                { type: 'TestBox', id: 'a', visible: false },
+                { type: 'TestBox', id: 'b' },
+                { type: 'TestBox', id: 'c', visible: false },
+                { type: 'TestBox', id: 'd', visible: true }
+            ]
+        });
+        expect(html).toBe('<div id="menu"><div id="b"></div><div id="d"></div></div>');
+    });
+
     it('merges the className prop of the renderer with the node className', () => {
         expect(render({ type: 'TestBox', className: 'a' }, { className: 'b' })).toBe('<div class="a b"></div>');
     });

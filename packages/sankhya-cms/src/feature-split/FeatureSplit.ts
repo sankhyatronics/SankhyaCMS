@@ -23,9 +23,13 @@ export interface FeatureSplitItem {
 export type FeatureSplitImagePosition = 'left' | 'right' | 'top';
 
 /**
- * A title/markdown-subtitle/feature-list block beside (or under) an image.
+ * A title/markdown-subtitle/feature-list block beside (or under) an image. The `action-label` button
+ * is a real link to `href`: the browser follows it unless the cancelable `feature-split-action`
+ * event is cancelled (a router does this to navigate client-side).
  *
+ * @fires feature-split-action - Cancelable, before following the action link. Detail `{ href }`.
  * @cssprop --st-feature-split-padding - Overrides the block's padding.
+ * @csspart action - The action link.
  */
 @customElement('st-feature-split')
 export class FeatureSplit extends LitElement {
@@ -125,11 +129,18 @@ export class FeatureSplit extends LitElement {
       line-height: 1.5;
     }
 
+    /* An <a> with the button's look: no underline, and the font a <button> would have used. */
     .action {
       ${ctaButtonStyles}
+      display: inline-block;
+      box-sizing: border-box;
       justify-self: start;
       padding: var(--st-space-16);
       border-radius: var(--st-radius-lg);
+      font-family: var(--st-font-family);
+      font-size: var(--st-text-base);
+      text-align: center;
+      text-decoration: none;
     }
 
     .image-wrapper {
@@ -220,14 +231,16 @@ export class FeatureSplit extends LitElement {
   @property({ type: String })
   href = '';
 
-  private onAction() {
-    const event = new CustomEvent<FeatureSplitActionEventDetail>('feature-split-action', {
+  /** Fires the cancelable `feature-split-action`; the link is followed unless it is cancelled. */
+  private onAction(event: MouseEvent) {
+    const action = new CustomEvent<FeatureSplitActionEventDetail>('feature-split-action', {
       detail: { href: this.href },
       bubbles: true,
       composed: true,
       cancelable: true,
     });
-    if (this.dispatchEvent(event)) window.location.href = this.href;
+    this.dispatchEvent(action);
+    if (action.defaultPrevented) event.preventDefault();
   }
 
   render() {
@@ -258,7 +271,7 @@ export class FeatureSplit extends LitElement {
               </div>`
             : nothing}
           ${this.actionLabel && this.href
-            ? html`<button class="action" part="action" type="button" @click=${this.onAction}>${this.actionLabel}</button>`
+            ? html`<a class="action" part="action" href=${this.href} @click=${this.onAction}>${this.actionLabel}</a>`
             : nothing}
         </div>
         <div class="image-wrapper" part="image-wrapper">

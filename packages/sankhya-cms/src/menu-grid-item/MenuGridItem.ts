@@ -6,16 +6,14 @@ import type { MenuGridItemSelectEventDetail } from './MenuGridItemEvents';
 
 /**
  * One entry in an `st-menu-grid` — icon (via `slot="icon"`) + title on one line, an optional
- * description below, and an optional corner badge ("New", "Popular", ...). A 1:1 port of
- * `SankhyaUI`'s React `MenuGridItem` (`SankhyaCMS/SankhyaUI/src/components/Menu`): same markup and
- * CSS, with its `motion` effects redone in CSS — fades up the first time it scrolls into view,
- * scales to 1.02 on hover / 0.98 while pressed, the icon tilts on hover, the badge pops in.
- * Colors come from the suite theme rather than per-item utility classes.
+ * description below, and an optional corner badge ("New", "Popular", ...). Effects are CSS:
+ * fades up the first time it scrolls into view, scales to 1.02 on hover / 0.98 while pressed, the
+ * icon tilts on hover, the badge pops in. Colors come from the suite theme rather than per-item
+ * utility classes.
  *
- * An `http(s)` `href` opens in a new tab, like the source. Any other `href` fires a *cancelable*
+ * An `http(s)` `href` opens in a new tab. Any other `href` fires a *cancelable*
  * `menu-grid-item-select` event (detail: `{ href }`) first: a host doing client-side routing calls
- * `event.preventDefault()` on it, which also cancels the anchor's own navigation (the source used
- * react-router's `Link` here; the suite apps have no router).
+ * `event.preventDefault()` on it, which also cancels the anchor's own navigation.
  */
 @customElement('st-menu-grid-item')
 export class MenuGridItem extends LitElement {

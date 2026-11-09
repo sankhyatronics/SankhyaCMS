@@ -59,3 +59,30 @@ export const Editorial: Story = {
 export const EditorialCentered: Story = {
   args: { ...Editorial.args, textAlignment: 'center', overlay: 'even' }
 };
+
+/** Copy beside the image on the page surface, with a badge and check-marked highlights. */
+export const Split: Story = {
+  args: {
+    layout: 'split',
+    badge: 'New in 0.2',
+    title: 'Ship portals from JSON',
+    subtitle: 'Lit components with React bindings, themed with CSS variables.',
+    imageAlt: 'Dashboard on a laptop',
+    imageSrc: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200',
+    highlights: ['Themeable', 'Accessible', 'Responsive'],
+    actionLabel: 'Get started',
+    href: '#',
+    secondaryActionLabel: 'Read the docs',
+    secondaryHref: '#'
+  }
+};
+
+/** The badge and highlights on the default background layout. */
+export const BadgeAndHighlights: Story = {
+  args: {
+    badge: 'Now available',
+    highlights: ['No build step', 'Dark mode', 'Screen-reader friendly'],
+    actionLabel: 'Get started',
+    href: '#'
+  }
+};

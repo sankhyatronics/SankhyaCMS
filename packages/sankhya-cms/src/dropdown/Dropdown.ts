@@ -3,27 +3,37 @@ import { customElement, property, state } from 'lit/decorators.js';
 
 import { chevronIcon } from '../shared/icons';
 import { buttonResetStyles, controlBaseStyles, fontFamilyStyles } from '../shared/styles';
+import { hasCurrentLink, isCurrentPath } from '../shared/nav-path';
 import type { DropdownToggleEventDetail } from './DropdownEvents';
+import { MEGA_MENU_LAYOUT_EVENT, type MegaMenuLayoutEventDetail } from '../mega-menu/MegaMenuEvents';
+
+/** The nav links a dropdown's panel can hold that can be the current page. */
+const PANEL_NAV_SELECTOR = 'st-menu-item, st-mega-menu-column, st-mega-menu-feature';
+
+/** A mega menu's intro and featured slots hold shortcuts (e.g. "Talk to an expert" → /contact-us)
+ * that belong to other sections, so they never make this dropdown the current one. */
+const PANEL_SHORTCUT_SLOTS = '[slot="intro"], [slot="featured"]';
 
 /**
  * A labeled trigger + slotted dropdown panel — nav menus (typically holding an `st-menu-grid`),
- * action menus, anything "click a trigger, show content under it". A 1:1 port of `SankhyaUI`'s
- * React `Dropdown` (`SankhyaCMS/SankhyaUI/src/components/Dropdown`): same markup
+ * action menus, anything "click a trigger, show content under it". Markup
  * (`.menu` > `.menu-title` + `.menu-dropdown`), sizes, 0.3s slide/fade, and behavior —
  *
- * - only one dropdown is open at a time (the source's `DropdownProvider`, built in here, so no
- *   provider element is needed);
+ * - only one dropdown is open at a time (a shared provider is built in, so no provider element
+ *   is needed);
  * - a mousedown outside, Escape, or a click inside the panel closes it;
  * - an `href` trigger toggles the panel when it has content, and is a plain link when it doesn't;
  * - `inline` opens the panel in the flow, the source's `.touch-device` layout.
  *
- * Colors and the panel's surface come from the suite theme (the source left those to the
- * consumer's `className`/`itemGroupClassName` utility classes). Two source rules are left out
- * because they break existing suite uses (`st-source-bar`'s site/library menus): the 100vw panel
- * at <=768px (overflows the screen from wherever the trigger sits; the header uses `inline`
- * instead) and `overflow: hidden` on slotted children (clips their focus rings). Suite additions
- * kept on top: `align`, `active`, `disabled`, `inline`, and the `dropdown-toggle` event — plus
- * `mega` and `open-on-hover` for an okta.com-style mega menu (see `st-mega-menu`).
+ * Colors and the panel's surface come from the suite theme. The panel is never 100vw wide at
+ * <=768px (it would overflow the screen from wherever the trigger sits; use `inline` in headers
+ * instead), and slotted children are not clipped with `overflow: hidden` (that would cut off their
+ * focus rings). Other attributes: `align`, `active`, `disabled`, `inline`, the `dropdown-toggle`
+ * event, `trigger-style` (`item` for a desktop-bar trigger that matches `st-menu-item`), and `mega`
+ * plus `open-on-hover` for a mega menu (see `st-mega-menu`).
+ *
+ * `current` is set when the trigger's own `href` or a nav item inside the panel is the current page
+ * (see `st-header`'s `current-path`); the trigger then shows as active, like `active`.
  *
  * @cssprop --st-mega-menu-max-width - Maximum width of a `mega` panel (default `1400px`).
  * @cssprop --st-mega-menu-inset - Minimum space between a `mega` panel and the header's sides (default `1rem`).
@@ -70,9 +80,11 @@ export class Dropdown extends LitElement {
       color: var(--st-nav-color, var(--st-color-text-strong));
     }
 
-    :host([active]) .menu-title {
-      background: var(--st-color-accent-subtle);
-      color: var(--st-color-accent-text);
+    /* The current section: an accent underline, the header's one indicator, rather than a filled pill. */
+    :host([active]) .menu-title,
+    :host([current]) .menu-title {
+      color: var(--st-nav-color, var(--st-color-accent-text));
+      box-shadow: inset 0 -2px 0 var(--st-nav-active-line, var(--st-color-accent));
     }
 
     :host([disabled]) .menu-title {
@@ -121,11 +133,11 @@ export class Dropdown extends LitElement {
       visibility: hidden;
       transform: translateY(-10px);
       /* visibility flips at once on open (so keyboard focus can move into the panel on the same
-         frame) and only after the 0.3s fade on close. */
+         frame) and only after the 0.15s fade on close. */
       transition:
-        opacity 0.3s ease,
-        transform 0.3s ease,
-        visibility 0s linear 0.3s;
+        opacity 0.15s ease,
+        transform 0.15s ease,
+        visibility 0s linear 0.15s;
       pointer-events: none;
     }
 
@@ -177,6 +189,12 @@ export class Dropdown extends LitElement {
       pointer-events: auto;
     }
 
+    /* Read by the st-mega-menu-column product cards in the panel: no hover lift or decoration shift in the hamburger layout. */
+    :host([inline]) {
+      --st-mega-menu-column-lift: 0px;
+      --st-mega-menu-column-deco-transform: none;
+    }
+
     /* Mega (okta.com): the panel is a large rounded card floating under the whole bar, centred on
        the nearest positioned ancestor (st-header) instead of hanging off the trigger — the host
        stops being the panel's containing block. */
@@ -188,7 +206,15 @@ export class Dropdown extends LitElement {
       top: calc(100% + var(--st-mega-menu-gap, 12px));
       left: var(--st-mega-menu-inset, 1rem);
       right: var(--st-mega-menu-inset, 1rem);
-      max-width: var(--st-mega-menu-max-width, 1400px);
+      /* A panel with few columns is not stretched to the full width: each grid track (intro, link column, featured)
+         gets up to --st-mega-menu-track-width (default 420px), plus the gaps and padding of st-mega-menu. */
+      max-width: min(
+        var(--st-mega-menu-max-width, 1400px),
+        calc(
+          var(--st-mega-menu-tracks, 99) * var(--st-mega-menu-track-width, 420px) + (var(--st-mega-menu-tracks, 99) - 1) * 3rem +
+            7rem
+        )
+      );
       margin: 0 auto;
       padding: 0;
       max-height: calc(100dvh - var(--st-mega-menu-offset, 96px));
@@ -196,6 +222,16 @@ export class Dropdown extends LitElement {
       border: 0;
       border-radius: var(--st-mega-menu-radius, 24px);
       box-shadow: 0 24px 48px var(--st-shadow-color-md);
+      /* No opacity fade here: the surface is opaque from the first frame, so the page behind (e.g. a hero's text)
+         never shows through the panel while it opens. It slides in over 0.15s instead. */
+      opacity: 1;
+      transition:
+        transform 0.15s ease,
+        visibility 0s linear 0.15s;
+    }
+
+    :host([mega]:not([inline])) .menu-dropdown.show {
+      transition-delay: 0s;
     }
 
     /* The open section's trigger becomes an accent pill — also for a plain dropdown marked \`bar\`,
@@ -209,6 +245,42 @@ export class Dropdown extends LitElement {
     :host([bar]:not([inline])) .menu-title[aria-expanded='true'] {
       background: var(--st-color-accent);
       color: var(--st-color-on-solid);
+    }
+
+    /* trigger-style="item" (desktop bar): the trigger is laid out like st-menu-item's row, so it
+       lines up with the Home item beside it. Colours stay on the base rules (so the --st-nav-*
+       variables and the disabled state still apply). The hover nudge is left out: it would widen
+       the fit-content trigger and push its neighbours. The rules below come after the mega/bar
+       pill rules and match their specificity or beat it, so they win. */
+    :host([trigger-style='item']:not([inline])) .menu-title {
+      min-height: 0;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 400;
+      gap: 6px;
+      transition-property: background-color, color, border-color;
+      transition-duration: 0.15s;
+      transition-timing-function: ease;
+    }
+
+    :host([trigger-style='item']:not([inline])) .arrow {
+      display: inline-flex;
+      margin-left: 0;
+      color: currentColor;
+    }
+
+    /* Open shows the hover fill, not the solid accent pill. */
+    :host([trigger-style='item']:not([inline])) .menu-title[aria-expanded='true'] {
+      background: var(--st-nav-hover-bg, var(--st-color-hover));
+      color: var(--st-nav-color, var(--st-color-text-strong));
+    }
+
+    /* The current page: the same accent underline as st-menu-item.active (no fill, no side bar). */
+    :host([trigger-style='item'][active]:not([inline])) .menu-title,
+    :host([trigger-style='item'][current]:not([inline])) .menu-title {
+      color: var(--st-nav-color, var(--st-color-accent-text));
+      box-shadow: inset 0 -2px 0 var(--st-nav-active-line, var(--st-color-accent));
     }
 
     .mega-back-bar,
@@ -341,6 +413,14 @@ export class Dropdown extends LitElement {
   @property({ type: Boolean, reflect: true })
   active = false;
 
+  /** Page path the header is showing; set by `st-header`. */
+  @property({ attribute: false })
+  currentPath = '';
+
+  /** Computed from `href` and the nav items in the panel against `currentPath`; reflected for styling. */
+  @property({ type: Boolean, reflect: true })
+  current = false;
+
   /** Opens the panel in the flow under the trigger instead of floating over the page (see the
    * styles). `st-header` sets this on its own menu's dropdowns while its hamburger panel shows. */
   @property({ type: Boolean, reflect: true })
@@ -365,6 +445,17 @@ export class Dropdown extends LitElement {
   @property({ type: Boolean, reflect: true })
   bar = false;
 
+  /**
+   * `default` keeps the trigger as it has always looked. `item` lays it out like an `st-menu-item`
+   * row, so it matches a Home-style link beside it in `st-header`'s desktop bar: the same padding,
+   * type and 6px corners, the hover fill, the current-page look with the accent left bar, and a
+   * chevron caret in place of the ▼ glyph. Open shows the hover fill, not the solid accent pill.
+   * The item look applies only while not `inline` (the hamburger layout keeps its own look).
+   * Set it from JSON as `triggerStyle`.
+   */
+  @property({ type: String, attribute: 'trigger-style', reflect: true })
+  triggerStyle: 'default' | 'item' = 'default';
+
   /** Opens the panel while a mouse hovers the trigger or panel (touch and keyboard still click). Off while `inline`. */
   @property({ type: Boolean, attribute: 'open-on-hover' })
   openOnHover = false;
@@ -380,6 +471,12 @@ export class Dropdown extends LitElement {
 
   /** Whether the default slot has content — the source's `children` check. */
   @state() private hasContent = false;
+  /** Grid tracks of the `st-mega-menu` inside the panel, as it reports them; 0 until it does. */
+  @state() private megaTracks = 0;
+
+  private onMegaLayout = (event: Event): void => {
+    this.megaTracks = (event as CustomEvent<MegaMenuLayoutEventDetail>).detail.tracks;
+  };
 
   /** Whether `slot="icon"` has content. */
   @state() private hasIcon = false;
@@ -388,6 +485,7 @@ export class Dropdown extends LitElement {
     super.connectedCallback();
     document.addEventListener('mousedown', this.closeOnOutsideMouseDown);
     window.addEventListener('keydown', this.closeOnEscape);
+    this.addEventListener(MEGA_MENU_LAYOUT_EVENT, this.onMegaLayout);
     this.addEventListener('pointerenter', this.onPointerEnter);
     this.addEventListener('pointerleave', this.onPointerLeave);
   }
@@ -395,11 +493,16 @@ export class Dropdown extends LitElement {
   disconnectedCallback(): void {
     document.removeEventListener('mousedown', this.closeOnOutsideMouseDown);
     window.removeEventListener('keydown', this.closeOnEscape);
+    this.removeEventListener(MEGA_MENU_LAYOUT_EVENT, this.onMegaLayout);
     this.removeEventListener('pointerenter', this.onPointerEnter);
     this.removeEventListener('pointerleave', this.onPointerLeave);
     clearTimeout(this.hoverTimer);
     if (Dropdown.openDropdown === this) Dropdown.openDropdown = null;
     super.disconnectedCallback();
+  }
+
+  protected willUpdate(): void {
+    this.current = isCurrentPath(this.href, this.currentPath) || hasCurrentLink(this, PANEL_NAV_SELECTOR, this.currentPath, PANEL_SHORTCUT_SLOTS);
   }
 
   protected updated(changed: Map<string, unknown>): void {
@@ -562,7 +665,9 @@ export class Dropdown extends LitElement {
     const titleContent = html`
       ${this.iconPosition === 'left' ? icon : nothing} ${this.label ? html`<span part="label">${this.label}</span>` : nothing}
       ${this.iconPosition === 'right' ? icon : nothing}
-      ${this.hasContent ? html`<span class="arrow" part="caret" aria-hidden="true">▼</span>` : nothing}
+      ${this.hasContent
+        ? html`<span class="arrow" part="caret" aria-hidden="true">${this.triggerStyle === 'item' ? chevronIcon('down', 14) : '▼'}</span>`
+        : nothing}
     `;
     const titleClass = `menu-title ${this.triggerClassName} ${this.open ? 'active' : ''}`;
 
@@ -602,6 +707,7 @@ export class Dropdown extends LitElement {
           part="panel"
           class="menu-dropdown align-${this.align} ${this.itemGroupClassName} ${this.open ? 'show' : ''}"
           role="menu"
+          style=${this.mega && this.megaTracks > 0 ? `--st-mega-menu-tracks:${this.megaTracks}` : nothing}
           @click=${this.onPanelClick}
           @keydown=${this.onPanelKeyDown}
         >

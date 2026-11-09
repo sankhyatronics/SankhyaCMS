@@ -2,7 +2,6 @@ packages:
   - "packages/*"
   - "tooling/*"
   - "storybook"
-  - "docs"
 
 allowBuilds:
   esbuild: true
@@ -29,24 +28,24 @@ catalog:
   storybook: 10.6.1
   '@iconify/react': 6.0.2
   '@lit/react': 1.0.8
-  '@types/node': 26.6.4
+  '@types/node': 26.6.6
   '@types/react': 19.3.0
   '@types/react-dom': 19.3.0
-  '@vitejs/plugin-react': 6.1.2
+  '@vitejs/plugin-react': 6.2.1
   jsdom: 30.1.2
   lit: 3.3.3
   motion: 14.0.0
-  oxlint: 1.87.0
-  react: 19.3.0
-  react-dom: 19.3.0
+  oxlint: 1.91.0
+  react: 19.3.1
+  react-dom: 19.3.1
   react-markdown: 10.1.0
-  react-router: 8.4.0
+  react-router: 8.5.1
   remark-breaks: 4.0.0
   remark-gfm: 4.0.1
-  rimraf: 6.1.3
+  rimraf: 6.1.4
   tsup: 8.5.1
   typescript: 6.0.3  # TS 7 (native) breaks tsup's dts build (rollup-plugin-dts needs the JS compiler API)
-  vite: 8.3.4
+  vite: 8.3.6
   vite-plugin-dts: 5.1.2
   vite-plugin-lib-inject-css: 2.2.2
   vitest: 5.0.3

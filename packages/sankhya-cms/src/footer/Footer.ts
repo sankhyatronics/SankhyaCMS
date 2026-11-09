@@ -7,17 +7,23 @@ import { controlBaseStyles, rootFontFamilyStyles } from '../shared/styles';
 export interface FooterLink {
   label: string;
   href: string;
+  /** `false` leaves the link out of the footer. Omit, or `true`, to show it. */
+  visible?: boolean;
 }
 
 export interface FooterColumn {
   title: string;
   links: FooterLink[];
+  /** `false` leaves the whole column out. A column whose links are all hidden is left out too. */
+  visible?: boolean;
 }
 
 export interface FooterSocialLink {
   /** Iconify icon name, e.g. `mdi:github`. */
   icon: string;
   href: string;
+  /** Accessible name of the icon link (e.g. "Sankhyatronics on LinkedIn"). Falls back to `icon`. */
+  label?: string;
 }
 
 /** Fired when an internal footer link is activated — cancelable, so an SPA can `preventDefault()` and route instead. */
@@ -52,7 +58,9 @@ export class Footer extends LitElement {
        * specificity — so a page that resets margin/padding/border on every element (e.g. Tailwind
        * Preflight, which every app but Template Hub loads) silently zeroes this footer's padding
        * and top border unless these two win the conflict outright via !important. */
-      padding: var(--st-space-16) var(--st-space-28) !important;
+      /* The bottom padding also clears a visible cookie banner (st-cookie-consent publishes its height
+       * as --st-cookie-banner-height on <html>; 0 when there is no banner). */
+      padding: var(--st-space-16) var(--st-space-28) calc(var(--st-space-16) + var(--st-cookie-banner-height, 0px)) !important;
       border-top: 1px solid var(--st-color-border) !important;
       color: var(--st-color-text-muted);
       font-size: var(--st-text-xs);
@@ -78,7 +86,7 @@ export class Footer extends LitElement {
     /* Site layout */
     :host([site]) {
       display: block;
-      padding: 64px var(--st-space-28) 32px !important;
+      padding: 64px var(--st-space-28) calc(32px + var(--st-cookie-banner-height, 0px)) !important;
       font-size: var(--st-text-sm);
     }
 
@@ -118,6 +126,8 @@ export class Footer extends LitElement {
       margin: 0;
       max-width: 300px;
       line-height: 1.6;
+      /* A line break in the text (for example name / address / email) stays a line break. */
+      white-space: pre-line;
     }
 
     .social {
@@ -127,7 +137,9 @@ export class Footer extends LitElement {
     }
 
     .social-link,
-    .link {
+    .link,
+    .powered-by {
+      position: relative;
       color: inherit;
       text-decoration: none;
       transition: color 0.2s ease;
@@ -136,6 +148,19 @@ export class Footer extends LitElement {
     .social-link:hover,
     .link:hover {
       color: var(--st-color-text-strong);
+    }
+
+    /* Touch target: the visible icon or text keeps its size; a 44px hit area (WCAG 2.5.5) sits over it. */
+    .social-link::after,
+    .link::after,
+    .powered-by::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 44px);
+      height: 44px;
+      transform: translate(-50%, -50%);
     }
 
     .column-title {
@@ -150,6 +175,7 @@ export class Footer extends LitElement {
     .links {
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
       gap: 16px;
     }
 
@@ -165,10 +191,19 @@ export class Footer extends LitElement {
       gap: 4px;
     }
 
+    .copyright-line {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 16px;
+      row-gap: 4px;
+    }
+
+    /* No opacity here: it blended the text into the background and fell below WCAG AA (about 3.6:1
+       on a light footer). The link takes the footer's colour, text-muted (5.1:1 on white) or
+       on-solid on an inverted footer. */
     .bottom-text .powered-by {
       font-size: 0.85em;
       font-weight: inherit;
-      opacity: 0.8;
     }
 
     @media (max-width: 1024px) {
@@ -214,6 +249,10 @@ export class Footer extends LitElement {
   @property({ type: String })
   copyright = '';
 
+  /** Legal line (e.g. a trademark notice) shown beside the copyright. Empty hides it. */
+  @property({ type: String, attribute: 'legal-note' })
+  legalNote = '';
+
   @property({ type: String, attribute: 'powered-by' })
   poweredBy = '';
 
@@ -229,6 +268,10 @@ export class Footer extends LitElement {
   @property({ type: String, attribute: 'image-src' })
   imageSrc = '';
 
+  /** Alt text of the logo. Default: the company name plus "home", or "Home" without one. */
+  @property({ type: String, attribute: 'image-alt' })
+  imageAlt = '';
+
   /** Short blurb under the logo (site layout). */
   @property({ type: String })
   description = '';
@@ -243,6 +286,14 @@ export class Footer extends LitElement {
 
   private get isSite(): boolean {
     return !!(this.columns.length || this.socialLinks.length || this.description || this.imageSrc);
+  }
+
+  /** The columns to show, each with only its visible links; a column left with no links is dropped. */
+  private get visibleColumns(): FooterColumn[] {
+    return this.columns
+      .filter(column => column.visible !== false)
+      .map(column => ({ ...column, links: column.links.filter(link => link.visible !== false) }))
+      .filter(column => column.links.length > 0);
   }
 
   private get resolvedCopyright(): string {
@@ -289,7 +340,7 @@ export class Footer extends LitElement {
           <div class="brand" part="brand">
             ${this.imageSrc || this.companyName
               ? html`<div class="logo">
-                  ${this.imageSrc ? html`<img class="logo-img" src=${this.imageSrc} alt=${this.companyName || 'Logo'} />` : nothing}
+                  ${this.imageSrc ? html`<img class="logo-img" part="logo" src=${this.imageSrc} alt=${this.imageAlt || (this.companyName ? `${this.companyName} home` : 'Home')} />` : nothing}
                   ${this.companyName ? html`<span>${this.companyName}</span>` : nothing}
                 </div>`
               : nothing}
@@ -297,14 +348,14 @@ export class Footer extends LitElement {
             ${this.socialLinks.length
               ? html`<div class="social">
                   ${this.socialLinks.map(
-                    social => html`<a part="social" class="social-link" href=${social.href} target="_blank" rel="noopener noreferrer" aria-label=${social.icon}>
+                    social => html`<a part="social" class="social-link" href=${social.href} target="_blank" rel="noopener noreferrer" aria-label=${social.label || social.icon}>
                       <iconify-icon icon=${social.icon} width="24" height="24"></iconify-icon>
                     </a>`
                   )}
                 </div>`
               : nothing}
           </div>
-          ${this.columns.map(
+          ${this.visibleColumns.map(
             column => html`<div class="column" part="column">
               <h4 class="column-title">${column.title}</h4>
               <div class="links">${column.links.map(link => this.renderLink(link))}</div>
@@ -313,7 +364,7 @@ export class Footer extends LitElement {
         </div>
         <div class="bottom" part="bottom">
           <div class="bottom-text">
-            <span part="copyright">${this.resolvedCopyright}</span>
+            ${this.renderCopyright()}
             ${this.version ? html`<span part="version">v${this.version}</span>` : nothing} ${this.renderPoweredBy()}
           </div>
         </div>
@@ -321,10 +372,17 @@ export class Footer extends LitElement {
     `;
   }
 
+  private renderCopyright() {
+    return html`<div class="copyright-line">
+      <span part="copyright">${this.resolvedCopyright}</span>
+      ${this.legalNote ? html`<span part="legal">${this.legalNote}</span>` : nothing}
+    </div>`;
+  }
+
   render() {
     if (this.isSite) return this.renderSite();
     return html`
-      <span part="copyright">${this.resolvedCopyright}</span>
+      ${this.renderCopyright()}
       ${this.version ? html`<span part="version">v${this.version}</span>` : nothing} ${this.renderPoweredBy()}
     `;
   }

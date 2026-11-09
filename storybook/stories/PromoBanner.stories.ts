@@ -23,3 +23,21 @@ export const Default: Story = {};
 export const Inverted: Story = { args: {
     "inverted": true
   } };
+
+/** Brand-colour banner with a white primary button. */
+export const Accent: Story = { args: {
+    "variant": "accent"
+  } };
+
+/** Two outlined buttons. */
+export const TwoActions: Story = { args: {
+    "secondaryActionLabel": "See pricing",
+    "secondaryHref": "#pricing"
+  } };
+
+/** Accent banner with two buttons: the primary is white, the outlined secondary white on the brand fill. */
+export const AccentTwoActions: Story = { args: {
+    "variant": "accent",
+    "secondaryActionLabel": "See pricing",
+    "secondaryHref": "/pricing"
+  } };

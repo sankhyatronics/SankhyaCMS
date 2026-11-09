@@ -2,7 +2,7 @@ import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 import { controlBaseStyles, rootFontFamilyStyles } from '../shared/styles';
-import { sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-styles';
+import { sectionEyebrowStyles, sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-styles';
 
 /**
  * A page band that holds other content: sets the background, the spacing above and below, and
@@ -15,6 +15,7 @@ import { sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-sty
  * @cssprop --st-section-padding-inline - Overrides the left/right padding (not with `width="full"`).
  * @csspart inner - The width-limited content box.
  * @csspart header - The heading block.
+ * @csspart content - The wrapper around the slot (the grid when `columns` is 2).
  */
 @customElement('st-section')
 export class Section extends LitElement {
@@ -44,7 +45,8 @@ export class Section extends LitElement {
       background: var(--st-section-bg, var(--st-color-subtle));
     }
 
-    :host([background='dark']) {
+    :host([background='dark']),
+    :host([inverted]) {
       background: var(--st-section-bg, var(--st-cms-band-dark-bg));
       color: var(--st-cms-band-dark-color);
     }
@@ -88,6 +90,18 @@ export class Section extends LitElement {
       max-width: none;
     }
 
+    /* columns="2": the slotted children sit in two equal columns; they stack below 720px. */
+    .content {
+      display: block;
+    }
+
+    :host([columns='2']) .content {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--st-space-48);
+      align-items: start;
+    }
+
     .header {
       margin-bottom: var(--st-space-48);
     }
@@ -108,12 +122,7 @@ export class Section extends LitElement {
     }
 
     .eyebrow {
-      margin: 0 0 var(--st-space-12);
-      font-size: var(--st-text-sm);
-      font-weight: var(--st-font-weight-bold);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--st-color-text-muted);
+      ${sectionEyebrowStyles}
     }
 
     .title {
@@ -134,13 +143,25 @@ export class Section extends LitElement {
     }
 
     :host([background='dark']) .eyebrow,
-    :host([background='dark']) .subtitle {
-      color: color-mix(in oklch, var(--st-cms-band-dark-color) 80%, transparent);
+    :host([inverted]) .eyebrow {
+      color: var(--st-cms-highlight);
+    }
+
+    :host([background='dark']) .subtitle,
+    :host([inverted]) .subtitle {
+      color: color-mix(in oklch, var(--st-cms-band-dark-color) 92%, transparent);
     }
 
     :host([background='accent']) .eyebrow,
     :host([background='accent']) .subtitle {
       color: color-mix(in oklch, var(--st-color-on-solid) 80%, transparent);
+    }
+
+    @media (max-width: 720px) {
+      :host([columns='2']) .content {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--st-space-24);
+      }
     }
 
     @media (max-width: 768px) {
@@ -166,6 +187,10 @@ export class Section extends LitElement {
   @property({ type: String, reflect: true })
   background: 'default' | 'subtle' | 'dark' | 'accent' | 'transparent' = 'default';
 
+  /** Puts the section on the dark band (`--st-cms-band-dark-bg`), like `background="dark"`; the band follows the theme. Same name as on the other components. */
+  @property({ type: Boolean, reflect: true })
+  inverted = false;
+
   /** Space above the content: `none`, `s`, `m` (default), `l`, `xl` or `xxl`. */
   @property({ type: String, reflect: true, attribute: 'spacing-above' })
   spacingAbove: 'none' | 's' | 'm' | 'l' | 'xl' | 'xxl' = 'm';
@@ -177,6 +202,10 @@ export class Section extends LitElement {
   /** `contained` (default, the page container width), `narrow` (reading width) or `full` (edge to edge). */
   @property({ type: String, reflect: true })
   width: 'contained' | 'narrow' | 'full' = 'contained';
+
+  /** Columns for the slotted children: `1` (default, stacked) or `2` (two equal columns, stacked again below 720px). */
+  @property({ type: Number, reflect: true })
+  columns: 1 | 2 = 1;
 
   /** Alignment of the heading. */
   @property({ type: String, reflect: true, attribute: 'text-alignment' })
@@ -193,7 +222,9 @@ export class Section extends LitElement {
               ${this.subtitle ? html`<p class="subtitle" part="subtitle">${this.subtitle}</p>` : nothing}
             </div>`
           : nothing}
-        <slot></slot>
+        <div class="content" part="content">
+          <slot></slot>
+        </div>
       </div>
     `;
   }

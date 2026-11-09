@@ -60,3 +60,15 @@ export const DarkWithStats: Story = {
     return section;
   }
 };
+
+/** Two equal columns of slotted cards (stacked below 720px). */
+export const TwoColumns: Story = {
+  args: { columns: 2, title: 'Two columns', subtitle: '', eyebrow: '', textAlignment: 'left' },
+  render: args => {
+    const section = renderElement('st-section')(args);
+    section.innerHTML = [1, 2, 3, 4]
+      .map(n => `<div style="padding:24px;border:1px solid var(--st-color-border);border-radius:14px">Column item ${n}</div>`)
+      .join('');
+    return section;
+  }
+};

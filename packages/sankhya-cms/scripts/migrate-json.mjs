@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Migrates SankhyaUI JSON from the legacy shape to the flat node schema (see CLAUDE.md).
+ * Migrates Sankhya CMS JSON from the legacy shape to the flat node schema (see CLAUDE.md).
  * Idempotent: already-migrated nodes pass through unchanged.
  *
  *   node scripts/migrate-json.mjs <file|dir> [...]   rewrite *.json, and ```json blocks in *.md / *.mdx

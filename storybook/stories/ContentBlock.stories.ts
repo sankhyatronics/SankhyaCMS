@@ -24,3 +24,23 @@ export const WithImage: Story = { args: {
     "imageAlt": "Team",
     "imageCaption": "Our team"
   } };
+
+/** `heading-level="3"`: a sub-section title (an `h3`), smaller and lighter than the section title. */
+export const SubsectionHeading: Story = { args: {
+    "title": "Getting started",
+    "headingLevel": 3
+  } };
+
+/** An eyebrow above the title, in the same style as the steps and section eyebrows. */
+export const WithEyebrow: Story = { args: {
+    "eyebrow": "Our story",
+    "title": "Built for enterprise portals"
+  } };
+
+/** `text-alignment="center"`: eyebrow, title, subtitle and body all centred. */
+export const Centered: Story = { args: {
+    "eyebrow": "Our story",
+    "title": "Built for enterprise portals",
+    "subtitle": "Centred",
+    "textAlignment": "center"
+  } };

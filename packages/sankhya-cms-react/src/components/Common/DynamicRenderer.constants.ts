@@ -1,11 +1,15 @@
 import type { ComponentType } from 'react';
 import type { ComponentList } from './schema';
 import {
+    AttentionPanel,
+    BarChart,
     BentoGrid,
     Card,
     Carousel,
+    Chip,
     ContentBlock,
     CookieConsent,
+    DateTile,
     Dropdown,
     FeatureItem,
     FeatureSplit,
@@ -15,16 +19,27 @@ import {
     Hero,
     IconButton,
     ItemsAccordion,
+    KpiCard,
     MegaMenu,
     MegaMenuColumn,
     MegaMenuFeature,
     MenuGrid,
     MenuGridItem,
     MenuItem,
+    PlanCards,
+    ProductNav,
     PromoBanner,
+    QuoteDialog,
+    ContactForm,
+    Booking,
+    ScreenshotTour,
+    SegmentedControl,
     Section,
     Select,
     Stats,
+    Steps,
+    TagStrip,
+    Flow,
     Testimonials
 } from '../lit';
 
@@ -46,14 +61,29 @@ export const baseComponents = {
     BentoGrid,
     Footer,
     Stats,
+    Steps,
+    TagStrip,
+    Flow,
     PromoBanner,
+    ProductNav,
+    PlanCards,
+    QuoteDialog,
+    ContactForm,
+    Booking,
     Testimonials,
     Select,
     Carousel,
     CookieConsent,
     Card,
     ItemsAccordion,
-    Section
+    Section,
+    Chip,
+    KpiCard,
+    DateTile,
+    AttentionPanel,
+    BarChart,
+    SegmentedControl,
+    ScreenshotTour
 } as const;
 
 /**
@@ -64,7 +94,7 @@ export type SlotMap = Record<string, string>;
 
 const componentRegistry: Record<string, ComponentType<any>> = { ...baseComponents };
 const slotRegistry: Record<string, SlotMap> = {
-    Header: { default: 'menuBar', utility: 'utilityButtons' },
+    Header: { default: 'menuBar', utility: 'utilityButtons', context: 'contextNav' },
     MegaMenu: { default: 'children', intro: 'intro', featured: 'featured' }
 };
 

@@ -34,3 +34,12 @@ export const Default: Story = {};
 export const AllowMultiple: Story = { args: {
     "allowMultiple": true
   } };
+
+/** The first row starts open; content is Markdown. */
+export const OpenFirst: Story = { args: {
+    "openFirst": true,
+    "items": [
+      { "id": "a", "title": "What is it?", "content": "A set of **Lit components** for portals." },
+      { "id": "b", "title": "Can I use React?", "content": "Yes. See [sankhya-cms-react](#), or use plain text." }
+    ]
+  } };

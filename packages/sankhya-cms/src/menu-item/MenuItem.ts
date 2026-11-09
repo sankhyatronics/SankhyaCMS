@@ -3,22 +3,25 @@ import { customElement, property, state } from 'lit/decorators.js';
 
 import { arrowUpRightIcon } from '../shared/icons';
 import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
+import { isCurrentPath } from '../shared/nav-path';
 import type { MenuItemSelectEventDetail } from './MenuItemEvents';
 
 /**
  * A single flat nav row — icon (`slot="icon"`) + title + badge on one line, an optional
- * description below — as opposed to `st-menu-grid-item`'s card for a multi-column grid. A 1:1
- * port of `SankhyaUI`'s React `MenuItem` (`SankhyaCMS/SankhyaUI/src/components/Menu`): same
- * markup and CSS, with its `motion` effects redone in CSS — nudges right and scales to 1.01 on
- * hover / 0.99 while pressed, the icon tilts on hover, the badge pops in, the description fades
- * in. Colors come from the suite theme rather than per-item utility classes.
+ * description below — as opposed to `st-menu-grid-item`'s card for a multi-column grid. Effects
+ * are CSS: nudges right and scales to 1.01 on hover / 0.99 while pressed, the icon tilts on hover,
+ * the badge pops in, the description fades in. Colors come from the suite theme rather than
+ * per-item utility classes.
  *
  * Renders a real `<a href>` but fires a *cancelable* `menu-item-select` event (detail: `{ href }`)
- * before navigating — a host doing client-side routing calls `event.preventDefault()` on it (the
- * source used react-router's `Link` here; the suite apps have no router).
+ * before navigating — a host doing client-side routing calls `event.preventDefault()` on it.
+ *
+ * It is the current page (`aria-current="page"`, shown as active) when `active` is set, or when the
+ * `href` matches `currentPath`, which an enclosing `st-header` sets from its `current-path`.
  *
  * @slot icon - The row's icon, sized to `icon-size` (16px, or 14px when `compact`).
  * @cssprop --st-menu-item-icon-size - Width and height of the slotted icon; `icon-size` sets it.
+ * @cssprop --st-menu-item-arrow - A trailing glyph (e.g. `'→'`) drawn after a `link` variant's title; none by default, and not drawn on a link that opens a new tab.
  */
 @customElement('st-menu-item')
 export class MenuItem extends LitElement {
@@ -93,10 +96,11 @@ export class MenuItem extends LitElement {
       transition-duration: 0.1s;
     }
 
+    /* The current page: an underline, the one indicator the header uses. No fill and no side bar. The
+       header sets --st-nav-active-line to follow its own text colour on a hero. */
     .menu-item.active {
-      background-color: var(--st-color-accent-subtle);
-      color: var(--st-color-accent-text);
-      border-left: 4px solid var(--st-color-accent);
+      color: var(--st-nav-color, var(--st-color-accent-text));
+      box-shadow: inset 0 -2px 0 var(--st-nav-active-line, var(--st-color-accent));
     }
 
     .menu-item-icon {
@@ -209,6 +213,34 @@ export class MenuItem extends LitElement {
       transform: none;
     }
 
+    /* The row arrow of a product card (st-mega-menu-column variant="product" sets --st-menu-item-arrow).
+       Nothing is drawn by default, and never on a link that opens a new tab (its ↗ icon sits in the title). */
+    .menu-item.link::after {
+      content: var(--st-menu-item-arrow, none);
+      flex: none;
+      transition: transform 0.2s ease;
+    }
+
+    .menu-item.link[target='_blank']::after {
+      content: none;
+    }
+
+    .menu-item.link:hover::after,
+    .menu-item.link:focus-visible::after {
+      transform: translateX(2px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .menu-item.link::after {
+        transition: none;
+      }
+
+      .menu-item.link:hover::after,
+      .menu-item.link:focus-visible::after {
+        transform: none;
+      }
+    }
+
     .menu-item.link.active {
       border-left: 0;
       background: transparent;
@@ -311,6 +343,10 @@ export class MenuItem extends LitElement {
   @property({ type: Boolean, reflect: true })
   active = false;
 
+  /** Page path the header is showing; set by `st-header` (from its `current-path`), so this row can compare its `href` with it. */
+  @property({ attribute: false })
+  currentPath = '';
+
   @property({ type: Boolean, reflect: true })
   compact = false;
 
@@ -353,11 +389,12 @@ export class MenuItem extends LitElement {
   render() {
     const showDescription = !!this.description && this.showDescription;
     const link = this.variant === 'link';
+    const current = isCurrentPath(this.href, this.currentPath);
     const classes = [
       'menu-item',
       link ? 'link' : '',
       this.variant === 'bar' ? 'bar' : '',
-      this.active ? 'active' : '',
+      this.active || current ? 'active' : '',
       this.compact ? 'compact' : '',
       showDescription ? '' : 'no-description'
     ]
@@ -371,6 +408,7 @@ export class MenuItem extends LitElement {
         href=${this.href}
         target=${this.target}
         rel=${this.target === '_blank' ? 'noopener noreferrer' : nothing}
+        aria-current=${current ? 'page' : nothing}
         @click=${this.onClick}
       >
         <span
