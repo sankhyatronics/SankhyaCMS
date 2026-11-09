@@ -1,4 +1,4 @@
-import { LitElement, css, html, nothing } from 'lit';
+import { LitElement, PropertyValues, css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 import { MODAL_OPEN_ATTRIBUTE } from '../shared/modal-state';
@@ -90,6 +90,12 @@ export class CookieConsent extends LitElement {
     }
 
     :host([data-st-drawer-hidden]) {
+      display: none;
+    }
+
+    /* Once the visitor has answered there is nothing to show. The host draws its own surface (padding, border,
+       shadow), so an empty host would still paint a strip along the bottom of the page. */
+    :host([data-st-answered]) {
       display: none;
     }
 
@@ -314,6 +320,16 @@ export class CookieConsent extends LitElement {
     this.sizeObserver = undefined;
     document.documentElement.style.removeProperty(BANNER_HEIGHT_PROPERTY);
     super.disconnectedCallback();
+  }
+
+  /**
+   * `storage-key` can arrive after the element connects (a framework wrapper sets properties once the element is
+   * in the page), so the read in `connectedCallback` may have used the default key. Read again under the key in
+   * force, so a choice saved earlier is found and the bar is not shown to someone who already answered.
+   */
+  protected willUpdate(changed: PropertyValues): void {
+    if (changed.has('storageKey')) this.consent = this.readStored();
+    this.toggleAttribute('data-st-answered', this.consent !== null);
   }
 
   protected updated(): void {
