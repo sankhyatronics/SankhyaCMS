@@ -3,6 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import 'iconify-icon';
 
+import { DECORATIONS } from '../shared/decorations';
+import type { DecorationName } from '../shared/decorations';
 import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
 import { renderMarkdown } from '../shared/markdown';
 import {
@@ -39,6 +41,8 @@ export interface BentoGridItem {
   chips?: BentoGridChip[];
   /** `stack` (default) puts the action under the text; `row` puts the text left and the action right. */
   layout?: 'stack' | 'row';
+  /** Faint line art in the card's top-right corner; overrides the grid's `decoration`. `none` turns it off for this card. */
+  decoration?: DecorationName | 'none';
 }
 
 export interface BentoGridChip {
@@ -134,6 +138,35 @@ export class BentoGrid extends LitElement {
       transform: translateY(-4px);
       box-shadow: 0 12px 24px -10px var(--st-shadow-color-lg);
       z-index: 1;
+    }
+
+    /* Decorative line art, as on the mega menu's product cards: behind the content, faded toward the bottom-left. */
+    .deco {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 240px;
+      height: 160px;
+      z-index: 0;
+      pointer-events: none;
+      color: var(--st-bento-deco-color, var(--st-color-accent));
+      opacity: var(--st-bento-deco-opacity, 0.28);
+      -webkit-mask-image: radial-gradient(120% 120% at 100% 0%, #000 35%, transparent 75%);
+      mask-image: radial-gradient(120% 120% at 100% 0%, #000 35%, transparent 75%);
+      transition:
+        transform 0.4s ease,
+        opacity 0.4s ease;
+    }
+
+    .card:hover .deco {
+      opacity: calc(var(--st-bento-deco-opacity, 0.28) + 0.2);
+      transform: translate(-6px, 4px);
+    }
+
+    :host .card.primary .deco,
+    :host .card.dark .deco,
+    :host([inverted]) .deco {
+      color: var(--st-cms-highlight, var(--st-color-on-solid));
     }
 
     .image-wrapper {
@@ -459,6 +492,12 @@ export class BentoGrid extends LitElement {
       }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .card:hover .deco {
+        transform: none;
+      }
+    }
+
     @media (max-width: 640px) {
       .chips {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -499,6 +538,10 @@ export class BentoGrid extends LitElement {
 
   @property({ type: Boolean, reflect: true })
   inverted = false;
+
+  /** Line art on every card (`flow`, `orbit`, `waves` or `ribbon`); a card's own `decoration` wins. Default none. */
+  @property({ type: String })
+  decoration: DecorationName | 'none' = 'none';
 
   @property({ type: String })
   title = '';
@@ -546,7 +589,11 @@ export class BentoGrid extends LitElement {
           )}
         </ul>`
       : nothing;
+    const decoration = item.imageSrc ? 'none' : (item.decoration ?? this.decoration);
     const body = html`
+      ${decoration !== 'none' && DECORATIONS[decoration]
+        ? html`<svg class="deco" part="decoration" viewBox="0 0 240 160" preserveAspectRatio="xMaxYMin meet" aria-hidden="true" focusable="false">${DECORATIONS[decoration]}</svg>`
+        : nothing}
       ${item.imageSrc
         ? html`<div class="image-wrapper" part="image-wrapper">
             <img class="image" part="image" src=${item.imageSrc} alt=${item.imageAlt ?? item.title} />
