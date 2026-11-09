@@ -36,6 +36,24 @@ export const buttonResetStyles = css`
 `;
 
 /**
+ * The pill CTA shape (`buttonStyle="pill"`): fully rounded, centred label, `min-height` 52px for a
+ * main CTA (hero, banner). A component can set `--st-cta-pill-min-height: 44px` for smaller CTAs.
+ * Fill, colour, border and padding stay local (they differ between primary and secondary).
+ */
+export const ctaPillStyles = css`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--st-space-8);
+  box-sizing: border-box;
+  min-height: var(--st-cta-pill-min-height, 52px);
+  padding: 0 var(--st-space-28);
+  border-radius: 9999px;
+  font-weight: var(--st-font-weight-semibold);
+  text-decoration: none;
+`;
+
+/**
  * The dark-filled primary-action button look (wizard Next/Generate/Run/Save,
  * active toggle buttons, ...). Pair with `ctaButtonDisabledStyles` on the
  * same selector's `:disabled` state.

@@ -10,6 +10,8 @@ export interface NodeEnvelope<TNode> {
     slot?: string;
     /** Editor-only label, never passed to the component. */
     label?: string;
+    /** `false` leaves the node (and its children) out of the rendered page. Omit, or `true`, to show it. Never passed to the component. */
+    visible?: boolean;
     children?: TNode[];
 }
 

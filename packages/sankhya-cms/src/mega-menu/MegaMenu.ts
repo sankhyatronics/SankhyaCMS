@@ -1,7 +1,8 @@
-import { LitElement, css, html, nothing } from 'lit';
+import { LitElement, PropertyValues, css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
+import { MEGA_MENU_LAYOUT_EVENT, type MegaMenuLayoutEventDetail } from './MegaMenuEvents';
 
 /**
  * The rich layout of a mega-menu panel, after okta.com: an optional intro column on the left (a
@@ -15,11 +16,15 @@ import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
  * everything stacked in the narrow drill-down panel `st-header` shows on a phone (where the intro
  * heading is left out — the drill-down already shows the section's name).
  *
+ * `cta-label` + `cta-href` add a call-to-action pill pinned to the foot of the intro column, so the
+ * column ends level with the featured cards instead of leaving an empty gap under the text.
+ *
  * @slot - The link columns (`st-mega-menu-column`s, or any blocks).
  * @slot intro - Quick links under the intro text, e.g. `st-menu-item`s with an icon.
  * @slot featured - Promo cards (`st-mega-menu-feature`s), stacked.
  * @csspart inner - The grid holding every area.
  * @csspart intro - The intro column.
+ * @csspart cta - The intro column's call-to-action pill.
  * @csspart columns - The grid holding the link columns.
  * @csspart featured - The featured column.
  */
@@ -83,6 +88,32 @@ export class MegaMenu extends LitElement {
       margin-top: 0;
       padding-top: 0;
       border-top: 0;
+    }
+
+    /* The intro column's call to action: pinned to the foot of the column, so it lines up with the featured cards. */
+    .intro-footer {
+      display: flex;
+      margin-top: auto;
+      padding-top: 2rem;
+    }
+
+    .intro-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      min-height: 44px;
+      padding: 0 1.25rem;
+      border-radius: 9999px;
+      background: var(--st-color-accent);
+      color: var(--st-color-on-solid);
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .intro-cta:hover {
+      background: color-mix(in oklch, var(--st-color-accent) 88%, var(--st-color-text-strong));
     }
 
     .featured-heading {
@@ -161,6 +192,18 @@ export class MegaMenu extends LitElement {
   @property({ type: Number })
   columns = 0;
 
+  /** Label of the call-to-action pill at the foot of the intro column. Needs `cta-href`. */
+  @property({ type: String, attribute: 'cta-label' })
+  ctaLabel = '';
+
+  /** Target of the intro column's call to action. */
+  @property({ type: String, attribute: 'cta-href' })
+  ctaHref = '';
+
+  /** Whether the menu panel is shown. Set to `false` to hide it entirely (it keeps its slotted content). */
+  @property({ type: Boolean })
+  visible = true;
+
   @state() private columnCount = 1;
   @state() private hasIntroLinks = false;
   @state() private hasFeatured = false;
@@ -177,11 +220,28 @@ export class MegaMenu extends LitElement {
     this.hasFeatured = (event.target as HTMLSlotElement).assignedElements({ flatten: true }).length > 0;
   };
 
-  render() {
+  private get layout() {
     const columns = Math.min(6, Math.max(1, Math.round(this.columns) || this.columnCount));
     const hasIntroText = !!(this.heading || this.description);
-    const hasIntro = hasIntroText || this.hasIntroLinks;
+    const hasCta = !!(this.ctaLabel && this.ctaHref);
+    const hasIntro = hasIntroText || this.hasIntroLinks || hasCta;
     const hasFeatured = this.hasFeatured || !!this.featuredHeading;
+    return { columns, hasIntroText, hasCta, hasIntro, hasFeatured, tracks: columns + (hasIntro ? 1 : 0) + (hasFeatured ? 1 : 0) };
+  }
+
+  private lastTracks = 0;
+
+  protected updated(_changed: PropertyValues): void {
+    const { tracks } = this.layout;
+    if (tracks === this.lastTracks) return;
+    this.lastTracks = tracks;
+    this.dispatchEvent(
+      new CustomEvent<MegaMenuLayoutEventDetail>(MEGA_MENU_LAYOUT_EVENT, { detail: { tracks }, bubbles: true, composed: true })
+    );
+  }
+
+  render() {
+    const { columns, hasIntroText, hasCta, hasIntro, hasFeatured } = this.layout;
     // Every column — intro, each link column, featured — gets the same share of the width.
     const tracks = [hasIntro ? 'minmax(0, 1fr)' : '', `minmax(0, ${columns}fr)`, hasFeatured ? 'minmax(0, 1fr)' : '']
       .filter(Boolean)
@@ -190,6 +250,7 @@ export class MegaMenu extends LitElement {
       <div
         part="inner"
         class="inner"
+        ?hidden=${!this.visible}
         style="grid-template-columns:${tracks};--st-mega-menu-columns:${columns};--st-mega-menu-columns-md:${Math.min(2, columns)}"
       >
         <div part="intro" class="intro" ?hidden=${!hasIntro}>
@@ -198,6 +259,9 @@ export class MegaMenu extends LitElement {
           <div part="intro-links" class="intro-links ${hasIntroText ? '' : 'no-text'}" ?hidden=${!this.hasIntroLinks}>
             <slot name="intro" @slotchange=${this.onIntroSlotChange}></slot>
           </div>
+          ${hasCta
+            ? html`<div part="cta-row" class="intro-footer"><a part="cta" class="intro-cta" href=${this.ctaHref}>${this.ctaLabel}</a></div>`
+            : nothing}
         </div>
         <div part="columns" class="columns"><slot @slotchange=${this.onColumnsSlotChange}></slot></div>
         <div part="featured" class="featured" ?hidden=${!hasFeatured}>

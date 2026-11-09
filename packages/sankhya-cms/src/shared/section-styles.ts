@@ -36,9 +36,28 @@ export const cardDescriptionStyles = css`
   line-height: 1.5;
 `;
 
-/** Outlined call-to-action link/button used by hero, promo banner, features, ... */
+/**
+ * Small uppercase, letter-spaced accent label above a section or content heading ("HOW IT WORKS").
+ * Shared by `st-steps`, `st-section`, `st-content-block` and `st-features-section`. Inverted/dark
+ * surfaces override the colour locally.
+ */
+export const sectionEyebrowStyles = css`
+  margin: 0 0 var(--st-space-12);
+  font-size: var(--st-text-sm);
+  font-weight: var(--st-font-weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--st-color-accent-text);
+`;
+
+/**
+ * Outlined call-to-action link/button used by hero, promo banner, features, ... Applies to both
+ * `<a>` (when the CTA has an `href`) and `<button>`: `box-sizing` is pinned so an anchor sizes like
+ * a button with the same padding.
+ */
 export const ctaLinkStyles = css`
   display: inline-block;
+  box-sizing: border-box;
   padding: 12px 24px;
   border-radius: var(--st-radius-sm);
   font: inherit;

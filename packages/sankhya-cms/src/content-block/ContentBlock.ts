@@ -2,19 +2,38 @@ import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
-import { sectionSubtitleStyles, sectionTitleStyles, sectionHeaderStyles } from '../shared/section-styles';
+import { ctaLinkStyles, sectionEyebrowStyles, sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-styles';
+import { ctaAriaLabel, ctaLabelStyles, renderCtaLabel } from '../shared/cta-label';
+import { externalLinkAttrs, externalLinkExtras, isExternalHref } from '../shared/external-link';
 import '../markdown';
 
 /**
- * A long-form article section: centered title/subtitle, an optional featured image with caption,
- * then Markdown body text. The body comes from `content-src` (a Markdown URL) or an inline
- * `content` string (so the block works without a fetch); `content-src` wins when both are set.
+ * A long-form article section: an optional eyebrow, a title, a subtitle, an optional featured image
+ * with caption, then Markdown body text. The body comes from `content-src` (a Markdown URL) or an
+ * inline `content` string (so the block works without a fetch); `content-src` wins when both are set.
+ *
+ * `list-style="check"` shows check marks instead of bullets on the body's lists. `action-label` with
+ * an `href` adds a pill link under the body, styled by `action-variant`. `max-width="prose"` narrows
+ * the body to a 720px reading column.
+ *
+ * The title is a real heading: `<h2>` by default, `<h3>` with `heading-level="3"` for a sub-section
+ * inside a larger page (smaller, lighter type, so it never outweighs a section title). Eyebrow,
+ * title, subtitle and body share one alignment: left by default, centred with `text-alignment="center"`.
  *
  * @cssprop --st-content-block-padding - Overrides the block's padding.
+ * @csspart container - The width-limited content box.
+ * @csspart header - The eyebrow, title and subtitle block.
+ * @csspart eyebrow - The small uppercase label above the title.
+ * @csspart title - The heading (`<h2>` or `<h3>`).
+ * @csspart subtitle - The line under the title.
+ * @csspart image - The featured image and its caption.
+ * @csspart body - The Markdown body.
+ * @csspart action - The pill link under the body (when `action-label` and `href` are set).
  */
 @customElement('st-content-block')
 export class ContentBlock extends LitElement {
   static styles = css`
+    ${ctaLabelStyles}
     ${controlBaseStyles}
 
     :host {
@@ -23,7 +42,9 @@ export class ContentBlock extends LitElement {
       /* !important: a page-level reset (e.g. Tailwind Preflight) otherwise zeroes a shadow host's
          padding; override with --st-content-block-padding instead. */
       padding: var(--st-content-block-padding, var(--st-space-24)) !important;
-      background: var(--st-color-surface);
+      /* Transparent: the block sits on whatever band or page surrounds it. A fill here made a box that
+         did not match the section (lighter navy in the dark theme) and had no padding around its text. */
+      background: transparent;
       color: var(--st-color-text-strong);
     }
 
@@ -36,10 +57,19 @@ export class ContentBlock extends LitElement {
       max-width: var(--st-cms-container-max);
       padding: 0 var(--st-space-48);
       margin: 0 auto;
+      text-align: left;
+    }
+
+    :host([text-alignment='center']) .container {
+      text-align: center;
     }
 
     .header {
-      ${sectionHeaderStyles}
+      margin-bottom: var(--st-space-48);
+    }
+
+    .eyebrow {
+      ${sectionEyebrowStyles}
     }
 
     .title {
@@ -47,8 +77,23 @@ export class ContentBlock extends LitElement {
       line-height: 1.1;
     }
 
+    /* heading-level="3": a sub-section title, a step below the section title's size and weight. */
+    .title.title-3 {
+      font-size: var(--st-cms-text-3xl);
+      font-weight: var(--st-font-weight-semibold);
+      line-height: 1.2;
+    }
+
     .subtitle {
       ${sectionSubtitleStyles}
+    }
+
+    :host([text-alignment='center']) .subtitle {
+      margin-inline: auto;
+    }
+
+    :host([inverted]) .eyebrow {
+      color: var(--st-cms-highlight);
     }
 
     :host([inverted]) .title,
@@ -84,6 +129,59 @@ export class ContentBlock extends LitElement {
       color: inherit;
     }
 
+    /* list-style="check": the check marks are navy on light pages and cyan on the dark band. */
+    :host([inverted][list-style='check']) st-markdown {
+      --st-markdown-list-check-color: var(--st-cms-highlight);
+    }
+
+    /* max-width="prose": a 720px reading column; the header follows the same width. */
+    :host([max-width='prose']) .container {
+      max-width: 720px;
+    }
+
+    .action {
+      ${ctaLinkStyles}
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      margin-top: var(--st-space-16);
+      padding: 0 var(--st-space-28);
+      border: 0;
+      border-radius: var(--st-radius-full);
+      font-size: var(--st-text-md);
+      font-weight: var(--st-font-weight-semibold);
+      text-decoration: none;
+    }
+
+    .action.primary {
+      background: var(--st-cms-navy);
+      color: var(--st-cms-on-dark);
+    }
+
+    .action.highlight {
+      background: var(--st-cms-highlight);
+      color: var(--st-cms-navy);
+    }
+
+    .action.light {
+      background: var(--st-cms-on-dark);
+      color: var(--st-cms-navy);
+    }
+
+    .action:hover {
+      transform: scale(1.03);
+    }
+
+    .action:focus-visible {
+      outline: var(--st-focus-ring);
+      outline-offset: 2px;
+    }
+
+    :host([text-alignment='center']) .action {
+      margin-inline: auto;
+    }
+
     @media (max-width: 768px) {
       :host {
         padding: var(--st-content-block-padding, var(--st-space-48) var(--st-space-24)) !important;
@@ -95,11 +193,23 @@ export class ContentBlock extends LitElement {
     }
   `;
 
+  /** Small uppercase label above the title (e.g. "Our story"). */
+  @property({ type: String })
+  eyebrow = '';
+
   @property({ type: String })
   title = '';
 
   @property({ type: String })
   subtitle = '';
+
+  /** `2` (default) renders the title as `<h2>`; `3` as a smaller `<h3>` for a sub-section. */
+  @property({ type: Number, attribute: 'heading-level' })
+  headingLevel: 2 | 3 = 2;
+
+  /** Alignment of the eyebrow, title, subtitle and body. `left` (default) or `center`. */
+  @property({ type: String, reflect: true, attribute: 'text-alignment' })
+  textAlignment: 'left' | 'center' = 'left';
 
   /** URL of a Markdown file. */
   @property({ type: String, attribute: 'content-src' })
@@ -121,13 +231,57 @@ export class ContentBlock extends LitElement {
   @property({ type: Boolean, reflect: true })
   inverted = false;
 
+  /** `default` keeps bullets; `check` shows a check mark on each bullet of the body's lists. */
+  @property({ type: String, reflect: true, attribute: 'list-style' })
+  listStyle: 'default' | 'check' = 'default';
+
+  /** Label of a pill link under the body. Shown only together with `href`. */
+  @property({ type: String, attribute: 'action-label' })
+  actionLabel = '';
+
+  /** Shorter `action-label` for phones (< 480px); the full label stays the accessible name. */
+  @property({ type: String, attribute: 'action-label-short' })
+  actionLabelShort = '';
+
+  /** Target of the pill link under the body. */
+  @property({ type: String })
+  href = '';
+
+  /** Colour of the pill link: `primary` (navy), `highlight` (cyan) or `light` (white). */
+  @property({ type: String, reflect: true, attribute: 'action-variant' })
+  actionVariant: 'primary' | 'highlight' | 'light' = 'primary';
+
+  /** `none` (default) uses the full container width; `prose` limits the block to a 720px column. */
+  @property({ type: String, reflect: true, attribute: 'max-width' })
+  maxWidth: 'none' | 'prose' = 'none';
+
+  private renderAction() {
+    if (!this.actionLabel || !this.href) return nothing;
+    const { target, rel } = externalLinkAttrs(this.href);
+    const ariaLabel = ctaAriaLabel(this.actionLabel, this.actionLabelShort, isExternalHref(this.href) ? ' (opens in new tab)' : '');
+    return html`<a class="action ${this.actionVariant}" part="action" href=${this.href} target=${target} rel=${rel} aria-label=${ariaLabel}
+      >${renderCtaLabel(this.actionLabel, this.actionLabelShort)}${externalLinkExtras(this.href)}</a
+    >`;
+  }
+
+  private renderTitle() {
+    if (!this.title) return nothing;
+    return this.headingLevel === 3
+      ? html`<h3 class="title title-3" part="title">${this.title}</h3>`
+      : html`<h2 class="title" part="title">${this.title}</h2>`;
+  }
+
   render() {
+    const hasHeader = Boolean(this.eyebrow || this.title || this.subtitle);
     return html`
       <section class="container" part="container">
-        <div class="header" part="header">
-          ${this.title ? html`<div class="title" part="title">${this.title}</div>` : nothing}
-          ${this.subtitle ? html`<div class="subtitle" part="subtitle">${this.subtitle}</div>` : nothing}
-        </div>
+        ${hasHeader
+          ? html`<div class="header" part="header">
+              ${this.eyebrow ? html`<p class="eyebrow" part="eyebrow">${this.eyebrow}</p>` : nothing}
+              ${this.renderTitle()}
+              ${this.subtitle ? html`<div class="subtitle" part="subtitle">${this.subtitle}</div>` : nothing}
+            </div>`
+          : nothing}
         ${this.imageSrc
           ? html`
               <figure class="featured-image" part="image">
@@ -136,7 +290,8 @@ export class ContentBlock extends LitElement {
               </figure>
             `
           : nothing}
-        <st-markdown part="body" .src=${this.contentSrc} .content=${this.content}></st-markdown>
+        <st-markdown part="body" .src=${this.contentSrc} .content=${this.content} .listStyle=${this.listStyle}></st-markdown>
+        ${this.renderAction()}
       </section>
     `;
   }

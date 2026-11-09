@@ -5,13 +5,16 @@ import { buttonResetStyles, controlBaseStyles } from '../shared/styles';
 import { reducedMotionStyles } from '../shared/section-styles';
 import type { CarouselChangeEventDetail } from './CarouselEvents';
 
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+
 /**
  * Cycles through its slotted children, one visible at a time, with optional autoplay, arrows and
  * dot indicators. The incoming slide slides in from the travel direction (CSS keyframes in place
  * of the source's framer-motion spring), or fades in with `transition="fade"`. Autoplay pauses
  * while hovered (unless `pause-on-hover` is turned off, e.g. for a full-screen hero the pointer
  * nearly always rests on) or focused, and stops when the element is disconnected; a paused slide
- * keeps the time it had left.
+ * keeps the time it had left. Under `prefers-reduced-motion: reduce` autoplay starts paused; the
+ * tabs' play button still starts it.
  *
  * `indicator-style="tabs"` replaces the dots with a row of labelled tabs along the bottom, each
  * with a progress bar that fills while its slide is showing, plus a pause button — the tabbed hero
@@ -39,20 +42,49 @@ export class Carousel extends LitElement {
 
     ::slotted(*) {
       display: none !important;
+      box-sizing: border-box;
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+    }
+
+    /* The slides sit in a clipping viewport and each is exactly the carousel's width, so the next
+       slide never shows at the edge; the slide animations move inside the viewport. */
+    .viewport {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
     }
 
     ::slotted([data-st-active]) {
       display: block !important;
+    }
+
+    /* data-st-still (set on the first slide until the first change) keeps the entrance off on first
+       paint, so the copy is there at once; later changes animate. */
+    ::slotted([data-st-active]:not([data-st-still])) {
       animation: st-carousel-in-next 0.4s ease both;
     }
 
-    :host([data-direction='prev']) ::slotted([data-st-active]) {
+    :host([data-direction='prev']) ::slotted([data-st-active]:not([data-st-still])) {
       animation-name: st-carousel-in-prev;
     }
 
-    :host([transition='fade']) ::slotted([data-st-active]),
-    :host([transition='fade'][data-direction]) ::slotted([data-st-active]) {
+    :host([transition='fade']) ::slotted([data-st-active]:not([data-st-still])),
+    :host([transition='fade'][data-direction]) ::slotted([data-st-active]:not([data-st-still])) {
       animation: st-carousel-fade 0.7s ease both;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     @keyframes st-carousel-in-next {
@@ -187,6 +219,7 @@ export class Carousel extends LitElement {
 
     .tab {
       ${buttonResetStyles}
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: var(--st-space-12);
@@ -209,6 +242,19 @@ export class Carousel extends LitElement {
     .play:focus-visible {
       outline: 2px solid currentColor;
       outline-offset: 4px;
+    }
+
+    /* Touch targets: the tab and the pause button keep their look; a pseudo-element extends the tap
+       area to at least 44x44 CSS px. */
+    .tab::after,
+    .play::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 44px);
+      height: max(100%, 44px);
+      transform: translate(-50%, -50%);
     }
 
     .progress {
@@ -251,6 +297,7 @@ export class Carousel extends LitElement {
 
     .play {
       ${buttonResetStyles}
+      position: relative;
       flex: none;
       display: inline-flex;
       align-items: center;
@@ -302,7 +349,7 @@ export class Carousel extends LitElement {
     ${reducedMotionStyles}
     @media (prefers-reduced-motion: reduce) {
       ::slotted([data-st-active]) {
-        animation: none;
+        animation: none !important;
       }
       .tab.active.running .fill {
         animation: none;
@@ -345,27 +392,45 @@ export class Carousel extends LitElement {
   @state() private slideLabels: string[] = [];
   /** Paused with the pause button; stays paused until the button is pressed again. */
   @state() private userPaused = false;
-  /** Paused while hovered or focused. */
-  private paused = false;
+  /** Pointer is over the carousel (only counts with `pause-on-hover`). */
+  @state() private hovered = false;
+  /** Focus is inside the carousel, other than the play button. */
+  @state() private focused = false;
+  /** False until the slides first change: the first slide is on screen at first paint and does not animate. */
+  @state() private turned = false;
   private timer?: ReturnType<typeof setTimeout>;
   /** Time left on the current slide, so a pause resumes where it stopped. */
   private remaining = 0;
   private startedAt = 0;
+  private reducedMotion?: MediaQueryList;
+
+  private onReducedMotionChange = (event: MediaQueryListEvent) => {
+    if (event.matches) this.hold(() => (this.userPaused = true));
+  };
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('mouseenter', this.pauseOnEnter);
-    this.addEventListener('mouseleave', this.resume);
-    this.addEventListener('focusin', this.pause);
-    this.addEventListener('focusout', this.resume);
+    if (!this.hasAttribute('role')) this.setAttribute('role', 'region');
+    this.setAttribute('aria-roledescription', 'carousel');
+    // Visitors who ask for reduced motion get a still carousel: autoplay starts paused (the play
+    // button still starts it), and turning the OS setting on later pauses it too.
+    this.reducedMotion = typeof window !== 'undefined' && window.matchMedia ? window.matchMedia(REDUCED_MOTION_QUERY) : undefined;
+    if (this.reducedMotion?.matches) this.hold(() => (this.userPaused = true));
+    this.reducedMotion?.addEventListener('change', this.onReducedMotionChange);
+    this.addEventListener('mouseenter', this.onPointerEnter);
+    this.addEventListener('mouseleave', this.onPointerLeave);
+    this.addEventListener('focusin', this.onFocusIn);
+    this.addEventListener('focusout', this.onFocusOut);
   }
 
   disconnectedCallback() {
     this.stopTimer();
-    this.removeEventListener('mouseenter', this.pauseOnEnter);
-    this.removeEventListener('mouseleave', this.resume);
-    this.removeEventListener('focusin', this.pause);
-    this.removeEventListener('focusout', this.resume);
+    this.reducedMotion?.removeEventListener('change', this.onReducedMotionChange);
+    this.reducedMotion = undefined;
+    this.removeEventListener('mouseenter', this.onPointerEnter);
+    this.removeEventListener('mouseleave', this.onPointerLeave);
+    this.removeEventListener('focusin', this.onFocusIn);
+    this.removeEventListener('focusout', this.onFocusOut);
     super.disconnectedCallback();
   }
 
@@ -374,12 +439,12 @@ export class Carousel extends LitElement {
   }
 
   protected updated(changed: Map<string, unknown>) {
-    if (changed.has('index') || changed.has('count') || changed.has('indicatorStyle') || changed.has('tabLabels')) this.syncSlides();
+    if (changed.has('index') || changed.has('count') || changed.has('indicatorStyle') || changed.has('tabLabels') || changed.has('turned')) this.syncSlides();
     if (changed.has('autoPlay') || changed.has('interval') || changed.has('count')) this.restartTimer();
   }
 
   private get halted(): boolean {
-    return this.paused || this.userPaused;
+    return this.hovered || this.focused || this.userPaused;
   }
 
   /** Applies a pause-state change, freezing or resuming the timer (and the tab progress bar). */
@@ -397,15 +462,27 @@ export class Carousel extends LitElement {
     }
   }
 
-  private pause = () => this.hold(() => (this.paused = true));
-
-  private pauseOnEnter = () => {
-    if (this.pauseOnHover) this.pause();
+  private onPointerEnter = () => {
+    if (this.pauseOnHover) this.hold(() => (this.hovered = true));
   };
 
-  private resume = () => this.hold(() => (this.paused = false));
+  private onPointerLeave = () => this.hold(() => (this.hovered = false));
 
-  private togglePlay = () => this.hold(() => (this.userPaused = !this.userPaused));
+  /** Focus inside the carousel pauses it (WCAG 2.2.2), but focusing the play button does not, so pressing play starts it. */
+  private onFocusIn = (event: FocusEvent) => {
+    const target = event.composedPath()[0];
+    const onPlay = target instanceof Element && target.classList.contains('play');
+    this.hold(() => (this.focused = !onPlay));
+  };
+
+  private onFocusOut = () => this.hold(() => (this.focused = false));
+
+  private togglePlay = () =>
+    this.hold(() => {
+      this.userPaused = !this.userPaused;
+      // A press while the pointer rests on the carousel starts it; hover pausing applies again on re-entry.
+      this.hovered = false;
+    });
 
   private get slides(): Element[] {
     return this.shadowRoot?.querySelector('slot')?.assignedElements({ flatten: true }) ?? [];
@@ -416,16 +493,14 @@ export class Carousel extends LitElement {
   }
 
   private syncSlides() {
-    const tabs = this.indicatorStyle === 'tabs';
-    this.slides.forEach((el, i) => {
-      el.toggleAttribute('data-st-active', i === this.index);
-      if (tabs) {
-        el.setAttribute('role', 'tabpanel');
-        el.setAttribute('aria-label', this.labelFor(i));
-      } else if (el.getAttribute('role') === 'tabpanel') {
-        el.removeAttribute('role');
-        el.removeAttribute('aria-label');
-      }
+    const slides = this.slides;
+    slides.forEach((el, i) => {
+      const active = i === this.index;
+      el.toggleAttribute('data-st-active', active);
+      el.toggleAttribute('data-st-still', active && !this.turned);
+      el.setAttribute('role', 'group');
+      el.setAttribute('aria-roledescription', 'slide');
+      el.setAttribute('aria-label', `${i + 1} of ${slides.length}`);
     });
   }
 
@@ -434,7 +509,25 @@ export class Carousel extends LitElement {
     this.count = slides.length;
     this.slideLabels = slides.map(el => (el as HTMLElement).dataset.tabLabel || (el as HTMLElement).title || '');
     if (this.index >= this.count) this.index = 0;
+    this.preloadImage(slides[0]);
     this.syncSlides();
+  }
+
+  /**
+   * The first slide's image is the one visitors see first, so it is preloaded at high priority. The
+   * other slides are display:none (their CSS backgrounds are not fetched) until they are shown.
+   */
+  private preloadImage(slide?: Element) {
+    const src = (slide as (Element & { imageSrc?: string }) | undefined)?.imageSrc || slide?.getAttribute('image-src');
+    if (!src) return;
+    const preloaded = Array.from(document.head.querySelectorAll('link[rel="preload"]')).some(link => link.getAttribute('href') === src);
+    if (preloaded) return;
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = src;
+    link.setAttribute('fetchpriority', 'high');
+    document.head.append(link);
   }
 
   private stopTimer() {
@@ -456,6 +549,7 @@ export class Carousel extends LitElement {
 
   private go(target: number, direction: 'next' | 'prev') {
     if (this.count === 0) return;
+    this.turned = true;
     this.setAttribute('data-direction', direction);
     this.index = (target + this.count) % this.count;
     this.dispatchEvent(
@@ -493,6 +587,7 @@ export class Carousel extends LitElement {
                 part="tab"
                 type="button"
                 role="tab"
+                aria-label=${this.labelFor(i)}
                 class="tab ${active ? 'active' : ''} ${running ? 'running' : ''}"
                 aria-selected=${active ? 'true' : 'false'}
                 tabindex=${active ? 0 : -1}
@@ -541,7 +636,12 @@ export class Carousel extends LitElement {
   render() {
     const multiple = this.count > 1;
     return html`
-      <slot @slotchange=${this.onSlotChange}></slot>
+      <div class="viewport" part="viewport">
+        <slot @slotchange=${this.onSlotChange}></slot>
+      </div>
+      ${multiple
+        ? html`<div class="sr-only" aria-live=${this.halted ? 'polite' : 'off'} aria-atomic="true">${this.index + 1} of ${this.count}</div>`
+        : nothing}
       ${this.showArrows && multiple
         ? html`
             <button part="nav-button prev" class="nav prev" aria-label="Previous Slide" @click=${() => this.go(this.index - 1, 'prev')}>&#10094;</button>

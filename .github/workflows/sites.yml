@@ -1,8 +1,8 @@
-name: Deploy Storybook and docs
+name: Deploy Storybook
 
-# Builds the docs site and the component Storybook and uploads both over FTP to the Sankhyatronics
-# docs hub, under docs.sankhyatronics.com/sankhya-cms (docs) and .../sankhya-cms/storybook (Storybook).
-# Manual only.
+# Builds the component Storybook and uploads it over FTP to the Sankhyatronics docs hub, under
+# docs.sankhyatronics.com/sankhya-cms/storybook. The Sankhya CMS docs pages themselves live in, and are
+# deployed from, the SankhyaPortals repo (sankhya-docs). Manual only.
 
 on:
   workflow_dispatch:
@@ -24,20 +24,7 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=8192
           STORYBOOK_DISABLE_TELEMETRY: '1'
 
-      # Order matters: dangerous-clean-slate empties its server-dir before uploading, and the docs
-      # upload's server-dir (public_html/sankhya-cms/) contains the Storybook folder. Docs go first so
-      # they cannot wipe Storybook after it lands.
-      - name: Deploy docs
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          # TODO: confirm the docs.sankhyatronics.com FTP account name (the SankhyaPortals hub deploy still uses the sankhyabook365 account)
-          username: ${{ secrets.FTP_USERNAME }}.docs.sankhyatronics.com
-          password: ${{ secrets.FTP_PASSWORD }}
-          dangerous-clean-slate: true
-          server-dir: ./public_html/sankhya-cms/
-          local-dir: docs/build/
-
+      # Only touch the storybook/ folder: the rest of public_html/sankhya-cms/ belongs to the SankhyaPortals docs deploy.
       - name: Deploy Storybook
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:

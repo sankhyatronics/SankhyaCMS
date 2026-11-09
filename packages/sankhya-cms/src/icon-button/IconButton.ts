@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 import { buttonResetStyles, controlBaseStyles, rootFontFamilyStyles } from '../shared/styles';
@@ -42,10 +42,12 @@ export class IconButton extends LitElement {
     }
   `;
 
-  /** Accessible name and tooltip — matches the source component's `ariaLabel` (renamed: modern
+  /**
+   * Accessible name, set as the button's `aria-label` and its `title` (tooltip). Required for a
+   * control with no visible text. Matches the source component's `ariaLabel` (renamed: modern
    * browsers already expose a native `ariaLabel` reflected property on every `Element`, so reusing
-   * that exact name as a Lit reactive property would shadow it). Required for a control with no
-   * visible text. */
+   * that exact name as a Lit reactive property would shadow it).
+   */
   @property({ type: String })
   label = '';
 
@@ -54,7 +56,13 @@ export class IconButton extends LitElement {
 
   render() {
     return html`
-      <button part="button" type="button" aria-label=${this.label} title=${this.label} ?disabled=${this.disabled}>
+      <button
+        part="button"
+        type="button"
+        aria-label=${this.label || nothing}
+        title=${this.label || nothing}
+        ?disabled=${this.disabled}
+      >
         <slot></slot>
       </button>
     `;

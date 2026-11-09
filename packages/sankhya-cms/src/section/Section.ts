@@ -2,7 +2,7 @@ import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 import { controlBaseStyles, rootFontFamilyStyles } from '../shared/styles';
-import { sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-styles';
+import { sectionEyebrowStyles, sectionSubtitleStyles, sectionTitleStyles } from '../shared/section-styles';
 
 /**
  * A page band that holds other content: sets the background, the spacing above and below, and
@@ -45,7 +45,8 @@ export class Section extends LitElement {
       background: var(--st-section-bg, var(--st-color-subtle));
     }
 
-    :host([background='dark']) {
+    :host([background='dark']),
+    :host([inverted]) {
       background: var(--st-section-bg, var(--st-cms-band-dark-bg));
       color: var(--st-cms-band-dark-color);
     }
@@ -121,12 +122,7 @@ export class Section extends LitElement {
     }
 
     .eyebrow {
-      margin: 0 0 var(--st-space-12);
-      font-size: var(--st-text-sm);
-      font-weight: var(--st-font-weight-bold);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--st-color-text-muted);
+      ${sectionEyebrowStyles}
     }
 
     .title {
@@ -147,8 +143,13 @@ export class Section extends LitElement {
     }
 
     :host([background='dark']) .eyebrow,
-    :host([background='dark']) .subtitle {
-      color: color-mix(in oklch, var(--st-cms-band-dark-color) 80%, transparent);
+    :host([inverted]) .eyebrow {
+      color: var(--st-cms-highlight);
+    }
+
+    :host([background='dark']) .subtitle,
+    :host([inverted]) .subtitle {
+      color: color-mix(in oklch, var(--st-cms-band-dark-color) 92%, transparent);
     }
 
     :host([background='accent']) .eyebrow,
@@ -185,6 +186,10 @@ export class Section extends LitElement {
   /** `default` (page surface), `subtle`, `dark`, `accent` or `transparent`. */
   @property({ type: String, reflect: true })
   background: 'default' | 'subtle' | 'dark' | 'accent' | 'transparent' = 'default';
+
+  /** Puts the section on the dark band (`--st-cms-band-dark-bg`), like `background="dark"`; the band follows the theme. Same name as on the other components. */
+  @property({ type: Boolean, reflect: true })
+  inverted = false;
 
   /** Space above the content: `none`, `s`, `m` (default), `l`, `xl` or `xxl`. */
   @property({ type: String, reflect: true, attribute: 'spacing-above' })

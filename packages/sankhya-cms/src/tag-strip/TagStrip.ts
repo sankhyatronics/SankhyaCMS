@@ -18,7 +18,10 @@ import { controlBaseStyles, fontFamilyStyles } from '../shared/styles';
 export class TagStrip extends LitElement {
   static styles = css`
     ${controlBaseStyles}
-    ${fontFamilyStyles}
+    /* fontFamilyStyles is a bare declaration: it must sit inside a rule, or it swallows the next one. */
+    :host {
+      ${fontFamilyStyles}
+    }
 
     :host {
       display: block;
@@ -31,6 +34,14 @@ export class TagStrip extends LitElement {
 
     :host([inverted]) {
       background: var(--st-cms-band-dark-bg);
+    }
+
+    /* variant="spread": no band behind the card (it sits on the page), with the same 24px side gutter
+       at every width. */
+    :host([variant='spread']) {
+      width: 100%;
+      background: transparent;
+      padding: var(--st-tag-strip-padding, var(--st-space-24)) var(--st-space-24) !important;
     }
 
     .strip {
@@ -87,11 +98,47 @@ export class TagStrip extends LitElement {
       color: var(--st-cms-band-dark-color);
     }
 
+    /* variant="spread": a white card with the label on the left and the items pushed to the right,
+       on the content width. */
+    :host([variant='spread']) .strip {
+      justify-content: space-between;
+      padding: 20px 28px;
+      border-radius: 12px;
+      border-color: var(--st-cms-primary-100, #e4ebff);
+      background: var(--st-color-surface);
+    }
+
+    :host([variant='spread']) .label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--st-cms-text, var(--st-cms-navy-2, #03346b));
+    }
+
+    :host([variant='spread']) .items {
+      flex: 1 1 auto;
+      justify-content: flex-end;
+      gap: 12px 28px;
+    }
+
+    :host([variant='spread']) .item {
+      font-weight: 600;
+      color: var(--st-cms-text-strong, var(--st-cms-navy, #011d41));
+    }
+
     @media (max-width: 600px) {
       .strip {
         flex-direction: column;
         align-items: flex-start;
         padding: var(--st-space-16) var(--st-space-20);
+      }
+
+      :host([variant='spread']) .strip {
+        padding: 16px 20px;
+      }
+
+      :host([variant='spread']) .items {
+        justify-content: flex-start;
       }
     }
   `;
@@ -99,6 +146,13 @@ export class TagStrip extends LitElement {
   /** Small uppercase label at the start of the band. Omit it for items alone. */
   @property({ type: String })
   label = '';
+
+  /**
+   * The same label as `label`, under a name the page JSON can use: the site renderer drops a node's
+   * `label` key (it is the node's own name), so JSON sets `heading`. Shown when `label` is empty.
+   */
+  @property({ type: String })
+  heading = '';
 
   /** The items, shown in order. */
   @property({ attribute: false })
@@ -108,10 +162,14 @@ export class TagStrip extends LitElement {
   @property({ type: Boolean, reflect: true })
   inverted = false;
 
+  /** `default` is the bordered band; `spread` is a white card with the label left and the items right (`label` shown). */
+  @property({ type: String, reflect: true })
+  variant: 'default' | 'spread' = 'default';
+
   render() {
     return html`
       <div class="strip" part="strip">
-        ${this.label ? html`<p class="label" part="label">${this.label}</p>` : nothing}
+        ${this.label || this.heading ? html`<p class="label" part="label">${this.label || this.heading}</p>` : nothing}
         <ul class="items" part="items">
           ${this.items.map(item => html`<li class="item" part="item">${item}</li>`)}
         </ul>

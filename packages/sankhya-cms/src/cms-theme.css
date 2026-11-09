@@ -25,6 +25,28 @@
   --st-cms-navy: #011d41;
   --st-cms-highlight: #49cce0;
   --st-cms-on-dark: #ffffff;
+
+  /* Sankhyatronics brand blues for the design-system options (pill buttons, title highlights,
+     plan cards). Fixed like the navy/cyan above; each has a fallback so the tokens work unthemed. */
+  --st-cms-brand-navy: #2144aa;
+  --st-cms-brand-azure: #1b91dd;
+  /* A second, lighter navy for panels on the dark band, and its hairline border and muted text. */
+  --st-cms-navy-2: #03346b;
+  --st-cms-navy-2-border: #0c64c5;
+  --st-cms-on-navy-muted: #c9d7fe;
+  /* Light blue ramp: 100 for soft tiles and chips, 200 for hairline borders, 400 for outlines on
+     brand fills. */
+  --st-cms-primary-100: #eaf0ff;
+  --st-cms-primary-200: #cbd9fb;
+  --st-cms-primary-400: #8eaffe;
+  /* The page-level tint behind the step cards of a band and the plan-card surfaces. */
+  --st-cms-surface-soft: #f0f3ff;
+  /* Text colours for light surfaces, split from the fills above: a navy fill and navy text share one
+     value today, and a dark theme needs them apart. */
+  --st-cms-text: #03346b;          /* body text on light surfaces */
+  --st-cms-text-strong: #011d41;   /* headings / strong text on light surfaces */
+  --st-cms-eyebrow: #0c64c5;       /* small uppercase labels */
+  --st-cms-accent-text: #2144aa;   /* navy used as text or outline (outlined buttons, links, icons) */
 }
 
 :root.dark {

@@ -84,7 +84,10 @@ export const DynamicRenderer: React.FC<IDynamicRendererProps> = ({ config, class
         return null;
     }
 
-    const { type, id, slot: _slot, label: _label, children, ...props } = config;
+    const { type, id, slot: _slot, label: _label, visible, children, ...props } = config;
+    // `"visible": false` leaves the node out of the page entirely (its children too), so a parent that counts
+    // its children (a mega menu's columns) lays out only the ones that remain. Anything but `false` shows it.
+    if (visible === false) return null;
     const Component = getComponent(type);
     if (!Component) {
         reportInvalid(new Error(`Component "${type}" is not registered`), config, onError);
