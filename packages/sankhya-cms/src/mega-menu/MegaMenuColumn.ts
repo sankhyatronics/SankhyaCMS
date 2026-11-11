@@ -25,7 +25,7 @@ import type { MegaMenuSelectEventDetail } from './MegaMenuEvents';
  * card lifts and gets an accent border on hover or focus. Set
  * `accent` (any CSS colour) to tint it; it defaults to the theme accent. A card whose link is the
  * page being shown (see `st-header`'s `current-path`) becomes the "You are here" card: a 2px accent
- * border, a faint accent wash, a `currentLabel` pill and a solid button. Inside an `inline`
+ * border, a faint accent wash, a `currentLabel` pill (shown beside the `tag`, if any) and a solid button. Inside an `inline`
  * (hamburger) header panel the card does not lift.
  *
  * `decoration` (`none` default, `flow`, `orbit`, `waves` or `ribbon`) draws faint curvy line art in
@@ -43,7 +43,7 @@ import type { MegaMenuSelectEventDetail } from './MegaMenuEvents';
  * @fires mega-menu-select - The heading link or the button was clicked (cancelable; detail `{ href }`).
  * @csspart top - The product card's top row (icon tile and pills).
  * @csspart icon - The product card's icon tile. With `icon-src` it holds the image (one, or two with `icon-src-dark`) at 28px, on the same tinted tile.
- * @csspart tag - The product card's tag pill.
+ * @csspart tag - The product card's tag pill, or the box around its image when `tag` is an image URL.
  * @csspart current - The product card's "You are here" pill.
  * @csspart heading - The heading text or link.
  * @csspart description - The line under the heading.
@@ -331,6 +331,19 @@ export class MegaMenuColumn extends LitElement {
       color: var(--st-mega-menu-column-accent-text);
     }
 
+    :host([variant='product']) .tag-image {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    :host([variant='product']) .tag-image img {
+      display: block;
+      height: 22px;
+      width: auto;
+      max-width: 160px;
+      object-fit: contain;
+    }
+
     :host([variant='product']) .heading {
       margin: 0;
       font-size: 1.125rem;
@@ -484,9 +497,16 @@ export class MegaMenuColumn extends LitElement {
   @property({ type: String, attribute: 'icon-src-dark' })
   iconSrcDark = '';
 
-  /** Short label pill on the top row of a `product` card, e.g. `Open source`. */
+  /**
+   * On the top row of a `product` card: a short label pill (`Open source`), or an image when the value is an image URL
+   * (starts with `http://`, `https://`, `/` or `data:image/`), shown 22px high with no pill around it, e.g. a badge.
+   */
   @property({ type: String })
   tag = '';
+
+  /** Alt text of the `tag` image (when `tag` is an image URL). Empty marks it as decorative. */
+  @property({ type: String, attribute: 'tag-alt' })
+  tagAlt = '';
 
   /** Accent of a `product` card, any CSS colour (sets `--st-mega-menu-column-accent`). */
   @property({ type: String })
@@ -596,11 +616,12 @@ export class MegaMenuColumn extends LitElement {
         ? html`<span part="icon" class="tile ${this.iconSrc ? 'image' : ''}">${this.renderTileIcon()}</span>`
         : nothing}
       <span class="pills">
-        ${this.current
-          ? html`<span part="current" class="pill current">${this.currentLabel}</span>`
-          : this.tag
-            ? html`<span part="tag" class="pill tag">${this.tag}</span>`
-            : nothing}
+        ${this.current ? html`<span part="current" class="pill current">${this.currentLabel}</span>` : nothing}
+        ${this.tag
+          ? /^(https?:\/\/|\/|data:image\/)/i.test(this.tag)
+            ? html`<span part="tag" class="tag-image"><img src=${this.tag} alt=${this.tagAlt} height="22" /></span>`
+            : html`<span part="tag" class="pill tag">${this.tag}</span>`
+          : nothing}
       </span>
     </div>`;
   }
