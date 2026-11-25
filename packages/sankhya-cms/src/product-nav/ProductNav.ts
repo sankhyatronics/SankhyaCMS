@@ -40,7 +40,7 @@ export interface ProductNavLink {
  * @fires product-nav-site-menu - The site-menu button was clicked. Detail: `{ trigger }`, the button itself, so the host can return focus to it. Bubbles, composed.
  * @attr icon - Product icon image URL, shown in the brand link before the wordmark (40px; 32px, then 28px under 480px, when `embedded`).
  * @attr icon-dark - Dark-theme icon image URL, shown on `:root.dark` in place of `icon`. Needs `icon`.
- * @attr label - Accessible name of the `<nav>` (e.g. `T-pilot`). Default: the brand prefix and name (e.g. `T-pilot`).
+ * @attr label - Accessible name of the `<nav>` (e.g. `T-Pilot`). Default: the brand prefix and name (e.g. `T-Pilot`).
  * @attr brand-href - Target of the brand link (icon and wordmark). Default `#top`.
  * @attr site-menu-label - Accessible name of the site-menu button (a hamburger before the action pill). Empty (default): no button.
  * @attr site-menu-open - Reflected. True while the host header's site menu is open, which sets the button's `aria-expanded`. Set by the host header, never from outside.
@@ -479,7 +479,7 @@ export class ProductNav extends LitElement {
   @property({ type: Boolean, reflect: true })
   sticky = false;
 
-  /** Accessible name of the `<nav>` landmark, e.g. `T-pilot`. Falls back to the brand prefix and name. */
+  /** Accessible name of the `<nav>` landmark, e.g. `T-Pilot`. Falls back to the brand prefix and name. */
   @property({ type: String })
   label = '';
 
