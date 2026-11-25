@@ -40,7 +40,7 @@ export interface HeroMediaInset {
  * defaults keep the original centered banner. Put several heroes in an `st-carousel` with
  * `indicator-style="tabs"` for a tabbed hero carousel.
  *
- * `badge` is a pill above the title; `highlights` is a row of check-marked points under the buttons.
+ * `badge` is a pill above the title; `badge-image` (with `badge-image-alt`) adds an image beside it, 28px high; `highlights` is a row of check-marked points under the buttons.
  * `cta-note` is a short line with a small padlock under the buttons (e.g. "No credit card needed"), left-aligned
  * with the buttons, or centred in a centred layout.
  * `button-style="pill"` gives the buttons the 52px pill look (primary navy, secondary white with an arrow).
@@ -305,6 +305,30 @@ export class Hero extends LitElement {
       line-height: 1.2;
       text-transform: uppercase;
       animation: st-hero-fade 0.8s 0.2s ease-out backwards;
+    }
+
+    /* badgeImage: the pill and the image share one row. */
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--st-space-12);
+      animation: st-hero-fade 0.8s 0.2s ease-out backwards;
+    }
+
+    :host([text-alignment='center']) .badges {
+      justify-content: center;
+    }
+
+    .badges .badge {
+      animation: none;
+    }
+
+    .badge-image {
+      display: block;
+      height: 28px;
+      width: auto;
+      max-width: 100%;
     }
 
     .badge::before {
@@ -709,6 +733,14 @@ export class Hero extends LitElement {
   @property({ type: String })
   badge = '';
 
+  /** An image (URL) shown beside the `badge` pill, or on its own, e.g. a launch-date badge. It is 28px high. */
+  @property({ type: String, attribute: 'badge-image' })
+  badgeImage = '';
+
+  /** Alt text of `badge-image`. Empty marks it as decorative. */
+  @property({ type: String, attribute: 'badge-image-alt' })
+  badgeImageAlt = '';
+
   /** Check-marked points shown in a row under the buttons. */
   @property({ attribute: false })
   highlights: string[] = [];
@@ -862,7 +894,14 @@ export class Hero extends LitElement {
       <div class="overlay" part="overlay"></div>
       <div class="content" part="content">
         ${this.eyebrow ? html`<p class="eyebrow" part="eyebrow">${this.eyebrow}</p>` : nothing}
-        ${this.badge ? html`<p class="badge" part="badge">${this.badge}</p>` : nothing}
+        ${this.badgeImage
+          ? html`<div class="badges">
+              ${this.badge ? html`<p class="badge" part="badge">${this.badge}</p>` : nothing}
+              <img class="badge-image" part="badge-image" src=${this.badgeImage} alt=${this.badgeImageAlt} height="28" />
+            </div>`
+          : this.badge
+            ? html`<p class="badge" part="badge">${this.badge}</p>`
+            : nothing}
         ${this.headingLevel === 2
           ? html`<h2 class="title" part="title">${this.renderTitle()}</h2>`
           : html`<h1 class="title" part="title">${this.renderTitle()}</h1>`}

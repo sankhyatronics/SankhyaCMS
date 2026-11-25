@@ -9,13 +9,13 @@ describe('buildMailto', () => {
   it('writes labelled lines and encodes subject and body', () => {
     const url = buildMailto({
       to: 'contact@example.com',
-      subject: 'Enquiry: T-pilot – Acme & Co',
+      subject: 'Enquiry: T-Pilot – Acme & Co',
       fields: [
         { label: 'Name', value: 'Asha' },
         { label: 'Message', value: 'Hi\nthere' }
       ]
     });
-    expect(url.startsWith('mailto:contact@example.com?subject=Enquiry%3A%20T-pilot%20%E2%80%93%20Acme%20%26%20Co&body=')).toBe(true);
+    expect(url.startsWith('mailto:contact@example.com?subject=Enquiry%3A%20T-Pilot%20%E2%80%93%20Acme%20%26%20Co&body=')).toBe(true);
     expect(bodyOf(url)).toBe('Name: Asha\nMessage: Hi\nthere');
   });
 
@@ -41,8 +41,8 @@ describe('buildMailto', () => {
 
 describe('fillTemplate', () => {
   it('fills known placeholders and keeps unknown ones', () => {
-    expect(fillTemplate('Quote request: T-pilot {option} – {company} {other}', { option: 'Cloud', company: 'Acme' })).toBe(
-      'Quote request: T-pilot Cloud – Acme {other}'
+    expect(fillTemplate('Quote request: T-Pilot {option} – {company} {other}', { option: 'Cloud', company: 'Acme' })).toBe(
+      'Quote request: T-Pilot Cloud – Acme {other}'
     );
   });
 });
