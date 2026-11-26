@@ -66,7 +66,8 @@ export class MenuItem extends LitElement {
       text-decoration: none;
       /* --st-nav-*: set by a host bar (st-header's transparent state) to recolour its nav items. */
       color: var(--st-nav-color, var(--st-color-text));
-      border-radius: 6px;
+      /* --st-nav-item-radius: set by a host bar (st-header[tinted]) for rounder items. */
+      border-radius: var(--st-nav-item-radius, 6px);
       /* The source's 'all 0.15s', minus visibility: animating the visibility this link inherits
          from a dropdown panel kept it unfocusable for a frame after the panel opened. */
       transition-property: background-color, color, padding, transform, border-color;

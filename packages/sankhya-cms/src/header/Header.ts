@@ -175,6 +175,35 @@ export class Header extends LitElement {
       border-bottom-color: transparent;
     }
 
+    /* tinted: a bar tinted with the theme's accent (--st-header-bg): a soft tint with dark text in
+       light themes, a deep tint with light text in dark themes — the --st-header-* tokens
+       (theme.css, themes.css) carry the difference. The surface, text, hover, line and accent
+       tokens are re-scoped to them for everything in the bar, slotted controls included; floating
+       panels (st-dropdown, the language menu) put the page's own tokens back (surfaceTokenStyles).
+       The surface token is the bar colour itself, so the mobile panel and any control with a
+       surface fill blend into the bar. */
+    :host([tinted]) {
+      --st-color-surface: var(--st-header-bg);
+      --st-color-text: var(--st-header-text);
+      --st-color-text-strong: var(--st-header-text-strong);
+      --st-color-text-secondary: var(--st-header-text-secondary);
+      --st-color-text-muted: var(--st-header-text-muted);
+      --st-color-hover: var(--st-header-hover);
+      --st-color-border: var(--st-header-line);
+      --st-color-divider: var(--st-header-divider);
+      --st-color-accent: var(--st-header-accent);
+      --st-color-accent-text: var(--st-header-accent-text);
+      --st-color-accent-subtle: var(--st-header-accent-subtle);
+      --st-color-accent-border: var(--st-header-accent);
+      --st-nav-color: var(--st-header-text-strong);
+      --st-nav-hover-bg: var(--st-header-nav-hover);
+      --st-nav-active-line: var(--st-header-accent);
+      --st-nav-item-radius: var(--st-radius-md);
+      color: var(--st-header-text);
+      border-bottom-color: transparent !important;
+      box-shadow: var(--st-header-shadow);
+    }
+
     :host([sticky]),
     :host([transparent]),
     :host([hide-on-scroll]) {
@@ -705,6 +734,15 @@ export class Header extends LitElement {
    * source component's `inverted` (from its shared `BaseProps`). */
   @property({ type: Boolean, reflect: true })
   inverted = false;
+
+  /**
+   * A bar tinted with the theme's accent (`--st-header-bg`) — a soft tint with dark text in light
+   * themes, a deep tint with light text in dark themes — and the current page marked in
+   * `--st-header-accent`: the suite apps' header. Dropdown panels opened from the bar keep the
+   * page's own light/dark surface.
+   */
+  @property({ type: Boolean, reflect: true })
+  tinted = false;
 
   @property({ type: Boolean, reflect: true })
   sticky = false;

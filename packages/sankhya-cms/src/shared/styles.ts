@@ -83,15 +83,43 @@ export const ctaButtonFillStyles = css`
   color: var(--st-button-primary-color);
 `;
 
+/**
+ * A floating panel is its own surface: it puts back the theme.css surface tokens, so an ancestor
+ * that re-scoped them (st-header[tinted]'s light-on-dark bar) doesn't reach the panel or the
+ * content slotted into it. The values are the theme.css definitions, read from the primary and
+ * shade layers, which no host re-scopes, so outside such an ancestor nothing changes.
+ */
+export const surfaceTokenStyles = css`
+  --st-color-surface: var(--st-primary-canvas);
+  --st-color-text: var(--st-neutral-950);
+  --st-color-text-strong: var(--st-neutral-950);
+  --st-color-text-secondary: var(--st-primary-text-secondary);
+  --st-color-text-muted: var(--st-primary-text-muted);
+  --st-color-hover: var(--st-hover-subtle);
+  --st-color-border: var(--st-primary-line);
+  --st-color-divider: var(--st-primary-divider);
+  --st-color-accent: var(--st-primary-accent);
+  --st-color-accent-text: var(--st-accent-text);
+  --st-color-accent-subtle: var(--st-accent-subtle);
+  --st-color-accent-border: var(--st-accent-border);
+  /* Items in a panel never take a bar's nav colours. */
+  --st-nav-color: initial;
+  --st-nav-hover-bg: initial;
+  --st-nav-active-line: initial;
+  --st-nav-item-radius: initial;
+`;
+
 /** Floating menu/dropdown panel chrome (user menu, language menu, ...). */
 export const dropdownPanelStyles = css`
+  ${surfaceTokenStyles}
   position: absolute;
   top: 38px;
   right: 0;
   background: var(--st-color-surface);
+  color: var(--st-color-text);
   border: 1px solid var(--st-color-border);
-  border-radius: var(--st-radius-sm);
-  box-shadow: 0 4px 16px var(--st-shadow-color-sm);
+  border-radius: var(--st-dropdown-panel-radius);
+  box-shadow: var(--st-dropdown-panel-shadow);
   z-index: 30;
   overflow: hidden;
 `;

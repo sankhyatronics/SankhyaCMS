@@ -56,6 +56,8 @@ import { ScreenshotTour as ScreenshotTourElement } from '@sankhyatronics/sankhya
 import { Section as SectionElement } from '@sankhyatronics/sankhya-cms/section';
 import { Select as SelectElement } from '@sankhyatronics/sankhya-cms/select';
 import type { SelectChangedEventDetail } from '@sankhyatronics/sankhya-cms/select';
+import { ThemePicker as ThemePickerElement } from '@sankhyatronics/sankhya-cms/theme-picker';
+import type { ThemeChangeEventDetail } from '@sankhyatronics/sankhya-cms/theme-picker';
 import { Stats as StatsElement } from '@sankhyatronics/sankhya-cms/stats';
 import { Steps as StepsElement } from '@sankhyatronics/sankhya-cms/steps';
 import { TagStrip as TagStripElement } from '@sankhyatronics/sankhya-cms/tag-strip';
@@ -507,3 +509,11 @@ export const Select: React.FC<SelectProps> = ({ options = [], value, defaultValu
     }}
   />
 );
+
+/** Theme picker (`st-theme-picker`): controlled by `value`; `onThemeChange` gets the picked theme. */
+export const ThemePicker = createComponent({
+  react: React,
+  tagName: 'st-theme-picker',
+  elementClass: ThemePickerElement,
+  events: { onThemeChange: 'theme-change' as Detail<ThemeChangeEventDetail> }
+});

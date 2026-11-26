@@ -33,15 +33,17 @@
    --st-primary-background: #F6F7F9;
    --st-neutral-50: var(--st-primary-background);
    --st-neutral-950: var(--st-primary-color);
-   --st-neutral-100: oklch(from color-mix(in oklch, var(--st-neutral-950) 8%, var(--st-neutral-50)) l calc(c * 2.1) h);
-   --st-neutral-200: oklch(from color-mix(in oklch, var(--st-neutral-950) 15%, var(--st-neutral-50)) l calc(c * 3.0) h);
-   --st-neutral-300: oklch(from color-mix(in oklch, var(--st-neutral-950) 27%, var(--st-neutral-50)) l calc(c * 4.3) h);
-   --st-neutral-400: oklch(from color-mix(in oklch, var(--st-neutral-950) 36%, var(--st-neutral-50)) l calc(c * 5.2) h);
-   --st-neutral-500: oklch(from color-mix(in oklch, var(--st-neutral-950) 49%, var(--st-neutral-50)) l calc(c * 7.0) h);
-   --st-neutral-600: oklch(from color-mix(in oklch, var(--st-neutral-950) 69%, var(--st-neutral-50)) l calc(c * 5.4) h);
-   --st-neutral-700: oklch(from color-mix(in oklch, var(--st-neutral-950) 86%, var(--st-neutral-50)) l calc(c * 3.0) h);
-   --st-neutral-800: oklch(from color-mix(in oklch, var(--st-neutral-950) 93%, var(--st-neutral-50)) l calc(c * 2.3) h);
-   --st-neutral-900: oklch(from color-mix(in oklch, var(--st-neutral-950) 96%, var(--st-neutral-50)) l calc(c * 1.6) h);
+   /* A straight oklab mix of the two ends. No chroma boost: on a near-grey primary the oklch hue
+     is undefined, and multiplying its chroma turned the greys pink/mauve. */
+   --st-neutral-100: color-mix(in oklab, var(--st-neutral-950) 5%, var(--st-neutral-50));
+   --st-neutral-200: color-mix(in oklab, var(--st-neutral-950) 11%, var(--st-neutral-50));
+   --st-neutral-300: color-mix(in oklab, var(--st-neutral-950) 22%, var(--st-neutral-50));
+   --st-neutral-400: color-mix(in oklab, var(--st-neutral-950) 36%, var(--st-neutral-50));
+   --st-neutral-500: color-mix(in oklab, var(--st-neutral-950) 49%, var(--st-neutral-50));
+   --st-neutral-600: color-mix(in oklab, var(--st-neutral-950) 65%, var(--st-neutral-50));
+   --st-neutral-700: color-mix(in oklab, var(--st-neutral-950) 80%, var(--st-neutral-50));
+   --st-neutral-800: color-mix(in oklab, var(--st-neutral-950) 90%, var(--st-neutral-50));
+   --st-neutral-900: color-mix(in oklab, var(--st-neutral-950) 95%, var(--st-neutral-50));
 
 
    /* Brand-like file-type colors are intentionally independent of the accent
@@ -77,6 +79,9 @@
    --st-primary-brand-soft: #EEF2FE;
    --st-primary-brand-ink: #2440B8;
 
+   /* The panel behind an app's icon on an app card (st-* app tiles, the portal's app store). */
+   --st-primary-banner: var(--st-primary-brand-soft);
+
    /* Status: the spec colour is for dots, icons and borders. Text on a soft
      background uses the darker variant so it passes WCAG AA (4.5:1). */
    --st-primary-success-soft: #E7F6F0;
@@ -90,6 +95,8 @@
    --st-accent-border: color-mix(in oklch, var(--st-primary-accent) 22%, var(--st-primary-canvas));
    --st-accent-muted: color-mix(in oklch, var(--st-primary-accent) 55%, var(--st-primary-canvas));
    --st-accent-text: color-mix(in oklch, var(--st-primary-accent) 78%, var(--st-primary-ink));
+   /* Hover fill: a faint accent tint of the surface (themes.css strengthens it for dark). */
+   --st-hover-subtle: color-mix(in oklab, var(--st-primary-accent) 7%, var(--st-primary-canvas));
 
    --st-danger-subtle: color-mix(in oklch, var(--st-primary-danger) 10%, var(--st-primary-canvas));
    --st-danger-border: color-mix(in oklch, var(--st-primary-danger) 28%, var(--st-primary-canvas));
@@ -111,7 +118,8 @@
    --st-color-surface: var(--st-primary-canvas);
    --st-color-subtle: var(--st-neutral-100);
    --st-color-divider: var(--st-primary-divider);
-   --st-color-hover: var(--st-neutral-200);
+   --st-color-hover: var(--st-hover-subtle);
+   --st-color-banner: var(--st-primary-banner);
    --st-color-border: var(--st-primary-line);
    --st-color-skeleton: var(--st-neutral-300);
    --st-color-folder-icon-bg: var(--st-neutral-300);
@@ -180,8 +188,11 @@
 
    /* ---- Elevation presets, for the design spec's card and primary button.
      Components reference these rather than writing their own shadows. ---- */
-   --st-shadow-card: 0 1px 2px rgba(20, 23, 31, 0.04);
-   --st-shadow-button-primary: 0 1px 2px rgba(53, 87, 224, 0.25), 0 4px 12px rgba(53, 87, 224, 0.18);
+   --st-shadow-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 4px 16px -4px rgb(0 0 0 / 0.08);
+   /* A card that lifts on hover (app cards): a deeper shadow tinted with the accent. */
+   --st-shadow-card-hover: 0 2px 4px rgb(0 0 0 / 0.05), 0 18px 36px -10px color-mix(in oklab, var(--st-primary-accent) 40%, transparent);
+   /* A top highlight and a short drop: reads on any accent, unlike a shadow tinted with one colour. */
+   --st-shadow-button-primary: 0 1px 0 rgb(255 255 255 / 0.2) inset, 0 1px 2px rgb(0 0 0 / 0.2);
 
    /* =========================================================
      SPACING SCALE — padding/margin/gap/inset. Named by their px
@@ -220,6 +231,7 @@
    --st-radius-sm: 8px;
    --st-radius-md: 10px;
    --st-radius-lg: 14px;
+   --st-radius-xl: 16px;
    --st-radius-full: 999px;
    --st-radius-circle: 50%;
 
@@ -312,6 +324,9 @@
      browser's own ring; e.g. `2px solid #0b5cff` for a custom one. ---- */
    --st-focus-ring: 2px solid var(--st-color-accent);
    --st-focus-ring-offset: 2px;
+   /* The same ring as a box-shadow, for controls whose focus shows as a halo around the border
+     (text inputs, buttons with a filled background). */
+   --st-focus-ring-shadow: 0 0 0 3px color-mix(in oklab, var(--st-primary-accent) 30%, transparent);
 
    /* ---- Text inputs (search boxes, file names, new folder, pattern) ---- */
    --st-input-font-family: var(--st-font-family);
@@ -323,11 +338,38 @@
    --st-input-radius: var(--st-radius-md);
 
    /* ---- Cards and page chrome ---- */
-   --st-card-radius: var(--st-radius-lg);
+   --st-card-radius: var(--st-radius-xl);
    --st-card-padding: var(--st-space-24);
    --st-card-shadow: var(--st-shadow-card);
    --st-page-padding: var(--st-space-32) var(--st-space-40);
    --st-page-gap: var(--st-space-20);
+
+   /* ---- Floating dropdown panels (st-dropdown, the header's language menu, ...) ---- */
+   --st-dropdown-panel-radius: 12px;
+   --st-dropdown-panel-shadow: 0 12px 32px -8px rgb(0 0 0 / 0.25);
+
+   /* ---- <st-header tinted>: a bar tinted with --st-header-tint (the accent unless a theme sets
+     another, e.g. InkLime's black accent tints with lime). These are the light themes' "soft
+     tint": 12% tint over the canvas, dark text. themes.css re-sets them for dark themes ("deep
+     tint": 30% tint over the canvas, light text). The bar re-scopes the --st-color-* text, hover,
+     line and accent tokens to these, so slotted controls follow; --st-header-accent marks the
+     current page. ---- */
+   --st-header-tint: var(--st-primary-accent);
+   --st-header-bg: color-mix(in oklab, var(--st-header-tint) 12%, var(--st-primary-canvas));
+   --st-header-shadow: 0 1px 0 color-mix(in oklab, var(--st-header-tint) 20%, transparent), 0 6px 20px -12px rgb(0 0 0 / 0.2);
+   --st-header-text: var(--st-primary-ink);
+   --st-header-text-strong: var(--st-primary-ink);
+   --st-header-text-secondary: var(--st-primary-text-secondary);
+   /* The secondary colour, not --st-primary-text-muted: muted text (the language trigger) falls
+     under 4.5:1 on the tinted bar in some themes. */
+   --st-header-text-muted: var(--st-primary-text-secondary);
+   --st-header-hover: color-mix(in oklab, var(--st-primary-accent) 8%, var(--st-primary-canvas));
+   --st-header-nav-hover: color-mix(in oklab, var(--st-primary-accent) 10%, transparent);
+   --st-header-line: var(--st-primary-line);
+   --st-header-divider: var(--st-primary-divider);
+   --st-header-accent: var(--st-primary-accent);
+   --st-header-accent-text: var(--st-primary-brand-ink);
+   --st-header-accent-subtle: var(--st-primary-brand-soft);
 
    /* ---- Wizard frame (<st-template-hub>). Set --st-wizard-bg to
      `transparent` to sit on the host app's own card/page. ---- */

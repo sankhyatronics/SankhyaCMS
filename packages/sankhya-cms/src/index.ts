@@ -36,4 +36,5 @@ export * from './stats';
 export * from './steps';
 export * from './tag-strip';
 export * from './testimonials';
+export * from './theme-picker';
 export * from './tooltip';

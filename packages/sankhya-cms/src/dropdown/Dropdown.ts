@@ -2,7 +2,7 @@ import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 import { chevronIcon } from '../shared/icons';
-import { buttonResetStyles, controlBaseStyles, fontFamilyStyles } from '../shared/styles';
+import { buttonResetStyles, controlBaseStyles, fontFamilyStyles, surfaceTokenStyles } from '../shared/styles';
 import { hasCurrentLink, isCurrentPath } from '../shared/nav-path';
 import type { DropdownToggleEventDetail } from './DropdownEvents';
 import { MEGA_MENU_LAYOUT_EVENT, type MegaMenuLayoutEventDetail } from '../mega-menu/MegaMenuEvents';
@@ -121,14 +121,14 @@ export class Dropdown extends LitElement {
       left: 0;
       z-index: 100;
       padding: 16px;
-      background: var(--st-color-surface);
-      color: var(--st-color-text);
-      /* The panel has its own surface: items in it never take the bar's nav colours. */
+      /* Items in the panel never take the bar's nav colours. */
       --st-nav-color: initial;
       --st-nav-hover-bg: initial;
+      background: var(--st-color-surface);
+      color: var(--st-color-text);
       border: 1px solid var(--st-color-border);
-      border-radius: var(--st-radius-sm);
-      box-shadow: 0 4px 16px var(--st-shadow-color-sm);
+      border-radius: var(--st-dropdown-panel-radius);
+      box-shadow: var(--st-dropdown-panel-shadow);
       opacity: 0;
       visibility: hidden;
       transform: translateY(-10px);
@@ -139,6 +139,12 @@ export class Dropdown extends LitElement {
         transform 0.15s ease,
         visibility 0s linear 0.15s;
       pointer-events: none;
+    }
+
+    /* A floating panel has its own surface: back to the page's surface tokens, whatever a bar
+       around it set (st-header[tinted]). An inline panel stays part of the bar, so it keeps them. */
+    :host(:not([inline])) .menu-dropdown {
+      ${surfaceTokenStyles}
     }
 
     .menu-dropdown.align-right {
@@ -255,7 +261,7 @@ export class Dropdown extends LitElement {
     :host([trigger-style='item']:not([inline])) .menu-title {
       min-height: 0;
       padding: 12px 16px;
-      border-radius: 6px;
+      border-radius: var(--st-nav-item-radius, 6px);
       font-size: 0.875rem;
       font-weight: 400;
       gap: 6px;
@@ -520,6 +526,13 @@ export class Dropdown extends LitElement {
     if (this.open === open) return;
     this.open = open;
     this.dispatchEvent(new CustomEvent<DropdownToggleEventDetail>('dropdown-toggle', { detail: { open }, bubbles: true, composed: true }));
+  }
+
+  /** Closes the panel; with `focusTrigger`, moves keyboard focus back to the trigger (e.g. after a
+   * choice made in the panel, whose focused entry is about to be hidden). */
+  close(focusTrigger = false): void {
+    this.setOpen(false);
+    if (focusTrigger) this.trigger()?.focus();
   }
 
   private hovers(event: PointerEvent): boolean {

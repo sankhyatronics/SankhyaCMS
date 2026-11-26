@@ -1,7 +1,7 @@
 :root.dark {
    --st-primary-color: oklch(97.913% 0.00011 271.152);
    --st-primary-background: oklch(11.862% 0.03663 260.411 / 0.808);
-   --st-font-family: "Open Sans";
+   /* No --st-font-family here: dark mode keeps the light theme's bundled Inter stack (theme.css). */
 
    /* The light-theme literals in theme.css, re-set for dark. Not part of the
      light design spec: these keep every surface, line and status readable. */
@@ -22,64 +22,153 @@
    --st-primary-success-text: #6EDCA9;
    --st-primary-warning-text: #F5C27A;
    --st-primary-danger-text: #FF9AA8;
+
+   --st-hover-subtle: color-mix(in oklab, var(--st-primary-accent) 12%, var(--st-primary-canvas));
+   --st-shadow-card: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 8px 24px -8px rgb(0 0 0 / 0.6);
+
+   /* <st-header tinted>, "deep tint": 30% tint over the canvas, light text, and a lighter accent
+     for the current page. Every dark theme carries .dark, so all of them get this. */
+   --st-header-bg: color-mix(in oklab, var(--st-header-tint) 30%, var(--st-primary-canvas));
+   --st-header-shadow: 0 8px 24px -10px rgb(0 0 0 / 0.5);
+   --st-header-text: #F5F6FA;
+   --st-header-text-strong: #FFFFFF;
+   --st-header-text-secondary: rgb(255 255 255 / 0.72);
+   --st-header-text-muted: rgb(255 255 255 / 0.6);
+   --st-header-hover: rgb(255 255 255 / 0.1);
+   --st-header-nav-hover: rgb(255 255 255 / 0.1);
+   --st-header-line: rgb(255 255 255 / 0.14);
+   --st-header-divider: rgb(255 255 255 / 0.12);
+   --st-header-accent: color-mix(in oklab, var(--st-primary-accent) 55%, #FFFFFF);
+   --st-header-accent-text: color-mix(in oklab, var(--st-primary-accent) 55%, #FFFFFF);
+   --st-header-accent-subtle: rgb(255 255 255 / 0.1);
 }
 
-:root.red {
-   --st-primary-color: oklch(25.8% 0.092 26.042);
-   --st-primary-background: oklch(97.1% 0.013 17.38);
-   --st-font-family: 'Arimo';
+/* =========================================================
+   Brand themes — each sets its own accent, surface/line/text
+   anchors and app-card banner, and a font loaded on demand by
+   applyTheme() (theming/index.ts). Dark ones are applied together
+   with .dark (<html class="dark aurora">), so they inherit every
+   dark-only value above and override only what differs.
+   ========================================================= */
+
+:root.electric {
+   --st-primary-color: #0B0B1F;
+   --st-primary-background: #ECEEFF;
+   --st-font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+   --st-primary-canvas: #FFFFFF;
+   --st-brand-color: #4338CA;
+   --st-primary-line: #D3D7F5;
+   --st-primary-divider: #E6E8FB;
+   --st-primary-text-secondary: #3A3D66;
+   --st-primary-text-muted: #5C6090;
+   --st-primary-brand-soft: #E0E3FF;
+   --st-primary-brand-ink: #3730A3;
+   --st-primary-banner: #DCE0FF;
 }
 
-:root.amber {
-   --st-primary-color: oklch(27.9% 0.077 45.635);
-   --st-primary-background: oklch(98.7% 0.022 95.277);
-   --st-font-family: "Open Sans";
+:root.inklime {
+   --st-primary-color: #0A0A0A;
+   --st-primary-background: #F2F2EC;
+   --st-font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+   --st-primary-canvas: #FFFFFF;
+   --st-brand-color: #0A0A0A;
+   --st-primary-line: #D6D6CC;
+   --st-primary-divider: #E7E7E0;
+   --st-primary-text-secondary: #3A3A35;
+   --st-primary-text-muted: #5E5E57;
+   --st-primary-brand-soft: #ECFCCB;
+   --st-primary-brand-ink: #365314;
+   --st-primary-banner: #D9F99D;
+   /* The accent is black, so the header is tinted with lime instead. */
+   --st-header-tint: #84CC16;
 }
 
-:root.lime {
-   --st-primary-color: oklch(27.4% 0.072 132.109);
-   --st-primary-background: oklch(98.6% 0.031 120.757);
-   --st-font-family: "Quicksand";
+:root.citrus {
+   --st-primary-color: #1A1205;
+   --st-primary-background: #FFF5DE;
+   --st-font-family: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+   --st-primary-canvas: #FFFFFF;
+   --st-brand-color: #EA580C;
+   --st-primary-line: #F1DDB5;
+   --st-primary-divider: #F8EBD0;
+   --st-primary-text-secondary: #5A4520;
+   --st-primary-text-muted: #7D6640;
+   --st-primary-brand-soft: #FFEDD5;
+   --st-primary-brand-ink: #B43F06;
+   --st-primary-banner: #FFE2AD;
 }
 
-:root.teal {
-   --st-primary-color: oklch(27.7% 0.046 192.524);
-   --st-primary-background: oklch(98.4% 0.014 180.72);
-   --st-font-family: "Nunito";
+:root.emerald {
+   --st-primary-color: #03140C;
+   --st-primary-background: #E6F5EC;
+   --st-font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+   --st-primary-canvas: #FFFFFF;
+   --st-brand-color: #047857;
+   --st-primary-line: #C9E3D3;
+   --st-primary-divider: #DDEEE3;
+   --st-primary-text-secondary: #28503C;
+   --st-primary-text-muted: #4A6F5C;
+   --st-primary-brand-soft: #D1FAE5;
+   --st-primary-brand-ink: #065F46;
+   --st-primary-banner: #C4EBD4;
 }
 
-:root.cyan {
-   --st-primary-color: oklch(30.2% 0.056 229.695);
-   --st-primary-background: oklch(98.4% 0.019 200.873);
-   --st-font-family: "Arimo";
+:root.coral {
+   --st-primary-color: #1F0A0E;
+   --st-primary-background: #FFF0EC;
+   --st-font-family: "Sora", system-ui, -apple-system, "Segoe UI", sans-serif;
+   --st-primary-canvas: #FFFFFF;
+   --st-brand-color: #E11D48;
+   --st-primary-line: #F3D3CB;
+   --st-primary-divider: #FAE5DF;
+   --st-primary-text-secondary: #5C2E36;
+   --st-primary-text-muted: #80545B;
+   --st-primary-brand-soft: #FFE4E6;
+   --st-primary-brand-ink: #BE123C;
+   --st-primary-banner: #FFD6CC;
 }
 
-:root.sky {
-   --st-primary-color: oklch(29.3% 0.066 243.157);
-   --st-primary-background: oklch(97.7% 0.013 236.62);
-   --st-font-family: "Almendra";
+:root.dark.neon {
+   --st-primary-color: #F4F6FA;
+   --st-primary-background: #06070B;
+   --st-font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+   --st-primary-canvas: #10121A;
+   --st-brand-color: #A3E635;
+   --st-primary-line: #262A36;
+   --st-primary-divider: #1A1D27;
+   --st-primary-text-secondary: #C2C7D3;
+   --st-primary-text-muted: #8D93A3;
+   --st-primary-brand-soft: #1F2B10;
+   --st-primary-brand-ink: #BEF264;
+   --st-primary-banner: #1B2410;
 }
 
-:root.blue {
-   --st-primary-color: oklch(28.2% 0.091 267.935);
-   --st-primary-background: oklch(97% 0.014 254.604);
-   --st-font-family: "Miranda Sans";
+:root.dark.aurora {
+   --st-primary-color: #EAF6FF;
+   --st-primary-background: #070D1C;
+   --st-font-family: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+   --st-primary-canvas: #0F1830;
+   --st-brand-color: #22D3EE;
+   --st-primary-line: #1F2C4A;
+   --st-primary-divider: #16213B;
+   --st-primary-text-secondary: #B6C6DE;
+   --st-primary-text-muted: #8597B5;
+   --st-primary-brand-soft: #0C2E3E;
+   --st-primary-brand-ink: #67E8F9;
+   --st-primary-banner: #0E3046;
 }
 
-:root.indigo {
-   --st-primary-color: oklch(25.7% 0.09 281.288);
-   --st-primary-background: oklch(96.2% 0.018 272.314);
-   --st-font-family: "Nunito";
-}
-
-:root.fuchsia {
-   --st-primary-color: oklch(29.3% 0.136 325.661);
-   --st-primary-background: oklch(97.7% 0.017 320.058);
-   --st-font-family: "Quicksand";
-}
-
-:root.pink {
-   --st-primary-color: oklch(28.4% 0.109 3.907);
-   --st-primary-background: oklch(97.1% 0.014 343.198);
-   --st-font-family: "Open Sans";
+:root.dark.ember {
+   --st-primary-color: #FFF3EB;
+   --st-primary-background: #110A07;
+   --st-font-family: "Sora", system-ui, -apple-system, "Segoe UI", sans-serif;
+   --st-primary-canvas: #1C130F;
+   --st-brand-color: #FB923C;
+   --st-primary-line: #33241C;
+   --st-primary-divider: #261A14;
+   --st-primary-text-secondary: #E0C7B8;
+   --st-primary-text-muted: #AE9283;
+   --st-primary-brand-soft: #3B2010;
+   --st-primary-brand-ink: #FDBA74;
+   --st-primary-banner: #3A1D0E;
 }

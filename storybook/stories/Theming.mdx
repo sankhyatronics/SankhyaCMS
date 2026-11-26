@@ -21,11 +21,19 @@ Every component styles itself with `var(--st-…)` custom properties, which inhe
 | Semantic | `--st-color-text`, `--st-color-surface`, `--st-radius-md`, `--st-text-sm`, … | A single exception |
 | CMS display sizes | `--st-cms-text-display`, `--st-cms-section-padding`, `--st-cms-container-max` | Rescaling marketing sections |
 
-Theme classes (`dark`, `red`, `amber`, `lime`, `teal`, `cyan`, `sky`, `blue`, `indigo`, `fuchsia`, `pink`) go on `<html>`:
+Theme classes go on `<html>`. With none, the base palette (Default) applies; `dark` is the plain dark theme:
 
 ```html
 <html class="dark">
 ```
+
+The brand themes set their own accent, surfaces, text, app-card banner and font. Light: `electric` (Electric), `inklime` (InkLime), `citrus` (Citrus), `emerald` (Emerald), `coral` (Coral). Dark, always together with `dark`: `neon` (Neon), `aurora` (Aurora), `ember` (Ember):
+
+```html
+<html class="dark aurora">
+```
+
+`applyTheme()` from `@sankhyatronics/sankhya-cms/theming` sets the right classes (removing the previous theme's) and loads a brand theme's Google font the first time it is used.
 
 A custom theme only has to set the primaries:
 

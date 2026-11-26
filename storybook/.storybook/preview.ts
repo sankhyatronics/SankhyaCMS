@@ -13,7 +13,13 @@ setCustomElementsManifest(manifest);
 const preview: Preview = {
   decorators: [
     withThemeByClassName({
-      themes: Object.fromEntries(THEMES.map(theme => [theme.value, theme.value === 'default' ? '' : theme.value])),
+      // A dark brand theme goes on <html> with the dark class beside it (see applyTheme).
+      themes: Object.fromEntries(
+        THEMES.map(theme => [
+          theme.value,
+          theme.value === 'default' ? '' : theme.dark && theme.value !== 'dark' ? `dark ${theme.value}` : theme.value
+        ])
+      ),
       defaultTheme: 'default',
       parentSelector: 'html'
     })
