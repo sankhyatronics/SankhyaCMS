@@ -3,9 +3,11 @@
 The docs and Storybook moved to the Sankhyatronics docs hub:
 
 - Docs: https://docs.sankhyatronics.com/sankhya-cms/ (was `sankhyaui.sankhyatronics.com`)
-- Storybook: https://docs.sankhyatronics.com/sankhya-cms/storybook/ (was `sankhyaui-stories.sankhyatronics.com`)
+- Storybook: https://sankhyacms.sankhyatronics.com/ (was `sankhyaui-stories.sankhyatronics.com`, then
+  `docs.sankhyatronics.com/sankhya-cms/storybook/`), deployed by `.github/workflows/storybook-hostinger.yml`
+  with `storybook-hostinger.htaccess` from this folder.
 
-The `.htaccess` files here send every path on the old hosts to the matching path on the new one with a 301.
+The other `.htaccess` files here send every path on the old hosts to the matching path on the new one with a 301.
 They are not part of any CI deploy, so upload them by hand:
 
 - `sankhyaui.htaccess` → rename to `.htaccess` in the `public_html` of the `sankhyaui.sankhyatronics.com` account.
