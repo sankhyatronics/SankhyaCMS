@@ -1,0 +1,118 @@
+name: Deploy Storybook (Hostinger)
+
+# Builds the component Storybook and uploads it to its Hostinger website, sankhyacms.sankhyatronics.com, on the
+# same hosting account the apps repo's suite-web-hostinger.yml uses. Upload is rsync over SSH, deleting files
+# the new build doesn't have. Manual only.
+#
+# Replaces the former FTP deploy (sites.yml) to docs.sankhyatronics.com/sankhya-cms/storybook/.
+#
+# Needs, at repository level (the same values as the apps repo's HOSTINGER_WEB_* settings):
+#   secret   HOSTINGER_WEB_SSH_KEY      private key whose public half is in hPanel (Advanced → SSH access)
+#   variable HOSTINGER_WEB_SSH_HOST     e.g. the hosting account's IP (hPanel → SSH access)
+#   variable HOSTINGER_WEB_SSH_PORT     65002 on Hostinger shared hosting (default)
+#   variable HOSTINGER_WEB_SSH_USER     u123456789
+#   variable HOSTINGER_WEB_HOST_FINGERPRINT  the "Host key fingerprint" hPanel shows (SHA256:…): the runner
+#                                       scans the host and continues only if a key matches it
+#   (or variable HOSTINGER_WEB_KNOWN_HOSTS, `ssh-keyscan -p <port> <host>` output, instead of the fingerprint)
+#   variable HOSTINGER_WEB_PATH         optional; default domains/{fqdn}/public_html
+#
+# The website sankhyacms.sankhyatronics.com must already exist in hPanel: this workflow only fills it.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: storybook-hostinger
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and upload
+    runs-on: ubuntu-latest
+    env:
+      FQDN: sankhyacms.sankhyatronics.com
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+
+      - name: Setup Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 26
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # Same build the old sites.yml ran: the root build, which builds the storybook/ workspace last.
+      - name: Build
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+          STORYBOOK_DISABLE_TELEMETRY: '1'
+        run: |
+          set -euo pipefail
+          pnpm build
+          test -f storybook/storybook-static/index.html || { echo "::error::storybook/storybook-static/index.html missing after build"; exit 1; }
+
+      # The Storybook static build plus the .htaccess (no SPA fallback: Storybook is addressed by query strings).
+      - name: Assemble site
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/site"
+          mkdir -p "$out"
+          cp -a storybook/storybook-static/. "$out/"
+          cp deploy/storybook-hostinger.htaccess "$out/.htaccess"
+          echo "$(find "$out" -type f | wc -l) files for $FQDN"
+
+      - name: Upload to Hostinger
+        env:
+          SSH_KEY: ${{ secrets.HOSTINGER_WEB_SSH_KEY }}
+          SSH_HOST: ${{ vars.HOSTINGER_WEB_SSH_HOST }}
+          SSH_PORT: ${{ vars.HOSTINGER_WEB_SSH_PORT || '65002' }}
+          SSH_USER: ${{ vars.HOSTINGER_WEB_SSH_USER }}
+          KNOWN_HOSTS: ${{ vars.HOSTINGER_WEB_KNOWN_HOSTS }}
+          HOST_FINGERPRINT: ${{ vars.HOSTINGER_WEB_HOST_FINGERPRINT }}
+          WEB_PATH: ${{ vars.HOSTINGER_WEB_PATH || 'domains/{fqdn}/public_html' }}
+        run: |
+          set -euo pipefail
+          for v in SSH_KEY SSH_HOST SSH_USER; do
+            [[ -n "${!v}" ]] || { echo "::error::$v is not set (repository secrets/variables HOSTINGER_WEB_*, see the workflow's header)."; exit 1; }
+          done
+          umask 077
+          mkdir -p ~/.ssh
+          # Pasted keys can arrive with CR line endings: strip them before ssh reads the file.
+          printf '%s\n' "$SSH_KEY" | tr -d '\r' > ~/.ssh/hostinger_web
+          if [[ -n "$KNOWN_HOSTS" ]]; then
+            printf '%s\n' "$KNOWN_HOSTS" | tr -d '\r' > ~/.ssh/known_hosts
+          elif [[ -n "$HOST_FINGERPRINT" ]]; then
+            # Trust the scanned keys only if one of them is the key hPanel shows.
+            ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" 2>/dev/null > "$RUNNER_TEMP/scanned"
+            want="$(printf '%s' "$HOST_FINGERPRINT" | tr -d '\r' | sed 's/^SHA256://')"
+            if ! ssh-keygen -lf "$RUNNER_TEMP/scanned" -E sha256 | awk '{print $2}' | sed 's/^SHA256://' | grep -qxF "$want"; then
+              echo "::error::No host key of $SSH_HOST:$SSH_PORT matches HOSTINGER_WEB_HOST_FINGERPRINT. Found:"
+              ssh-keygen -lf "$RUNNER_TEMP/scanned" -E sha256 || true
+              exit 1
+            fi
+            cp "$RUNNER_TEMP/scanned" ~/.ssh/known_hosts
+          else
+            echo "::error::Set HOSTINGER_WEB_HOST_FINGERPRINT (hPanel → SSH Access → Host key fingerprint) or HOSTINGER_WEB_KNOWN_HOSTS."
+            exit 1
+          fi
+          SSH="ssh -i $HOME/.ssh/hostinger_web -p $SSH_PORT -o StrictHostKeyChecking=yes -o BatchMode=yes"
+          target="${WEB_PATH//\{fqdn\}/$FQDN}"
+          # The website must exist (created in hPanel): refuse to create folders for one that doesn't.
+          $SSH "$SSH_USER@$SSH_HOST" "test -d '$target'" \
+            || { echo "::error::$target doesn't exist: create the website $FQDN in hPanel first."; exit 1; }
+          rsync -az --delete -e "$SSH" "$RUNNER_TEMP/site/" "$SSH_USER@$SSH_HOST:$target/"
+          echo "Storybook → https://$FQDN/"
+
+      - name: Remove credentials
+        if: ${{ always() }}
+        run: rm -f ~/.ssh/hostinger_web

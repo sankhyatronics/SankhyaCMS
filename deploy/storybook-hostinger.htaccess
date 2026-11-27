@@ -1,0 +1,25 @@
+# Storybook on Hostinger web hosting (LiteSpeed, .htaccess). Adapted from suitecore/tooling/hostinger.htaccess in
+# the apps repo. The workflow .github/workflows/storybook-hostinger.yml copies this file into the build as .htaccess.
+# Storybook's static build is index.html + iframe.html + assets addressed by query strings, not a single-page app,
+# so there is no rewrite-to-index.html fallback: a missing path is a plain 404.
+Options -MultiViews -Indexes
+RewriteEngine On
+
+# HTTPS only (the website's free certificate is issued by hPanel).
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Vite's hashed bundles under assets/ (names change with content): flag them for the long cache below.
+RewriteRule ^assets/ - [E=STORYBOOK_HASHED:1]
+
+<IfModule mod_headers.c>
+  # Hashed bundles: cache for a year.
+  Header set Cache-Control "public, max-age=31536000, immutable" env=STORYBOOK_HASHED
+  # The HTML entry points and Storybook's index/project metadata are never cached, so a deploy takes effect at once.
+  <FilesMatch "^(index\.html|iframe\.html|index\.json|project\.json)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
